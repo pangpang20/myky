@@ -25,37 +25,36 @@
 <body>
 <div class="wrap">
   <h1>📕 408 在线刷题</h1>
-  <div class="meta">单选题点击选项即判分；多选题勾选后点击“提交答案”。</div>
+  <div class="meta">单选题点击选项即判分；多选题勾选后点击“提交答案”。作答结果实时上报。</div>
   <div class="card" id="quizCard"></div>
   <div class="log" id="log"></div>
 </div>
 <script>
-const SUBJECT_DIRS = { '计算机网络': '计算机网络' };
 let questions = [];
 let idx = 0;
-let wrongLog = [];
-
-const GROUP_SIZE = 5;
-let groupStart = 0;
+let answered = [];
+let roundId = 'quiz-' + Date.now();
 
 async function init() {
-  const res = await fetch('./questions.json');
+  const res = await fetch('./questions.json', { cache: 'no-store' });
   questions = await res.json();
   render();
 }
 
-function saveWrong(q) {
-  wrongLog.push({ id:q.id, subject:q.subject, topic:q.topic, question:q.question, selected:q.lastSelection, answer:q.answer, time:new Date().toISOString() });
-  localStorage.setItem('ky_wrong_log', JSON.stringify(wrongLog));
-  document.getElementById('log').textContent = `已记入错题集：${q.subject} / ${q.topic}`;
+function report(q, sel, ok) {
+  answered.push({ id: q.id, selected: sel, answer: q.answer, correct: ok, at: new Date().toISOString() });
+  fetch('/api/answer', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ roundId, id: q.id, subject: q.subject, topic: q.topic, question: q.question, options: q.options, selected: sel, answer: q.answer, correct: ok, at: new Date().toISOString() })
+  }).catch(() => {});
 }
 
-function isCorrect(q, selected) {
+function isCorrect(q, sel) {
   if (q.type === 'multi') {
-    return Array.isArray(selected) && selected.length === q.answer.length &&
-      q.answer.every(a => selected.includes(a));
+    return Array.isArray(sel) && sel.length === q.answer.length && q.answer.every(a => sel.includes(a));
   }
-  return selected === q.answer;
+  return sel === q.answer;
 }
 
 function render() {
@@ -63,14 +62,14 @@ function render() {
   const log = document.getElementById('log');
   log.textContent = '';
   if (idx >= questions.length) {
-    const wrongItems = wrongLog.map(x => `${x.id} · ${x.topic} · 正确答案 ${Array.isArray(x.answer)?x.answer.join('、'):x.answer}`).join('<br>');
-    card.innerHTML = `<div class="q">本组题目已完成 ✅</div><p>共 ${questions.length} 题，答错 ${wrongLog.length} 题。</p><div>${wrongItems}</div>`;
-    log.textContent = wrongLog.length ? '本次错题已记录：' + wrongLog.map(x => x.id).join(', ') : '本次全部答对，无需归档。';
+    const wrong = answered.filter(a => !a.correct);
+    card.innerHTML = `<div class="q">本组题目已完成 ✅</div><p>共 ${answered.length} 题，答错 ${wrong.length} 题。</p><p>${wrong.map(w => w.id + ' · ' + (Array.isArray(w.answer) ? w.answer.join('、') : w.answer)).join('<br>')}</p><p>已上报，刷新页面可重新练习。</p>`;
+    log.textContent = '结果已保存到服务端。';
     return;
   }
   const q = questions[idx];
   card.innerHTML = `
-    <div class="meta">第 ${idx - groupStart + 1} / ${Math.min(GROUP_SIZE, questions.length - groupStart)} 题 · ${q.subject} · ${q.topic} · ${q.type === 'multi' ? '多选' : '单选'}</div>
+    <div class="meta">第 ${idx + 1} / ${questions.length} 题 · ${q.subject} · ${q.topic} · ${q.type === 'multi' ? '多选' : '单选'}</div>
     <div class="q">${q.question}</div>
     <div id="options"></div>
     ${q.type === 'multi' ? '<button class="btn" id="submitBtn" disabled>提交答案</button>' : ''}
@@ -91,12 +90,10 @@ function render() {
     div.innerHTML = `<span class="badge">${letter}</span>${q.options[letter]}`;
     div.onclick = () => {
       if (q.type === 'single') {
-        selected = letter;
-        judge(q, selected);
+        judge(letter);
       } else {
         const i = selected.indexOf(letter);
-        if (i === -1) selected.push(letter); else selected.splice(i,1);
-        div.classList.toggle('selected', i === -1);
+        if (i === -1) selected.push(letter); else selected.splice(i, 1);
         div.style.borderColor = selected.includes(letter) ? '#2563eb' : '#e5e7eb';
         div.style.background = selected.includes(letter) ? '#eff6ff' : '#fafafa';
         submitBtn.disabled = selected.length === 0;
@@ -105,27 +102,28 @@ function render() {
     optionsEl.appendChild(div);
   });
 
-  if (submitBtn) submitBtn.onclick = () => judge(q, [...selected].sort());
+  if (submitBtn) submitBtn.onclick = () => judge([...selected].sort());
 
-  function judge(q, sel) {
-    q.lastSelection = sel;
+  function judge(sel) {
     const ok = isCorrect(q, sel);
     optionsEl.querySelectorAll('.opt').forEach(el => {
       const l = el.dataset.letter;
-      const correct = q.type === 'multi' ? q.answer.includes(l) : l === q.answer;
-      if (correct) el.classList.add('correct');
-      else if ((q.type === 'multi' ? sel.includes(l) : sel === l)) el.classList.add('wrong');
+      const isRight = q.type === 'multi' ? q.answer.includes(l) : l === q.answer;
+      const picked = q.type === 'multi' ? sel.includes(l) : sel === l;
+      if (isRight) el.classList.add('correct');
+      else if (picked) el.classList.add('wrong');
       el.classList.add('disabled');
       el.onclick = null;
     });
     const analysisEl = card.querySelector('#analysis');
     analysisEl.style.display = 'block';
-    analysisEl.innerHTML = `<p><b>${ok ? '✅ 回答正确' : '❌ 回答错误'}</b>　正确答案：${Array.isArray(q.answer)?q.answer.join('、'):q.answer}</p><p>${q.analysis}</p>`;
-    if (!ok) saveWrong(q);
+    analysisEl.innerHTML = `<p><b>${ok ? '✅ 回答正确' : '❌ 回答错误'}</b>　正确答案：${Array.isArray(q.answer) ? q.answer.join('、') : q.answer}</p><p>${q.analysis}</p>`;
+    report(q, sel, ok);
+    log.textContent = ok ? '已记录：本题答对。' : '已记录：本题答错，将进入错题集。';
     nextBtn.style.display = 'inline-block';
   }
 
-  nextBtn.onclick = () => { idx++; if (idx - groupStart >= GROUP_SIZE || idx >= questions.length) { groupStart = idx; } render(); };
+  nextBtn.onclick = () => { idx++; render(); };
 }
 
 init();

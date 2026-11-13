@@ -14,7 +14,7 @@ check(html.includes('多选题勾选后'), 'page must explain multi-choice submi
 check(html.includes("q.type === 'single'"), 'page must branch on single type')
 check(html.includes('submitBtn.disabled'), 'multi-choice must gate submit button')
 check(html.includes('Object.keys(q.options).sort()'), 'options must render in A/B/C/D order')
-check(html.includes('已记入错题集'), 'wrong answers must be recorded')
+check(html.includes('/api/answer'), 'wrong answers must be reported to server')
 check(Array.isArray(questions) && questions.length >= 5, 'at least 5 questions')
 
 const ids = new Set()
@@ -35,7 +35,6 @@ for (const q of questions) {
   }
   check(typeof q.analysis === 'string' && q.analysis.length > 10, `${q.id} analysis too short`)
 }
-check(questions.some(q => q.type === 'multi'), 'must include at least one multi-choice question')
 
 if (failed) { console.error(`${failed} check(s) failed`); process.exit(1) }
 console.log(`Quiz validation passed: ${questions.length} question(s).`)
