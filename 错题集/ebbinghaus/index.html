@@ -9,7 +9,9 @@
   h1{font-size:22px;margin:0 0 4px}
   .meta{color:#6b7280;font-size:13px;margin-bottom:18px}
   .card{background:#fff;border-radius:14px;padding:20px;box-shadow:0 2px 10px rgba(15,23,42,.06);margin-bottom:12px}
-  .q{font-size:17px;font-weight:600;margin-bottom:14px}
+  .q{font-size:17px;font-weight:600;margin-bottom:14px;line-height:1.5}
+.q pre{background:#1e293b;color:#e2e8f0;border-radius:8px;padding:12px 14px;margin:10px 0;overflow-x:auto;font-family:Consolas,Menlo,monospace;font-size:13px;line-height:1.6;font-weight:400}
+.q code{font-family:Consolas,Menlo,monospace}
   .opt{border:1px solid #e5e7eb;border-radius:10px;padding:12px 14px;margin:10px 0;cursor:pointer;transition:.15s;background:#fafafa}
   .opt:hover{border-color:#2563eb;background:#eff6ff}
   .opt.correct{border-color:#16a34a;background:#ecfdf5;color:#15803d}
@@ -55,6 +57,24 @@ async function init() {
   render();
 }
 
+function renderQuestion(text) {
+  const LNBREAK = '\\n';
+  const FENCE = '```';
+  let html = text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  const parts = html.split(FENCE);
+  let out = "";
+  for (let i = 0; i < parts.length; i++) {
+    if (i % 2 === 1) {
+      const codeLines = parts[i].split(LNBREAK).join(String.fromCharCode(10));
+      const code = codeLines.replace(/^[a-zA-Z0-9]+\n/, '');
+      out += '<pre><code>' + code + '</code></pre>';
+    } else {
+      out += parts[i].split(LNBREAK).join('<br>');
+    }
+  }
+  return out;
+}
+
 function isCorrect(q, sel) {
   return sel === q.answer;
 }
@@ -79,7 +99,7 @@ function render() {
   card.innerHTML = `
     <div class="card">
       <div class="meta">第 ${idx + 1} / ${dueQuestions.length} 题 · ${q.topic} · 第 ${q.round} 轮</div>
-      <div class="q">${q.question}</div>
+      <div class="q">${renderQuestion(q.question)}</div>
       <div id="options"></div>
       <div class="analysis" id="analysis"></div>
       <button class="btn" id="nextBtn" style="display:none">下一题</button>
