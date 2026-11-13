@@ -1,0 +1,1382 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&display=swap');
+
+/* ── 全局视口防溢出锁定 ── */
+html, body {
+  overflow-x: hidden !important;
+  max-width: 100vw !important;
+  width: 100% !important;
+}
+
+#app {
+  overflow-x: hidden !important;
+  max-width: 100vw !important;
+  width: 100% !important;
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   408 考研简纲 · 现代技术文档与沉浸式应试排版系统 (Nextra / Tailwind UI 风格)
+   ══════════════════════════════════════════════════════════════════ */
+
+
+
+:root {
+  /* 基础布局全宽，侧边栏贴靠最左侧 */
+  --vp-layout-max-width: 100% !important;
+  --vp-sidebar-width: 270px;
+
+  /* 基础字体与排版 (15px 正文，1.75 行高) */
+  --vp-font-family-base: 'Inter', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  --vp-font-family-mono: 'JetBrains Mono', 'Fira Code', Menlo, Monaco, Consolas, monospace;
+
+  /* 408 四门科目专属模块色彩系统 */
+  --subject-ds: #10b981;      /* 🟢 数据结构: Emerald */
+  --subject-ds-soft: rgba(16, 185, 129, 0.12);
+  --subject-ds-border: rgba(16, 185, 129, 0.35);
+
+  --subject-co: #3b82f6;      /* 🔵 计算机组成原理: Blue/Indigo */
+  --subject-co-soft: rgba(59, 130, 246, 0.12);
+  --subject-co-border: rgba(59, 130, 246, 0.35);
+
+  --subject-os: #8b5cf6;      /* 🟣 操作系统: Purple/Violet */
+  --subject-os-soft: rgba(139, 92, 246, 0.12);
+  --subject-os-border: rgba(139, 92, 246, 0.35);
+
+  --subject-cn: #f59e0b;      /* 🟠 计算机网络: Amber/Orange */
+  --subject-cn-soft: rgba(245, 158, 11, 0.12);
+  --subject-cn-border: rgba(245, 158, 11, 0.35);
+
+  /* ☀️ 浅色模式调色板 */
+  --vp-c-brand-1: #2563eb;
+  --vp-c-brand-2: #3b82f6;
+  --vp-c-brand-3: #60a5fa;
+  --vp-c-brand-soft: rgba(37, 99, 235, 0.08);
+
+  --vp-c-bg: #ffffff;
+  --vp-c-bg-soft: #f8fafc;
+  --vp-c-bg-alt: #f1f5f9;
+  --vp-c-bg-elv: #ffffff;
+
+  --vp-c-text-1: #0f172a;
+  --vp-c-text-2: #334155;
+  --vp-c-text-3: #64748b;
+
+  --vp-c-divider: #e2e8f0;
+  --vp-c-gutter: #e2e8f0;
+  --vp-c-border: #cbd5e1;
+
+  --vp-code-block-bg: #f8fafc;
+  --vp-code-bg: #f1f5f9;
+  --vp-code-color: #0f172a;
+
+  --card-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+  --card-hover-shadow: 0 12px 30px -4px rgba(37, 99, 235, 0.12);
+
+  --vp-sidebar-bg-color: #ffffff;
+  --vp-nav-bg-color: #ffffff;
+}
+
+/* 🌙 深色夜间模式 */
+.dark {
+  --vp-c-brand-1: #3b82f6;
+  --vp-c-brand-2: #60a5fa;
+  --vp-c-brand-3: #93c5fd;
+  --vp-c-brand-soft: rgba(59, 130, 246, 0.15);
+
+  --vp-c-bg: #090d16;
+  --vp-c-bg-soft: #111827;
+  --vp-c-bg-alt: #0d131f;
+  --vp-c-bg-elv: #172033;
+
+  --vp-c-text-1: #f8fafc;
+  --vp-c-text-2: #cbd5e1;
+  --vp-c-text-3: #94a3b8;
+
+  --vp-c-divider: #1e293b;
+  --vp-c-gutter: #1e293b;
+  --vp-c-border: #334155;
+
+  --vp-code-block-bg: #0d1424;
+  --vp-code-bg: #1e293b;
+  --vp-code-color: #e2e8f0;
+
+  --vp-sidebar-bg-color: #090d16;
+  --vp-nav-bg-color: #090d16;
+
+  --card-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.4);
+  --card-hover-shadow: 0 12px 30px -4px rgba(59, 130, 246, 0.2);
+}
+
+/* 📜 羊皮纸复古护眼模式 */
+html.parchment {
+  --vp-c-brand-1: #9a5b28;
+  --vp-c-brand-2: #b46b32;
+  --vp-c-brand-3: #cf7e3e;
+  --vp-c-brand-soft: rgba(154, 91, 40, 0.15);
+
+  --vp-c-bg: #f6eedb;
+  --vp-c-bg-soft: #ebdfc4;
+  --vp-c-bg-alt: #eee3cb;
+  --vp-c-bg-elv: #fbf5e7;
+
+  --vp-c-text-1: #342618;
+  --vp-c-text-2: #5c4731;
+  --vp-c-text-3: #8a735a;
+
+  --vp-c-divider: #dfd0b2;
+  --vp-c-gutter: #dfd0b2;
+  --vp-c-border: #d4c3a2;
+
+  --vp-code-block-bg: #e7dac0;
+  --vp-code-bg: #ebdcc3;
+  --vp-code-color: #5c2c06;
+
+  --vp-sidebar-bg-color: #f1e6ce;
+  --vp-nav-bg-color: #f6eedb;
+
+  --card-shadow: 0 4px 16px -2px rgba(92, 71, 49, 0.08);
+  --card-hover-shadow: 0 10px 24px -4px rgba(154, 91, 40, 0.18);
+}
+
+/* 隐藏默认双态切换器 */
+.VPSwitchAppearance {
+  display: none !important;
+}
+
+/* ── 顶部导航栏整体不透明与左上角标题背景统一定制 ── */
+.VPNav,
+.VPNavBar,
+.VPNavBar .wrapper,
+.VPNavBar .container,
+.VPNavBar .title,
+.VPNavBar.has-sidebar .title,
+.VPNavBarTitle,
+.VPNavBar .content,
+.VPNavBar .content-body {
+  background-color: var(--vp-nav-bg-color, var(--vp-c-bg)) !important;
+}
+
+.VPNavBar.has-sidebar .title {
+  background-color: var(--vp-nav-bg-color, var(--vp-c-bg)) !important;
+  border-bottom: 1px solid var(--vp-c-gutter) !important;
+}
+
+.VPNavBar {
+  border-bottom: 1px solid var(--vp-c-gutter) !important;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
+}
+
+.dark .VPNavBar {
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.3);
+}
+
+html.parchment .VPNavBar {
+  box-shadow: 0 1px 6px rgba(92, 71, 49, 0.08);
+}
+
+
+/* ── 优化侧边栏、正文与右侧本页大纲 (TOC Sticky 稳固显示) ── */
+@media (min-width: 960px) {
+  /* 侧边栏贴靠最左侧 */
+  .VPSidebar {
+    left: 0 !important;
+    width: var(--vp-sidebar-width) !important;
+    padding-left: 20px !important;
+    padding-right: 16px !important;
+    border-right: 1px solid var(--vp-c-divider);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+  }
+
+  .VPContent.has-sidebar {
+    padding-left: var(--vp-sidebar-width) !important;
+    transition: padding-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* 侧边栏收起状态 */
+  html.sidebar-collapsed .VPSidebar {
+    transform: translateX(-100%) !important;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  html.sidebar-collapsed .VPContent.has-sidebar {
+    padding-left: 0 !important;
+  }
+
+  /* ════════ 全屏与宽屏沉浸式正文容器布局 ════════ */
+  .VPDoc .container,
+  .VPDoc.has-sidebar .container,
+  .VPDoc.has-aside .container,
+  .VPDoc:not(.has-sidebar) .container {
+    max-width: 100% !important;
+    width: 100% !important;
+    padding-left: 28px !important;
+    padding-right: 24px !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: flex-start !important;
+    margin: 0 !important;
+  }
+
+  /* 主体内容列向两侧自适应扩宽 */
+  .VPDoc > .container > .content,
+  .VPDoc.has-sidebar > .container > .content,
+  .VPDoc.has-aside > .container > .content {
+    flex: 1 1 0% !important;
+    width: 100% !important;
+    max-width: calc(100% - 240px) !important;
+    padding-right: 28px !important;
+    padding-left: 0 !important;
+    margin: 0 !important;
+  }
+
+  .VPDoc:not(.has-aside) > .container > .content {
+    max-width: 100% !important;
+    padding-right: 0 !important;
+  }
+
+  .VPDoc .content-container,
+  .VPDoc.has-sidebar .content-container,
+  .VPDoc.has-aside .content-container,
+  .VPDoc:not(.has-sidebar) .content-container {
+    max-width: 100% !important;
+    width: 100% !important;
+    margin: 0 !important;
+  }
+
+  /* 仅对文档页生效，不污染首页 */
+  .VPDoc main.main,
+  .VPDoc .vp-doc,
+  .VPDoc .vp-doc > div {
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+
+  /* ════════ 右侧「本页大纲 (TOC)」—— 与左侧章节目录同款 position:fixed 效果 ════════
+     VitePress 默认已对 .aside-container 设置 position:fixed，效果与左侧 VPSidebar 一致。
+     此处只覆盖宽度/显示相关属性，不覆盖定位属性，让默认 fixed 行为原样保留。
+     ════════════════════════════════════════════════════════════════════════════════ */
+  .aside.aside,
+  .VPDoc .aside.aside,
+  .VPDoc.has-aside .aside.aside {
+    display: block !important;
+    order: 2 !important;
+    width: 220px !important;
+    min-width: 220px !important;
+    max-width: 220px !important;
+    padding: 0 !important;
+    padding-left: 16px !important;
+    flex-shrink: 0 !important;
+    flex-grow: 0 !important;
+  }
+
+  /* 不覆盖 position / top / height —— 让 VitePress 默认的 position:fixed 生效 */
+  .aside-curtain.aside-curtain,
+  .VPDoc .aside-curtain.aside-curtain,
+  .VPDoc.has-aside .aside-curtain.aside-curtain {
+    display: none !important;
+  }
+
+  /* ── 大纲收起/展开平滑抽屉式动画 ── */
+  .aside.aside,
+  .VPDoc .aside.aside,
+  .VPDoc.has-aside .aside.aside {
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                min-width 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                max-width 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                padding 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  }
+
+  .aside-container,
+  .VPDoc .aside-container,
+  .VPDoc.has-aside .aside-container {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.25s ease !important;
+    transform: translateX(0) !important;
+    opacity: 1 !important;
+  }
+
+  html.aside-collapsed .aside.aside,
+  html.aside-collapsed .VPDoc .aside.aside,
+  html.aside-collapsed .VPDoc.has-aside .aside.aside {
+    width: 0 !important;
+    min-width: 0 !important;
+    max-width: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+  }
+
+  html.aside-collapsed .aside-container,
+  html.aside-collapsed .VPDoc .aside-container,
+  html.aside-collapsed .VPDoc.has-aside .aside-container {
+    transform: translateX(100%) !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+
+  .VPDoc .content,
+  .VPDoc > .container > .content,
+  .VPDoc.has-aside > .container > .content {
+    transition: max-width 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                padding-right 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  }
+
+  html.aside-collapsed .VPDoc .content,
+  html.aside-collapsed .VPDoc > .container > .content,
+  html.aside-collapsed .VPDoc.has-aside > .container > .content {
+    max-width: 100% !important;
+    padding-right: 24px !important;
+  }
+
+  .VPDocAsideOutline {
+    display: block !important;
+    position: static !important;
+  }
+
+  .VPDocAsideOutline .content {
+    position: static !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 0 0 14px !important;
+    margin: 0 !important;
+    border-left: 1.5px solid var(--vp-c-divider) !important;
+  }
+
+  .VPDocAsideOutline .outline-title {
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.04em !important;
+    color: var(--vp-c-text-1) !important;
+    text-transform: uppercase !important;
+    line-height: 28px !important;
+    margin-bottom: 8px !important;
+  }
+
+  .VPDocAsideOutline .outline-link {
+    font-size: 13px !important;
+    line-height: 24px !important;
+    padding: 2px 0 !important;
+    display: block !important;
+    color: var(--vp-c-text-2) !important;
+    text-decoration: none !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    transition: color 0.15s ease, transform 0.15s ease !important;
+  }
+
+  .VPDocAsideOutline .outline-link:hover {
+    color: var(--vp-c-brand-1) !important;
+    transform: translateX(2px) !important;
+  }
+
+  .VPDocAsideOutline .outline-link.active {
+    color: var(--vp-c-brand-1) !important;
+    font-weight: 700 !important;
+  }
+
+  .VPDocAsideOutline .nested {
+    padding-left: 12px !important;
+    margin-top: 2px !important;
+  }
+
+  .VPDocAsideOutline .nested .outline-link {
+    font-size: 12.5px !important;
+    line-height: 22px !important;
+    padding: 1px 0 !important;
+  }
+}
+
+/* ── 正文排版 ── */
+.vp-doc {
+  font-size: 15px;
+  line-height: 1.75;
+  letter-spacing: 0.01em;
+}
+
+.vp-doc h1 {
+  font-size: 2.1rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 24px;
+  background: linear-gradient(135deg, var(--vp-c-text-1) 30%, var(--vp-c-brand-1));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.vp-doc h2 {
+  font-size: 1.45rem;
+  font-weight: 700;
+  border-bottom: 2px solid var(--vp-c-divider);
+  padding-bottom: 8px;
+  margin-top: 36px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.vp-doc h3 {
+  font-size: 1.18rem;
+  font-weight: 600;
+  margin-top: 24px;
+  margin-bottom: 12px;
+}
+
+/* ── 408 核心考研徽章 ── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  font-size: 12px;
+  font-weight: 700;
+  border-radius: 9999px;
+  line-height: 1.2;
+  vertical-align: middle;
+  margin: 2px 4px 2px 0;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.badge-star { background: rgba(239, 68, 68, 0.15); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.35); }
+.dark .badge-star { background: rgba(239, 68, 68, 0.25); color: #f87171; border-color: rgba(239, 68, 68, 0.5); }
+html.parchment .badge-star { background: #fde8e8; color: #c53030; border-color: #feb2b2; }
+
+.badge-trap { background: rgba(245, 158, 11, 0.15); color: #d97706; border: 1px solid rgba(245, 158, 11, 0.35); }
+.dark .badge-trap { background: rgba(245, 158, 11, 0.25); color: #fbbf24; border-color: rgba(245, 158, 11, 0.5); }
+html.parchment .badge-trap { background: #fef3c7; color: #b45309; border-color: #fcd34d; }
+
+.badge-formula { background: rgba(59, 130, 246, 0.15); color: #2563eb; border: 1px solid rgba(59, 130, 246, 0.35); }
+.dark .badge-formula { background: rgba(59, 130, 246, 0.25); color: #60a5fa; border-color: rgba(59, 130, 246, 0.5); }
+html.parchment .badge-formula { background: #e0f2fe; color: #0369a1; border-color: #7dd3fc; }
+
+.badge-freq { background: rgba(16, 185, 129, 0.15); color: #059669; border: 1px solid rgba(16, 185, 129, 0.35); }
+.dark .badge-freq { background: rgba(16, 185, 129, 0.25); color: #34d399; border-color: rgba(16, 185, 129, 0.5); }
+html.parchment .badge-freq { background: #d1fae5; color: #065f46; border-color: #6ee7b7; }
+
+
+
+/* ── 表格全屏与移动端局部滚动响应式 ── */
+.vp-doc table {
+  width: 100% !important;
+  max-width: 100% !important;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 20px 0 !important;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 10px;
+  font-size: 14.5px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
+  table-layout: auto !important;
+}
+
+.vp-doc th,
+.vp-doc td {
+  padding: 12px 18px !important;
+  line-height: 1.65 !important;
+}
+
+@media (min-width: 960px) {
+  .vp-doc table {
+    display: table !important;
+    width: 100% !important;
+  }
+}
+
+@media (max-width: 959px) {
+  .vp-doc table {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap;
+  }
+}
+
+/* ── 核心公式高亮卡片 (Formula Box) ── */
+.formula-card {
+  border-left: 4px solid var(--vp-c-brand-1);
+  background: var(--vp-c-bg-soft);
+  border-radius: 0 10px 10px 0;
+  padding: 16px 20px;
+  margin: 18px 0;
+  border-top: 1px solid var(--vp-c-divider);
+  border-right: 1px solid var(--vp-c-divider);
+  border-bottom: 1px solid var(--vp-c-divider);
+}
+
+.formula-card .title {
+  font-weight: 700;
+  color: var(--vp-c-brand-1);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+}
+
+/* ── 考点自测背诵折叠组件 ── */
+details.self-test {
+  border: 1px solid var(--vp-c-divider);
+  background: var(--vp-c-bg-soft);
+  border-radius: 10px;
+  padding: 12px 18px;
+  margin: 16px 0;
+  transition: all 0.25s ease;
+}
+
+details.self-test[open] {
+  background: var(--vp-c-bg-elv);
+  border-color: var(--vp-c-brand-1);
+  box-shadow: 0 4px 16px -2px rgba(0, 0, 0, 0.06);
+}
+
+details.self-test summary {
+  cursor: pointer;
+  font-weight: 700;
+  color: var(--vp-c-text-1);
+  user-select: none;
+  outline: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+details.self-test summary:hover {
+  color: var(--vp-c-brand-1);
+}
+
+details.self-test .answer-content {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--vp-c-divider);
+  font-size: 14.5px;
+}
+
+/* ════════ 首页 (Home Layout) 宽度与左右边距完全对齐 ════════
+   确保首页主体内容（四科卡片、备考线索、时间分配表格）与
+   顶部 Hero 及 Features 具有完全相同的 max-width (1152px) 和水平居中对齐。
+   ════════════════════════════════════════════════════════════ */
+.VPHome .VPHomeContent,
+.VPHome .VPHomeContent .container,
+.VPHome .vp-doc.container {
+  max-width: 1152px !important;
+  width: 100% !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-left: 24px !important;
+  padding-right: 24px !important;
+  box-sizing: border-box !important;
+}
+
+@media (min-width: 640px) {
+  .VPHome .VPHomeContent,
+  .VPHome .VPHomeContent .container,
+  .VPHome .vp-doc.container {
+    padding-left: 48px !important;
+    padding-right: 48px !important;
+  }
+}
+
+@media (min-width: 960px) {
+  .VPHome .VPHomeContent,
+  .VPHome .VPHomeContent .container,
+  .VPHome .vp-doc.container {
+    padding-left: 64px !important;
+    padding-right: 64px !important;
+  }
+}
+
+.VPHome .vp-doc {
+  max-width: 100% !important;
+  width: 100% !important;
+  margin: 0 auto !important;
+}
+
+/* ── 首页卡片网格 ── */
+.home-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin: 28px 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+@media (min-width: 960px) {
+  .home-card-grid {
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 16px !important;
+  }
+}
+
+@media (max-width: 959px) and (min-width: 640px) {
+  .home-card-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 14px !important;
+  }
+}
+
+@media (max-width: 639px) {
+  .home-card-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+.subject-card {
+  position: relative;
+  background: var(--vp-c-bg-elv);
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 14px;
+  padding: 20px 18px;
+  text-decoration: none !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  box-shadow: var(--card-shadow);
+}
+
+.subject-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+}
+
+.subject-card.ds::before { background: linear-gradient(90deg, #10b981, #059669); }
+.subject-card.co::before { background: linear-gradient(90deg, #3b82f6, #4f46e5); }
+.subject-card.os::before { background: linear-gradient(90deg, #8b5cf6, #7c3aed); }
+.subject-card.cn::before { background: linear-gradient(90deg, #f59e0b, #d97706); }
+
+.subject-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--card-hover-shadow);
+}
+
+.subject-card.ds:hover { border-color: var(--subject-ds); }
+.subject-card.co:hover { border-color: var(--subject-co); }
+.subject-card.os:hover { border-color: var(--subject-os); }
+.subject-card.cn:hover { border-color: var(--subject-cn); }
+
+.subject-card .header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.subject-card .subject-title {
+  font-size: 1.28rem;
+  font-weight: 800;
+  color: var(--vp-c-text-1);
+  white-space: nowrap;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+.subject-card .score-row {
+  display: flex;
+  align-items: center;
+}
+
+.subject-card .score-pill {
+  display: inline-flex;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  background: var(--vp-c-bg-soft);
+  color: var(--vp-c-text-2);
+  border: 1px solid var(--vp-c-divider);
+  line-height: 1.3;
+}
+
+.subject-card .desc {
+  font-size: 13.5px;
+  color: var(--vp-c-text-2);
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+.subject-card .footer-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   408OS 极简赛博像素背景与首页玻璃拟态增强 (Cyber Home UI)
+   ══════════════════════════════════════════════════════════════════ */
+.VPHome {
+  background: transparent !important;
+  position: relative;
+  z-index: 1;
+}
+
+/* 让 Hero 与 Features 背景通透，展露动态矩阵绿波背景 */
+.VPHero {
+  background: transparent !important;
+}
+
+.VPHero .name {
+  font-size: clamp(2.5rem, 5vw, 4.5rem) !important;
+  font-weight: 900 !important;
+  letter-spacing: -0.03em !important;
+  background: linear-gradient(135deg, #111827 0%, #059669 50%, #10b981 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  filter: drop-shadow(0 4px 18px rgba(5, 150, 105, 0.15));
+}
+
+.dark .VPHero .name {
+  background: linear-gradient(135deg, #f9fafb 0%, #34d399 50%, #10b981 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  filter: drop-shadow(0 4px 20px rgba(52, 211, 153, 0.3));
+}
+
+html.parchment .VPHero .name {
+  background: linear-gradient(135deg, #2d241e 0%, #047857 50%, #059669 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+.VPHero .text {
+  font-weight: 800 !important;
+  letter-spacing: -0.02em !important;
+  color: var(--vp-c-text-1) !important;
+}
+
+/* 主操作按钮：翠绿赛博渐变 + 柔光阴影 + 光泽流动 (超越原版) */
+.VPHero .action .VPButton.brand {
+  position: relative !important;
+  overflow: hidden !important;
+  background: linear-gradient(135deg, #059669 0%, #10b981 100%) !important;
+  border: none !important;
+  color: #ffffff !important;
+  border-radius: 9999px !important;
+  font-weight: 700 !important;
+  box-shadow: 0 6px 20px rgba(5, 150, 105, 0.35) !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.VPHero .action .VPButton.brand::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -70%;
+  width: 45%;
+  height: 200%;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.35) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: rotate(25deg);
+  animation: hero-shimmer-sweep 4.5s infinite cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+}
+
+@keyframes hero-shimmer-sweep {
+  0% { left: -80%; opacity: 0; }
+  15% { opacity: 1; }
+  35% { left: 150%; opacity: 0; }
+  100% { left: 150%; opacity: 0; }
+}
+
+.VPHero .action .VPButton.brand:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 10px 30px rgba(5, 150, 105, 0.5) !important;
+}
+
+/* 次要操作按钮：磨砂玻璃药丸 */
+.VPHero .action .VPButton.alt {
+  background: rgba(255, 255, 255, 0.82) !important;
+  border: 1px solid rgba(229, 231, 235, 0.8) !important;
+  border-radius: 9999px !important;
+  backdrop-filter: blur(10px) !important;
+  font-weight: 600 !important;
+  color: var(--vp-c-text-1) !important;
+  transition: all 0.3s ease !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04) !important;
+}
+
+.dark .VPHero .action .VPButton.alt {
+  background: rgba(39, 39, 42, 0.75) !important;
+  border-color: rgba(63, 63, 70, 0.6) !important;
+  color: #f4f4f5 !important;
+}
+
+html.parchment .VPHero .action .VPButton.alt {
+  background: rgba(254, 250, 240, 0.82) !important;
+  border-color: rgba(217, 119, 6, 0.25) !important;
+}
+
+/* 四科各色药丸独立极客光晕响应 */
+.VPHero .action a[href*="data-structure"]:hover {
+  border-color: #10b981 !important;
+  color: #059669 !important;
+  box-shadow: 0 8px 24px rgba(16, 185, 129, 0.25) !important;
+  transform: translateY(-2px) !important;
+}
+.VPHero .action a[href*="computer-organization"]:hover {
+  border-color: #3b82f6 !important;
+  color: #2563eb !important;
+  box-shadow: 0 8px 24px rgba(59, 130, 246, 0.25) !important;
+  transform: translateY(-2px) !important;
+}
+.VPHero .action a[href*="operating-system"]:hover {
+  border-color: #8b5cf6 !important;
+  color: #7c3aed !important;
+  box-shadow: 0 8px 24px rgba(139, 92, 246, 0.25) !important;
+  transform: translateY(-2px) !important;
+}
+.VPHero .action a[href*="computer-network"]:hover {
+  border-color: #f59e0b !important;
+  color: #d97706 !important;
+  box-shadow: 0 8px 24px rgba(245, 158, 11, 0.25) !important;
+  transform: translateY(-2px) !important;
+}
+
+.dark .VPHero .action a[href*="data-structure"]:hover { color: #34d399 !important; }
+.dark .VPHero .action a[href*="computer-organization"]:hover { color: #60a5fa !important; }
+.dark .VPHero .action a[href*="operating-system"]:hover { color: #a78bfa !important; }
+.dark .VPHero .action a[href*="computer-network"]:hover { color: #fbbf24 !important; }
+
+/* Features 卡片：磨砂玻璃化 (参考 408os.cn .feature-card-split) */
+.VPHomeFeatures {
+  background: transparent !important;
+}
+
+.VPHomeFeatures .item {
+  background: rgba(255, 255, 255, 0.85) !important;
+  backdrop-filter: blur(14px) !important;
+  border: 1px solid rgba(229, 231, 235, 0.75) !important;
+  border-radius: 20px !important;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04) !important;
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.dark .VPHomeFeatures .item {
+  background: rgba(30, 30, 35, 0.8) !important;
+  border-color: rgba(63, 63, 70, 0.5) !important;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25) !important;
+}
+
+html.parchment .VPHomeFeatures .item {
+  background: rgba(254, 248, 236, 0.85) !important;
+  border-color: rgba(217, 119, 6, 0.2) !important;
+  box-shadow: 0 8px 24px rgba(140, 83, 36, 0.05) !important;
+}
+
+.VPHomeFeatures .item:hover {
+  transform: translateY(-5px) !important;
+  border-color: rgba(16, 185, 129, 0.5) !important;
+  box-shadow: 0 16px 40px rgba(5, 150, 105, 0.14) !important;
+}
+
+/* 首页四科卡片玻璃拟态增强 */
+.subject-card {
+  background: rgba(255, 255, 255, 0.86) !important;
+  backdrop-filter: blur(14px) !important;
+  border: 1px solid rgba(229, 231, 235, 0.75) !important;
+}
+
+.dark .subject-card {
+  background: rgba(30, 30, 35, 0.8) !important;
+  border-color: rgba(63, 63, 70, 0.5) !important;
+}
+
+html.parchment .subject-card {
+  background: rgba(254, 248, 236, 0.86) !important;
+  border-color: rgba(217, 119, 6, 0.2) !important;
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   数学公式渲染增强 (MathJax / SVG / KaTeX 全主题与高对比度适配)
+   ══════════════════════════════════════════════════════════════════ */
+mjx-container {
+  display: inline-block !important;
+  color: inherit !important;
+  font-size: 1.05em !important;
+  vertical-align: -0.15em !important;
+  outline: none !important;
+  line-height: 0 !important;
+}
+
+mjx-container svg {
+  display: inline-block !important;
+  color: inherit !important;
+  fill: currentColor !important;
+  vertical-align: middle !important;
+  max-width: 100% !important;
+}
+
+mjx-container svg path,
+mjx-container svg use,
+mjx-container svg text {
+  fill: currentColor !important;
+  stroke: currentColor !important;
+  stroke-width: 0 !important;
+}
+
+/* 块级居中公式 (Display Math) */
+mjx-container[jax="SVG"][display="true"],
+mjx-container[jax="CHTML"][display="true"],
+.vp-doc .MathJax_Display,
+.vp-doc .katex-display {
+  display: block !important;
+  text-align: center !important;
+  margin: 1.2em 0 !important;
+  padding: 10px 16px !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  max-width: 100% !important;
+  color: inherit !important;
+  border-radius: 8px;
+}
+
+/* 在公式卡片内部的公式 */
+.formula-card mjx-container[display="true"] {
+  margin: 0.5em 0 !important;
+  padding: 4px 0 !important;
+  background: transparent !important;
+}
+
+/* 🌙 暗黑模式公式高亮 */
+.dark mjx-container,
+.dark mjx-container svg {
+  color: #f8fafc !important;
+  fill: #f8fafc !important;
+}
+
+.dark mjx-container svg path,
+.dark mjx-container svg use,
+.dark mjx-container svg text {
+  fill: #f8fafc !important;
+  stroke: #f8fafc !important;
+}
+
+/* 📜 羊皮纸模式公式暖色匹配 */
+html.parchment mjx-container,
+html.parchment mjx-container svg {
+  color: #342618 !important;
+  fill: #342618 !important;
+}
+
+html.parchment mjx-container svg path,
+html.parchment mjx-container svg use,
+html.parchment mjx-container svg text {
+  fill: #342618 !important;
+  stroke: #342618 !important;
+}
+
+/* 顶部导航栏控件组合 (用户筛选 + 主题切换) */
+.nav-controls-wrapper {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px;
+  margin-left: 10px;
+  flex-shrink: 0;
+  z-index: 50;
+}
+
+.nav-screen-controls-wrapper {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 12px;
+  padding: 16px 0;
+}
+
+@media (max-width: 960px) {
+  .nav-controls-wrapper {
+    margin-left: 4px;
+    gap: 4px;
+  }
+}
+
+
+
+/* ── 考研自测折叠卡片 (VitePress native details 容器美化) ── */
+.custom-block.details {
+  border: 1px solid var(--vp-c-divider) !important;
+  background: var(--vp-c-bg-soft) !important;
+  border-radius: 10px !important;
+  padding: 14px 18px !important;
+  margin: 18px 0 !important;
+  transition: all 0.25s ease !important;
+}
+
+.custom-block.details[open] {
+  background: var(--vp-c-bg-elv) !important;
+  border-color: var(--vp-c-brand-1) !important;
+  box-shadow: 0 4px 16px -2px rgba(0, 0, 0, 0.06) !important;
+}
+
+.custom-block.details summary {
+  cursor: pointer !important;
+  font-weight: 700 !important;
+  color: var(--vp-c-text-1) !important;
+  user-select: none !important;
+  outline: none !important;
+  font-size: 14.5px !important;
+}
+
+.custom-block.details summary:hover {
+  color: var(--vp-c-brand-1) !important;
+}
+
+.custom-block.details summary mjx-container {
+  vertical-align: middle !important;
+}
+
+
+/* ══════════════════════════════════════════════════════════════════
+   移动端与平板全量响应式适配 (< 960px)
+   ══════════════════════════════════════════════════════════════════ */
+@media (max-width: 959px) {
+  .VPContent.has-sidebar {
+    padding-left: 0 !important;
+  }
+
+  .VPDoc {
+    padding: 20px 14px 48px 14px !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+    box-sizing: border-box !important;
+  }
+
+  .VPDoc.has-sidebar .container,
+  .VPDoc .container {
+    max-width: 100% !important;
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: block !important;
+  }
+
+  .VPDoc.has-sidebar > .container > .content,
+  .VPDoc .content {
+    max-width: 100% !important;
+    width: 100% !important;
+    padding: 0 !important;
+  }
+
+  .VPDoc .content-container {
+    max-width: 100% !important;
+    width: 100% !important;
+    margin: 0 !important;
+  }
+
+  /* 移动端彻底隐藏固定右侧大纲（由顶部本地导航 Menu 代替） */
+  .VPDoc.has-aside .aside,
+  .VPDoc.has-aside .aside-container {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+  }
+
+  .nav-controls-wrapper {
+    margin-left: 2px !important;
+    gap: 2px !important;
+  }
+
+  /* 移动端卡片网格单列显示 */
+  .home-card-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+/* ══════════════════════════════════════════════════════════════════
+   🎯 408 交互式刷题自测通用样式 (Interactive Quiz Styles)
+   ══════════════════════════════════════════════════════════════════ */
+.quiz-interactive-box {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 6px 0;
+}
+
+.opt-item {
+  background: var(--vp-c-bg);
+  border: 1.5px solid var(--vp-c-border);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--vp-c-text-1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.opt-item:hover {
+  border-color: var(--vp-c-brand-1);
+  background: rgba(37, 99, 235, 0.04);
+  transform: translateY(-1px);
+}
+
+.opt-selected {
+  border-color: var(--vp-c-brand-1);
+  background: rgba(37, 99, 235, 0.08);
+}
+
+.opt-correct {
+  border-color: #10b981 !important;
+  background: rgba(16, 185, 129, 0.12) !important;
+  color: #059669 !important;
+  font-weight: 800 !important;
+}
+
+.opt-wrong {
+  border-color: #ef4444 !important;
+  background: rgba(239, 68, 68, 0.1) !important;
+  color: #dc2626 !important;
+}
+
+.opt-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.opt-letter {
+  font-weight: 800;
+  color: var(--vp-c-brand-1);
+}
+
+.correct-badge {
+  font-size: 11px;
+  font-weight: 800;
+  background: #10b981;
+  color: #ffffff;
+  padding: 2px 6px;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(16, 185, 129, 0.3);
+}
+
+.wrong-badge {
+  font-size: 11px;
+  font-weight: 800;
+  background: #ef4444;
+  color: #ffffff;
+  padding: 2px 6px;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(239, 68, 68, 0.3);
+}
+
+.quiz-action-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.quiz-btn {
+  font-size: 11.5px;
+  font-weight: 700;
+  padding: 5px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-toggle {
+  background: var(--vp-c-bg-alt);
+  border: 1px solid var(--vp-c-border);
+  color: var(--vp-c-text-1);
+}
+
+.btn-toggle:hover {
+  background: var(--vp-c-brand-1);
+  color: #ffffff;
+  border-color: var(--vp-c-brand-1);
+}
+
+.btn-reset {
+  background: transparent;
+  border: 1px dashed var(--vp-c-border);
+  color: var(--vp-c-text-3);
+}
+
+.btn-reset:hover {
+  color: var(--vp-c-text-1);
+  border-color: var(--vp-c-text-2);
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   顶部导航栏自适应与防溢出架构 (Navbar Adaptive Layout)
+   ══════════════════════════════════════════════════════════════════ */
+.VPNavBar .container {
+  max-width: 100% !important;
+  padding: 0 16px !important;
+}
+
+.VPNavBar .content {
+  flex-grow: 1;
+  min-width: 0;
+}
+
+.VPNavBar .content-body {
+  display: flex !important;
+  align-items: center !important;
+  flex-wrap: nowrap !important;
+  gap: 6px !important;
+  min-width: 0;
+  justify-content: flex-end !important;
+}
+
+/* 搜索栏弹性宽度与居左 */
+.VPNavBarSearch {
+  flex-grow: 0 !important;
+  flex-shrink: 1 !important;
+  margin-right: auto !important;
+}
+
+.VPNavBarSearch .DocSearch-Button {
+  width: 190px !important;
+  max-width: 190px !important;
+  padding: 0 10px !important;
+  transition: width 0.2s ease;
+}
+
+/* 中间菜单项：固定不被挤压，文字不折行 */
+.VPNavBarMenu {
+  display: flex !important;
+  align-items: center !important;
+  flex-shrink: 0 !important;
+  margin-right: 0 !important;
+  white-space: nowrap !important;
+}
+
+.VPNavBarMenuLink {
+  padding: 0 7px !important;
+  font-size: 13px !important;
+  white-space: nowrap !important;
+}
+
+/* 右侧功能控制栏容器：独立隔离，带优雅分割线 */
+.nav-controls-wrapper {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  flex-shrink: 0 !important;
+  white-space: nowrap !important;
+  margin-left: 6px !important;
+  padding-left: 8px !important;
+  border-left: 1px solid var(--vp-c-divider);
+}
+
+/* 当存在侧边栏时，顶栏可用宽度减小，确保始终使用紧凑工具条 */
+.VPNavBar.has-sidebar .full-filter-group,
+.VPNavBar.has-sidebar .full-theme-control {
+  display: none !important;
+}
+
+.VPNavBar.has-sidebar .compact-filter-dropdown,
+.VPNavBar.has-sidebar .compact-theme-control {
+  display: inline-flex !important;
+}
+
+/* 页面放大或中等宽度下的阶梯细化适配 */
+@media (max-width: 1400px) {
+  .VPNavBarMenuLink {
+    padding: 0 5px !important;
+    font-size: 12.5px !important;
+  }
+  .nav-controls-wrapper {
+    gap: 4px !important;
+    margin-left: 4px !important;
+    padding-left: 6px !important;
+  }
+}
+
+@media (max-width: 1200px) {
+  .VPNavBarSearch .DocSearch-Button {
+    width: 150px !important;
+    max-width: 150px !important;
+  }
+  .VPNavBarMenuLink {
+    padding: 0 4px !important;
+    font-size: 12px !important;
+  }
+}
+
+@media (max-width: 1050px) {
+  .VPNavBar .container {
+    padding: 0 8px !important;
+  }
+  .VPNavBarSearch .DocSearch-Button {
+    width: 40px !important;
+    padding: 0 !important;
+    justify-content: center !important;
+  }
+  .VPNavBarSearch .DocSearch-Button-Placeholder,
+  .VPNavBarSearch .DocSearch-Button-Keys {
+    display: none !important;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   手绘草图高精重构卡片 (Handdrawn Diagram Card System)
+   ══════════════════════════════════════════════════════════════════ */
+.handdrawn-diagram-card {
+  margin: 20px 0;
+  padding: 16px 20px;
+  background: var(--vp-c-bg-soft);
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+  transition: all 0.25s ease;
+  overflow-x: auto;
+}
+
+.handdrawn-diagram-card:hover {
+  border-color: var(--vp-c-brand-1);
+  box-shadow: 0 6px 20px -4px rgba(37, 99, 235, 0.08);
+}
+
+.diagram-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--vp-c-text-1);
+  border-bottom: 1px dashed var(--vp-c-divider);
+  padding-bottom: 8px;
+}
+
+.diagram-icon {
+  font-size: 15px;
+}
+
+.diagram-badge {
+  margin-left: auto;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  background: var(--vp-c-brand-soft);
+  color: var(--vp-c-brand-1);
+}
+
+.handdrawn-diagram-card svg {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  height: auto;
+}
+
+

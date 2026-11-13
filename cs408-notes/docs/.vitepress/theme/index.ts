@@ -1,0 +1,103 @@
+import DefaultTheme from 'vitepress/theme'
+import './custom.css'
+import './practice.css'
+import PracticeCenter from './PracticeCenter.vue'
+import PracticeQuestionCard from './PracticeQuestionCard.vue'
+import ThemeToggle from './ThemeToggle.vue'
+import ModeToggle from './ModeToggle.vue'
+import CollapseToggle from './CollapseToggle.vue'
+import SidebarBorderToggle from './SidebarBorderToggle.vue'
+import AuthorTag from './AuthorTag.vue'
+import KP from './KP.vue'
+import ProcessTable from './ProcessTable.vue'
+import InterruptSimulator from './InterruptSimulator.vue'
+import MediaCard from './MediaCard.vue'
+import ProtocolStackMap from './ProtocolStackMap.vue'
+import NetworkMetrics from './NetworkMetrics.vue'
+import EncodingModulation from './EncodingModulation.vue'
+import MultiplexingSimulator from './MultiplexingSimulator.vue'
+import ErrorCheckSimulator from './ErrorCheckSimulator.vue'
+import TcpFlowControl from './TcpFlowControl.vue'
+import TcpCongestionControl from './TcpCongestionControl.vue'
+import TcpReliableTransfer from './TcpReliableTransfer.vue'
+import TcpConnectionManagement from './TcpConnectionManagement.vue'
+import TcpHeaderFormat from './TcpHeaderFormat.vue'
+import DnsQuerySimulator from './DnsQuerySimulator.vue'
+import FtpConnectionModel from './FtpConnectionModel.vue'
+import EmailProtocolSimulator from './EmailProtocolSimulator.vue'
+import HttpProtocolSimulator from './HttpProtocolSimulator.vue'
+import GbnUtilizationSimulator from './GbnUtilizationSimulator.vue'
+import CsmaCaSimulator from './CsmaCaSimulator.vue'
+import UdpChecksumCalculator from './UdpChecksumCalculator.vue'
+import AsideToggle from './AsideToggle.vue'
+import InternalSortPlayer from './InternalSortPlayer.vue'
+import ExternalSortPlayer from './ExternalSortPlayer.vue'
+import TreePlayer from './TreePlayer.vue'
+import SearchPlayer from './SearchPlayer.vue'
+import DhcpProtocolSimulator from './DhcpProtocolSimulator.vue'
+import HomeCyberBackground from './HomeCyberBackground.vue'
+import HomeTypewriter from './HomeTypewriter.vue'
+import HomeExamCountdown from './HomeExamCountdown.vue'
+import { h } from 'vue'
+
+export default {
+  extends: DefaultTheme,
+  Layout() {
+    return h(DefaultTheme.Layout, null, {
+      'nav-bar-content-after': () => h('div', { class: 'nav-controls-wrapper' }, [
+        h(ModeToggle),
+        h(CollapseToggle),
+        h(ThemeToggle)
+      ]),
+      'nav-screen-content-after': () => h('div', { class: 'nav-screen-controls-wrapper' }, [
+        h(ModeToggle),
+        h(CollapseToggle),
+        h(ThemeToggle)
+      ]),
+      'layout-top': () => h('div', null, [
+        h(HomeCyberBackground),
+        h(SidebarBorderToggle),
+        h(AsideToggle)
+      ]),
+      'home-hero-info-after': () => h(HomeTypewriter),
+      'home-hero-after': () => h(HomeExamCountdown)
+    })
+  },
+  enhanceApp({ app }) {
+    app.component('HomeCyberBackground', HomeCyberBackground)
+    app.component('HomeTypewriter', HomeTypewriter)
+    app.component('HomeExamCountdown', HomeExamCountdown)
+    app.component('PracticeCenter', PracticeCenter)
+    app.component('PracticeQuestionCard', PracticeQuestionCard)
+    app.component('ModeToggle', ModeToggle)
+    app.component('CollapseToggle', CollapseToggle)
+    app.component('AuthorTag', AuthorTag)
+    app.component('KP', KP)
+    app.component('KnowledgePoint', KP)
+    app.component('ProcessTable', ProcessTable)
+    app.component('InterruptSimulator', InterruptSimulator)
+    app.component('MediaCard', MediaCard)
+    app.component('ProtocolStackMap', ProtocolStackMap)
+    app.component('NetworkMetrics', NetworkMetrics)
+    app.component('EncodingModulation', EncodingModulation)
+    app.component('MultiplexingSimulator', MultiplexingSimulator)
+    app.component('ErrorCheckSimulator', ErrorCheckSimulator)
+    app.component('TcpFlowControl', TcpFlowControl)
+    app.component('TcpCongestionControl', TcpCongestionControl)
+    app.component('TcpReliableTransfer', TcpReliableTransfer)
+    app.component('TcpConnectionManagement', TcpConnectionManagement)
+    app.component('TcpHeaderFormat', TcpHeaderFormat)
+    app.component('DnsQuerySimulator', DnsQuerySimulator)
+    app.component('FtpConnectionModel', FtpConnectionModel)
+    app.component('EmailProtocolSimulator', EmailProtocolSimulator)
+    app.component('HttpProtocolSimulator', HttpProtocolSimulator)
+    app.component('GbnUtilizationSimulator', GbnUtilizationSimulator)
+    app.component('CsmaCaSimulator', CsmaCaSimulator)
+    app.component('UdpChecksumCalculator', UdpChecksumCalculator)
+    app.component('InternalSortPlayer', InternalSortPlayer)
+    app.component('ExternalSortPlayer', ExternalSortPlayer)
+    app.component('TreePlayer', TreePlayer)
+    app.component('SearchPlayer', SearchPlayer)
+    app.component('DhcpProtocolSimulator', DhcpProtocolSimulator)
+  }
+}
