@@ -39,11 +39,12 @@ let roundId = 'eb-' + Date.now();
 let todayStr = new Date().toISOString().slice(0,10);
 
 async function init() {
-  const [bRes, qRes] = await Promise.all([
+  const [b1, b2, qRes] = await Promise.all([
     fetch('/questions.json', { cache:'no-store' }),
+    fetch('/ds-questions.json', { cache:'no-store' }),
     fetch('/queue.json', { cache:'no-store' })
   ]);
-  bank = (await bRes.json()).questions;
+  bank = [...(await b1.json()).questions, ...(await b2.json()).questions];
   queue = await qRes.json();
   const dueItemIds = queue.items.filter(i => i.dueDate <= todayStr).map(i => i.id);
   dueQuestions = bank.filter(q => dueItemIds.includes(q.itemId));
