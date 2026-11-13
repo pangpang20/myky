@@ -1,0 +1,69 @@
+{
+  "version": 1,
+  "generatedAt": "2026-11-13",
+  "schedule": [
+    0,
+    1,
+    2,
+    4,
+    7,
+    15,
+    30
+  ],
+  "items": [
+    {
+      "id": "计算机-网络基本概念",
+      "subject": "计算机网络",
+      "file": "计算机网络/计算机网络基本概念.md",
+      "firstLearned": "2026-11-13",
+      "reviews": [],
+      "dueDate": "2026-11-14",
+      "nextRound": 1
+    },
+    {
+      "id": "计算机-分组交换的缺点",
+      "subject": "计算机网络",
+      "file": "计算机网络/分组交换的缺点.md",
+      "firstLearned": "2026-11-13",
+      "reviews": [],
+      "dueDate": "2026-11-14",
+      "nextRound": 1
+    },
+    {
+      "id": "计算机-分组交换缺点辨析",
+      "subject": "计算机网络",
+      "file": "计算机网络/分组交换缺点辨析.md",
+      "firstLearned": "2026-11-13",
+      "reviews": [],
+      "dueDate": "2026-11-14",
+      "nextRound": 1
+    },
+    {
+      "id": "计算机-数据交换方式性能与改进",
+      "subject": "计算机网络",
+      "file": "计算机网络/数据交换方式性能与改进.md",
+      "firstLearned": "2026-11-13",
+      "reviews": [],
+      "dueDate": "2026-11-14",
+      "nextRound": 1
+    },
+    {
+      "id": "计算机-信道利用率比较",
+      "subject": "计算机网络",
+      "file": "计算机网络/信道利用率比较.md",
+      "firstLearned": "2026-11-13",
+      "reviews": [],
+      "dueDate": "2026-11-14",
+      "nextRound": 1
+    },
+    {
+      "id": "计算机-分组化直接结果辨析",
+      "subject": "计算机网络",
+      "file": "计算机网络/分组化直接结果辨析.md",
+      "firstLearned": "2026-11-13",
+      "reviews": [],
+      "dueDate": "2026-11-14",
+      "nextRound": 1
+    }
+  ]
+}

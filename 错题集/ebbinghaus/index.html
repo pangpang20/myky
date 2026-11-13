@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>408 艾宾浩斯复习</title>
+<style>
+  body{margin:0;background:#f3f5f8;font-family:system-ui,"Microsoft YaHei",sans-serif;color:#1f2937}
+  .wrap{max-width:760px;margin:0 auto;padding:24px}
+  h1{font-size:22px;margin:0 0 4px}
+  .meta{color:#6b7280;font-size:13px;margin-bottom:18px}
+  .card{background:#fff;border-radius:14px;padding:20px;box-shadow:0 2px 10px rgba(15,23,42,.06);margin-bottom:12px}
+  .q{font-size:17px;font-weight:600;margin-bottom:14px}
+  .opt{border:1px solid #e5e7eb;border-radius:10px;padding:12px 14px;margin:10px 0;cursor:pointer;transition:.15s;background:#fafafa}
+  .opt:hover{border-color:#2563eb;background:#eff6ff}
+  .opt.correct{border-color:#16a34a;background:#ecfdf5;color:#15803d}
+  .opt.wrong{border-color:#dc2626;background:#fef2f2;color:#b91c1c}
+  .opt.disabled{cursor:default;opacity:.85}
+  .badge{font-weight:700;margin-right:8px}
+  .analysis{margin-top:14px;border-top:1px dashed #e5e7eb;padding-top:12px;display:none}
+  .btn{margin-top:16px;padding:9px 16px;border-radius:8px;border:none;background:#2563eb;color:#fff;cursor:pointer;font-size:14px}
+  .btn:disabled{background:#94a3b8;cursor:not-allowed}
+  .log{margin-top:20px;font-size:13px;color:#475569}
+  .warn{color:#b91c1c;font-weight:600}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>🔁 408 艾宾浩斯复习</h1>
+  <div class="meta" id="meta">加载中…</div>
+  <div id="quizCard"></div>
+  <div class="log" id="log"></div>
+</div>
+<script>
+let bank = [];
+let queue = null;
+let dueQuestions = [];
+let idx = 0;
+let roundId = 'eb-' + Date.now();
+let todayStr = new Date().toISOString().slice(0,10);
+
+async function init() {
+  const [bRes, qRes] = await Promise.all([
+    fetch('/questions.json', { cache:'no-store' }),
+    fetch('/queue.json', { cache:'no-store' })
+  ]);
+  bank = (await bRes.json()).questions;
+  queue = await qRes.json();
+  const dueItemIds = queue.items.filter(i => i.dueDate <= todayStr).map(i => i.id);
+  dueQuestions = bank.filter(q => dueItemIds.includes(q.itemId));
+  document.getElementById('meta').textContent =
+    dueQuestions.length
+      ? `今天是 ${todayStr}，到期复习 ${dueItemIds.length} 个知识点，共 ${dueQuestions.length} 题。`
+      : `今天是 ${todayStr}，暂无到期复习题。下次到期日：${queue.items.map(i=>i.dueDate).sort()[0] || '—'}。`;
+  render();
+}
+
+function isCorrect(q, sel) {
+  return sel === q.answer;
+}
+
+function render() {
+  const card = document.getElementById('quizCard');
+  const log = document.getElementById('log');
+  log.textContent = '';
+  if (idx >= dueQuestions.length) {
+    card.innerHTML = `<div class="q">今日复习完成 ✅</div><p>共 ${dueQuestions.length} 题。结果已提交，下一次到期日将按遗忘曲线更新。</p><p class="warn">关闭页面前无需其他操作。</p>`;
+    log.textContent = '正在提交结果…';
+    fetch('/api/finish', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ roundId, date: todayStr })
+    }).then(r=>r.json()).then(d=>{
+      log.textContent = `已提交。本次答错 ${d.wrongCount} 题对应的知识点将重新进入 1 天后复习。`;
+    }).catch(()=>{ log.textContent='提交失败，请检查服务。'; });
+    return;
+  }
+  const q = dueQuestions[idx];
+  card.innerHTML = `
+    <div class="card">
+      <div class="meta">第 ${idx + 1} / ${dueQuestions.length} 题 · ${q.topic} · 第 ${q.round} 轮</div>
+      <div class="q">${q.question}</div>
+      <div id="options"></div>
+      <div class="analysis" id="analysis"></div>
+      <button class="btn" id="nextBtn" style="display:none">下一题</button>
+    </div>
+  `;
+  const optionsEl = card.querySelector('#options');
+  const nextBtn = card.querySelector('#nextBtn');
+  Object.keys(q.options).sort().forEach(letter => {
+    const div = document.createElement('div');
+    div.className = 'opt';
+    div.dataset.letter = letter;
+    div.innerHTML = `<span class="badge">${letter}</span>${q.options[letter]}`;
+    div.onclick = () => judge(letter);
+    optionsEl.appendChild(div);
+  });
+
+  function judge(sel) {
+    const ok = isCorrect(q, sel);
+    optionsEl.querySelectorAll('.opt').forEach(el => {
+      const l = el.dataset.letter;
+      if (l === q.answer) el.classList.add('correct');
+      else if (l === sel) el.classList.add('wrong');
+      el.classList.add('disabled');
+      el.onclick = null;
+    });
+    const analysisEl = card.querySelector('#analysis');
+    analysisEl.style.display = 'block';
+    analysisEl.innerHTML = `<p><b>${ok ? '✅ 正确' : '❌ 错误'}</b>　正确答案：${q.answer}</p><p>${q.analysis}</p>`;
+    fetch('/api/answer', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ roundId, itemId:q.itemId, id:q.id, topic:q.topic, selected:sel, answer:q.answer, correct:ok, at:new Date().toISOString() })
+    }).catch(()=>{});
+    log.textContent = ok ? '已记录 ✅' : '已记录 ❌ 该知识点本轮答错，将重置为 1 天后复习。';
+    nextBtn.style.display = 'inline-block';
+  }
+
+  nextBtn.onclick = () => { idx++; render(); };
+}
+
+init();
+</script>
+</body>
+</html>
