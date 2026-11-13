@@ -79,7 +79,7 @@ function render() {
   `;
 
   const optionsEl = card.querySelector('#options');
-  const letters = Object.keys(q.options);
+  const letters = Object.keys(q.options).sort();
   let selected = q.type === 'multi' ? [] : null;
   const submitBtn = card.querySelector('#submitBtn');
   const nextBtn = card.querySelector('#nextBtn');

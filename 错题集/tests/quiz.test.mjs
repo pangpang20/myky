@@ -13,6 +13,7 @@ check(html.includes('单选题点击选项即判分'), 'page must explain single
 check(html.includes('多选题勾选后'), 'page must explain multi-choice submit button')
 check(html.includes("q.type === 'single'"), 'page must branch on single type')
 check(html.includes('submitBtn.disabled'), 'multi-choice must gate submit button')
+check(html.includes('Object.keys(q.options).sort()'), 'options must render in A/B/C/D order')
 check(html.includes('已记入错题集'), 'wrong answers must be recorded')
 check(Array.isArray(questions) && questions.length >= 5, 'at least 5 questions')
 
