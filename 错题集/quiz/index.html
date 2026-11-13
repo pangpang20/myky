@@ -35,6 +35,9 @@ let questions = [];
 let idx = 0;
 let wrongLog = [];
 
+const GROUP_SIZE = 5;
+let groupStart = 0;
+
 async function init() {
   const res = await fetch('./questions.json');
   questions = await res.json();
@@ -67,7 +70,7 @@ function render() {
   }
   const q = questions[idx];
   card.innerHTML = `
-    <div class="meta">${q.subject} · ${q.topic} · ${q.type === 'multi' ? '多选' : '单选'}</div>
+    <div class="meta">第 ${idx - groupStart + 1} / ${Math.min(GROUP_SIZE, questions.length - groupStart)} 题 · ${q.subject} · ${q.topic} · ${q.type === 'multi' ? '多选' : '单选'}</div>
     <div class="q">${q.question}</div>
     <div id="options"></div>
     ${q.type === 'multi' ? '<button class="btn" id="submitBtn" disabled>提交答案</button>' : ''}
@@ -122,7 +125,7 @@ function render() {
     nextBtn.style.display = 'inline-block';
   }
 
-  nextBtn.onclick = () => { idx++; render(); };
+  nextBtn.onclick = () => { idx++; if (idx - groupStart >= GROUP_SIZE || idx >= questions.length) { groupStart = idx; } render(); };
 }
 
 init();
