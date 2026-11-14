@@ -2,144 +2,195 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
-<title>计算机考研 · 艾宾浩斯复习</title>
+<title>计算机考研 · 艾宾浩斯记忆中心</title>
 <style>
-  body{margin:0;background:#f3f5f8;font-family:system-ui,"Microsoft YaHei",sans-serif;color:#1f2937}
-  .wrap{max-width:760px;margin:0 auto;padding:24px}
-  h1{font-size:22px;margin:0 0 4px}
-  .meta{color:#6b7280;font-size:13px;margin-bottom:18px}
-  .card{background:#fff;border-radius:14px;padding:20px;box-shadow:0 2px 10px rgba(15,23,42,.06);margin-bottom:12px}
-  .q{font-size:17px;font-weight:600;margin-bottom:14px;line-height:1.5}
-.q pre{background:#1e293b;color:#e2e8f0;border-radius:8px;padding:12px 14px;margin:10px 0;overflow-x:auto;font-family:Consolas,Menlo,monospace;font-size:13px;line-height:1.6;font-weight:400}
-.q code{font-family:Consolas,Menlo,monospace}
-  .opt{border:1px solid #e5e7eb;border-radius:10px;padding:12px 14px;margin:10px 0;cursor:pointer;transition:.15s;background:#fafafa}
-  .opt:hover{border-color:#2563eb;background:#eff6ff}
-  .opt.correct{border-color:#16a34a;background:#ecfdf5;color:#15803d}
-  .opt.wrong{border-color:#dc2626;background:#fef2f2;color:#b91c1c}
-  .opt.disabled{cursor:default;opacity:.85}
-  .badge{font-weight:700;margin-right:8px}
-  .analysis{margin-top:14px;border-top:1px dashed #e5e7eb;padding-top:12px;display:none}
-  .btn{margin-top:16px;padding:9px 16px;border-radius:8px;border:none;background:#2563eb;color:#fff;cursor:pointer;font-size:14px}
-  .btn:disabled{background:#94a3b8;cursor:not-allowed}
-  .log{margin-top:20px;font-size:13px;color:#475569}
-  .warn{color:#b91c1c;font-weight:600}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#0f172a;color:#e2e8f0;font-family:system-ui,"Microsoft YaHei",sans-serif;min-height:100vh}
+.topbar{background:#1e293b;border-bottom:1px solid #334155;padding:14px 24px;display:flex;align-items:center;gap:16px}
+.topbar h1{font-size:18px;font-weight:600}
+.topbar .badge{font-size:12px;color:#94a3b8}
+.wrap{max-width:1100px;margin:0 auto;padding:24px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px}
+.stat{background:#1e293b;border-radius:12px;padding:16px;border:1px solid #334155}
+.stat .num{font-size:26px;font-weight:700}
+.stat .label{font-size:12px;color:#94a3b8;margin-top:4px}
+.stat.green .num{color:#4ade80}.stat.blue .num{color:#60a5fa}.stat.orange .num{color:#fb923c}.stat.purple .num{color:#c084fc}
+.section{background:#1e293b;border-radius:12px;border:1px solid #334155;margin-bottom:16px;overflow:hidden}
+.section h2{font-size:14px;padding:14px 18px;border-bottom:1px solid #334155;color:#94a3b8;font-weight:600}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{padding:10px 14px;text-align:left;color:#64748b;font-weight:500;border-bottom:1px solid #334155;background:#0f172a}
+td{padding:12px 14px;border-bottom:1px solid #1e293b}
+tr:last-child td{border-bottom:none}
+.tag{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600}
+.tag.mastered{background:#14532d;color:#4ade80}
+.tag.learning{background:#1e3a5f;color:#60a5fa}
+.tag.due-today{background:#431407;color:#fb923c}
+.btn{padding:6px 12px;border-radius:6px;border:none;cursor:pointer;font-size:12px;font-weight:600}
+.btn.primary{background:#2563eb;color:#fff}
+.btn.ghost{background:transparent;color:#94a3b8;border:1px solid #334155}
+.btn:hover{opacity:.85}
+.curve{padding:20px 18px}
+svg{display:block;width:100%;height:auto}
+.dot{cursor:pointer}
+#quizCard{max-width:680px;margin:0 auto}
+.opt{border:1px solid #334155;border-radius:10px;padding:12px 14px;margin:10px 0;cursor:pointer;transition:.15s;background:#0f172a}
+.opt:hover{border-color:#3b82f6;background:#172554}
+.opt.correct{border-color:#22c55e;background:#14532d;color:#86efac}
+.opt.wrong{border-color:#ef4444;background:#450a0a;color:#fca5a5}
+.opt.disabled{cursor:default;opacity:.9}
+.badge{font-weight:700;margin-right:8px}
+.analysis{margin-top:14px;border-top:1px dashed #334155;padding-top:12px;display:none;font-size:13px;line-height:1.6;color:#94a3b8}
+.btn-lg{margin-top:16px;padding:10px 20px;border-radius:8px;border:none;background:#2563eb;color:#fff;cursor:pointer;font-size:14px;font-weight:600}
+.btn-lg:disabled{background:#475569;cursor:not-allowed}
+.q{font-size:16px;font-weight:600;margin-bottom:14px;line-height:1.6}
+.q pre{background:#0f172a;color:#93c5fd;border-radius:8px;padding:12px 14px;margin:10px 0;overflow-x:auto;font-family:Consolas,monospace;font-size:13px;line-height:1.6;font-weight:400}
+.q code{font-family:Consolas,monospace}
+.meta{color:#64748b;font-size:12px;margin-bottom:14px}
+.log{margin-top:14px;font-size:13px;color:#94a3b8;min-height:20px}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <h1>🔁 计算机考研 · 艾宾浩斯复习</h1>
-  <div class="meta" id="meta">加载中…</div>
-  <div id="quizCard"></div>
-  <div class="log" id="log"></div>
+<div class="topbar">
+  <h1>🧠 计算机考研 · 艾宾浩斯记忆中心</h1>
+  <span class="badge" id="todayBadge"></span>
 </div>
+<div class="wrap">
+  <div class="stats" id="stats"></div>
+  <div class="section">
+    <h2>📊 记忆保持曲线（艾宾浩斯遗忘曲线）</h2>
+    <div class="curve"><svg id="curveSvg" viewBox="0 0 900 220"></svg></div>
+  </div>
+  <div class="section" id="dueSection" style="display:none">
+    <h2>📅 今日到期复习</h2>
+    <table><thead><tr><th>知识点</th><th>科目</th><th>轮次</th><th>上次复习</th><th>连续答对</th><th>操作</th></tr></thead><tbody id="dueBody"></tbody></table>
+    <div style="padding:14px 18px"><button class="btn primary" id="startBtn">开始今日复习</button></div>
+  </div>
+  <div class="section">
+    <h2>📚 全部知识点</h2>
+    <table><thead><tr><th>知识点</th><th>科目</th><th>状态</th><th>轮次</th><th>下次到期</th><th>已复习</th><th>操作</th></tr></thead><tbody id="allBody"></tbody></table>
+  </div>
+</div>
+<div id="quizArea" style="display:none"><div class="wrap"><div id="quizCard" class="section" style="padding:20px"></div><div class="log" id="quizLog"></div><div style="margin-top:12px"><button class="btn ghost" onclick="exitQuiz()">← 返回记忆中心</button></div></div></div>
 <script>
-let bank = [];
-let queue = null;
-let dueQuestions = [];
-let idx = 0;
-let roundId = 'eb-' + Date.now();
-let todayStr = new Date().toISOString().slice(0,10);
-
-async function init() {
-  const [b1, b2, qRes] = await Promise.all([
-    fetch('/questions.json', { cache:'no-store' }),
-    fetch('/ds-questions.json', { cache:'no-store' }),
-    fetch('/queue.json', { cache:'no-store' })
-  ]);
-  bank = [...(await b1.json()).questions, ...(await b2.json()).questions];
-  queue = await qRes.json();
-  const dueItemIds = queue.items.filter(i => i.dueDate <= todayStr).map(i => i.id);
-  dueQuestions = bank.filter(q => dueItemIds.includes(q.itemId));
-  document.getElementById('meta').textContent =
-    dueQuestions.length
-      ? `今天是 ${todayStr}，到期复习 ${dueItemIds.length} 个知识点，共 ${dueQuestions.length} 题。`
-      : `今天是 ${todayStr}，暂无到期复习题。下次到期日：${queue.items.map(i=>i.dueDate).sort()[0] || '—'}。`;
-  render();
+let db=null, bank=null, quizList=[], qi=0, roundId=null;
+const TODAY = new Date().toISOString().slice(0,10);
+async function init(){
+  const [dRes,c1,c2]=await Promise.all([fetch('/api/db',{cache:'no-store'}),fetch('/questions.json',{cache:'no-store'}),fetch('/ds-questions.json',{cache:'no-store'})]);
+  db=await dRes.json();
+  bank=[...(await c1.json()).questions,...(await c2.json()).questions];
+  renderStats(); renderCurve(); renderDue(); renderAll();
 }
-
-function renderQuestion(text) {
-  const LNBREAK = '\\n';
-  const FENCE = '```';
-  let html = text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-  const parts = html.split(FENCE);
-  let out = "";
-  for (let i = 0; i < parts.length; i++) {
-    if (i % 2 === 1) {
-      const codeLines = parts[i].split(LNBREAK).join(String.fromCharCode(10));
-      const code = codeLines.replace(/^[a-zA-Z0-9]+\n/, '');
-      out += '<pre><code>' + code + '</code></pre>';
+function renderStats(){
+  const items=db.items;
+  const mastered=items.filter(i=>i.status==='mastered').length;
+  const learning=items.filter(i=>i.status==='learning').length;
+  const due=items.filter(i=>i.status==='learning'&&i.dueDate<=TODAY).length;
+  const totalReviews=items.reduce((s,i)=>s+(i.reviews?i.reviews.length:0),0);
+  document.getElementById('todayBadge').textContent='今天 '+TODAY;
+  document.getElementById('stats').innerHTML=
+    '<div class="stat orange"><div class="num">'+due+'</div><div class="label">今日到期</div></div>' +
+    '<div class="stat blue"><div class="num">'+learning+'</div><div class="label">学习中</div></div>' +
+    '<div class="stat green"><div class="num">'+mastered+'</div><div class="label">已掌握</div></div>' +
+    '<div class="stat purple"><div class="num">'+totalReviews+'</div><div class="label">累计复习</div></div>';
+}
+function renderCurve(){
+  const svg=document.getElementById('curveSvg');
+  const sched=db.schedule;
+  const W=900,H=220,PX=50,PY=30;
+  const maxDays=Math.max(...sched,30);
+  const x=d=>PX+(d/maxDays)*(W-PX-20);
+  const y=v=>H-PY-(v/100)*(H-2*PY);
+  const retention=d=>100*Math.pow(0.9,d===0?0:d);
+  let path='M '+x(0)+' '+y(100);
+  let pts='';
+  sched.forEach(d=>{ path+=' L '+x(d)+' '+y(retention(d)); pts+='<circle class="dot" cx="'+x(d)+'" cy="'+y(retention(d))+'" r="5" fill="#60a5fa"/>'; pts+='<text x="'+x(d)+'" y="'+(y(retention(d))-12)+'" text-anchor="middle" fill="#94a3b8" font-size="11">第'+(sched.indexOf(d)+1)+'轮</text>'; });
+  let axis='<line x1="'+PX+'" y1="'+(H-PY)+'" x2="'+(W-20)+'" y2="'+(H-PY)+'" stroke="#334155"/>';
+  axis+='<line x1="'+PX+'" y1="'+PY+'" x2="'+PX+'" y2="'+(H-PY)+'" stroke="#334155"/>';
+  axis+='<text x="'+(PX-10)+'" y="'+(PY+5)+'" text-anchor="end" fill="#64748b" font-size="11">100%</text>';
+  axis+='<text x="'+(PX-10)+'" y="'+(H-PY+5)+'" text-anchor="end" fill="#64748b" font-size="11">0%</text>';
+  axis+='<text x="'+(W-20)+'" y="'+(H-PY+18)+'" text-anchor="end" fill="#64748b" font-size="11">天数</text>';
+  let grid='';
+  sched.forEach(d=>{ grid+='<line x1="'+x(d)+'" y1="'+PY+'" x2="'+x(d)+'" y2="'+(H-PY)+'" stroke="#1e293b" stroke-dasharray="3,3"/>'; grid+='<text x="'+x(d)+'" y="'+(H-PY+18)+'" text-anchor="middle" fill="#64748b" font-size="11">'+d+'天</text>'; });
+  svg.innerHTML=axis+grid+'<path d="'+path+'" stroke="#60a5fa" stroke-width="2" fill="none"/>'+pts;
+}
+function renderDue(){
+  const due=db.items.filter(i=>i.status==='learning'&&i.dueDate<=TODAY);
+  const sec=document.getElementById('dueSection');
+  if(due.length===0){sec.style.display='none';return;}
+  sec.style.display='block';
+  document.getElementById('dueBody').innerHTML=due.map(i=>{
+    const last=i.reviews&&i.reviews.length?i.reviews[i.reviews.length-1].date:'—';
+    return '<tr><td>'+i.id.split('-').slice(1).join('-')+'</td><td>'+i.subject+'</td><td>第 '+i.round+' 轮</td><td>'+last+'</td><td>'+streak(i)+'</td><td><button class="btn ghost" onclick="resetItem(\''+i.id+'\')">重置</button></td></tr>';
+  }).join('');
+}
+function streak(i){let s=0;for(let j=i.reviews.length-1;j>=0;j--){if(i.reviews[j].correct)s++;else break;}return s+' 次';}
+function renderAll(){
+  document.getElementById('allBody').innerHTML=db.items.map(i=>{
+    const dueClass=i.status==='learning'&&i.dueDate<=TODAY?'due-today':'';
+    const tagClass=i.status==='mastered'?'mastered':'learning';
+    const tagText=i.status==='mastered'?'✓ 已掌握':(i.dueDate<=TODAY?'今日到期':'学习中');
+    return '<tr><td>'+i.id.split('-').slice(1).join('-')+'</td><td>'+i.subject+'</td><td><span class="tag '+tagClass+' '+dueClass+'">'+tagText+'</span></td><td>第 '+i.round+' 轮 / 6</td><td>'+(i.status==='mastered'?'—':i.dueDate)+'</td><td>'+(i.reviews?i.reviews.length:0)+' 次</td><td><button class="btn ghost" onclick="resetItem(\''+i.id+'\')">重置</button></td></tr>';
+  }).join('');
+}
+async function resetItem(id){await fetch('/api/reset/'+encodeURIComponent(id),{method:'POST'});init();}
+document.getElementById('startBtn').onclick=startQuiz;
+function startQuiz(){
+  const due=db.items.filter(i=>i.status==='learning'&&i.dueDate<=TODAY);
+  const ids=due.map(i=>i.id);
+  quizList=bank.filter(q=>ids.includes(q.itemId));
+  if(quizList.length===0){alert('今日无到期题目');return;}
+  roundId='eb-'+Date.now();qi=0;
+  document.querySelector('.wrap').style.display='none';
+  document.getElementById('quizArea').style.display='block';
+  renderQ();
+}
+function exitQuiz(){document.querySelector('.wrap').style.display='block';document.getElementById('quizArea').style.display='none';init();}
+function renderQ(){
+  const card=document.getElementById('quizCard');
+  const log=document.getElementById('quizLog');
+  log.textContent='';
+  if(qi>=quizList.length){
+    card.innerHTML='<div class="q">今日复习完成 ✅</div><p style="color:#94a3b8;font-size:14px">共 '+quizList.length+' 题，结果已提交。</p>';
+    fetch('/api/finish',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({roundId,date:TODAY})}).then(r=>r.json()).then(d=>{log.textContent='已提交，答错知识点 '+d.wrongCount+' 个，明天重新复习。';});
+    return;
+  }
+  const q=quizList[qi];
+  card.innerHTML=`<div class="meta">第 ${qi+1} / ${quizList.length} 题 · ${q.topic} · 第 ${q.round} 轮</div><div class="q">${renderQuestion(q.question)}</div><div id="options"></div><div class="analysis" id="analysis"></div><button class="btn-lg" id="nextBtn" style="display:none">下一题</button>`;
+  const optEl=card.querySelector('#options');
+  const nextBtn=card.querySelector('#nextBtn');
+  Object.keys(q.options).sort().forEach(letter=>{
+    const div=document.createElement('div');div.className='opt';div.dataset.letter=letter;
+    div.innerHTML='<span class="badge">'+letter+'</span>'+q.options[letter];
+    div.onclick=()=>judge(letter);optEl.appendChild(div);
+  });
+  function judge(sel){
+    const ok=sel===q.answer;
+    optEl.querySelectorAll('.opt').forEach(el=>{const l=el.dataset.letter;if(l===q.answer)el.classList.add('correct');else if(l===sel)el.classList.add('wrong');el.classList.add('disabled');el.onclick=null;});
+    const an=card.querySelector('#analysis');an.style.display='block';
+    an.innerHTML='<b>'+(ok?'✅ 正确':'❌ 错误')+'</b>　正确答案：'+q.answer+'<br>'+q.analysis;
+    fetch('/api/answer',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({roundId,itemId:q.itemId,id:q.id,topic:q.topic,selected:sel,answer:q.answer,correct:ok,at:new Date().toISOString()})}).catch(()=>{});
+    log.textContent=ok?'已记录 ✅':'已记录 ❌ 该知识点将重置为 1 天后复习';
+    nextBtn.style.display='inline-block';
+  }
+  nextBtn.onclick=()=>{qi++;renderQ();};
+}
+function renderQuestion(text){
+  const LNBREAK=String.fromCharCode(92)+'n';
+  const FENCE=String.fromCharCode(96,96,96);
+  let html=text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  const parts=html.split(FENCE);
+  let out='';
+  for(let i=0;i<parts.length;i++){
+    if(i%2===1){
+      let code=parts[i].split(LNBREAK).join(String.fromCharCode(10));
+      code=code.replace(/^[a-zA-Z0-9]+' + String.fromCharCode(92) + 'n/, '');
+      out+='<pre><code>'+code+'</code></pre>';
     } else {
-      out += parts[i].split(LNBREAK).join('<br>');
+      out+=parts[i].split(LNBREAK).join('<br>');
     }
   }
   return out;
 }
-
-function isCorrect(q, sel) {
-  return sel === q.answer;
-}
-
-function render() {
-  const card = document.getElementById('quizCard');
-  const log = document.getElementById('log');
-  log.textContent = '';
-  if (idx >= dueQuestions.length) {
-    card.innerHTML = `<div class="q">今日复习完成 ✅</div><p>共 ${dueQuestions.length} 题。结果已提交，下一次到期日将按遗忘曲线更新。</p><p class="warn">关闭页面前无需其他操作。</p>`;
-    log.textContent = '正在提交结果…';
-    fetch('/api/finish', {
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({ roundId, date: todayStr })
-    }).then(r=>r.json()).then(d=>{
-      log.textContent = `已提交。本次答错 ${d.wrongCount} 题对应的知识点将重新进入 1 天后复习。`;
-    }).catch(()=>{ log.textContent='提交失败，请检查服务。'; });
-    return;
-  }
-  const q = dueQuestions[idx];
-  card.innerHTML = `
-    <div class="card">
-      <div class="meta">第 ${idx + 1} / ${dueQuestions.length} 题 · ${q.topic} · 第 ${q.round} 轮</div>
-      <div class="q">${renderQuestion(q.question)}</div>
-      <div id="options"></div>
-      <div class="analysis" id="analysis"></div>
-      <button class="btn" id="nextBtn" style="display:none">下一题</button>
-    </div>
-  `;
-  const optionsEl = card.querySelector('#options');
-  const nextBtn = card.querySelector('#nextBtn');
-  Object.keys(q.options).sort().forEach(letter => {
-    const div = document.createElement('div');
-    div.className = 'opt';
-    div.dataset.letter = letter;
-    div.innerHTML = `<span class="badge">${letter}</span>${q.options[letter]}`;
-    div.onclick = () => judge(letter);
-    optionsEl.appendChild(div);
-  });
-
-  function judge(sel) {
-    const ok = isCorrect(q, sel);
-    optionsEl.querySelectorAll('.opt').forEach(el => {
-      const l = el.dataset.letter;
-      if (l === q.answer) el.classList.add('correct');
-      else if (l === sel) el.classList.add('wrong');
-      el.classList.add('disabled');
-      el.onclick = null;
-    });
-    const analysisEl = card.querySelector('#analysis');
-    analysisEl.style.display = 'block';
-    analysisEl.innerHTML = `<p><b>${ok ? '✅ 正确' : '❌ 错误'}</b>　正确答案：${q.answer}</p><p>${q.analysis}</p>`;
-    fetch('/api/answer', {
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({ roundId, itemId:q.itemId, id:q.id, topic:q.topic, selected:sel, answer:q.answer, correct:ok, at:new Date().toISOString() })
-    }).catch(()=>{});
-    log.textContent = ok ? '已记录 ✅' : '已记录 ❌ 该知识点本轮答错，将重置为 1 天后复习。';
-    nextBtn.style.display = 'inline-block';
-  }
-
-  nextBtn.onclick = () => { idx++; render(); };
-}
-
 init();
 </script>
 </body>
