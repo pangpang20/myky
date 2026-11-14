@@ -1,5 +1,80 @@
 [
   {
+    "id": "ds-lg1",
+    "subject": "数据结构",
+    "topic": "对数步长·基础复现",
+    "type": "single",
+    "question": "设 n 为正整数。下列程序段的时间复杂度是（ ）。\n\n```c\nfor (i = 1; i <= n; i++)\n    for (j = 1; j <= i; j *= 2)\n        for (k = 1; k <= 10; k++)\n            count++;\n```",
+    "options": {
+      "A": "O(log n)",
+      "B": "O(n)",
+      "C": "O(n log₂ n)",
+      "D": "O(n²)"
+    },
+    "answer": "C",
+    "analysis": "中层 j *= 2 执行 ⌈log₂ i⌉ 次，内层固定 10 次是常数。总 Σ log₂ i = log₂(n!) ≈ n·log₂ n（Stirling 公式）。"
+  },
+  {
+    "id": "ds-lg2",
+    "subject": "数据结构",
+    "topic": "对数步长·去常数层",
+    "type": "single",
+    "question": "下列程序段的时间复杂度是（ ）。\n\n```c\nfor (i = 1; i <= n; i++)\n    for (j = 1; j <= i; j *= 2) count++;\n```",
+    "options": {
+      "A": "O(log n)",
+      "B": "O(n)",
+      "C": "O(n log n)",
+      "D": "O(n²)"
+    },
+    "answer": "C",
+    "analysis": "常数层不影响量级。Σ log₂ i ≈ n·log₂ n。"
+  },
+  {
+    "id": "ds-lg3",
+    "subject": "数据结构",
+    "topic": "对数步长·Stirling 恒等式",
+    "type": "single",
+    "question": "Σᵢ₌₁ⁿ log₂ i 化简后等于（ ）。",
+    "options": {
+      "A": "log₂(n!)",
+      "B": "n·log₂ n（精确）",
+      "C": "2·log₂ n",
+      "D": "n²"
+    },
+    "answer": "A",
+    "analysis": "Σ log₂ i = log₂(n!)，由 Stirling ≈ n·log₂ n − 1.44n。这是 j *= 2 型循环复杂度的数学基础。"
+  },
+  {
+    "id": "ds-lg4",
+    "subject": "数据结构",
+    "topic": "对数步长·外层除法步长",
+    "type": "single",
+    "question": "下列程序段的时间复杂度是（ ）。\n\n```c\nfor (i = n; i >= 1; i /= 2)\n    for (j = 1; j <= n; j++) count++;\n```",
+    "options": {
+      "A": "O(log n)",
+      "B": "O(n log n)",
+      "C": "O(n)",
+      "D": "O(n²)"
+    },
+    "answer": "B",
+    "analysis": "外层步长 i /= 2 → log₂ n 次，内层 n 次 → n·log n。"
+  },
+  {
+    "id": "ds-lg5",
+    "subject": "数据结构",
+    "topic": "对数步长·与调和级数对照",
+    "type": "single",
+    "question": "下列说法正确的是（ ）。",
+    "options": {
+      "A": "j += i 与 j *= 2 机理相同，都按比例缩放内层次数",
+      "B": "j += i 每层 ≈ n/i 次（调和），j *= 2 每层 ≈ log₂ i 次（对数），量级都是 O(n log n)",
+      "C": "j *= 2 的总次数是 O(n²)",
+      "D": "j += i 的总次数是 O(n²)"
+    },
+    "answer": "B",
+    "analysis": "两种步长机理不同但最终都是 O(n log n)：调和级数 n·H(n) 与对数求和 log₂(n!) ≈ n·log₂ n。"
+  },
+  {
     "id": "ds-n1",
     "subject": "数据结构",
     "topic": "三层嵌套求和·基础复现",

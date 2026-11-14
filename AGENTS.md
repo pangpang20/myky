@@ -1,0 +1,21 @@
+# 仓库协作规则
+
+## 错题登记流程（必做）
+
+用户发送错题（截图或文字）时，除解答外必须同步更新本地刷题系统：
+
+1. 归档错题 Markdown 到 `错题集/<科目>/`，包含：题干与选项、我的答案/正确答案、根因分析、完整知识点梳理、复刷清单（5 道举一反三 + 3-5 道真题风格）、复习记录。
+2. 用 `node 错题集/scripts/register-wrong-question.mjs <payload.json>` 一次性完成双端登记：
+   - 4317（quiz）：新题置顶加入 `quiz/questions.json`，知识点卡加入 `quiz/knowledge.json`
+   - 4318（艾宾浩斯）：`data/db.json` 复习队列 + `ebbinghaus/knowledge.json` + 对应科目第 1 轮 5 题
+   payload 结构见脚本头部注释。
+3. 运行 `node 错题集/tests/quiz.test.mjs` 和 `node 错题集/tests/wrong-book.test.mjs`，通过后单独提交 Git。
+4. 提交信息格式：`<科目>：收录<知识点>错题并同步双端`。
+
+科目目录：数据结构 / 计算机组成原理 / 操作系统 / 计算机网络。
+
+## 会话规范
+
+- 每次会话结束，将实现功能、测试结果、Git 提交和未解决事项写入 `doc/sessions/YYYY-MM-DD-主题.md`。
+- 保留用户已有未提交修改，不使用覆盖性 Git 命令。
+- 服务端口：4317 新错题练习，4318 艾宾浩斯复习。启停脚本在 `错题集/` 根目录。
