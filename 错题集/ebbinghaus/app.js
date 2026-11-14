@@ -237,8 +237,7 @@ function renderSide(){
   el.innerHTML=queue.map((q,i)=>{
     const r=results[i];
     const cls=r?(r.correct?'correct':'wrong'):'';
-    const ico=r?(r.correct?'✓':'✗'):'';
-    return '<div class="side-item'+(i===qi?' active':'')+'" onclick="jumpTo('+i+')"><div class="side-status '+cls+'">'+ico+'</div><div class="side-title">'+esc(q.topic||('第'+(i+1)+'题'))+'</div></div>';
+    return '<div class="side-cell'+(i===qi?' active':'')+' '+cls+'" onclick="jumpTo('+i+')">'+(i+1)+'</div>';
   }).join('');
 }
 function jumpTo(i){qi=i;renderQ()}
