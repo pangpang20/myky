@@ -390,6 +390,91 @@
       },
       "answer": "B",
       "analysis": "sqrt(n) 是多项式幂次 n^(1/2)。单层为 O(n^(1/2))；外层 n^(1/2)、内层 n 时相乘为 O(n^(3/2))。不能因为比 n 小就降级成对数。"
+    },
+    {
+      "id": "ds-r1-0101036",
+      "itemId": "数据结构-倍增外层内层依赖",
+      "round": 1,
+      "subject": "数据结构",
+      "topic": "倍增·依赖求和·变式1",
+      "type": "single",
+      "question": "设 n 为正整数，下列程序段的时间复杂度是（ ）。\n\n```c\nfor (i = 1; i <= n; i *= 2)\n    for (j = 1; j <= i; j++)\n        count++;\n```",
+      "options": {
+        "A": "O(log₂ n)",
+        "B": "O(n)",
+        "C": "O(n log₂ n)",
+        "D": "O(n²)"
+      },
+      "answer": "B",
+      "analysis": "内层 j <= i 依赖外层。i 取 1,2,4,…,n，内层次数求和 1+2+4+…+n ≈ 2n，为 O(n)。"
+    },
+    {
+      "id": "ds-r1-0101037",
+      "itemId": "数据结构-倍增外层内层依赖",
+      "round": 1,
+      "subject": "数据结构",
+      "topic": "倍增·独立相乘·变式2",
+      "type": "single",
+      "question": "下列程序段的时间复杂度是（ ）。\n\n```c\nfor (i = 1; i <= n; i *= 2)\n    for (j = 1; j <= n; j++)\n        count++;\n```",
+      "options": {
+        "A": "O(log₂ n)",
+        "B": "O(n)",
+        "C": "O(n log₂ n)",
+        "D": "O(n²)"
+      },
+      "answer": "C",
+      "analysis": "内层固定 n 次与外层无关，log n × n = O(n log n)。"
+    },
+    {
+      "id": "ds-r1-0101038",
+      "itemId": "数据结构-倍增外层内层依赖",
+      "round": 1,
+      "subject": "数据结构",
+      "topic": "倍增·平方依赖·变式3",
+      "type": "single",
+      "question": "下列程序段的时间复杂度是（ ）。\n\n```c\nfor (i = 1; i <= n; i *= 2)\n    for (j = 1; j <= i * i; j++)\n        count++;\n```",
+      "options": {
+        "A": "O(n)",
+        "B": "O(n²)",
+        "C": "O(n log n)",
+        "D": "O(n³)"
+      },
+      "answer": "B",
+      "analysis": "内层次数 i²，Σ(2^k)² ≈ (4/3)n²，量级 O(n²)。"
+    },
+    {
+      "id": "ds-r1-0101039",
+      "itemId": "数据结构-倍增外层内层依赖",
+      "round": 1,
+      "subject": "数据结构",
+      "topic": "倍增·精确求和·变式4",
+      "type": "single",
+      "question": "下列程序段中 count++ 的执行次数约为（ ）。\n\n```c\nfor (i = 1; i <= n; i *= 2)\n    for (j = 1; j <= i; j++)\n        count++;\n```",
+      "options": {
+        "A": "n",
+        "B": "2n − 1",
+        "C": "n log₂ n",
+        "D": "n²"
+      },
+      "answer": "B",
+      "analysis": "等比求和 1+2+4+…+2^k = 2^(k+1) − 1 ≈ 2n − 1。"
+    },
+    {
+      "id": "ds-r1-0101040",
+      "itemId": "数据结构-倍增外层内层依赖",
+      "round": 1,
+      "subject": "数据结构",
+      "topic": "倍增·判定法则·变式5",
+      "type": "single",
+      "question": "关于嵌套循环复杂度判定，下列说法正确的是（ ）。",
+      "options": {
+        "A": "外层倍增则整体必为 O(n log n)",
+        "B": "内层依赖外层时必须求和，结果可能比相乘低一阶",
+        "C": "内层依赖外层时复杂度必然更高",
+        "D": "循环嵌套层数决定复杂度"
+      },
+      "answer": "B",
+      "analysis": "判定看「内层是否依赖」：依赖则求和（本题 ≈ 2n → O(n)），独立则相乘（n log n）。"
     }
   ]
 }
