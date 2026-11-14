@@ -23,7 +23,7 @@
       "status": "learning",
       "round": 2,
       "dueDate": "2026-11-15",
-      "createdAt": "2026-11-13T09:00:00.000Z"
+      "createdAt": "2026-11-13T09:00:00"
     },
     {
       "id": "计算机-分组交换的缺点",
@@ -39,7 +39,7 @@
       "status": "learning",
       "round": 2,
       "dueDate": "2026-11-15",
-      "createdAt": "2026-11-13T09:00:00.000Z"
+      "createdAt": "2026-11-13T09:00:00"
     },
     {
       "id": "计算机-分组交换缺点辨析",
@@ -55,7 +55,7 @@
       "status": "learning",
       "round": 2,
       "dueDate": "2026-11-15",
-      "createdAt": "2026-11-13T09:00:00.000Z"
+      "createdAt": "2026-11-13T09:00:00"
     },
     {
       "id": "计算机-数据交换方式性能与改进",
@@ -71,7 +71,7 @@
       "status": "learning",
       "round": 2,
       "dueDate": "2026-11-15",
-      "createdAt": "2026-11-13T09:00:00.000Z"
+      "createdAt": "2026-11-13T09:00:00"
     },
     {
       "id": "计算机-信道利用率比较",
@@ -87,7 +87,7 @@
       "status": "learning",
       "round": 2,
       "dueDate": "2026-11-15",
-      "createdAt": "2026-11-13T09:00:00.000Z"
+      "createdAt": "2026-11-13T09:00:00"
     },
     {
       "id": "计算机-分组化直接结果辨析",
@@ -103,7 +103,7 @@
       "status": "learning",
       "round": 2,
       "dueDate": "2026-11-15",
-      "createdAt": "2026-11-13T09:00:00.000Z"
+      "createdAt": "2026-11-13T09:00:00"
     },
     {
       "id": "数据结构-算法特性",
@@ -119,7 +119,7 @@
       "status": "learning",
       "round": 2,
       "dueDate": "2026-11-15",
-      "createdAt": "2026-11-13T09:00:00.000Z"
+      "createdAt": "2026-11-13T09:00:00"
     },
     {
       "id": "数据结构-大O定义",
@@ -135,7 +135,7 @@
       "status": "learning",
       "round": 1,
       "dueDate": "2026-11-15",
-      "createdAt": "2026-11-13T09:00:00.000Z"
+      "createdAt": "2026-11-13T09:00:00"
     },
     {
       "id": "数据结构-循环复杂度",
@@ -151,7 +151,7 @@
       "status": "learning",
       "round": 2,
       "dueDate": "2026-11-15",
-      "createdAt": "2026-11-13T09:00:00.000Z"
+      "createdAt": "2026-11-13T09:00:00"
     },
     {
       "id": "数据结构-嵌套循环计数",
@@ -167,7 +167,7 @@
       "status": "learning",
       "round": 1,
       "dueDate": "2026-11-15",
-      "createdAt": "2026-11-13T09:00:00.000Z"
+      "createdAt": "2026-11-13T09:00:00"
     },
     {
       "id": "数据结构-有序合并",
@@ -183,7 +183,7 @@
       "status": "learning",
       "round": 1,
       "dueDate": "2026-11-15",
-      "createdAt": "2026-11-13T09:00:00.000Z"
+      "createdAt": "2026-11-13T09:00:00"
     },
     {
       "id": "数据结构-时间复杂度综合",
@@ -199,7 +199,7 @@
       "status": "learning",
       "round": 2,
       "dueDate": "2026-11-15",
-      "createdAt": "2026-11-13T09:00:00.000Z"
+      "createdAt": "2026-11-13T09:00:00"
     },
     {
       "id": "数据结构-sqrt循环边界",
@@ -210,7 +210,7 @@
       "status": "learning",
       "round": 1,
       "dueDate": "2026-11-15",
-      "createdAt": "2026-11-14T14:30:00.000Z"
+      "createdAt": "2026-11-14T14:30:00"
     }
   ],
   "answers": [
