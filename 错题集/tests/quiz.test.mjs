@@ -21,6 +21,7 @@ check(html.includes('根因分析'), 'study view must show root cause analysis')
 check(html.includes('完整知识点梳理'), 'study view must show full knowledge summary')
 check(html.includes('我已阅读，开始答题'), 'study view must require confirmation before quiz')
 check(Array.isArray(questions) && questions.length >= 5, 'at least 5 questions')
+check(questions.every(q => typeof q.itemId === 'string' && q.itemId.length > 0), 'each question must link to knowledge item')
 
 const ids = new Set()
 const subjects = new Set(['数据结构','计算机组成原理','操作系统','计算机网络'])

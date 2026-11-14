@@ -130,7 +130,7 @@ function renderStudy() {
   const relatedCause = Object.entries(causes).find(([key]) => q.topic.includes(key) || key.includes(q.topic));
   const causeList = relatedCause ? [relatedCause] : Object.entries(causes);
   card.innerHTML = [
-    "<div class="learn-card">",
+    "<div class=\"learn-card\">",
     "<h2>📚 答题前强化学习</h2>",
     "<h3>知识点：" + title + "</h3>",
     "<h3>根因分析</h3>",
@@ -139,8 +139,8 @@ function renderStudy() {
     "<p>" + renderQuestion(entry.knowledge || "") + "</p>",
     "<h3>关键点</h3>",
     "<ul>" + (entry.keyPoints || []).map(item => "<li>" + renderQuestion(item) + "</li>").join("") + "</ul>",
-    entry.mnemonic ? "<div class="learn-mnemonic">🧠 记忆口诀：" + renderQuestion(entry.mnemonic) + "</div>" : "",
-    "<button class="btn" id="startQuizBtn">我已阅读，开始答题</button>",
+    entry.mnemonic ? "<div class=\"learn-mnemonic\">🧠 记忆口诀：" + renderQuestion(entry.mnemonic) + "</div>" : "",
+    "<button class=\"btn\" id=\"startQuizBtn\">我已阅读，开始答题</button>",
     "</div>"
   ].join("");
   card.querySelector("#startQuizBtn").onclick = () => {
