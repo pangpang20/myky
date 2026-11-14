@@ -1,10 +1,197 @@
 [
-  {"id":"ds-q1","subject":"数据结构","topic":"算法特性","type":"single","question":"一个算法应该具有（ ）等重要特性。","options":{"A":"可维护性、可读性和可行性","B":"可行性、确定性和有穷性","C":"确定性、有穷性和可靠性","D":"可读性、正确性和可行性"},"answer":"B","analysis":"算法五大特性：有穷性、确定性、可行性 + 输入输出。可靠性、可读性、高效性都是评价标准，不是判定条件。"},
-  {"id":"ds-q2","subject":"数据结构","topic":"大 O 定义","type":"single","question":"设 n 为问题规模，T(n) 为算法基本操作次数。若 T(n) = O(n²)，则必然成立的是（ ）。","options":{"A":"问题规模是 n²","B":"T(n) 恰好等于 n²","C":"存在常数 c>0 和 n₀，使所有 n≥n₀ 都满足 T(n) ≤ c·n²","D":"T(n) 与 n² 成正比"},"answer":"C","analysis":"大 O 是渐进上界：T(n) 不超过 c·n² 即可，可能是 n²、n log n、n 等更低阶。「恰好」对应 Θ，「成正比」也是 Θ 的语义。"},
-  {"id":"ds-q3","subject":"数据结构","topic":"循环复杂度","type":"single","question":"设 n 为正整数，下列程序段的时间复杂度是（ ）。\\n\\n```c\\ni = 2;\\nwhile (i < n)\\n    i = i * i;\\n```","options":{"A":"O(log₂n)","B":"O(n)","C":"O(n^1/2)","D":"O(log log n)"},"answer":"D","analysis":"i 序列 2→4→16→256…，即 2^(2^k)。达到 n 需 2^k ≥ log₂n，即 k ≥ log₂log₂n，所以是 O(log log n)。"},
-  {"id":"ds-q4","subject":"数据结构","topic":"嵌套循环计数","type":"single","question":"下列算法中加下划线语句的执行次数为（ ）。\\n\\n```c\\nfor (i = 1; i <= n; i++)\\n    for (j = 1; j <= 2 * i; j++)\\n        m++;\\n```","options":{"A":"n(n+1)","B":"n","C":"n+1","D":"n²"},"answer":"A","analysis":"内层次数 = 2i，总次数 = Σ2i = 2·n(n+1)/2 = n(n+1)。n² 只是量级，精确次数是 n(n+1)。"},
-  {"id":"ds-q5","subject":"数据结构","topic":"有序链表合并","type":"single","question":"已知两个长度分别为 m 和 n 的升序链表，若将它们合并为一个长度为 m+n 的降序链表，则最坏情况下的时间复杂度是（ ）。","options":{"A":"O(n)","B":"O(m×n)","C":"O(min(m,n))","D":"O(max(m,n))"},"answer":"D","analysis":"合并有序链表用双指针，每个节点只处理一次，复杂度 O(m+n)，量级同 O(max(m,n))。O(m×n) 是嵌套遍历，不是合并。"},
-  {"id":"ds-q6","subject":"数据结构","topic":"循环复杂度","type":"single","question":"下列程序段的时间复杂度是（ ）。\\n\\n```c\\nint sum = 0;\\nfor (int i = 1; i < n; i *= 2)\\n    for (int j = 0; j < i; j++)\\n        sum++;\\n```","options":{"A":"O(log₂n)","B":"O(n)","C":"O(nlog₂n)","D":"O(n²)"},"answer":"B","analysis":"外层 i = 1,2,4,…,2^k（2^k<n），内层次数 = i 的取值之和 = 1+2+4+…+2^(k−1) ≈ n，所以总次数 O(n)。"},
-  {"id":"ds-q7","subject":"数据结构","topic":"循环复杂度","type":"single","question":"以下 C 代码的时间复杂度是（ ）。\\n\\n```c\\nint count = 0;\\nfor (int i=0; i*i<n; i++)\\n    for (int j=0; j<i; j++)\\n        count++;\\n```","options":{"A":"O(log₂N)","B":"O(N)","C":"O(Nlog₂N)","D":"O(N²)"},"answer":"B","analysis":"外层 i < √n 共 √n 次，内层次数 0+1+…+(√n−1) ≈ n/2，总次数 O(n)。"},
-  {"id":"ds-q8","subject":"数据结构","topic":"循环复杂度","type":"single","question":"以下 C 代码的时间复杂度是（ ）。\\n\\n```c\\nint count = 0;\\nfor (int i=0; i*i<n; i++)\\n    for (int j=0; j<i; j++)\\n        count++;\\n```","options":{"A":"O(log₂N)","B":"O(N)","C":"O(Nlog₂N)","D":"O(N²)"},"answer":"B","analysis":"与上一题相同：外层 √n 次，内层求和 ≈ n/2，总次数 O(n)。关键：双层循环必须写求和式，不能量级相乘。"}
+  {
+    "id": "ds-q1",
+    "subject": "数据结构",
+    "topic": "算法特性",
+    "type": "single",
+    "question": "一个算法应该具有（ ）等重要特性。",
+    "options": {
+      "A": "可维护性、可读性和可行性",
+      "B": "可行性、确定性和有穷性",
+      "C": "确定性、有穷性和可靠性",
+      "D": "可读性、正确性和可行性"
+    },
+    "answer": "B",
+    "analysis": "算法五大特性：有穷性、确定性、可行性 + 输入输出。可靠性、可读性、高效性都是评价标准，不是判定条件。"
+  },
+  {
+    "id": "ds-q2",
+    "subject": "数据结构",
+    "topic": "大 O 定义",
+    "type": "single",
+    "question": "设 n 为问题规模，T(n) 为算法基本操作次数。若 T(n) = O(n²)，则必然成立的是（ ）。",
+    "options": {
+      "A": "问题规模是 n²",
+      "B": "T(n) 恰好等于 n²",
+      "C": "存在常数 c>0 和 n₀，使所有 n≥n₀ 都满足 T(n) ≤ c·n²",
+      "D": "T(n) 与 n² 成正比"
+    },
+    "answer": "C",
+    "analysis": "大 O 是渐进上界：T(n) 不超过 c·n² 即可，可能是 n²、n log n、n 等更低阶。「恰好」对应 Θ，「成正比」也是 Θ 的语义。"
+  },
+  {
+    "id": "ds-q3",
+    "subject": "数据结构",
+    "topic": "循环复杂度",
+    "type": "single",
+    "question": "设 n 为正整数，下列程序段的时间复杂度是（ ）。\\n\\n```c\\ni = 2;\\nwhile (i < n)\\n    i = i * i;\\n```",
+    "options": {
+      "A": "O(log₂n)",
+      "B": "O(n)",
+      "C": "O(n^1/2)",
+      "D": "O(log log n)"
+    },
+    "answer": "D",
+    "analysis": "i 序列 2→4→16→256…，即 2^(2^k)。达到 n 需 2^k ≥ log₂n，即 k ≥ log₂log₂n，所以是 O(log log n)。"
+  },
+  {
+    "id": "ds-q4",
+    "subject": "数据结构",
+    "topic": "嵌套循环计数",
+    "type": "single",
+    "question": "下列算法中加下划线语句的执行次数为（ ）。\\n\\n```c\\nfor (i = 1; i <= n; i++)\\n    for (j = 1; j <= 2 * i; j++)\\n        m++;\\n```",
+    "options": {
+      "A": "n(n+1)",
+      "B": "n",
+      "C": "n+1",
+      "D": "n²"
+    },
+    "answer": "A",
+    "analysis": "内层次数 = 2i，总次数 = Σ2i = 2·n(n+1)/2 = n(n+1)。n² 只是量级，精确次数是 n(n+1)。"
+  },
+  {
+    "id": "ds-q5",
+    "subject": "数据结构",
+    "topic": "有序链表合并",
+    "type": "single",
+    "question": "已知两个长度分别为 m 和 n 的升序链表，若将它们合并为一个长度为 m+n 的降序链表，则最坏情况下的时间复杂度是（ ）。",
+    "options": {
+      "A": "O(n)",
+      "B": "O(m×n)",
+      "C": "O(min(m,n))",
+      "D": "O(max(m,n))"
+    },
+    "answer": "D",
+    "analysis": "合并有序链表用双指针，每个节点只处理一次，复杂度 O(m+n)，量级同 O(max(m,n))。O(m×n) 是嵌套遍历，不是合并。"
+  },
+  {
+    "id": "ds-q6",
+    "subject": "数据结构",
+    "topic": "循环复杂度",
+    "type": "single",
+    "question": "下列程序段的时间复杂度是（ ）。\\n\\n```c\\nint sum = 0;\\nfor (int i = 1; i < n; i *= 2)\\n    for (int j = 0; j < i; j++)\\n        sum++;\\n```",
+    "options": {
+      "A": "O(log₂n)",
+      "B": "O(n)",
+      "C": "O(nlog₂n)",
+      "D": "O(n²)"
+    },
+    "answer": "B",
+    "analysis": "外层 i = 1,2,4,…,2^k（2^k<n），内层次数 = i 的取值之和 = 1+2+4+…+2^(k−1) ≈ n，所以总次数 O(n)。"
+  },
+  {
+    "id": "ds-q7",
+    "subject": "数据结构",
+    "topic": "循环复杂度",
+    "type": "single",
+    "question": "以下 C 代码的时间复杂度是（ ）。\\n\\n```c\\nint count = 0;\\nfor (int i=0; i*i<n; i++)\\n    for (int j=0; j<i; j++)\\n        count++;\\n```",
+    "options": {
+      "A": "O(log₂N)",
+      "B": "O(N)",
+      "C": "O(Nlog₂N)",
+      "D": "O(N²)"
+    },
+    "answer": "B",
+    "analysis": "外层 i < √n 共 √n 次，内层次数 0+1+…+(√n−1) ≈ n/2，总次数 O(n)。"
+  },
+  {
+    "id": "ds-q8",
+    "subject": "数据结构",
+    "topic": "循环复杂度",
+    "type": "single",
+    "question": "以下 C 代码的时间复杂度是（ ）。\\n\\n```c\\nint count = 0;\\nfor (int i=0; i*i<n; i++)\\n    for (int j=0; j<i; j++)\\n        count++;\\n```",
+    "options": {
+      "A": "O(log₂N)",
+      "B": "O(N)",
+      "C": "O(Nlog₂N)",
+      "D": "O(N²)"
+    },
+    "answer": "B",
+    "analysis": "与上一题相同：外层 √n 次，内层求和 ≈ n/2，总次数 O(n)。关键：双层循环必须写求和式，不能量级相乘。"
+  },
+  {
+    "id": "ds-q9",
+    "subject": "数据结构",
+    "topic": "sqrt 边界·基础复现",
+    "type": "single",
+    "question": "设 n 为正整数，sqrt(n) 按常数时间计算。下列程序段的时间复杂度是（ ）。\n\n```c\nfor (i = 0; i <= sqrt(n); i++)\n    count++;\n```",
+    "options": {
+      "A": "O(log2 n)",
+      "B": "O(n^(1/2))",
+      "C": "O(n^(1/3))",
+      "D": "O(n)"
+    },
+    "answer": "B",
+    "analysis": "步长不变（i++），边界是 sqrt(n) = n^(1/2)，执行 n^(1/2)+1 次，量级 O(n^(1/2))。这是多项式家族，不是对数家族。"
+  },
+  {
+    "id": "ds-q10",
+    "subject": "数据结构",
+    "topic": "步长不变·三次方根边界",
+    "type": "single",
+    "question": "下列程序段的时间复杂度是（ ）。\n\n```c\nfor (i = 1; i * i * i <= n; i++)\n    count++;\n```",
+    "options": {
+      "A": "O(n)",
+      "B": "O(n^(1/2))",
+      "C": "O(n^(1/3))",
+      "D": "O(log n)"
+    },
+    "answer": "C",
+    "analysis": "终止时 i*i*i 约等于 n，即 i 约等于 n^(1/3)，共执行 n^(1/3) 次。步长不变时，次数由边界决定。"
+  },
+  {
+    "id": "ds-q11",
+    "subject": "数据结构",
+    "topic": "步长不变·平方边界",
+    "type": "single",
+    "question": "下列程序段的时间复杂度是（ ）。\n\n```c\nfor (i = 0; i <= n * n; i++)\n    count++;\n```",
+    "options": {
+      "A": "O(n)",
+      "B": "O(n^2)",
+      "C": "O(log n)",
+      "D": "O(n log n)"
+    },
+    "answer": "B",
+    "analysis": "步长仍为 i++，边界为 n 的平方，执行 n^2+1 次，量级 O(n^2)。"
+  },
+  {
+    "id": "ds-q12",
+    "subject": "数据结构",
+    "topic": "步长减半·除以三",
+    "type": "single",
+    "question": "下列程序段的时间复杂度是（ ）。\n\n```c\ni = n;\nwhile (i > 1)\n    i = i / 3;\n```",
+    "options": {
+      "A": "O(n)",
+      "B": "O(log3 n)",
+      "C": "O(n^(1/3))",
+      "D": "O(log log n)"
+    },
+    "answer": "B",
+    "analysis": "每轮缩小 3 倍，需 log3(n) 轮。底数不影响量级，记为 O(log n)。"
+  },
+  {
+    "id": "ds-q13",
+    "subject": "数据结构",
+    "topic": "相同形状·不同答案对比",
+    "type": "single",
+    "question": "比较下列两段程序，时间复杂度分别是（ ）。\n\n```c\n// 甲\ni = n;\nwhile (i > 1) i = i / 2;\n\n// 乙\nfor (i = 0; i < sqrt(n); i++) count++;\n```",
+    "options": {
+      "A": "甲 O(n)、乙 O(log n)",
+      "B": "甲 O(log n)、乙 O(n^(1/2))",
+      "C": "甲 O(log log n)、乙 O(log n)",
+      "D": "甲 O(n^(1/2))、乙 O(n)"
+    },
+    "answer": "B",
+    "analysis": "甲是步长减半，属对数家族 O(log n)；乙是步长不变且边界为 sqrt(n)，属多项式家族 O(n^(1/2))。判定依据不同：一个看步长，一个看边界。"
+  }
 ]

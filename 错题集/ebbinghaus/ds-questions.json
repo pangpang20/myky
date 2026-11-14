@@ -1,27 +1,395 @@
 {
   "questions": [
-    { "id": "ds-r1-013", "itemId": "数据结构-嵌套循环计数", "round": 1, "subject": "数据结构", "topic": "内层次数依赖外层·变式1", "type": "single", "question": "下列循环中 m++ 的执行次数是（ ）。\\n\\n```c\\nfor (i = 1; i <= n; i++)\\n    for (j = 1; j <= 3 * i; j++)\\n        m++;\\n```", "options": { "A": "3n(n+1)/2", "B": "n(n+1)", "C": "3n", "D": "n²" }, "answer": "A", "analysis": "内层次数 = 3i，总次数 = Σ3i = 3·n(n+1)/2。系数不影响量级，但精确次数必须带上系数。" },
-    { "id": "ds-r1-014", "itemId": "数据结构-嵌套循环计数", "round": 1, "subject": "数据结构", "topic": "内层次数依赖外层·变式2", "type": "single", "question": "下列循环中 s++ 的执行次数是（ ）。\\n\\n```c\\nfor (i = 1; i <= n; i++)\\n    for (j = i; j <= n; j++)\\n        s++;\\n```", "options": { "A": "n(n+1)/2", "B": "n²", "C": "n", "D": "n(n−1)/2" }, "answer": "A", "analysis": "内层次数 = n − i + 1，总和 = n + (n−1) + … + 1 = n(n+1)/2。这是经典的三角形求和。" },
-    { "id": "ds-r1-015", "itemId": "数据结构-嵌套循环计数", "round": 1, "subject": "数据结构", "topic": "内层次数依赖外层·变式3", "type": "single", "question": "下列循环中 s++ 的执行次数是（ ）。\\n\\n```c\\nfor (i = 0; i < n; i++)\\n    for (j = 0; j < i * i; j++)\\n        s++;\\n```", "options": { "A": "O(n²)", "B": "O(n³)", "C": "O(n⁴)", "D": "O(n log n)" }, "answer": "B", "analysis": "内层次数 = i²，总和 = Σ i² ≈ n³/3，复杂度 O(n³)。看到 i² 就要想到平方和公式。" },
-
-    { "id": "ds-r1-016", "itemId": "数据结构-算法特性", "round": 1, "subject": "数据结构", "topic": "算法特性·变式1", "type": "single", "question": "某计算序列在第 10⁹ 步时仍未终止，将无限执行下去。该序列（ ）。", "options": { "A": "是算法，只是效率低", "B": "不满足有穷性，不是算法", "C": "是算法，但不可行", "D": "是算法，但不确定" }, "answer": "B", "analysis": "有穷性要求算法在有限步骤内终止。永不终止的序列直接违反有穷性，无论其他性质多好，都不是算法。" },
-    { "id": "ds-r1-017", "itemId": "数据结构-算法特性", "round": 1, "subject": "数据结构", "topic": "算法特性·变式2", "type": "single", "question": "某伪代码中有一条指令「根据心情选择下一步操作」，该伪代码作为算法（ ）。", "options": { "A": "违反确定性", "B": "违反有穷性", "C": "违反可行性", "D": "完全合法" }, "answer": "A", "analysis": "「根据心情」含义不唯一、有二义性，违反确定性——每条指令必须含义明确、无歧义。" },
-    { "id": "ds-r1-018", "itemId": "数据结构-算法特性", "round": 1, "subject": "数据结构", "topic": "算法特性·变式3", "type": "single", "question": "下列说法正确的是（ ）。", "options": { "A": "好的算法必须可读性高，否则不是算法", "B": "算法可以有零个输入，但必须有至少一个输出", "C": "算法必须有多个输出", "D": "算法必须高效，否则不是算法" }, "answer": "B", "analysis": "算法可以没有输入（如输出固定字符串的程序），但必须至少有一个输出。高效、可读都是评价标准，不是判定条件。" },
-
-    { "id": "ds-r1-019", "itemId": "数据结构-大O定义", "round": 1, "subject": "数据结构", "topic": "大 O 定义·变式1", "type": "single", "question": "若 T(n) = O(n²)，则下列**一定**成立的是（ ）。", "options": { "A": "T(n) = Θ(n²)", "B": "T(n) = Ω(n²)", "C": "T(n) = O(n³)", "D": "T(n) = Θ(n)" }, "answer": "C", "analysis": "大 O 具有传递性：不超过 n² 阶的函数也必然不超过 n³ 阶。但上界不能推出紧确界 Θ 或下界 Ω。" },
-    { "id": "ds-r1-020", "itemId": "数据结构-大O定义", "round": 1, "subject": "数据结构", "topic": "大 O 定义·变式2", "type": "single", "question": "T(n) = 5n log n + 3n，下列说法正确的是（ ）。", "options": { "A": "T(n) = O(n²) 但 T(n) ≠ Θ(n²)", "B": "T(n) = Θ(n²)", "C": "T(n) = O(n)", "D": "T(n) = Ω(n²)" }, "answer": "A", "analysis": "n log n 阶增长慢于 n²，所以 O(n²) 成立（上界宽松），但不是 Θ(n²)（增长不恰好是 n²），也不是 Ω(n²)（下界太高）。" },
-    { "id": "ds-r1-021", "itemId": "数据结构-大O定义", "round": 1, "subject": "数据结构", "topic": "大 O 定义·变式3", "type": "single", "question": "下列关于记号的说法，**错误**的是（ ）。【注意否定词】", "options": { "A": "O 表示渐进上界", "B": "Ω 表示渐进下界", "C": "Θ 表示渐进紧确界", "D": "若 T(n) = O(f(n))，则必有 T(n) = Ω(f(n))" }, "answer": "D", "analysis": "上界推不出下界。T(n) = n 是 O(n²)，但不是 Ω(n²)。三者是独立的关系，只有 Θ 同时给出上下界。" },
-
-    { "id": "ds-r1-022", "itemId": "数据结构-循环复杂度", "round": 1, "subject": "数据结构", "topic": "循环复杂度·变式1", "type": "single", "question": "下列循环的时间复杂度是（ ）。\\n\\n```c\\ni = 1;\\nwhile (i < n)\\n    i = i * 2;\\n```", "options": { "A": "O(n)", "B": "O(log₂ n)", "C": "O(n log n)", "D": "O(log log n)" }, "answer": "B", "analysis": "i 每次翻倍，迭代 k 次后 i = 2^k ≥ n，即 k = log₂n。这是最经典的倍增循环。" },
-    { "id": "ds-r1-023", "itemId": "数据结构-循环复杂度", "round": 1, "subject": "数据结构", "topic": "循环复杂度·变式2", "type": "single", "question": "下列循环的时间复杂度是（ ）。\\n\\n```c\\ni = n;\\nwhile (i > 1)\\n    i = i / 2;\\n```", "options": { "A": "O(n)", "B": "O(n/2)", "C": "O(log₂ n)", "D": "O(log log n)" }, "answer": "C", "analysis": "i 每次减半，从 n 到 1 需 log₂n 次。与倍增循环对称，复杂度相同。" },
-    { "id": "ds-r1-024", "itemId": "数据结构-循环复杂度", "round": 1, "subject": "数据结构", "topic": "循环复杂度·变式3", "type": "single", "question": "下列循环的时间复杂度是（ ）。\\n\\n```c\\ni = 1;\\nwhile (i < n)\\n    i = i + i;\\n```", "options": { "A": "O(n)", "B": "O(log₂ n)", "C": "O(n log n)", "D": "O(2ⁿ)" }, "answer": "B", "analysis": "i = i + i 等价于 i = 2i，即每次翻倍，迭代 log₂n 次。注意「加自己」和「加常数」不同——加常数才是 O(n)。" },
-
-    { "id": "ds-r1-025", "itemId": "数据结构-有序合并", "round": 1, "subject": "数据结构", "topic": "有序合并·变式1", "type": "single", "question": "合并两个长度分别为 m、n 的有序链表，**最少**需要比较的次数是（ ）。", "options": { "A": "m+n", "B": "min(m,n)", "C": "max(m,n)", "D": "m×n" }, "answer": "B", "analysis": "当一个链表全部小于另一个链表时，只需比较 min(m,n) 次（短表每个元素与长表首元素比较一次即可）。最坏是 m+n−1 次。" },
-    { "id": "ds-r1-026", "itemId": "数据结构-有序合并", "round": 1, "subject": "数据结构", "topic": "有序合并·变式2", "type": "single", "question": "两个有序链表合并过程中，每个节点最多被访问（ ）次。", "options": { "A": "1 次", "B": "2 次", "C": "log 次", "D": "m+n 次" }, "answer": "A", "analysis": "双指针合并时，每个节点只被读取一次就链接到结果链表，所以是线性时间。" },
-    { "id": "ds-r1-027", "itemId": "数据结构-有序合并", "round": 1, "subject": "数据结构", "topic": "有序合并·变式3", "type": "single", "question": "若两个链表长度分别为 100 和 10000，合并的最坏比较次数约为（ ）。", "options": { "A": "10000", "B": "1009900", "C": "10100", "D": "100" }, "answer": "C", "analysis": "最坏比较 m+n−1 = 10099 ≈ 10100 次。量级 O(m+n)，不是 O(m×n)。" },
-
-    { "id": "ds-r1-028", "itemId": "数据结构-时间复杂度综合", "round": 1, "subject": "数据结构", "topic": "综合·变式1", "type": "single", "question": "下列循环的时间复杂度是（ ）。\\n\\n```c\\nint sum = 0;\\nfor (int i = 0; i < n; i++)\\n    for (int j = 0; j < n; j++)\\n        for (int k = 0; k < n; k++)\\n            sum++;\\n```", "options": { "A": "O(n)", "B": "O(n²)", "C": "O(n³)", "D": "O(log n)" }, "answer": "C", "analysis": "三层独立嵌套循环，每层都是 n 次，总次数 n³。内层次数不依赖外层时才能直接相乘。" },
-    { "id": "ds-r1-029", "itemId": "数据结构-时间复杂度综合", "round": 1, "subject": "数据结构", "topic": "综合·变式2", "type": "single", "question": "下列循环的时间复杂度是（ ）。\\n\\n```c\\nint sum = 0;\\nfor (int i = 1; i < n; i *= 2)\\n    for (int j = 0; j < n; j++)\\n        sum++;\\n```", "options": { "A": "O(n)", "B": "O(n log n)", "C": "O(n²)", "D": "O(log n)" }, "answer": "B", "analysis": "外层 log n 次，内层 n 次且与 i 无关，总次数 n log n。与「内层依赖 i」的题不同——这道内层是固定的 n。" },
-    { "id": "ds-r1-030", "itemId": "数据结构-时间复杂度综合", "round": 1, "subject": "数据结构", "topic": "综合·变式3", "type": "single", "question": "下列循环的时间复杂度是（ ）。\\n\\n```c\\nint sum = 0;\\nfor (int i = 0; i < n; i++)\\n    for (int j = 0; j < i; j++)\\n        for (int k = 0; k < j; k++)\\n            sum++;\\n```", "options": { "A": "O(n)", "B": "O(n²)", "C": "O(n³)", "D": "O(n⁴)" }, "answer": "C", "analysis": "Σ i·(i−1)/2 ≈ Σ i²/2 ≈ n³/6，复杂度 O(n³)。多层依赖时逐层求和。" }
+    {
+      "id": "ds-r1-013",
+      "itemId": "数据结构-嵌套循环计数",
+      "round": 1,
+      "subject": "数据结构",
+      "topic": "内层次数依赖外层·变式1",
+      "type": "single",
+      "question": "下列循环中 m++ 的执行次数是（ ）。\\n\\n```c\\nfor (i = 1; i <= n; i++)\\n    for (j = 1; j <= 3 * i; j++)\\n        m++;\\n```",
+      "options": {
+        "A": "3n(n+1)/2",
+        "B": "n(n+1)",
+        "C": "3n",
+        "D": "n²"
+      },
+      "answer": "A",
+      "analysis": "内层次数 = 3i，总次数 = Σ3i = 3·n(n+1)/2。系数不影响量级，但精确次数必须带上系数。"
+    },
+    {
+      "id": "ds-r1-014",
+      "itemId": "数据结构-嵌套循环计数",
+      "round": 1,
+      "subject": "数据结构",
+      "topic": "内层次数依赖外层·变式2",
+      "type": "single",
+      "question": "下列循环中 s++ 的执行次数是（ ）。\\n\\n```c\\nfor (i = 1; i <= n; i++)\\n    for (j = i; j <= n; j++)\\n        s++;\\n```",
+      "options": {
+        "A": "n(n+1)/2",
+        "B": "n²",
+        "C": "n",
+        "D": "n(n−1)/2"
+      },
+      "answer": "A",
+      "analysis": "内层次数 = n − i + 1，总和 = n + (n−1) + … + 1 = n(n+1)/2。这是经典的三角形求和。"
+    },
+    {
+      "id": "ds-r1-015",
+      "itemId": "数据结构-嵌套循环计数",
+      "round": 1,
+      "subject": "数据结构",
+      "topic": "内层次数依赖外层·变式3",
+      "type": "single",
+      "question": "下列循环中 s++ 的执行次数是（ ）。\\n\\n```c\\nfor (i = 0; i < n; i++)\\n    for (j = 0; j < i * i; j++)\\n        s++;\\n```",
+      "options": {
+        "A": "O(n²)",
+        "B": "O(n³)",
+        "C": "O(n⁴)",
+        "D": "O(n log n)"
+      },
+      "answer": "B",
+      "analysis": "内层次数 = i²，总和 = Σ i² ≈ n³/3，复杂度 O(n³)。看到 i² 就要想到平方和公式。"
+    },
+    {
+      "id": "ds-r1-016",
+      "itemId": "数据结构-算法特性",
+      "round": 1,
+      "subject": "数据结构",
+      "topic": "算法特性·变式1",
+      "type": "single",
+      "question": "某计算序列在第 10⁹ 步时仍未终止，将无限执行下去。该序列（ ）。",
+      "options": {
+        "A": "是算法，只是效率低",
+        "B": "不满足有穷性，不是算法",
+        "C": "是算法，但不可行",
+        "D": "是算法，但不确定"
+      },
+      "answer": "B",
+      "analysis": "有穷性要求算法在有限步骤内终止。永不终止的序列直接违反有穷性，无论其他性质多好，都不是算法。"
+    },
+    {
+      "id": "ds-r1-017",
+      "itemId": "数据结构-算法特性",
+      "round": 1,
+      "subject": "数据结构",
+      "topic": "算法特性·变式2",
+      "type": "single",
+      "question": "某伪代码中有一条指令「根据心情选择下一步操作」，该伪代码作为算法（ ）。",
+      "options": {
+        "A": "违反确定性",
+        "B": "违反有穷性",
+        "C": "违反可行性",
+        "D": "完全合法"
+      },
+      "answer": "A",
+      "analysis": "「根据心情」含义不唯一、有二义性，违反确定性——每条指令必须含义明确、无歧义。"
+    },
+    {
+      "id": "ds-r1-018",
+      "itemId": "数据结构-算法特性",
+      "round": 1,
+      "subject": "数据结构",
+      "topic": "算法特性·变式3",
+      "type": "single",
+      "question": "下列说法正确的是（ ）。",
+      "options": {
+        "A": "好的算法必须可读性高，否则不是算法",
+        "B": "算法可以有零个输入，但必须有至少一个输出",
+        "C": "算法必须有多个输出",
+        "D": "算法必须高效，否则不是算法"
+      },
+      "answer": "B",
+      "analysis": "算法可以没有输入（如输出固定字符串的程序），但必须至少有一个输出。高效、可读都是评价标准，不是判定条件。"
+    },
+    {
+      "id": "ds-r1-019",
+      "itemId": "数据结构-大O定义",
+      "round": 1,
+      "subject": "数据结构",
+      "topic": "大 O 定义·变式1",
+      "type": "single",
+      "question": "若 T(n) = O(n²)，则下列**一定**成立的是（ ）。",
+      "options": {
+        "A": "T(n) = Θ(n²)",
+        "B": "T(n) = Ω(n²)",
+        "C": "T(n) = O(n³)",
+        "D": "T(n) = Θ(n)"
+      },
+      "answer": "C",
+      "analysis": "大 O 具有传递性：不超过 n² 阶的函数也必然不超过 n³ 阶。但上界不能推出紧确界 Θ 或下界 Ω。"
+    },
+    {
+      "id": "ds-r1-020",
+      "itemId": "数据结构-大O定义",
+      "round": 1,
+      "subject": "数据结构",
+      "topic": "大 O 定义·变式2",
+      "type": "single",
+      "question": "T(n) = 5n log n + 3n，下列说法正确的是（ ）。",
+      "options": {
+        "A": "T(n) = O(n²) 但 T(n) ≠ Θ(n²)",
+        "B": "T(n) = Θ(n²)",
+        "C": "T(n) = O(n)",
+        "D": "T(n) = Ω(n²)"
+      },
+      "answer": "A",
+      "analysis": "n log n 阶增长慢于 n²，所以 O(n²) 成立（上界宽松），但不是 Θ(n²)（增长不恰好是 n²），也不是 Ω(n²)（下界太高）。"
+    },
+    {
+      "id": "ds-r1-021",
+      "itemId": "数据结构-大O定义",
+      "round": 1,
+      "subject": "数据结构",
+      "topic": "大 O 定义·变式3",
+      "type": "single",
+      "question": "下列关于记号的说法，**错误**的是（ ）。【注意否定词】",
+      "options": {
+        "A": "O 表示渐进上界",
+        "B": "Ω 表示渐进下界",
+        "C": "Θ 表示渐进紧确界",
+        "D": "若 T(n) = O(f(n))，则必有 T(n) = Ω(f(n))"
+      },
+      "answer": "D",
+      "analysis": "上界推不出下界。T(n) = n 是 O(n²)，但不是 Ω(n²)。三者是独立的关系，只有 Θ 同时给出上下界。"
+    },
+    {
+      "id": "ds-r1-022",
+      "itemId": "数据结构-循环复杂度",
+      "round": 1,
+      "subject": "数据结构",
+      "topic": "循环复杂度·变式1",
+      "type": "single",
+      "question": "下列循环的时间复杂度是（ ）。\\n\\n```c\\ni = 1;\\nwhile (i < n)\\n    i = i * 2;\\n```",
+      "options": {
+        "A": "O(n)",
+        "B": "O(log₂ n)",
+        "C": "O(n log n)",
+        "D": "O(log log n)"
+      },
+      "answer": "B",
+      "analysis": "i 每次翻倍，迭代 k 次后 i = 2^k ≥ n，即 k = log₂n。这是最经典的倍增循环。"
+    },
+    {
+      "id": "ds-r1-023",
+      "itemId": "数据结构-循环复杂度",
+      "round": 1,
+      "subject": "数据结构",
+      "topic": "循环复杂度·变式2",
+      "type": "single",
+      "question": "下列循环的时间复杂度是（ ）。\\n\\n```c\\ni = n;\\nwhile (i > 1)\\n    i = i / 2;\\n```",
+      "options": {
+        "A": "O(n)",
+        "B": "O(n/2)",
+        "C": "O(log₂ n)",
+        "D": "O(log log n)"
+      },
+      "answer": "C",
+      "analysis": "i 每次减半，从 n 到 1 需 log₂n 次。与倍增循环对称，复杂度相同。"
+    },
+    {
+      "id": "ds-r1-024",
+      "itemId": "数据结构-循环复杂度",
+      "round": 1,
+      "subject": "数据结构",
+      "topic": "循环复杂度·变式3",
+      "type": "single",
+      "question": "下列循环的时间复杂度是（ ）。\\n\\n```c\\ni = 1;\\nwhile (i < n)\\n    i = i + i;\\n```",
+      "options": {
+        "A": "O(n)",
+        "B": "O(log₂ n)",
+        "C": "O(n log n)",
+        "D": "O(2ⁿ)"
+      },
+      "answer": "B",
+      "analysis": "i = i + i 等价于 i = 2i，即每次翻倍，迭代 log₂n 次。注意「加自己」和「加常数」不同——加常数才是 O(n)。"
+    },
+    {
+      "id": "ds-r1-025",
+      "itemId": "数据结构-有序合并",
+      "round": 1,
+      "subject": "数据结构",
+      "topic": "有序合并·变式1",
+      "type": "single",
+      "question": "合并两个长度分别为 m、n 的有序链表，**最少**需要比较的次数是（ ）。",
+      "options": {
+        "A": "m+n",
+        "B": "min(m,n)",
+        "C": "max(m,n)",
+        "D": "m×n"
+      },
+      "answer": "B",
+      "analysis": "当一个链表全部小于另一个链表时，只需比较 min(m,n) 次（短表每个元素与长表首元素比较一次即可）。最坏是 m+n−1 次。"
+    },
+    {
+      "id": "ds-r1-026",
+      "itemId": "数据结构-有序合并",
+      "round": 1,
+      "subject": "数据结构",
+      "topic": "有序合并·变式2",
+      "type": "single",
+      "question": "两个有序链表合并过程中，每个节点最多被访问（ ）次。",
+      "options": {
+        "A": "1 次",
+        "B": "2 次",
+        "C": "log 次",
+        "D": "m+n 次"
+      },
+      "answer": "A",
+      "analysis": "双指针合并时，每个节点只被读取一次就链接到结果链表，所以是线性时间。"
+    },
+    {
+      "id": "ds-r1-027",
+      "itemId": "数据结构-有序合并",
+      "round": 1,
+      "subject": "数据结构",
+      "topic": "有序合并·变式3",
+      "type": "single",
+      "question": "若两个链表长度分别为 100 和 10000，合并的最坏比较次数约为（ ）。",
+      "options": {
+        "A": "10000",
+        "B": "1009900",
+        "C": "10100",
+        "D": "100"
+      },
+      "answer": "C",
+      "analysis": "最坏比较 m+n−1 = 10099 ≈ 10100 次。量级 O(m+n)，不是 O(m×n)。"
+    },
+    {
+      "id": "ds-r1-028",
+      "itemId": "数据结构-时间复杂度综合",
+      "round": 1,
+      "subject": "数据结构",
+      "topic": "综合·变式1",
+      "type": "single",
+      "question": "下列循环的时间复杂度是（ ）。\\n\\n```c\\nint sum = 0;\\nfor (int i = 0; i < n; i++)\\n    for (int j = 0; j < n; j++)\\n        for (int k = 0; k < n; k++)\\n            sum++;\\n```",
+      "options": {
+        "A": "O(n)",
+        "B": "O(n²)",
+        "C": "O(n³)",
+        "D": "O(log n)"
+      },
+      "answer": "C",
+      "analysis": "三层独立嵌套循环，每层都是 n 次，总次数 n³。内层次数不依赖外层时才能直接相乘。"
+    },
+    {
+      "id": "ds-r1-029",
+      "itemId": "数据结构-时间复杂度综合",
+      "round": 1,
+      "subject": "数据结构",
+      "topic": "综合·变式2",
+      "type": "single",
+      "question": "下列循环的时间复杂度是（ ）。\\n\\n```c\\nint sum = 0;\\nfor (int i = 1; i < n; i *= 2)\\n    for (int j = 0; j < n; j++)\\n        sum++;\\n```",
+      "options": {
+        "A": "O(n)",
+        "B": "O(n log n)",
+        "C": "O(n²)",
+        "D": "O(log n)"
+      },
+      "answer": "B",
+      "analysis": "外层 log n 次，内层 n 次且与 i 无关，总次数 n log n。与「内层依赖 i」的题不同——这道内层是固定的 n。"
+    },
+    {
+      "id": "ds-r1-030",
+      "itemId": "数据结构-时间复杂度综合",
+      "round": 1,
+      "subject": "数据结构",
+      "topic": "综合·变式3",
+      "type": "single",
+      "question": "下列循环的时间复杂度是（ ）。\\n\\n```c\\nint sum = 0;\\nfor (int i = 0; i < n; i++)\\n    for (int j = 0; j < i; j++)\\n        for (int k = 0; k < j; k++)\\n            sum++;\\n```",
+      "options": {
+        "A": "O(n)",
+        "B": "O(n²)",
+        "C": "O(n³)",
+        "D": "O(n⁴)"
+      },
+      "answer": "C",
+      "analysis": "Σ i·(i−1)/2 ≈ Σ i²/2 ≈ n³/6，复杂度 O(n³)。多层依赖时逐层求和。"
+    },
+    {
+      "id": "ds-r1-01031",
+      "itemId": "数据结构-循环复杂度",
+      "round": 1,
+      "subject": "数据结构",
+      "topic": "循环边界·平方根·变式1",
+      "type": "single",
+      "question": "若某循环写为：while 循环变量 i 从 0 开始，每次加 1，条件是 i 小于 sqrt(n)，且 sqrt(n) 为常数时间。则该循环执行次数与下列哪一项同阶？（ ）",
+      "options": {
+        "A": "log2 n",
+        "B": "n^(1/2)",
+        "C": "n",
+        "D": "log log n"
+      },
+      "answer": "B",
+      "analysis": "i 从 0 每次加 1 到 sqrt(n)-1，共 sqrt(n) 次。sqrt(n) 与 n^(1/2) 同阶。"
+    },
+    {
+      "id": "ds-r1-01032",
+      "itemId": "数据结构-循环复杂度",
+      "round": 1,
+      "subject": "数据结构",
+      "topic": "循环边界·立方根·变式2",
+      "type": "single",
+      "question": "设 n 为正整数，下列程序段的时间复杂度是（ ）。\n\n```c\nfor (i = 0; i * i * i < n; i++)\n    sum += i;\n```",
+      "options": {
+        "A": "O(n)",
+        "B": "O(n^(1/2))",
+        "C": "O(n^(1/3))",
+        "D": "O(n^(2/3))"
+      },
+      "answer": "C",
+      "analysis": "终止条件 i*i*i 小于 n 意味着 i 增长到约 n^(1/3)，因此共 n^(1/3) 次迭代。"
+    },
+    {
+      "id": "ds-r1-01033",
+      "itemId": "数据结构-循环复杂度",
+      "round": 1,
+      "subject": "数据结构",
+      "topic": "边界与步长·反向辨析",
+      "type": "single",
+      "question": "某循环的边界写成 log2(n)，循环变量每次加 1。下列关于其复杂度的判断，正确的是（ ）。",
+      "options": {
+        "A": "因为边界含对数，所以复杂度是 O(log log n)",
+        "B": "步长不变，执行 log2(n) 次，复杂度 O(log n)",
+        "C": "复杂度由 n 决定，应为 O(n)",
+        "D": "无法判断，必须看循环体内部语句"
+      },
+      "answer": "B",
+      "analysis": "步长不变时，次数由边界决定。边界是 log2(n)，执行 log2(n) 次，因此是 O(log n)，不是 log log n。"
+    },
+    {
+      "id": "ds-r1-01034",
+      "itemId": "数据结构-循环复杂度",
+      "round": 1,
+      "subject": "数据结构",
+      "topic": "多项式边界族·变式4",
+      "type": "single",
+      "question": "下列四段单层循环中，时间复杂度为 O(n^(1/4)) 的是（ ）。",
+      "options": {
+        "A": "循环条件为 i 小于 sqrt(n)，i 每次加 1",
+        "B": "循环条件为 i*i*i 小于 n，i 每次加 1",
+        "C": "循环条件为 i 的四次方小于 n，i 每次加 1",
+        "D": "循环条件为 i 小于 log2(n)，i 每次加 1"
+      },
+      "answer": "C",
+      "analysis": "四次方小于 n 等价于 i 约等于 n^(1/4)，因此执行 n^(1/4) 次。A 是 n^(1/2)，B 是 n^(1/3)，D 是 log n。"
+    },
+    {
+      "id": "ds-r1-01035",
+      "itemId": "数据结构-循环复杂度",
+      "round": 1,
+      "subject": "数据结构",
+      "topic": "综合判定·最小误判点",
+      "type": "single",
+      "question": "下列关于 sqrt(n) 出现在循环边界的说法，正确的是（ ）。",
+      "options": {
+        "A": "sqrt 是数学函数，出现在循环里就一定是对数复杂度",
+        "B": "sqrt(n) 属 n^(1/2)，单层循环为 O(n^(1/2))；若内层再嵌套 n 次则为 O(n^(3/2))",
+        "C": "sqrt(n) 的复杂度等同于 O(log n)，因为二者都小于 n",
+        "D": "sqrt(n) 循环因为次数少，复杂度可以忽略不计"
+      },
+      "answer": "B",
+      "analysis": "sqrt(n) 是多项式幂次 n^(1/2)。单层为 O(n^(1/2))；外层 n^(1/2)、内层 n 时相乘为 O(n^(3/2))。不能因为比 n 小就降级成对数。"
+    }
   ]
 }

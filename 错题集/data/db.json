@@ -188,6 +188,16 @@
       "status": "learning",
       "round": 2,
       "dueDate": "2026-11-15"
+    },
+    {
+      "id": "数据结构-sqrt循环边界",
+      "subject": "数据结构",
+      "file": "数据结构/sqrt循环边界复杂度错题.md",
+      "firstLearned": "2026-11-14",
+      "reviews": [],
+      "status": "learning",
+      "round": 1,
+      "dueDate": "2026-11-15"
     }
   ],
   "answers": [
@@ -679,6 +689,126 @@
       "answer": "C",
       "correct": true,
       "at": "2026-11-14T01:32:45.702Z"
+    },
+    {
+      "roundId": "eb-1794622206125",
+      "itemId": "计算机-网络基本概念",
+      "id": "cn-r1-002",
+      "topic": "自治含义反向验证",
+      "selected": "B",
+      "answer": "B",
+      "correct": true,
+      "at": "2026-11-14T02:10:14.069Z"
+    },
+    {
+      "roundId": "eb-1794622654527",
+      "itemId": "计算机-网络基本概念",
+      "id": "cn-r1-003",
+      "topic": "分布式与网络边界",
+      "selected": "A",
+      "answer": "B",
+      "correct": false,
+      "at": "2026-11-14T02:18:57.875Z"
+    },
+    {
+      "roundId": "eb-1794622654527",
+      "itemId": "计算机-网络基本概念",
+      "id": "cn-r1-004",
+      "topic": "紧耦合系统辨析",
+      "selected": "C",
+      "answer": "C",
+      "correct": true,
+      "at": "2026-11-14T02:19:07.875Z"
+    },
+    {
+      "roundId": "eb-1794622654527",
+      "itemId": "计算机-网络基本概念",
+      "id": "cn-r1-004",
+      "topic": "紧耦合系统辨析",
+      "selected": "C",
+      "answer": "C",
+      "correct": true,
+      "at": "2026-11-14T02:19:19.198Z"
+    },
+    {
+      "roundId": "eb-1794622851214",
+      "itemId": "计算机-网络基本概念",
+      "id": "cn-r1-002",
+      "topic": "自治含义反向验证",
+      "selected": "B",
+      "answer": "B",
+      "correct": true,
+      "at": "2026-11-14T02:20:55.075Z"
+    },
+    {
+      "roundId": "eb-1794623319834",
+      "itemId": "计算机-网络基本概念",
+      "id": "cn-r1-004",
+      "topic": "紧耦合系统辨析",
+      "selected": "C",
+      "answer": "C",
+      "correct": true,
+      "at": "2026-11-14T02:28:45.975Z"
+    },
+    {
+      "roundId": "eb-1794623341177",
+      "itemId": "计算机-信道利用率比较",
+      "id": "cn-r1-025",
+      "topic": "同义术语排除",
+      "selected": "B",
+      "answer": "B",
+      "correct": true,
+      "at": "2026-11-14T02:30:59.677Z"
+    },
+    {
+      "roundId": "eb-1794623341177",
+      "itemId": "计算机-信道利用率比较",
+      "id": "cn-r1-022",
+      "topic": "独占即低利用率",
+      "selected": "B",
+      "answer": "B",
+      "correct": true,
+      "at": "2026-11-14T02:31:13.967Z"
+    },
+    {
+      "roundId": "eb-1794623341177",
+      "itemId": "计算机-分组化直接结果辨析",
+      "id": "cn-r1-030",
+      "topic": "维度正交验证",
+      "selected": "B",
+      "answer": "B",
+      "correct": true,
+      "at": "2026-11-14T02:31:23.728Z"
+    },
+    {
+      "roundId": "eb-1794623530992",
+      "itemId": "计算机-网络基本概念",
+      "id": "cn-r1-003",
+      "topic": "分布式与网络边界",
+      "selected": "B",
+      "answer": "B",
+      "correct": true,
+      "at": "2026-11-14T02:32:25.105Z"
+    },
+    {
+      "roundId": "eb-1794623530992",
+      "itemId": "计算机-网络基本概念",
+      "id": "cn-r1-002",
+      "topic": "自治含义反向验证",
+      "selected": "B",
+      "answer": "B",
+      "correct": true,
+      "at": "2026-11-14T02:32:36.115Z"
+    },
+    {
+      "roundId": "eb-1794623530992",
+      "itemId": "计算机-网络基本概念",
+      "id": "cn-r1-005",
+      "topic": "网络组成三要素",
+      "selected": "B",
+      "answer": "B",
+      "correct": true,
+      "at": "2026-11-14T02:32:45.075Z"
     }
   ]
 }
