@@ -321,6 +321,17 @@
       "round": 1,
       "dueDate": "2026-11-15",
       "createdAt": "2026-11-14T22:55:29"
+    },
+    {
+      "id": "英语-2000年完形填空词义与逻辑",
+      "subject": "英语",
+      "file": "英语/2000年考研英语完形填空错题.md",
+      "firstLearned": "2026-11-14",
+      "reviews": [],
+      "status": "learning",
+      "round": 1,
+      "dueDate": "2026-11-15",
+      "createdAt": "2026-11-14T23:31:21"
     }
   ],
   "answers": [

@@ -362,5 +362,19 @@
     "rootCauses": {
       "点到坐标轴距离": "未作答。未掌握投影构造法：到某轴距离=点与投影点距离，投影点保留该轴坐标、其余置 0。"
     }
+  },
+  "英语-2000年完形填空词义与逻辑": {
+    "knowledge": "考研英语完形填空核心：①固定搭配（insurance against、rate of interest、irrigation channels、seek funds、feed the soil）；②近义词辨析（instead of 表取舍、only if 表必要条件、rate 指率、replace 换旧、self-sufficient 自给自足）；③逻辑衔接优先。口诀「搭配先行、逻辑定案」。",
+    "mnemonic": "搭配先行、逻辑定案——insurance against / rate of interest / irrigation channels 见到直接锁定；先判断取舍、条件还是频率，再选词。",
+    "keyPoints": [
+      "insurance against sth. 防范…的保障",
+      "only if 只有…才（必要条件）；instead of 而不是（取舍）",
+      "rate of interest 利率；irrigation channels 灌溉渠道",
+      "replace old implements 以新换旧；feed the soil 肥田；seek funds 寻求资金",
+      "self-sufficient 自给自足；frequently obtainable 经常可获得"
+    ],
+    "rootCauses": {
+      "完形填空词义与逻辑": "未作答。失分集中在介词搭配、近义辨析与逻辑衔接：insurance against、rate of interest、irrigation channels 等固定搭配不熟；instead of（取舍）与 only if（必要条件）的语义功能混淆。"
+    }
   }
 }

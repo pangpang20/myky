@@ -594,6 +594,91 @@
       },
       "answer": "C",
       "analysis": "到 x 轴去掉 x 坐标，用 b²+c²。"
+    },
+    {
+      "id": "ds-r1-1001",
+      "itemId": "英语-2000年完形填空词义与逻辑",
+      "round": 1,
+      "subject": "英语",
+      "topic": "insurance 搭配",
+      "type": "single",
+      "question": "As an insurance ______ unexpected losses, farmers usually store some grain.",
+      "options": {
+        "A": "for",
+        "B": "against",
+        "C": "of",
+        "D": "towards"
+      },
+      "answer": "B",
+      "analysis": "insurance against… 固定搭配，表「防范…的保障」。"
+    },
+    {
+      "id": "ds-r1-1002",
+      "itemId": "英语-2000年完形填空词义与逻辑",
+      "round": 1,
+      "subject": "英语",
+      "topic": "only if 逻辑",
+      "type": "single",
+      "question": "He will succeed ______ he keeps a wide gap between consumption and production.",
+      "options": {
+        "A": "only if",
+        "B": "even if",
+        "C": "as if",
+        "D": "if only"
+      },
+      "answer": "A",
+      "analysis": "only if「只有…才」，必要条件；even if「即使」；if only「要是…就好了」。"
+    },
+    {
+      "id": "ds-r1-1003",
+      "itemId": "英语-2000年完形填空词义与逻辑",
+      "round": 1,
+      "subject": "英语",
+      "topic": "rate of interest",
+      "type": "single",
+      "question": "They borrowed money at a low ______ of interest.",
+      "options": {
+        "A": "proportion",
+        "B": "percentage",
+        "C": "rate",
+        "D": "ratio"
+      },
+      "answer": "C",
+      "analysis": "rate of interest「利率」固定表达；ratio 表比值；percentage 表百分比。"
+    },
+    {
+      "id": "ds-r1-1004",
+      "itemId": "英语-2000年完形填空词义与逻辑",
+      "round": 1,
+      "subject": "英语",
+      "topic": "irrigation channels",
+      "type": "single",
+      "question": "The government invested heavily in irrigation ______.",
+      "options": {
+        "A": "vessels",
+        "B": "routes",
+        "C": "paths",
+        "D": "channels"
+      },
+      "answer": "D",
+      "analysis": "irrigation channels「灌溉渠道」固定搭配；vessels 指容器或船只。"
+    },
+    {
+      "id": "ds-r1-1005",
+      "itemId": "英语-2000年完形填空词义与逻辑",
+      "round": 1,
+      "subject": "英语",
+      "topic": "replace 用法",
+      "type": "single",
+      "question": "He sold the surplus to ______ old implements with new machines.",
+      "options": {
+        "A": "replace",
+        "B": "purchase",
+        "C": "supplement",
+        "D": "dispose"
+      },
+      "answer": "A",
+      "analysis": "replace…with…「以新换旧」；dispose 需接 of；supplement 表补充。"
     }
   ]
 }

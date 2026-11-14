@@ -1,5 +1,85 @@
 [
   {
+    "subject": "英语",
+    "itemId": "英语-2000年完形填空词义与逻辑",
+    "id": "en-2000-1",
+    "topic": "完形·逻辑衔接",
+    "type": "single",
+    "question": "Farmers must store grain ______ consuming it immediately.",
+    "options": {
+      "A": "other than",
+      "B": "as well as",
+      "C": "instead of",
+      "D": "more than"
+    },
+    "answer": "C",
+    "analysis": "储存与立即消费二选一，instead of「而不是」表取舍。"
+  },
+  {
+    "subject": "英语",
+    "itemId": "英语-2000年完形填空词义与逻辑",
+    "id": "en-2000-2",
+    "topic": "完形·条件逻辑",
+    "type": "single",
+    "question": "He can continue to support his family ______ he produces a surplus.",
+    "options": {
+      "A": "only if",
+      "B": "much as",
+      "C": "long before",
+      "D": "ever since"
+    },
+    "answer": "A",
+    "analysis": "only if「只有…才」，必要条件；ever since「自从」。"
+  },
+  {
+    "subject": "英语",
+    "itemId": "英语-2000年完形填空词义与逻辑",
+    "id": "en-2000-3",
+    "topic": "完形·固定搭配",
+    "type": "single",
+    "question": "Grain is stored as an insurance ______ the unpredictable effects of bad weather.",
+    "options": {
+      "A": "for",
+      "B": "against",
+      "C": "of",
+      "D": "towards"
+    },
+    "answer": "B",
+    "analysis": "insurance against…「防范…的保障」为固定搭配。"
+  },
+  {
+    "subject": "英语",
+    "itemId": "英语-2000年完形填空词义与逻辑",
+    "id": "en-2000-4",
+    "topic": "完形·近义动词",
+    "type": "single",
+    "question": "He sold the surplus in order to ______ old agricultural implements and obtain chemical fertilizers.",
+    "options": {
+      "A": "replace",
+      "B": "purchase",
+      "C": "supplement",
+      "D": "dispose"
+    },
+    "answer": "A",
+    "analysis": "replace「更换旧农具」；dispose 需接 of；supplement 表补充。"
+  },
+  {
+    "subject": "英语",
+    "itemId": "英语-2000年完形填空词义与逻辑",
+    "id": "en-2000-5",
+    "topic": "完形·固定搭配",
+    "type": "single",
+    "question": "Naturally he will try to borrow money at a low ______ of interest.",
+    "options": {
+      "A": "proportion",
+      "B": "percentage",
+      "C": "rate",
+      "D": "ratio"
+    },
+    "answer": "C",
+    "analysis": "rate of interest「利率」固定表达。"
+  },
+  {
     "subject": "高等数学",
     "itemId": "高等数学-点到坐标轴距离",
     "id": "hm-ax1",

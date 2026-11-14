@@ -3,7 +3,7 @@ import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const root = fileURLToPath(new URL('..', import.meta.url))
-const subjects = ['数据结构', '计算机组成原理', '操作系统', '计算机网络', '高等数学']
+const subjects = ['数据结构', '计算机组成原理', '操作系统', '计算机网络', '高等数学', '英语']
 const requiredHeadings = ['## 错题信息', '## 根因分析', '## 完整知识点梳理', '## 复刷清单', '## 复习记录']
 const wrongBookFields = ['科目：', '我的答案：', '正确答案：']
 const wrongBookExercises = ['### 举一反三 5 题', '### 历年真题风格练习']
