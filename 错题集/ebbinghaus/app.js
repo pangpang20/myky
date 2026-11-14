@@ -260,6 +260,7 @@ function choose(k){
   results[qi]={selected:k,correct:ok};
   renderSide();
   renderNavBar();
+  if(window.renderMathInElement)renderMathInElement(document.getElementById('quizCard'),{delimiters:[{left:'\$',right:'\$',display:false}],throwOnError:false});
 }
 function renderNavBar(){
   const nw=document.getElementById('navWrap');
