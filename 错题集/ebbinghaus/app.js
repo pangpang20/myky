@@ -1,5 +1,5 @@
 'use strict';
-let DB=null,QS=[],page=1,pageSize=10,queue=[],qi=0,roundId='',forceMode=false;
+let DB=null,QS=[],KB={},page=1,pageSize=10,queue=[],qi=0,roundId='',forceMode=false,results=[];
 
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
 
@@ -8,10 +8,11 @@ function today(){const d=new Date();return d.getFullYear()+'-'+String(d.getMonth
 async function init(){
   document.documentElement.dataset.theme=localStorage.getItem('eb_theme')||'dark';
   updateThemeBtn();
-  const [dbR,q1,q2]=await Promise.all([fetch('/api/db'),fetch('/questions.json'),fetch('/ds-questions.json')]);
+  const [dbR,q1,q2,kbR]=await Promise.all([fetch('/api/db'),fetch('/questions.json'),fetch('/ds-questions.json'),fetch('/knowledge.json')]);
   DB=await dbR.json();
   const a=await q1.json(),b=await q2.json();
   QS=[...(a.questions||[]),...(b.questions||[])];
+  KB=await kbR.json();
   const t=today();
   document.getElementById('todayBadge').textContent='今天 '+t;
   renderStats();renderCurve();fillSubjectFilter();renderAll();renderDueBar();
@@ -161,7 +162,8 @@ function startQuiz(force){
   const items=forceMode?DB.items.filter(i=>i.status!=='mastered'):dueItems();
   if(!items.length){renderDueBar();return;}
   roundId='eb-'+Date.now();
-  queue=[];qi=0;
+  queue=[];qi=0;results=[];
+  results=new Array();
   items.forEach(it=>{
     const pool=QS.filter(q=>q.itemId===it.id);
     if(!pool.length)return;
@@ -171,12 +173,15 @@ function startQuiz(force){
   if(!queue.length){document.getElementById('quizDesc').textContent='题库为空，暂无可用练习。';return;}
   document.getElementById('mainView').style.display='none';
   document.getElementById('quizView').style.display='';
+  document.getElementById('quizView').classList.add('main-with-side');
   renderQ();
+  renderSide();
 }
 function exitQuiz(){
   document.getElementById('quizView').style.display='none';
   document.getElementById('mainView').style.display='';
   document.getElementById('quizLog').textContent='';
+  results=[];
   init();
 }
 function renderQ(){
@@ -186,7 +191,8 @@ function renderQ(){
   card.innerHTML='<div class="meta">第 '+(qi+1)+' / '+queue.length+' 题 · '+esc(q.subject)+' · '+esc(q.topic)+' · 单选</div>'+
     '<div class="q">'+renderQuestion(q.question)+'</div>'+
     '<div id="opts">'+Object.keys(q.options).map(k=>'<div class="opt" data-k="'+k+'" onclick="choose(\''+k+'\')"><span class="badge">'+k+'</span>'+renderQuestion(q.options[k])+'</div>').join('')+'</div>'+
-    '<div class="analysis" id="ana"></div><div id="nextWrap"></div>';
+    '<div class="analysis" id="ana"></div><div id="navWrap"></div>';
+  document.querySelectorAll('.side-item').forEach((el,idx)=>el.classList.toggle('active',idx===qi));
 }
 const FENCE='```';
 function renderQuestion(text){
@@ -209,12 +215,38 @@ function choose(k){
   if(!ok&&picked)picked.classList.add('wrong');
   fetch('/api/answer',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({roundId:roundId,itemId:q.itemId,id:q.id,topic:q.topic,selected:k,answer:q.answer,correct:ok,at:new Date().toISOString()})});
   const ana=document.getElementById('ana');
-  ana.innerHTML='<b>解析：</b>'+renderQuestion(q.analysis);
+  const kb=KB[q.itemId]||{};
+  const rootCause=(kb.rootCauses||{})[q.topic]||'暂无针对此题的根因分析。';
+  let html='<div class="analysis-block"><h4>🔍 解析</h4><p>'+renderQuestion(q.analysis)+'</p></div>';
+  html+='<div class="analysis-block"><h4>⚠️ 根因分析</h4><p>'+renderQuestion(rootCause)+'</p></div>';
+  if(kb.knowledge)html+='<div class="analysis-block"><h4>📚 完整知识点梳理</h4><p>'+renderQuestion(kb.knowledge)+'</p></div>';
+  if(kb.mnemonic)html+='<div class="analysis-mnemonic">🧠 记忆口诀：'+renderQuestion(kb.mnemonic)+'</div>';
+  if(kb.keyPoints&&kb.keyPoints.length)html+='<div class="analysis-block analysis-kp"><h4>🔑 关键点</h4><ul>'+kb.keyPoints.map(p=>'<li>'+renderQuestion(p)+'</li>').join('')+'</ul></div>';
+  ana.innerHTML=html;
   ana.style.display='block';
-  const nw=document.getElementById('nextWrap');
-  nw.innerHTML='<button class="btn-next" onclick="nextQ()">'+(qi===queue.length-1?'完成本轮 →':'下一题 →')+'</button>';
+  results[qi]={selected:k,correct:ok};
+  renderSide();
+  const nw=document.getElementById('navWrap');
+  nw.innerHTML=(qi>0?'<button class="btn ghost" onclick="prevQ()">← 上一题</button> ':'')+
+    '<button class="btn-next" onclick="nextQ()">'+(qi===queue.length-1?'完成本轮 →':'下一题 →')+'</button>';
 }
-function nextQ(){qi++;renderQ()}
+function nextQ(){if(qi<queue.length-1){qi++;renderQ()}else{finishRound()}}
+function prevQ(){if(qi>0){qi--;renderQ()}}
+function renderSide(){
+  const el=document.getElementById('sideList');
+  el.innerHTML=queue.map((q,i)=>{
+    const r=results[i];
+    const cls=r?(r.correct?'correct':'wrong'):'';
+    const ico=r?(r.correct?'✓':'✗'):'';
+    return '<div class="side-item'+(i===qi?' active':'')+'" onclick="jumpTo('+i+')"><div class="side-status '+cls+'">'+ico+'</div><div class="side-title">'+esc(q.topic||('第'+(i+1)+'题'))+'</div></div>';
+  }).join('');
+}
+function jumpTo(i){qi=i;renderQ()}
+document.addEventListener('keydown',e=>{
+  if(document.getElementById('quizView').style.display==='none')return;
+  const ana=document.getElementById('ana');
+  if((e.key==='ArrowRight'||e.key===' ')&&ana&&ana.style.display==='block'){e.preventDefault();nextQ()}
+});
 async function finishRound(){
   const r=await fetch('/api/finish',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({roundId:roundId,date:today()})});
   const res=await r.json();

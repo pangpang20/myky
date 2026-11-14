@@ -73,6 +73,22 @@ tbody tr:hover td{background:var(--bg3)}
 .opt.disabled{cursor:default;opacity:.92}
 .opt .badge{font-weight:800;margin-right:10px}
 .analysis{margin-top:16px;border-top:1px dashed var(--border);padding-top:14px;display:none;font-size:13px;line-height:1.75;color:var(--muted)}
+.analysis-block{margin-bottom:14px}
+.analysis-block h4{font-size:12px;color:var(--blue);margin-bottom:6px;letter-spacing:.5px;font-weight:800}
+.analysis-block p,.analysis-block li{font-size:13px;color:var(--muted);line-height:1.75}
+.analysis-block ul{padding-left:18px;list-style:disc}
+.analysis-mnemonic{background:rgba(147,51,234,.1);border-left:3px solid var(--purple);border-radius:6px;padding:10px 14px;font-size:12.5px;color:var(--purple);font-weight:600;margin-bottom:14px}
+.analysis-kp{background:rgba(37,99,235,.06);border-radius:8px;padding:10px 14px;border:1px solid var(--border)}
+.side-panel{position:fixed;right:0;top:0;bottom:0;width:230px;background:var(--bg2);border-left:1px solid var(--border);padding:18px 14px;overflow-y:auto;z-index:50}
+.side-panel h3{font-size:12px;color:var(--muted);font-weight:700;margin-bottom:14px;letter-spacing:.5px}
+.side-item{display:flex;align-items:center;gap:9px;padding:8px 6px;border-radius:7px;font-size:12px;color:var(--muted);cursor:pointer;transition:.15s;line-height:1.4}
+.side-item:hover{background:var(--bg3)}
+.side-item.active{background:rgba(37,99,235,.12);color:var(--blue);font-weight:700}
+.side-status{flex:0 0 18px;width:18px;height:18px;border-radius:50%;border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800}
+.side-status.correct{background:rgba(74,222,128,.2);border-color:var(--green);color:var(--green)}
+.side-status.wrong{background:rgba(248,113,113,.2);border-color:var(--red);color:var(--red)}
+.side-title{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.main-with-side{margin-right:230px}
 .btn-next{margin-top:18px;padding:11px 24px;border-radius:8px;border:none;background:var(--blue);color:#fff;cursor:pointer;font-size:14px;font-weight:700}
 .q{font-size:16px;font-weight:600;margin-bottom:16px;line-height:1.75}
 .q pre{background:var(--bg3);color:var(--blue);border-radius:8px;padding:14px 16px;margin:12px 0;overflow-x:auto;font-family:Consolas,Menlo,monospace;font-size:13px;line-height:1.65;font-weight:400;border:1px solid var(--border)}
@@ -132,9 +148,13 @@ tbody tr:hover td{background:var(--bg3)}
   </div>
 </div>
 <div id="quizView" style="display:none">
-  <div class="wrap">
+  <div class="wrap main-with-side">
     <div id="quizCard"></div>
     <div class="log" id="quizLog"></div>
+  </div>
+  <div class="side-panel">
+    <h3>📋 答题状态</h3>
+    <div id="sideList"></div>
   </div>
 </div>
 <script>
