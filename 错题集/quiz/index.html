@@ -25,6 +25,12 @@
   .btn{margin-top:16px;padding:9px 16px;border-radius:8px;border:none;background:#2563eb;color:#fff;cursor:pointer;font-size:14px}
   .btn:disabled{background:#94a3b8;cursor:not-allowed}
   .log{margin-top:20px;font-size:13px;color:#475569}
+  .learn-card{border:1px solid #dbeafe;border-left:5px solid #2563eb;background:#f8fafc;border-radius:12px;padding:18px;margin-bottom:14px}
+  .learn-card h2{margin:0 0 10px;font-size:18px;color:#1d4ed8}
+  .learn-card h3{margin:14px 0 6px;font-size:15px;color:#1e40af}
+  .learn-card p{line-height:1.75;margin:0}
+  .learn-card ul{margin:8px 0 0;padding-left:20px;line-height:1.7}
+  .learn-mnemonic{margin-top:12px;padding:12px 14px;border-left:5px solid #7c3aed;background:#f5f3ff;border-radius:10px;font-weight:600;color:#5b21b6}
 </style>
 </head>
 <body>
@@ -36,14 +42,21 @@
 </div>
 <script>
 let questions = [];
+let knowledgeBase = {};
+let studyStarted = false;
 let idx = 0;
 let answered = [];
 let roundId = 'quiz-' + Date.now();
 
 async function init() {
-  const res = await fetch('./questions.json', { cache: 'no-store' });
-  questions = await res.json();
-  render();
+  const [qRes, kbRes] = await Promise.all([
+    fetch('./questions.json', { cache: 'no-store' }),
+    fetch('./knowledge.json', { cache: 'no-store' })
+  ]);
+  questions = await qRes.json();
+  knowledgeBase = await kbRes.json();
+  if (questions.length) renderStudy();
+  else render();
 }
 
 function report(q, sel, ok) {
@@ -95,6 +108,45 @@ function renderQuestion(text) {
     }
   }
   return out;
+}
+
+function findKnowledgeEntry(q) {
+  if (q.itemId && knowledgeBase[q.itemId]) return knowledgeBase[q.itemId];
+  const topic = q.topic || "";
+  for (const [itemId, entry] of Object.entries(knowledgeBase)) {
+    const causes = entry.rootCauses || {};
+    if (topic in causes || Object.keys(causes).some(key => topic.includes(key) || key.includes(topic))) return entry;
+  }
+  return null;
+}
+
+function renderStudy() {
+  const card = document.getElementById("quizCard");
+  const q = questions[0];
+  const entry = findKnowledgeEntry(q);
+  if (!entry) { studyStarted = true; render(); return; }
+  const title = Object.keys(knowledgeBase).find(key => knowledgeBase[key] === entry) || "本组错题";
+  const causes = entry.rootCauses || {};
+  const relatedCause = Object.entries(causes).find(([key]) => q.topic.includes(key) || key.includes(q.topic));
+  const causeList = relatedCause ? [relatedCause] : Object.entries(causes);
+  card.innerHTML = [
+    "<div class="learn-card">",
+    "<h2>📚 答题前强化学习</h2>",
+    "<h3>知识点：" + title + "</h3>",
+    "<h3>根因分析</h3>",
+    causeList.map(([name, value]) => "<p><b>" + name + "：</b>" + renderQuestion(value) + "</p>").join(""),
+    "<h3>完整知识点梳理</h3>",
+    "<p>" + renderQuestion(entry.knowledge || "") + "</p>",
+    "<h3>关键点</h3>",
+    "<ul>" + (entry.keyPoints || []).map(item => "<li>" + renderQuestion(item) + "</li>").join("") + "</ul>",
+    entry.mnemonic ? "<div class="learn-mnemonic">🧠 记忆口诀：" + renderQuestion(entry.mnemonic) + "</div>" : "",
+    "<button class="btn" id="startQuizBtn">我已阅读，开始答题</button>",
+    "</div>"
+  ].join("");
+  card.querySelector("#startQuizBtn").onclick = () => {
+    studyStarted = true;
+    render();
+  };
 }
 
 function isCorrect(q, sel) {
