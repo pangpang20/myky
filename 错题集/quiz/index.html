@@ -53,11 +53,17 @@ async function init() {
     fetch('./questions.json', { cache: 'no-store' }),
     fetch('./knowledge.json', { cache: 'no-store' })
   ]);
-  questions = await qRes.json();
+  const all = await qRes.json();
+  questions = latestItemQuestions(all);
   knowledgeBase = await kbRes.json();
   render();
 }
 
+function latestItemQuestions(all){
+  if(!Array.isArray(all)||!all.length)return [];
+  const latest=all[0].itemId;
+  return all.filter(q=>q.itemId===latest);
+}
 function report(q, sel, ok) {
   answered.push({ id: q.id, selected: sel, answer: q.answer, correct: ok, at: new Date(Date.now()+8*3600*1000).toISOString().replace('Z','+08:00') });
   fetch('/api/answer', {

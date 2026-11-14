@@ -17,6 +17,8 @@ check(html.includes('Object.keys(q.options).sort()'), 'options must render in A/
 check(html.includes('/api/answer'), 'wrong answers must be reported to server')
 check(html.includes('./knowledge.json'), 'study view must load knowledge base')
 check(html.includes('function renderStudy('), 'study view must render before quiz')
+check(html.includes('function latestItemQuestions('), 'quiz must show only the newest item')
+check(html.includes('questions = latestItemQuestions(all)'), 'quiz must filter questions to newest itemId')
 check(html.includes('renderStudy(entry)'), 'study view must run before every question')
 check(html.includes('根因分析'), 'study view must show root cause analysis')
 check(html.includes('完整知识点梳理'), 'study view must show full knowledge summary')
