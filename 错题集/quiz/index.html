@@ -25,7 +25,10 @@
   .btn{margin-top:16px;padding:9px 16px;border-radius:8px;border:none;background:#2563eb;color:#fff;cursor:pointer;font-size:14px}
   .btn:disabled{background:#94a3b8;cursor:not-allowed}
   .log{margin-top:20px;font-size:13px;color:#475569}
-  .learn-card{border:1px solid #dbeafe;border-left:5px solid #2563eb;background:#f8fafc;border-radius:12px;padding:18px;margin-bottom:14px}
+  .switcher{margin:14px 0;display:flex;align-items:center;gap:10px;font-size:14px;color:#334155}
+.switcher select{padding:7px 10px;border-radius:8px;border:1px solid #cbd5e1;background:#fff;font-size:14px}
+.switcher .btn{margin-top:0}
+.learn-card{border:1px solid #dbeafe;border-left:5px solid #2563eb;background:#f8fafc;border-radius:12px;padding:18px;margin-bottom:14px}
   .learn-card h2{margin:0 0 10px;font-size:18px;color:#1d4ed8}
   .learn-card h3{margin:14px 0 6px;font-size:15px;color:#1e40af}
   .learn-card p{line-height:1.75;margin:0}
@@ -37,12 +40,16 @@
 <div class="wrap">
   <h1>📕 计算机考研 · 新错题练习</h1>
   <div class="meta">单选题点击选项即判分；多选题勾选后点击“提交答案”。新错题练习区。把错题发给助手后会自动生成题目到这里；复习题在 4318 端口。</div>
+  <div class="switcher"><label>知识点：</label><select id="itemSelect"></select> <button class="btn" id="nextItemBtn">下一个知识点 →</button></div>
   <div class="card" id="quizCard"></div>
   <div class="log" id="log"></div>
 </div>
 <script>
 let questions = [];
+let allQuestions = [];
 let knowledgeBase = {};
+let itemOrder = [];
+let itemIndex = 0;
 let studyStarted = false;
 let idx = 0;
 let answered = [];
@@ -54,7 +61,11 @@ async function init() {
     fetch('./knowledge.json', { cache: 'no-store' })
   ]);
   const all = await qRes.json();
+  allQuestions = all;
+  itemOrder = [...new Set(all.map(q=>q.itemId).filter(Boolean))];
+  itemIndex = 0;
   questions = latestItemQuestions(all);
+  renderSwitcher();
   knowledgeBase = await kbRes.json();
   render();
 }
@@ -63,6 +74,19 @@ function latestItemQuestions(all){
   if(!Array.isArray(all)||!all.length)return [];
   const latest=all[0].itemId;
   return all.filter(q=>q.itemId===latest);
+}
+function renderSwitcher(){
+  const sel=document.getElementById("itemSelect");
+  sel.innerHTML=itemOrder.map((id,i)=>'<option value="'+i+'">'+esc(id)+'</option>').join("");
+  sel.value=String(itemIndex);
+  sel.onchange=()=>{itemIndex=+sel.value;loadItem()};
+  document.getElementById("nextItemBtn").onclick=()=>{itemIndex=(itemIndex+1)%itemOrder.length;loadItem()};
+}
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
+function loadItem(){
+  idx=0;answered=[];studyStarted=false;roundId='quiz-'+Date.now();
+  questions=allQuestions.filter(q=>q.itemId===itemOrder[itemIndex]);
+  render();
 }
 function report(q, sel, ok) {
   answered.push({ id: q.id, selected: sel, answer: q.answer, correct: ok, at: new Date(Date.now()+8*3600*1000).toISOString().replace('Z','+08:00') });
