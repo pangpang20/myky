@@ -31,10 +31,22 @@ description: >-
    - 完整知识点梳理
    - 复刷清单（5 道举一反三 + 3-5 道真题风格）
    - 复习记录
-4. Run tests before finishing:
+4. Add 5 new practice questions (original + variations) to
+   `错题集/quiz/questions.json`. Do not stop at archiving the Markdown:
+   the user expects new interactive exercises each time.
+5. Register the wrong knowledge point in the Ebbinghaus center:
+   - `错题集/ebbinghaus/queue.json` — append an item with
+     `id` (`科目-知识点`), `subject`, `file` (subject markdown path),
+     `firstLearned`, `reviews: []`, `dueDate` (tomorrow), `nextRound: 1`.
+   - `错题集/ebbinghaus/knowledge.json` — add the knowledge summary,
+     mnemonic, key points, and per-topic root causes.
+   - `错题集/ebbinghaus/questions.json` (or subject-specific file such as
+     `ds-questions.json`) — add round-1 questions (about 5) tagged
+     `round: 1` and the matching `itemId`.
+6. Run tests before finishing:
    - `node tests/quiz.test.mjs`
    - `node tests/wrong-book.test.mjs`
-5. Commit as a separate Git commit describing the quiz update.
+7. Commit as a separate Git commit describing the quiz update.
 
 ## Question JSON schema
 
@@ -59,6 +71,8 @@ Rules:
 - Wrong answers append to `localStorage.ky_wrong_log` and show 已记入错题集.
 - Final page shows total count and wrong question ids.
 - Every question must include analysis for learning.
+- Every wrong-question intake must produce: archived markdown + 5 quiz
+  questions + Ebbinghaus registration (queue/knowledge/round questions).
 
 ## Template
 
