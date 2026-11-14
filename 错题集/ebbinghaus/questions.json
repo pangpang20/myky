@@ -509,6 +509,91 @@
       },
       "answer": "B",
       "analysis": "跳数减少意味着经过的节点更少，存储转发与排队次数减少，总时延降低；链路速率与带宽不变。"
+    },
+    {
+      "id": "ds-r1-1001",
+      "itemId": "高等数学-点到坐标轴距离",
+      "round": 1,
+      "subject": "高等数学",
+      "topic": "到 x 轴距离",
+      "type": "single",
+      "question": "点 M(4,−3,5) 到 x 轴的距离是（　）。",
+      "options": {
+        "A": "√34",
+        "B": "√41",
+        "C": "5",
+        "D": "√50"
+      },
+      "answer": "A",
+      "analysis": "到 x 轴用 y²+z²=9+25=34，√34。"
+    },
+    {
+      "id": "ds-r1-1002",
+      "itemId": "高等数学-点到坐标轴距离",
+      "round": 1,
+      "subject": "高等数学",
+      "topic": "到 y 轴距离",
+      "type": "single",
+      "question": "点 M(4,−3,5) 到 y 轴的距离是（　）。",
+      "options": {
+        "A": "√34",
+        "B": "√41",
+        "C": "5",
+        "D": "√50"
+      },
+      "answer": "B",
+      "analysis": "到 y 轴用 x²+z²=16+25=41，√41。"
+    },
+    {
+      "id": "ds-r1-1003",
+      "itemId": "高等数学-点到坐标轴距离",
+      "round": 1,
+      "subject": "高等数学",
+      "topic": "到 z 轴距离",
+      "type": "single",
+      "question": "点 M(4,−3,5) 到 z 轴的距离是（　）。",
+      "options": {
+        "A": "√34",
+        "B": "√41",
+        "C": "5",
+        "D": "√50"
+      },
+      "answer": "C",
+      "analysis": "到 z 轴用 x²+y²=16+9=25，√25=5。"
+    },
+    {
+      "id": "ds-r1-1004",
+      "itemId": "高等数学-点到坐标轴距离",
+      "round": 1,
+      "subject": "高等数学",
+      "topic": "变式计算",
+      "type": "single",
+      "question": "点 P(2,1,−2) 到 y 轴的距离是（　）。",
+      "options": {
+        "A": "√5",
+        "B": "2√2",
+        "C": "3",
+        "D": "√8"
+      },
+      "answer": "B",
+      "analysis": "到 y 轴用 x²+z²=4+4=8，2√2。"
+    },
+    {
+      "id": "ds-r1-1005",
+      "itemId": "高等数学-点到坐标轴距离",
+      "round": 1,
+      "subject": "高等数学",
+      "topic": "公式记忆",
+      "type": "single",
+      "question": "点 M(a,b,c) 到 x 轴的距离公式是（　）。",
+      "options": {
+        "A": "|a|",
+        "B": "√(a²+b²)",
+        "C": "√(b²+c²)",
+        "D": "√(a²+c²)"
+      },
+      "answer": "C",
+      "analysis": "到 x 轴去掉 x 坐标，用 b²+c²。"
     }
   ]
 }

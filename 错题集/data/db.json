@@ -310,6 +310,17 @@
       "round": 1,
       "dueDate": "2026-11-15",
       "createdAt": "2026-11-14T21:38:29"
+    },
+    {
+      "id": "高等数学-点到坐标轴距离",
+      "subject": "高等数学",
+      "file": "高等数学/点到坐标轴距离错题.md",
+      "firstLearned": "2026-11-14",
+      "reviews": [],
+      "status": "learning",
+      "round": 1,
+      "dueDate": "2026-11-15",
+      "createdAt": "2026-11-14T22:55:29"
     }
   ],
   "answers": [

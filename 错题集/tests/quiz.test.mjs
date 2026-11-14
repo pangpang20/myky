@@ -30,7 +30,7 @@ check(Array.isArray(questions) && questions.length >= 5, 'at least 5 questions')
 check(questions.every(q => typeof q.itemId === 'string' && q.itemId.length > 0), 'each question must link to knowledge item')
 
 const ids = new Set()
-const subjects = new Set(['数据结构','计算机组成原理','操作系统','计算机网络'])
+const subjects = new Set(['数据结构','计算机组成原理','操作系统','计算机网络','高等数学'])
 for (const q of questions) {
   check(typeof q.id === 'string' && q.id.length > 0, 'question id required')
   check(!ids.has(q.id), `duplicate id ${q.id}`)
