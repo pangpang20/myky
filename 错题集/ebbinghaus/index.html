@@ -138,6 +138,8 @@ tbody tr:hover td{background:var(--bg3)}
 @media(max-width:1100px){.stats{grid-template-columns:repeat(3,1fr)}}
 .num.link{cursor:pointer}
 .num.link:hover{opacity:.75;text-decoration:underline;text-underline-offset:6px}
+#noteModal.modal-mask.open{display:block}
+#noteModal.modal-mask{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:50;padding:0;overflow:hidden}
 .modal-mask{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:50;align-items:flex-start;justify-content:center;padding:60px 16px}
 .modal-mask.open{display:flex}
 .modal{background:var(--bg2);border:1px solid var(--border);border-radius:14px;min-width:340px;max-width:520px;width:100%;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.35)}
@@ -149,7 +151,13 @@ tbody tr:hover td{background:var(--bg3)}
 .modal td .row-sub{font-size:11px;color:var(--muted2);margin-top:2px}
 .modal td.clickable{cursor:pointer}
 .modal td.clickable:hover{background:var(--bg3)}
-.note-body{padding:20px 24px;font-size:13.5px;line-height:1.8;color:var(--text)}
+.note-modal{position:absolute;left:0;top:0;max-width:none;width:760px;height:min(78vh,720px);min-width:320px;min-height:180px;display:flex;flex-direction:column;overflow:hidden}
+.note-resize{position:absolute;right:0;bottom:0;width:18px;height:18px;cursor:nwse-resize;touch-action:none;background:linear-gradient(135deg,transparent 46%,var(--muted2) 46%,var(--muted2) 58%,transparent 58%,transparent 74%,var(--muted2) 74%,var(--muted2) 86%,transparent 86%);opacity:.6;border-bottom-right-radius:12px}
+.note-resize:hover{opacity:1}
+.note-tools{display:flex;gap:6px;align-items:center;margin-right:10px}
+.note-tools button{border:1px solid var(--border);background:transparent;color:var(--muted);border-radius:6px;font-size:12px;padding:2px 8px;cursor:pointer;line-height:1.6}
+.note-tools button:hover{background:var(--bg3);color:var(--text)}
+.note-body{flex:1;overflow:auto;min-height:0;padding:20px 24px;font-size:13.5px;line-height:1.8;color:var(--text)}
 .note-body h1{font-size:19px;margin:18px 0 10px;color:var(--text)}
 .note-body h1:first-child{margin-top:0}
 .note-body h2{font-size:16px;margin:16px 0 8px;padding-bottom:4px;border-bottom:1px solid var(--border);color:var(--text)}
@@ -221,7 +229,7 @@ tbody tr:hover td{background:var(--bg3)}
     <div class="pager" id="pager"></div>
   </div>
 </div>
-<div class="modal-mask" id="noteModal" onclick="if(event.target===this)closeNote()"><div class="modal" style="max-width:720px"><h3><span id="noteTitle"></span><button onclick="closeNote()">✕</button></h3><div class="note-body" id="noteBody"></div></div></div>
+<div class="modal-mask" id="noteModal" onclick="if(event.target===this)closeNote()"><div class="modal note-modal" id="noteBox"><h3 id="noteDragBar" style="cursor:move;user-select:none;touch-action:none"><span id="noteTitle"></span><span class="note-tools"><button onclick="zoomNote(-0.1)" title="缩小">−</button><button onclick="zoomNote(0.1)" title="放大">＋</button><button onclick="resetNoteBox()" title="复位">复位</button></span><button onclick="closeNote()">✕</button></h3><div class="note-body" id="noteBody"></div><div class="note-resize" id="noteResize"></div></div></div>
 <div class="modal-mask" id="drillModal" onclick="if(event.target===this)closeDrill()"><div class="modal"><h3><span id="drillTitle"></span><button onclick="closeDrill()">✕</button></h3><div class="modal-body" id="drillBody"></div></div></div>
 <div id="quizView" style="display:none">
   <div class="wrap main-with-side">

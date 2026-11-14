@@ -123,7 +123,7 @@ async function openNote(itemId){
   document.getElementById('noteTitle').textContent='📄 '+item.id;
   const body=document.getElementById('noteBody');
   body.innerHTML='<div class="empty">加载中…</div>';
-  document.getElementById('noteModal').classList.add('open');
+  document.getElementById('noteModal').classList.add('open');openNoteHook();
   try{
     const r=await fetch('/api/note/'+item.file.split('/').map(encodeURIComponent).join('/'));
     if(!r.ok)throw new Error('HTTP '+r.status);
@@ -138,6 +138,93 @@ async function openNote(itemId){
 function closeNote(){
   document.getElementById('noteModal').classList.remove('open');
 }
+
+
+let noteLayout=null;
+function clampNotePos(x,y,w,h){
+  x=Math.max(-w+80,Math.min(x,window.innerWidth-80));
+  y=Math.max(0,Math.min(y,window.innerHeight-40));
+  return [x,y];
+}
+function applyNoteLayout(){
+  const box=document.getElementById('noteBox');
+  if(!box)return;
+  const scale=noteLayout?noteLayout.scale:1;
+  const w=Math.round((noteLayout?noteLayout.w:760)*scale);
+  const h=Math.round((noteLayout?noteLayout.h:Math.min(window.innerHeight*.78,720))*scale);
+  let x=noteLayout?noteLayout.x:(window.innerWidth-w)/2;
+  let y=noteLayout?noteLayout.y:48;
+  [x,y]=clampNotePos(x,y,w,h);
+  box.style.left=x+'px';box.style.top=y+'px';box.style.width=w+'px';box.style.height=h+'px';
+}
+function zoomNote(delta){
+  if(!noteLayout)captureNoteLayout();
+  noteLayout.scale=Math.min(2,Math.max(.5,noteLayout.scale+delta));
+  applyNoteLayout();
+}
+function resetNoteBox(){
+  noteLayout={x:null,y:null,w:760,h:Math.min(window.innerHeight*.78,720),scale:1};
+  applyNoteLayout();
+  noteLayout.x=(window.innerWidth-760)/2;noteLayout.y=48;
+  applyNoteLayout();
+}
+function captureNoteLayout(){
+  const box=document.getElementById('noteBox');
+  noteLayout={x:parseFloat(box.style.left)||((window.innerWidth-box.offsetWidth)/2),y:parseFloat(box.style.top)||48,w:760,h:Math.min(window.innerHeight*.78,720),scale:1};
+}
+function initNoteDragResize(){
+  const modal=document.getElementById('noteModal');
+  const box=document.getElementById('noteBox');
+  const bar=document.getElementById('noteDragBar');
+  const rz=document.getElementById('noteResize');
+  if(!modal||!box||!bar||bar.dataset.bound)return;
+  bar.dataset.bound='1';rz.dataset.bound='1';
+  let drag=null;
+  bar.addEventListener('pointerdown',e=>{
+    if(e.target.tagName==='BUTTON')return;
+    const r=box.getBoundingClientRect();
+    drag={type:'move',offX:e.clientX-r.left,offY:e.clientY-r.top,w:r.width,h:r.height};
+    captureNoteLayout();
+    bar.setPointerCapture(e.pointerId);
+    e.preventDefault();
+  });
+  bar.addEventListener('pointermove',e=>{
+    if(!drag)return;
+    noteLayout.x=e.clientX-drag.offX;noteLayout.y=e.clientY-drag.offY;
+    applyNoteLayout();
+  });
+  const endDrag=e=>{if(drag){drag=null;try{bar.releasePointerCapture(e.pointerId)}catch(err){}}};
+  bar.addEventListener('pointerup',endDrag);
+  bar.addEventListener('pointercancel',endDrag);
+  let rs=null;
+  rz.addEventListener('pointerdown',e=>{
+    const r=box.getBoundingClientRect();
+    rs={x:e.clientX,y:e.clientY,w:r.width,h:r.height};
+    captureNoteLayout();
+    rz.setPointerCapture(e.pointerId);
+    e.preventDefault();
+  });
+  rz.addEventListener('pointermove',e=>{
+    if(!rs)return;
+    noteLayout.w=Math.max(320,Math.min(rs.w+(e.clientX-rs.x),Math.round(window.innerWidth*.95)));
+    noteLayout.h=Math.max(180,Math.min(rs.h+(e.clientY-rs.y),Math.round(window.innerHeight*.95)));
+    applyNoteLayout();
+  });
+  const endRs=e=>{if(rs){rs=null;try{rz.releasePointerCapture(e.pointerId)}catch(err){}}};
+  rz.addEventListener('pointerup',endRs);
+  rz.addEventListener('pointercancel',endRs);
+  modal.addEventListener('wheel',e=>{
+    if(!(e.ctrlKey||e.metaKey))return;
+    e.preventDefault();
+    zoomNote(e.deltaY<0?.08:-.08);
+  },{passive:false});
+}
+function openNoteHook(){
+  if(!noteLayout)resetNoteBox();
+  initNoteDragResize();
+  applyNoteLayout();
+}
+
 
 function bindDrillClicks(){
   const body=document.getElementById('drillBody');
