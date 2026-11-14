@@ -116,10 +116,11 @@ function renderAll(){
   const t=today();
   const body=document.getElementById('allBody');
   body.innerHTML=slice.length?slice.map(i=>{
+    const qCount=QS.filter(q=>q.itemId===i.id).length;
     const due=i.status==='learning'&&i.dueDate<=t;
     const tag=i.status==='mastered'?'<span class="tag mastered">已掌握</span>':due?'<span class="tag due">今日到期</span>':'<span class="tag learning">学习中</span>';
-    return '<tr><td style="text-align:left;font-weight:600">'+esc(i.id)+'</td><td>'+esc(i.subject)+'</td><td>'+tag+'</td><td>第 '+i.round+' 轮</td><td>'+(i.status==='mastered'?'—':i.dueDate)+'</td><td>'+(i.reviews||[]).length+' 次</td><td><button class="btn ghost" onclick="resetItem(\''+i.id+'\')">重置</button></td></tr>';
-  }).join(''):'<tr><td colspan="7" class="empty">没有符合条件的数据</td></tr>';
+    return '<tr><td style="text-align:left;font-weight:600">'+esc(i.id)+'</td><td>'+esc(i.subject)+'</td><td>'+tag+'</td><td>'+qCount+' 题</td><td>第 '+i.round+' 轮</td><td>'+(i.status==='mastered'?'—':i.dueDate)+'</td><td>'+(i.reviews||[]).length+' 次</td><td><button class="btn ghost" onclick="resetItem(\''+i.id+'\')">重置</button></td></tr>';
+  }).join(''):'<tr><td colspan="8" class="empty">没有符合条件的数据</td></tr>';
   renderPager(total,tp);
 }
 function renderPager(total,tp){
