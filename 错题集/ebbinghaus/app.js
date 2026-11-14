@@ -474,8 +474,8 @@ function renderTrend(){
   out+='<text x="'+(PL+iw)+'" y="'+(PT+ih+46)+'" fill="'+labelC+'" font-size="11" text-anchor="end">'+(trendMode==="month"?"近 6 个月":"近 7 天")+" · "+(trendMode==="month"?"按月汇总":"按日汇总")+'</text>';
   ["ans","kp","q"].forEach((s,si)=>{
     const d=smoothPath(pts[s]);
-    for(let k=0;k<4;k++){
-      out+='<circle class="trend-runner" r="3" fill="'+COLORS[s]+'" opacity="0.85"><animateMotion dur="2.4s" begin="'+(si*0.3+k*0.6)+'s" repeatCount="indefinite" path="'+d+'"/></circle>';
+    for(let k=0;k<7;k++){
+      out+='<circle class="trend-runner" r="2.6" fill="'+COLORS[s]+'" opacity="0.8"><animateMotion dur="3.6s" begin="'+(si*0.3+k*(3.6/7).toFixed(3))+'s" repeatCount="indefinite" path="'+d+'"/></circle>';
     }
   });
   svg.innerHTML=out;
