@@ -448,6 +448,7 @@ function renderTrend(){
   const yOf=v=>PT+ih-(v/niceMax)*ih;
   let out='<defs>';
   out+='<linearGradient id="ansGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="rgba(37,99,235,.26)"/><stop offset="1" stop-color="rgba(37,99,235,0)"/></linearGradient>';
+  out+='<filter id="trendShadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="3" stdDeviation="3.5" flood-color="'+(dark?"#0b1220":"#334155")+'" flood-opacity="'+(dark?0.35:0.2)+'"/></filter>';
   out+='</defs>';
   for(let g=0;g<=4;g++){
     const v=niceMax*g/4,y=yOf(v);
@@ -458,7 +459,7 @@ function renderTrend(){
   ["ans","kp","q"].forEach(s=>{pts[s]=data.map((d,i)=>({x:xOf(i),y:clampY(yOf(d[s]),PT,PT+ih),v:d[s]}))});
   const areaOf=p=>smoothPath(p)+' L '+p[p.length-1].x+' '+(PT+ih)+' L '+p[0].x+' '+(PT+ih)+' Z';
   out+='<path d="'+areaOf(pts.ans)+'" fill="url(#ansGrad)" stroke="none"/>';
-  ["kp","q","ans"].forEach(s=>{out+='<path d="'+smoothPath(pts[s])+'" fill="none" stroke="'+COLORS[s]+'" stroke-width="2.4" stroke-linecap="round"'+(s==="kp"?"":s==="q"?" stroke-dasharray='7 5'":"")+'/>'});
+  ["kp","q","ans"].forEach(s=>{out+='<path d="'+smoothPath(pts[s])+'" fill="none" stroke="'+COLORS[s]+'" stroke-width="2.4" stroke-linecap="round" filter="url(#trendShadow)"'+(s==="kp"?"":s==="q"?" stroke-dasharray='7 5'":"")+'/>'});
   data.forEach((d,i)=>{
     const x=xOf(i);
     const lab=trendMode==="month"?(d.key.slice(0,4)+"年"+Number(d.key.slice(5))+"月"):d.key.slice(5).replace("-","/");

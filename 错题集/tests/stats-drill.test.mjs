@@ -35,6 +35,8 @@ check(!read('data/db.json').includes('"roundId": "t1"'), 'legacy t1 test answers
 check(app.includes('kp:sums[k]?sums[k].kp:0'), 'trend must include knowledge-point series')
 check(app.includes('q:sums[k]?sums[k].q:0'), 'trend must include question-count series')
 check(read('ebbinghaus/index.html').includes('新增知识点')&&read('ebbinghaus/index.html').includes('新增题数'), 'legend must label knowledge points and question counts')
+check(app.includes('filter id="trendShadow"'), 'trend curves must have drop-shadow filter')
+check(app.includes('filter="url(#trendShadow)"'), 'curve paths must reference the shadow filter')
 check(html.includes('trendSvg'), 'trend svg must exist')
 check(html.includes('按日')&&html.includes('按月'), 'trend must offer day/month toggle')
 check(html.includes('--cyan:#22d3ee'), 'cyan color must be defined in dark theme')
