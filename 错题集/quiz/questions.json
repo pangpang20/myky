@@ -1,6 +1,86 @@
 [
   {
     "subject": "数据结构",
+    "itemId": "数据结构-有序顺序表去重算法",
+    "id": "ds-od1",
+    "topic": "有序去重·复杂度",
+    "type": "single",
+    "question": "对长度为 n 的有序顺序表去重，最优算法的时间复杂度是（ ）。",
+    "options": {
+      "A": "O(1)",
+      "B": "O(log n)",
+      "C": "O(n)",
+      "D": "O(n²)"
+    },
+    "answer": "C",
+    "analysis": "双读写指针一次扫描，原地覆盖完成，时间 O(n)、空间 O(1)。"
+  },
+  {
+    "subject": "数据结构",
+    "itemId": "数据结构-有序顺序表去重算法",
+    "id": "ds-od2",
+    "topic": "有序去重·保留条件",
+    "type": "single",
+    "question": "去重算法中元素 data[i] 被保留的条件是（ ）。",
+    "options": {
+      "A": "data[i] != data[k-1]",
+      "B": "data[i] != data[i+1]",
+      "C": "data[i] == data[k-1]",
+      "D": "data[i] > data[k-1]"
+    },
+    "answer": "A",
+    "analysis": "与保留区最后一个值比较，保证 data[0..k-1] 严格递增。"
+  },
+  {
+    "subject": "数据结构",
+    "itemId": "数据结构-有序顺序表去重算法",
+    "id": "ds-od3",
+    "topic": "有序去重·k 与 i",
+    "type": "single",
+    "question": "去重过程中，写指针 k 与读指针 i 的关系始终满足（ ）。",
+    "options": {
+      "A": "k = i",
+      "B": "k ≤ i",
+      "C": "k ≥ i",
+      "D": "无固定关系"
+    },
+    "answer": "B",
+    "analysis": "k 只在新值时 +1，覆盖写入不会破坏未处理数据。"
+  },
+  {
+    "subject": "数据结构",
+    "itemId": "数据结构-有序顺序表去重算法",
+    "id": "ds-od4",
+    "topic": "有序去重·无序表",
+    "type": "single",
+    "question": "若顺序表无序，删除所有重复元素的最优时间复杂度是（ ）。",
+    "options": {
+      "A": "O(n)",
+      "B": "O(n log n)（先排序再去重）",
+      "C": "O(n²)",
+      "D": "O(n log² n)"
+    },
+    "answer": "B",
+    "analysis": "相邻比较只对有序表成立；先排序 O(n log n) 再 O(n) 去重。"
+  },
+  {
+    "subject": "数据结构",
+    "itemId": "数据结构-有序顺序表去重算法",
+    "id": "ds-od5",
+    "topic": "有序去重·变式",
+    "type": "single",
+    "question": "删除顺序表中所有值为 x 的元素（要求 O(n)、O(1)），保留条件是（ ）。",
+    "options": {
+      "A": "data[i] != data[k-1]",
+      "B": "data[i] != x",
+      "C": "data[i] == x",
+      "D": "data[i] > x"
+    },
+    "answer": "B",
+    "analysis": "按值过滤模板：k 记保留个数，条件不等于 x 时保留。"
+  },
+  {
+    "subject": "数据结构",
     "itemId": "数据结构-顺序表链表渐近对比",
     "id": "ds-sl1",
     "topic": "渐近对比·基础复现",
