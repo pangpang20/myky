@@ -28,4 +28,4 @@ h.createServer((req,res)=>{
     res.writeHead(200,{'Content-Type':mime,'Cache-Control':'no-store'});
     res.end(d);
   });
-}).listen(4317,()=>console.log('quiz server on 4317'));
+}).listen(4317,'0.0.0.0',()=>console.log('quiz server on 0.0.0.0:4317'));

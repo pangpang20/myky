@@ -466,9 +466,9 @@ function renderTrend(){
     out+='<text x="'+x+'" y="'+(PT+ih+24)+'" fill="'+labelC+'" font-size="11.5" text-anchor="middle">'+lab+'</text>';
     const entries=[{s:"ans",y:pts.ans[i].y,v:d.ans},{s:"kp",y:pts.kp[i].y,v:d.kp},{s:"q",y:pts.q[i].y,v:d.q}];
     entries.forEach(e=>{out+='<circle cx="'+x+'" cy="'+e.y+'" r="4" fill="var(--bg2)" stroke="'+COLORS[e.s]+'" stroke-width="2.2"/>'});
-    const order=[0,1,2].sort((a,b)=>entries[a].y-entries[b].y);
-    const offsets=[-11,20,33];
-    order.forEach((idx,rank)=>{const e=entries[idx];let ly=e.y+offsets[rank];if(ly>PT+ih-2)ly=e.y-12-rank*13;out+='<text x="'+x+'" y="'+ly+'" fill="'+COLORS[e.s]+'" font-size="11" font-weight="700" text-anchor="middle">'+e.v+'</text>'});
+    const order=[0,1,2].map(i=>({i,y:entries[i].y})).sort((a,b)=>b.y-a.y);
+    const placed=[];
+    order.forEach(o=>{const e=entries[o.i];let ly=e.y-12;while(placed.some(p=>Math.abs(p-ly)<13))ly-=14;placed.push(ly);out+='<text x="'+x+'" y="'+ly+'" fill="'+COLORS[e.s]+'" font-size="11" font-weight="700" text-anchor="middle">'+e.v+'</text>'});
   });
   out+='<line x1="'+PL+'" y1="'+(PT+ih)+'" x2="'+(PL+iw)+'" y2="'+(PT+ih)+'" stroke="'+axisC+'" stroke-width="1"/>';
   out+='<text x="'+(PL+iw)+'" y="'+(PT+ih+46)+'" fill="'+labelC+'" font-size="11" text-anchor="end">'+(trendMode==="month"?"近 6 个月":"近 7 天")+" · "+(trendMode==="month"?"按月汇总":"按日汇总")+'</text>';

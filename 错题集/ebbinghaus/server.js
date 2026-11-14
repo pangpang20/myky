@@ -112,4 +112,4 @@ const server = h.createServer((req, res) => {
   });
 });
 
-server.listen(4318, () => console.log('ebbinghaus server on 4318, db at', DB_FILE));
+server.listen(4318, '0.0.0.0', () => console.log('ebbinghaus server on 0.0.0.0:4318, db at', DB_FILE));
