@@ -9,6 +9,9 @@ function loadDB() {
 function saveDB(db) {
   f.writeFileSync(DB_FILE, JSON.stringify(db, null, 2), 'utf8');
 }
+function todayEast8() {
+  return new Date(Date.now() + 8 * 3600 * 1000).toISOString().slice(0, 10);
+}
 function addDays(dateStr, days) {
   const d = new Date(dateStr);
   d.setDate(d.getDate() + days);
@@ -43,7 +46,7 @@ const server = h.createServer((req, res) => {
         const { roundId, date } = JSON.parse(body);
         const db = loadDB();
         const today = (db.answers || []).filter(a => a.roundId === roundId);
-        const todayStr = date || new Date().toISOString().slice(0, 10);
+        const todayStr = date || todayEast8();
         const itemIds = [...new Set(today.map(a => a.itemId))];
         itemIds.forEach(id => {
           const it = db.items.find(x => x.id === id);
@@ -88,7 +91,7 @@ const server = h.createServer((req, res) => {
       it.status = 'learning';
       it.round = 1;
       it.reviews = [];
-      it.dueDate = addDays(new Date().toISOString().slice(0, 10), 1);
+      it.dueDate = addDays(todayEast8(), 1);
       saveDB(db);
     }
     res.writeHead(200, { 'Content-Type': 'application/json' });

@@ -59,11 +59,11 @@ async function init() {
 }
 
 function report(q, sel, ok) {
-  answered.push({ id: q.id, selected: sel, answer: q.answer, correct: ok, at: new Date().toISOString() });
+  answered.push({ id: q.id, selected: sel, answer: q.answer, correct: ok, at: new Date(Date.now()+8*3600*1000).toISOString().replace('Z','+08:00') });
   fetch('/api/answer', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ roundId, id: q.id, subject: q.subject, topic: q.topic, question: q.question, options: q.options, selected: sel, answer: q.answer, correct: ok, at: new Date().toISOString() })
+    body: JSON.stringify({ roundId, id: q.id, subject: q.subject, topic: q.topic, question: q.question, options: q.options, selected: sel, answer: q.answer, correct: ok, at: new Date(Date.now()+8*3600*1000).toISOString().replace('Z','+08:00') })
   }).catch(() => {});
 }
 

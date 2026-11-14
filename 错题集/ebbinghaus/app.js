@@ -1,6 +1,8 @@
 'use strict';
 let DB=null,QS=[],KB={},page=1,pageSize=10,queue=[],qi=0,roundId='',forceMode=false,results=[];
 
+function nowEast8Iso(){const d=new Date(Date.now()+8*3600*1000);return d.toISOString().replace('Z','+08:00')}
+
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
 
 function today(){const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
@@ -251,7 +253,7 @@ function choose(k){
   const ansEl=document.querySelector('#opts .opt[data-k="'+q.answer+'"]');
   if(ansEl)ansEl.classList.add('correct');
   if(!ok&&picked)picked.classList.add('wrong');
-  fetch('/api/answer',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({roundId:roundId,itemId:q.itemId,id:q.id,topic:q.topic,selected:k,answer:q.answer,correct:ok,at:new Date().toISOString()})});
+  fetch('/api/answer',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({roundId:roundId,itemId:q.itemId,id:q.id,topic:q.topic,selected:k,answer:q.answer,correct:ok,at:nowEast8Iso()})});
   const ana=document.getElementById('ana');
   const kb=KB[q.itemId]||{};
   const rootCause=(kb.rootCauses||{})[q.topic]||'暂无针对此题的根因分析。';

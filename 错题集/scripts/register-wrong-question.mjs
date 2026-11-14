@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import { readFileSync, writeFileSync } from 'node:fs'
+import { dateEast8, isoEast8 } from '../lib/east8-time.mjs'
 
 const usage = `Usage: node register-wrong-question.mjs <payload.json>
 Payload schema:
@@ -23,8 +24,8 @@ const root = new URL('..', import.meta.url).pathname.replace(/^\/(.*)\/$/, '$1')
 const read = (rel) => JSON.parse(readFileSync(new URL(rel, import.meta.url), 'utf8'))
 const write = (rel, data) => writeFileSync(new URL(rel, import.meta.url), JSON.stringify(data, null, 2) + '\n', 'utf8')
 
-const today = new Date().toISOString().slice(0, 10)
-const due = new Date(Date.now() + 86400000).toISOString().slice(0, 10)
+const today = dateEast8()
+const due = dateEast8(new Date(Date.now() + 86400000))
 
 // 1. Ebbinghaus db.json (4318 source of truth)
 const db = read('../data/db.json')
@@ -32,7 +33,7 @@ if (!db.items.some(x => x.id === p.itemId)) {
   db.items.push({
     id: p.itemId, subject: p.subject, file: p.file,
     firstLearned: today, reviews: [], status: 'learning',
-    round: 1, dueDate: due, createdAt: new Date().toISOString().slice(0, 19)
+    round: 1, dueDate: due, createdAt: isoEast8()
   })
   write('../data/db.json', db)
 }
