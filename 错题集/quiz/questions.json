@@ -78,5 +78,85 @@
     "answer": "C",
     "analysis": "H(n) ≈ ln n + 0.577，量级 O(log n)。这是「j += i」型循环复杂度的数学基础——筛法类算法都依赖这一结论。",
     "itemId": "数据结构-调和级数步长循环"
+  },
+  {
+    "id": "ds-n1",
+    "subject": "数据结构",
+    "topic": "三层嵌套求和·基础复现",
+    "type": "single",
+    "question": "设 n 为正整数。下列程序段的时间复杂度是（ ）。\n\n```c\nfor (i = 1; i <= n; i++)\n    for (j = 1; j <= i; j++)\n        for (k = 1; k <= j; k++)\n            count++;\n```",
+    "options": {
+      "A": "O(n)",
+      "B": "O(n²)",
+      "C": "O(n log₂ n)",
+      "D": "O(n³)"
+    },
+    "answer": "D",
+    "analysis": "总次数 Σ₁ⁿ Σ₁ⁱ Σ₁ʲ 1 = Σ₁ⁿ i(i+1)/2 ≈ n³/6，量级 O(n³)。关键：内层上界依赖外层变量，须逐层求和，最高阶项 i³/6 主导。",
+    "itemId": "数据结构-三层嵌套求和循环"
+  },
+  {
+    "id": "ds-n2",
+    "subject": "数据结构",
+    "topic": "两层依赖求和·对照",
+    "type": "single",
+    "question": "下列程序段的时间复杂度是（ ）。\n\n```c\nfor (i = 1; i <= n; i++)\n    for (j = 1; j <= i; j++) count++;\n```",
+    "options": {
+      "A": "O(n)",
+      "B": "O(n²)",
+      "C": "O(n log n)",
+      "D": "O(n³)"
+    },
+    "answer": "B",
+    "analysis": "内层执行 i 次，Σi = n(n+1)/2 ≈ n²/2，量级 O(n²)。与三层版本对比：链式依赖求和每多一层，阶数升一阶。",
+    "itemId": "数据结构-三层嵌套求和循环"
+  },
+  {
+    "id": "ds-n3",
+    "subject": "数据结构",
+    "topic": "最内层独立·变式",
+    "type": "single",
+    "question": "下列程序段的时间复杂度是（ ）。\n\n```c\nfor (i = 1; i <= n; i++)\n    for (j = 1; j <= i; j++)\n        for (k = 1; k <= n; k++) count++;\n```",
+    "options": {
+      "A": "O(n)",
+      "B": "O(n²)",
+      "C": "O(n³)",
+      "D": "O(n⁴)"
+    },
+    "answer": "C",
+    "analysis": "最内层边界独立于 i、j：ΣΣ n = n·(n²/2) ≈ n³/2，量级 O(n³)。",
+    "itemId": "数据结构-三层嵌套求和循环"
+  },
+  {
+    "id": "ds-n4",
+    "subject": "数据结构",
+    "topic": "内层平方依赖·变式",
+    "type": "single",
+    "question": "下列程序段的时间复杂度是（ ）。\n\n```c\nfor (i = 1; i <= n; i++)\n    for (j = 1; j <= i*i; j++) count++;\n```",
+    "options": {
+      "A": "O(n)",
+      "B": "O(n²)",
+      "C": "O(n³)",
+      "D": "O(n⁴)"
+    },
+    "answer": "C",
+    "analysis": "内层执行 i² 次，Σi² = n(n+1)(2n+1)/6 ≈ n³/3，量级 O(n³)。内层次数是外层变量的多项式时，求和后阶数升一阶。",
+    "itemId": "数据结构-三层嵌套求和循环"
+  },
+  {
+    "id": "ds-n5",
+    "subject": "数据结构",
+    "topic": "四重链式依赖·变式",
+    "type": "single",
+    "question": "下列程序段的时间复杂度是（ ）。\n\n```c\nfor (i = 1; i <= n; i++)\n    for (j = 1; j <= i; j++)\n        for (k = 1; k <= j; k++)\n            for (l = 1; l <= k; l++) count++;\n```",
+    "options": {
+      "A": "O(n³)",
+      "B": "O(n⁴)",
+      "C": "O(n⁵)",
+      "D": "O(n⁶)"
+    },
+    "answer": "B",
+    "analysis": "四重链式求和 1 ≤ l ≤ k ≤ j ≤ i ≤ n 的组合数为 C(n+3,4) ≈ n⁴/24，量级 O(n⁴)。链式依赖每加一层，阶数升一阶。",
+    "itemId": "数据结构-三层嵌套求和循环"
   }
 ]
