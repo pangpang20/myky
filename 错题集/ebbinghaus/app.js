@@ -393,7 +393,13 @@ function trendBuckets(){
   const perDay={};
   (DB.answers||[]).forEach(a=>{const d=String(a.at||'').slice(0,10);if(!d)return;perDay[d]=(perDay[d]||0)+1});
   const addDay={};
-  DB.items.forEach(i=>{const d=String(i.createdAt||i.firstLearned||'').slice(0,10);if(!d)return;addDay[d]=(addDay[d]||0)+1});
+  const qAddDay={};
+  DB.items.forEach(i=>{
+    const d=String(i.createdAt||i.firstLearned||'').slice(0,10);
+    if(!d)return;
+    addDay[d]=(addDay[d]||0)+1;
+    qAddDay[d]=(qAddDay[d]||0)+QS.filter(q=>q.itemId===i.id).length;
+  });
   const keys=[];
   if(trendMode==='month'){
     const todayStr=east8TodayStr();
@@ -405,10 +411,11 @@ function trendBuckets(){
   }
   const keyOf=d=>trendMode==='month'?d.slice(0,7):d;
   const sums={};
-  const bump=(d,f)=>{const k=keyOf(d);const b=sums[k]||(sums[k]={ans:0,add:0});b[f]+=1};
+  const bump=(d,f)=>{const k=keyOf(d);const b=sums[k]||(sums[k]={ans:0,kp:0,q:0});b[f]+=1};
   Object.keys(perDay).forEach(d=>{for(let i=0;i<perDay[d];i++)bump(d,"ans")});
-  Object.keys(addDay).forEach(d=>{for(let i=0;i<addDay[d];i++)bump(d,"add")});
-  return keys.map(k=>({key:k,ans:sums[k]?sums[k].ans:0,add:sums[k]?sums[k].add:0}));
+  Object.keys(addDay).forEach(d=>{for(let i=0;i<addDay[d];i++)bump(d,"kp")});
+  Object.keys(qAddDay).forEach(d=>{for(let i=0;i<qAddDay[d];i++)bump(d,"q")});
+  return keys.map(k=>({key:k,ans:sums[k]?sums[k].ans:0,kp:sums[k]?sums[k].kp:0,q:sums[k]?sums[k].q:0}));
 }
 function clampY(y,pt,pb){return Math.max(pt,Math.min(pb,y))}
 function smoothPath(pts){
@@ -433,39 +440,34 @@ function renderTrend(){
   const labelC=dark?"#94a3b8":"#64748b";
   const axisC=dark?"#475569":"#cbd5e1";
   if(!data.length){svg.innerHTML='<text x="'+(W/2)+'" y="'+(H/2)+'" fill="'+labelC+'" font-size="14" text-anchor="middle">暂无数据</text>';return}
-  const maxV=Math.max(4,...data.map(d=>Math.max(d.ans,d.add)));
+  const COLORS={ans:"#2563eb",kp:"#16a34a",q:"#f59e0b"};
+  const maxV=Math.max(4,...data.map(d=>Math.max(d.ans,d.kp,d.q)));
   const step=Math.pow(10,Math.floor(Math.log10(maxV)));
   const niceMax=Math.max(step,Math.ceil(maxV/step)*step);
   const xOf=i=>PL+(data.length===1?iw/2:i*(iw/(data.length-1)));
   const yOf=v=>PT+ih-(v/niceMax)*ih;
   let out='<defs>';
-  out+='<linearGradient id="ansGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="rgba(37,99,235,.30)"/><stop offset="1" stop-color="rgba(37,99,235,0)"/></linearGradient>';
-  out+='<linearGradient id="addGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="rgba(22,163,74,.22)"/><stop offset="1" stop-color="rgba(22,163,74,0)"/></linearGradient>';
+  out+='<linearGradient id="ansGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="rgba(37,99,235,.26)"/><stop offset="1" stop-color="rgba(37,99,235,0)"/></linearGradient>';
   out+='</defs>';
   for(let g=0;g<=4;g++){
     const v=niceMax*g/4,y=yOf(v);
     out+='<line x1="'+PL+'" y1="'+y+'" x2="'+(PL+iw)+'" y2="'+y+'" stroke="'+grid+'" stroke-width="1"/>';
     out+='<text x="'+(PL-12)+'" y="'+(y+4)+'" fill="'+labelC+'" font-size="11" text-anchor="end">'+(Math.round(v*10)/10)+'</text>';
   }
-  const ansPts=data.map((d,i)=>({x:xOf(i),y:clampY(yOf(d.ans),PT,PT+ih),v:d.ans}));
-  const addPts=data.map((d,i)=>({x:xOf(i),y:clampY(yOf(d.add),PT,PT+ih),v:d.add}));
-  const areaOf=pts=>smoothPath(pts)+' L '+pts[pts.length-1].x+' '+(PT+ih)+' L '+pts[0].x+' '+(PT+ih)+' Z';
-  out+='<path d="'+areaOf(ansPts)+'" fill="url(#ansGrad)" stroke="none"/>';
-  out+='<path d="'+areaOf(addPts)+'" fill="url(#addGrad)" stroke="none"/>';
-  out+='<path d="'+smoothPath(ansPts)+'" fill="none" stroke="#2563eb" stroke-width="2.6" stroke-linecap="round"/>';
-  out+='<path d="'+smoothPath(addPts)+'" fill="none" stroke="#16a34a" stroke-width="2.6" stroke-linecap="round" stroke-dasharray="7 5"/>';
-  const ansY={},addY={};
-  ansPts.forEach((p,i)=>ansY[i]=p.y);
-  addPts.forEach((p,i)=>addY[i]=p.y);
+  const pts={ans:[],kp:[],q:[]};
+  ["ans","kp","q"].forEach(s=>{pts[s]=data.map((d,i)=>({x:xOf(i),y:clampY(yOf(d[s]),PT,PT+ih),v:d[s]}))});
+  const areaOf=p=>smoothPath(p)+' L '+p[p.length-1].x+' '+(PT+ih)+' L '+p[0].x+' '+(PT+ih)+' Z';
+  out+='<path d="'+areaOf(pts.ans)+'" fill="url(#ansGrad)" stroke="none"/>';
+  ["kp","q","ans"].forEach(s=>{out+='<path d="'+smoothPath(pts[s])+'" fill="none" stroke="'+COLORS[s]+'" stroke-width="2.4" stroke-linecap="round"'+(s==="kp"?"":s==="q"?" stroke-dasharray='7 5'":"")+'/>'});
   data.forEach((d,i)=>{
     const x=xOf(i);
     const lab=trendMode==="month"?(d.key.slice(0,4)+"年"+Number(d.key.slice(5))+"月"):d.key.slice(5).replace("-","/");
     out+='<text x="'+x+'" y="'+(PT+ih+24)+'" fill="'+labelC+'" font-size="11.5" text-anchor="middle">'+lab+'</text>';
-    out+='<circle cx="'+x+'" cy="'+ansY[i]+'" r="4.2" fill="var(--bg2)" stroke="#2563eb" stroke-width="2.2"/>';
-    out+='<circle cx="'+x+'" cy="'+addY[i]+'" r="4.2" fill="var(--bg2)" stroke="#16a34a" stroke-width="2.2"/>';
-    const aAbove=ansY[i]>=addY[i];
-    out+='<text x="'+x+'" y="'+(aAbove?ansY[i]-11:ansY[i]+19)+'" fill="#2563eb" font-size="11.5" font-weight="700" text-anchor="middle">'+d.ans+'</text>';
-    out+='<text x="'+x+'" y="'+(aAbove?addY[i]+19:addY[i]-11)+'" fill="#16a34a" font-size="11.5" font-weight="700" text-anchor="middle">'+d.add+'</text>';
+    const entries=[{s:"ans",y:pts.ans[i].y,v:d.ans},{s:"kp",y:pts.kp[i].y,v:d.kp},{s:"q",y:pts.q[i].y,v:d.q}];
+    entries.forEach(e=>{out+='<circle cx="'+x+'" cy="'+e.y+'" r="4" fill="var(--bg2)" stroke="'+COLORS[e.s]+'" stroke-width="2.2"/>'});
+    const order=[0,1,2].sort((a,b)=>entries[a].y-entries[b].y);
+    const offsets=[-11,20,33];
+    order.forEach((idx,rank)=>{const e=entries[idx];out+='<text x="'+x+'" y="'+(e.y+offsets[rank])+'" fill="'+COLORS[e.s]+'" font-size="11" font-weight="700" text-anchor="middle">'+e.v+'</text>'});
   });
   out+='<line x1="'+PL+'" y1="'+(PT+ih)+'" x2="'+(PL+iw)+'" y2="'+(PT+ih)+'" stroke="'+axisC+'" stroke-width="1"/>';
   out+='<text x="'+(PL+iw)+'" y="'+(PT+ih+46)+'" fill="'+labelC+'" font-size="11" text-anchor="end">'+(trendMode==="month"?"近 6 个月":"近 7 天")+" · "+(trendMode==="month"?"按月汇总":"按日汇总")+'</text>';
