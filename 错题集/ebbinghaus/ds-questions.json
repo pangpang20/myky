@@ -560,6 +560,86 @@
       },
       "answer": "C",
       "analysis": "H(n) ≈ ln n + γ，量级 O(log n)。"
+    },
+    {
+      "id": "ds-r1-1001",
+      "itemId": "数据结构-三层嵌套求和循环",
+      "round": 1,
+      "subject": "数据结构",
+      "topic": "三层·基础·变式1",
+      "question": "设 n 为正整数。下列程序段的时间复杂度是（ ）。\n\n```c\nfor (i = 1; i <= n; i++)\n    for (j = 1; j <= i; j++)\n        for (k = 1; k <= j; k++)\n            count++;\n```",
+      "options": {
+        "A": "O(n)",
+        "B": "O(n²)",
+        "C": "O(n log₂ n)",
+        "D": "O(n³)"
+      },
+      "answer": "D",
+      "analysis": "Σ i(i+1)/2 ≈ n³/6，量级 O(n³)。代 n=3 验证：1+3+6=10 ≈ 3³/6。"
+    },
+    {
+      "id": "ds-r1-1002",
+      "itemId": "数据结构-三层嵌套求和循环",
+      "round": 1,
+      "subject": "数据结构",
+      "topic": "三层·两层对照·变式2",
+      "question": "下列程序段的时间复杂度是（ ）。\n\n```c\nfor (i = 1; i <= n; i++)\n    for (j = 1; j <= i; j++) count++;\n```",
+      "options": {
+        "A": "O(n)",
+        "B": "O(n²)",
+        "C": "O(n log n)",
+        "D": "O(n³)"
+      },
+      "answer": "B",
+      "analysis": "Σi = n(n+1)/2 ≈ n²/2。链式依赖两层 O(n²)，三层才升到 O(n³)。"
+    },
+    {
+      "id": "ds-r1-1003",
+      "itemId": "数据结构-三层嵌套求和循环",
+      "round": 1,
+      "subject": "数据结构",
+      "topic": "三层·最内层独立·变式3",
+      "question": "下列程序段的时间复杂度是（ ）。\n\n```c\nfor (i = 1; i <= n; i++)\n    for (j = 1; j <= i; j++)\n        for (k = 1; k <= n; k++) count++;\n```",
+      "options": {
+        "A": "O(n)",
+        "B": "O(n²)",
+        "C": "O(n³)",
+        "D": "O(n⁴)"
+      },
+      "answer": "C",
+      "analysis": "最内层边界独立：ΣΣ n = n·(n²/2) ≈ n³/2，仍 O(n³)。"
+    },
+    {
+      "id": "ds-r1-1004",
+      "itemId": "数据结构-三层嵌套求和循环",
+      "round": 1,
+      "subject": "数据结构",
+      "topic": "三层·内层平方依赖·变式4",
+      "question": "下列程序段的时间复杂度是（ ）。\n\n```c\nfor (i = 1; i <= n; i++)\n    for (j = 1; j <= i*i; j++) count++;\n```",
+      "options": {
+        "A": "O(n)",
+        "B": "O(n²)",
+        "C": "O(n³)",
+        "D": "O(n⁴)"
+      },
+      "answer": "C",
+      "analysis": "内层次数 i²，Σi² ≈ n³/3，量级 O(n³)。"
+    },
+    {
+      "id": "ds-r1-1005",
+      "itemId": "数据结构-三层嵌套求和循环",
+      "round": 1,
+      "subject": "数据结构",
+      "topic": "三层·四重链式·变式5",
+      "question": "下列程序段的时间复杂度是（ ）。\n\n```c\nfor (i = 1; i <= n; i++)\n    for (j = 1; j <= i; j++)\n        for (k = 1; k <= j; k++)\n            for (l = 1; l <= k; l++) count++;\n```",
+      "options": {
+        "A": "O(n³)",
+        "B": "O(n⁴)",
+        "C": "O(n⁵)",
+        "D": "O(n⁶)"
+      },
+      "answer": "B",
+      "analysis": "四重链式求和 ≈ C(n+3,4) ≈ n⁴/24，量级 O(n⁴)。"
     }
   ]
 }

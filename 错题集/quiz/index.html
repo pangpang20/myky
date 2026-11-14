@@ -120,18 +120,32 @@ function findKnowledgeEntry(q) {
   return null;
 }
 
-function renderStudy() {
+function isCorrect(q, sel) {
+  if (q.type === 'multi') {
+    return Array.isArray(sel) && sel.length === q.answer.length && q.answer.every(a => sel.includes(a));
+  }
+  return sel === q.answer;
+}
+
+function render() {
+  const entry = findKnowledgeEntry(questions[idx]);
+  if (entry && !answered.some(a => a.id === questions[idx].id)) {
+    renderStudy(entry);
+    return;
+  }
+  renderQuiz();
+}
+
+function renderStudy(entry) {
   const card = document.getElementById("quizCard");
-  const q = questions[0];
-  const entry = findKnowledgeEntry(q);
-  if (!entry) { studyStarted = true; render(); return; }
+  const q = questions[idx];
   const title = Object.keys(knowledgeBase).find(key => knowledgeBase[key] === entry) || "本组错题";
   const causes = entry.rootCauses || {};
   const relatedCause = Object.entries(causes).find(([key]) => q.topic.includes(key) || key.includes(q.topic));
   const causeList = relatedCause ? [relatedCause] : Object.entries(causes);
   card.innerHTML = [
     "<div class=\"learn-card\">",
-    "<h2>📚 答题前强化学习</h2>",
+    "<h2>📚 答题前强化学习 · 第 " + (idx + 1) + " 题</h2>",
     "<h3>知识点：" + title + "</h3>",
     "<h3>根因分析</h3>",
     causeList.map(([name, value]) => "<p><b>" + name + "：</b>" + renderQuestion(value) + "</p>").join(""),
@@ -143,20 +157,11 @@ function renderStudy() {
     "<button class=\"btn\" id=\"startQuizBtn\">我已阅读，开始答题</button>",
     "</div>"
   ].join("");
-  card.querySelector("#startQuizBtn").onclick = () => {
-    studyStarted = true;
-    render();
-  };
+  card.querySelector("#startQuizBtn").onclick = () => renderQuiz();
+  if(window.renderMathInElement)renderMathInElement(card,{delimiters:[{left:'$',right:'$',display:false}],throwOnError:false});
 }
 
-function isCorrect(q, sel) {
-  if (q.type === 'multi') {
-    return Array.isArray(sel) && sel.length === q.answer.length && q.answer.every(a => sel.includes(a));
-  }
-  return sel === q.answer;
-}
-
-function render() {
+function renderQuiz() {
   const card = document.getElementById('quizCard');
   const log = document.getElementById('log');
   log.textContent = '';
