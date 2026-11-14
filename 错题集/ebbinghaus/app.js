@@ -203,7 +203,7 @@ function renderQ(){
     '<div class="nav-bar" id="navWrap"></div>'+
     '<div class="analysis" id="ana"></div>';
   renderNavBar();
-  
+  renderSide();
 }
 const FENCE='```';
 function toMath(tex){
@@ -228,14 +228,15 @@ function renderQuestion(text){
   const parts=String(text).split(FENCE);
   let out='';
   parts.forEach((part,i)=>{
+    const seg0=part.replace(/\\n/g,'\n');
     if(i%2===0){
-      let seg=esc(part).replace(/\*\*(.+?)\*\*/g,'<b>$1</b>');
-      seg=seg.replace(/O\(([^)]+)\)/g,function(m,inner){return katexO(inner);});
+      let seg=esc(seg0).replace(/\*\*(.+?)\*\*/g,'<b>$1</b>').replace(/\n/g,'<br>');
+      seg=seg.replace(/O\(([^)<]+)\)/g,function(m,inner){return katexO(inner);});
       out+=seg;
     }
     else{
-      const nl=part.replace(/^\n/,'').replace(/\n$/,'');
-      out+='<pre><code>'+esc(nl)+'</code></pre>';
+      const code=seg0.replace(/^\n/,'').replace(/\n$/,'').replace(/^\s*c\n/,'');
+      out+='<pre><code>'+esc(code)+'</code></pre>';
     }
   });
   return out;

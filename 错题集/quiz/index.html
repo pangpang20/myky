@@ -70,7 +70,7 @@ function toMathQuiz(tex){
 }
 function katexO(inner){
   try{
-    return katex.renderToString('O(' + toMathQuiz(inner) + ')',{throwOnError:false,output:'html'};
+    return katex.renderToString('O(' + toMathQuiz(inner) + ')',{throwOnError:false,output:'html'});
   }catch(e){
     return 'O(' + inner + ')';
   }
