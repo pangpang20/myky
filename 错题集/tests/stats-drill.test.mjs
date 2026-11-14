@@ -39,7 +39,7 @@ check(app.includes('filter id="trendShadow"'), 'trend curves must have drop-shad
 check(app.includes('filter="url(#trendShadow)"'), 'curve paths must reference the shadow filter')
 check(!app.includes("stroke-dasharray='7 5'"), 'all trend lines must be solid')
 check(app.includes('animateMotion'), 'trend must animate runner dots along each line')
-check(/for\\(let k=0;k<7;k\\+\\+\\)/.test(app), 'each line must have 7 runner dots')
+check(app.includes('for(let k=0;k<7;k++)'), 'each line must have 7 runner dots')
 check(app.includes('dur="3.6s"'), 'runner animation must run on 3.6s loop')
 check(app.includes('class="trend-runner"'), 'runner dots must use trend-runner class')
 check(html.includes('trendSvg'), 'trend svg must exist')
