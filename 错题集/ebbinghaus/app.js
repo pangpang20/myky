@@ -219,7 +219,7 @@ function toMath(tex){
 }
 function katexO(inner){
   try{
-    return katex.renderToString('O(' + toMath(inner) + ')',{throwOnError:false});
+    return katex.renderToString('O(' + toMath(inner) + ')',{throwOnError:false,output:'html'};
   }catch(e){
     return 'O(' + inner + ')';
   }
