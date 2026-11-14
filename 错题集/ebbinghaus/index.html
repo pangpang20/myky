@@ -96,7 +96,13 @@ tbody tr:hover td{background:var(--bg3)}
 .side-status.wrong{background:rgba(248,113,113,.2);border-color:var(--red);color:var(--red)}
 .side-title{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .main-with-side{margin-right:230px}
-.btn-next{margin-top:18px;padding:11px 24px;border-radius:8px;border:none;background:var(--blue);color:#fff;cursor:pointer;font-size:14px;font-weight:700}
+.nav-bar{display:flex;gap:12px;margin:18px 0;justify-content:space-between}
+.nav-bar .btn{flex:1;padding:11px 0;font-size:14px;font-weight:700;border-radius:9px;cursor:pointer;transition:.15s}
+.nav-bar .btn-prev{background:var(--bg3);color:var(--text);border:1px solid var(--border)}
+.nav-bar .btn-prev:hover{border-color:var(--blue);color:var(--blue)}
+.nav-bar .btn-next2{background:var(--blue);color:#fff;border:none}
+.nav-bar .btn-next2:hover{background:#3b82f6;transform:translateY(-1px)}
+.nav-bar .btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
 .q{font-size:16px;font-weight:600;margin-bottom:16px;line-height:1.75}
 .q pre{background:var(--bg3);color:var(--blue);border-radius:8px;padding:14px 16px;margin:12px 0;overflow-x:auto;font-family:Consolas,Menlo,monospace;font-size:13px;line-height:1.65;font-weight:400;border:1px solid var(--border)}
 .q code{font-family:Consolas,Menlo,monospace;background:rgba(96,165,250,.12);padding:2px 6px;border-radius:4px}

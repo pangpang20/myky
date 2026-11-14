@@ -191,8 +191,10 @@ function renderQ(){
   card.innerHTML='<div class="meta">第 '+(qi+1)+' / '+queue.length+' 题 · '+esc(q.subject)+' · '+esc(q.topic)+' · 单选</div>'+
     '<div class="q">'+renderQuestion(q.question)+'</div>'+
     '<div id="opts">'+Object.keys(q.options).map(k=>'<div class="opt" data-k="'+k+'" onclick="choose(\''+k+'\')"><span class="badge">'+k+'</span>'+renderQuestion(q.options[k])+'</div>').join('')+'</div>'+
-    '<div class="analysis" id="ana"></div><div id="navWrap"></div>';
-  document.querySelectorAll('.side-item').forEach((el,idx)=>el.classList.toggle('active',idx===qi));
+    '<div class="nav-bar" id="navWrap"></div>'+
+    '<div class="analysis" id="ana"></div>';
+  renderNavBar();
+  
 }
 const FENCE='```';
 function renderQuestion(text){
@@ -226,9 +228,14 @@ function choose(k){
   ana.style.display='block';
   results[qi]={selected:k,correct:ok};
   renderSide();
+  renderNavBar();
+}
+function renderNavBar(){
   const nw=document.getElementById('navWrap');
-  nw.innerHTML=(qi>0?'<button class="btn ghost" onclick="prevQ()">← 上一题</button> ':'')+
-    '<button class="btn-next" onclick="nextQ()">'+(qi===queue.length-1?'完成本轮 →':'下一题 →')+'</button>';
+  if(!nw)return;
+  nw.innerHTML=
+    '<button class="btn btn-prev" onclick="prevQ()"'+(qi===0?' disabled':'')+'>← 上一题</button>'+
+    '<button class="btn btn-next2" onclick="nextQ()"'+(qi===queue.length-1?' disabled':'')+'>'+(qi===queue.length-1?'完成本轮':'下一题 →')+'</button>';
 }
 function nextQ(){if(qi<queue.length-1){qi++;renderQ()}else{finishRound()}}
 function prevQ(){if(qi>0){qi--;renderQ()}}
@@ -243,8 +250,9 @@ function renderSide(){
 function jumpTo(i){qi=i;renderQ()}
 document.addEventListener('keydown',e=>{
   if(document.getElementById('quizView').style.display==='none')return;
-  const ana=document.getElementById('ana');
-  if((e.key==='ArrowRight'||e.key===' ')&&ana&&ana.style.display==='block'){e.preventDefault();nextQ()}
+  if(e.key==='ArrowRight'&&qi<queue.length-1){e.preventDefault();nextQ()}
+  if(e.key==='ArrowLeft'&&qi>0){e.preventDefault();prevQ()}
+  if(e.key===' '){const ana=document.getElementById('ana');if(ana&&ana.style.display==='block'){e.preventDefault();nextQ()}}
 });
 async function finishRound(){
   const r=await fetch('/api/finish',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({roundId:roundId,date:today()})});
