@@ -28,6 +28,13 @@ function toggleTheme(){
   updateThemeBtn();renderCurve();
 }
 
+function fmtTs(v){
+  if(!v)return '—';
+  const d=new Date(v);
+  if(isNaN(d))return String(v);
+  return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')+' '+String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');
+}
+
 function dueItems(){const t=today();return DB.items.filter(i=>i.status==='learning'&&i.dueDate<=t)}
 function renderStats(){
   const t=today();
@@ -94,7 +101,7 @@ function filteredItems(){
   const st=document.getElementById('fStatus').value;
   const rev=parseInt(document.getElementById('fReviews').value)||0;
   const t=today();
-  return DB.items.filter(i=>{
+  const list=DB.items.filter(i=>{
     if(kw&&!i.id.toLowerCase().includes(kw))return false;
     if(sub&&i.subject!==sub)return false;
     if(st==='learning'&&i.status!=='learning')return false;
@@ -103,6 +110,7 @@ function filteredItems(){
     if(rev&&(i.reviews||[]).length<rev)return false;
     return true;
   });
+  return list.slice().sort((a,b)=>(b.createdAt||b.firstLearned||'').localeCompare(a.createdAt||a.firstLearned||'')||(b.id||'').localeCompare(a.id||''));
 }
 function clearFilters(){
   document.getElementById('fKeyword').value='';
@@ -126,10 +134,11 @@ function renderAll(){
   const body=document.getElementById('allBody');
   body.innerHTML=slice.length?slice.map(i=>{
     const qCount=QS.filter(q=>q.itemId===i.id).length;
+    const addedAt=fmtTs(i.createdAt||i.firstLearned);
     const due=i.status==='learning'&&i.dueDate<=t;
     const tag=i.status==='mastered'?'<span class="tag mastered">已掌握</span>':due?'<span class="tag due">今日到期</span>':'<span class="tag learning">学习中</span>';
-    return '<tr><td style="text-align:left;font-weight:600">'+esc(i.id)+'</td><td>'+esc(i.subject)+'</td><td>'+tag+'</td><td>'+qCount+' 题</td><td>第 '+i.round+' 轮</td><td>'+(i.status==='mastered'?'—':i.dueDate)+'</td><td>'+(i.reviews||[]).length+' 次</td><td><button class="btn ghost" onclick="resetItem(\''+i.id+'\')">重置</button></td></tr>';
-  }).join(''):'<tr><td colspan="8" class="empty">没有符合条件的数据</td></tr>';
+    return '<tr><td style="color:var(--muted2);font-size:12px;white-space:nowrap">'+esc(addedAt)+'</td><td style="text-align:left;font-weight:600">'+esc(i.id)+'</td><td>'+esc(i.subject)+'</td><td>'+tag+'</td><td>'+qCount+' 题</td><td>第 '+i.round+' 轮</td><td>'+(i.status==='mastered'?'—':i.dueDate)+'</td><td>'+(i.reviews||[]).length+' 次</td><td><button class="btn ghost" onclick="resetItem(\''+i.id+'\')">重置</button></td></tr>';
+  }).join(''):'<tr><td colspan="9" class="empty">没有符合条件的数据</td></tr>';
   renderPager(total,tp);
 }
 function renderPager(total,tp){
