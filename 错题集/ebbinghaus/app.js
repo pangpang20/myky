@@ -36,16 +36,24 @@ function renderStats(){
   const rev=(DB.answers||[]).length;
   const s=document.getElementById('stats');
   s.innerHTML=
-    '<div class="stat orange"><div class="num">'+due+'</div><div class="label">今日到期</div></div>'+
-    '<div class="stat blue"><div class="num">'+learn+'</div><div class="label">学习中</div></div>'+
-    '<div class="stat green"><div class="num">'+mast+'</div><div class="label">已掌握</div></div>'+
-    '<div class="stat purple"><div class="num">'+rev+'</div><div class="label">累计作答</div></div>';
+    '<div class="stat orange"><div class="stat-top"><div class="stat-ico"><span>⏰</span></div><div class="stat-label">今日到期</div></div><div class="num">'+due+'<span class="unit">个</span></div><div class="stat-hint">'+(due?'需要立即复习':'暂无到期任务')+'</div></div>'+
+    '<div class="stat blue"><div class="stat-top"><div class="stat-ico"><span>📖</span></div><div class="stat-label">学习中</div></div><div class="num">'+learn+'<span class="unit">个</span></div><div class="stat-hint">按遗忘曲线推进中</div></div>'+
+    '<div class="stat green"><div class="stat-top"><div class="stat-ico"><span>✅</span></div><div class="stat-label">已掌握</div></div><div class="num">'+mast+'<span class="unit">个</span></div><div class="stat-hint">完成全部 6 轮复习</div></div>'+
+    '<div class="stat purple"><div class="stat-top"><div class="stat-ico"><span>✏️</span></div><div class="stat-label">累计作答</div></div><div class="num">'+rev+'<span class="unit">次</span></div><div class="stat-hint">含即时练习与复习</div></div>';
 }
 function renderDueBar(){
   const due=dueItems();const d=document.getElementById('quizDesc');
   const btn=document.getElementById('startBtn');
-  if(due.length){d.textContent='今天有 '+due.length+' 个知识点到期，答错将重置记忆周期。';btn.disabled=false;}
-  else{d.textContent='今天没有到期复习，可以用「全部练习」巩固全部知识点。';btn.disabled=true;}
+  const pct=document.getElementById('duePct');
+  if(due.length){
+    d.textContent='今天有 '+due.length+' 个知识点到期，答错将重置记忆周期。建议先完成到期复习，再做全部练习巩固。';
+    pct.textContent='到期率 '+Math.round(due.length/Math.max(1,DB.items.filter(i=>i.status!=='mastered').length)*100)+'%';
+    btn.disabled=false;
+  }else{
+    d.textContent='今天没有到期复习，可以用「全部练习」巩固全部知识点，巩固轮次不计入记忆周期。';
+    pct.textContent='进度良好';
+    btn.disabled=true;
+  }
 }
 
 const SCHEDULE=[1,2,4,7,15,30];

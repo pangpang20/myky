@@ -15,11 +15,19 @@ body{background:var(--bg);color:var(--text);font-family:system-ui,"Microsoft YaH
 .theme-btn{padding:8px 16px;border-radius:8px;border:1px solid var(--border);background:var(--bg);color:var(--text);cursor:pointer;font-size:13px;font-weight:600;transition:.2s}
 .theme-btn:hover{border-color:var(--blue);transform:translateY(-1px)}
 .wrap{max-width:1200px;margin:0 auto;padding:24px}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:22px}
-.stat{background:var(--bg2);border-radius:12px;padding:22px 16px;border:1px solid var(--border);text-align:center}
-.stat .num{font-size:34px;font-weight:800;line-height:1.1}
-.stat .label{font-size:13px;color:var(--muted);margin-top:8px;font-weight:600}
-.stat.green .num{color:var(--green)}.stat.blue .num{color:var(--blue)}.stat.orange .num{color:var(--orange)}.stat.purple .num{color:var(--purple)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:20px}
+.stat{position:relative;overflow:hidden;background:var(--bg2);border-radius:14px;padding:20px 22px;border:1px solid var(--border);transition:transform .2s,box-shadow .2s,border-color .2s}
+.stat::before{content:"";position:absolute;left:0;top:0;width:3px;height:100%;background:currentColor;opacity:.9}
+.stat::after{content:"";position:absolute;right:-40px;top:-40px;width:120px;height:120px;border-radius:50%;background:currentColor;opacity:.07;filter:blur(6px)}
+.stat:hover{transform:translateY(-3px);border-color:currentColor;box-shadow:0 10px 24px rgba(0,0,0,.14)}
+.stat.orange{color:var(--orange)}.stat.blue{color:var(--blue)}.stat.green{color:var(--green)}.stat.purple{color:var(--purple)}
+.stat-top{display:flex;align-items:center;gap:9px;position:relative;z-index:1}
+.stat-ico{width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:15px;background:currentColor;flex:0 0 auto}
+.stat-ico span{filter:brightness(0) invert(1);opacity:.95}
+.stat-label{font-size:12.5px;font-weight:700;color:var(--muted);letter-spacing:.4px}
+.stat .num{position:relative;z-index:1;font-size:38px;font-weight:800;line-height:1.05;margin-top:14px;letter-spacing:-1px;font-variant-numeric:tabular-nums}
+.stat .unit{font-size:13px;font-weight:700;opacity:.6;margin-left:5px;letter-spacing:0}
+.stat-hint{position:relative;z-index:1;margin-top:6px;font-size:11.5px;color:var(--muted2);font-weight:600}
 .section{background:var(--bg2);border-radius:12px;border:1px solid var(--border);margin-bottom:18px;overflow:hidden}
 .section h2{font-size:14px;padding:16px 20px;border-bottom:1px solid var(--border);color:var(--muted);font-weight:700;text-align:center;letter-spacing:1px}
 table{width:100%;border-collapse:collapse;font-size:13px}
@@ -47,10 +55,12 @@ tbody tr:hover td{background:var(--bg3)}
 .pager .info{color:var(--muted);font-size:12px;font-weight:600}
 .curve-box{padding:26px 22px 12px}
 .curve-svg{display:block;width:100%;height:auto;overflow:visible}
-.quiz-bar{background:linear-gradient(135deg,rgba(37,99,235,.14),rgba(147,51,234,.14));border:1px solid var(--border);border-radius:12px;padding:20px 24px;margin-bottom:20px;display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.quiz-bar{position:relative;overflow:hidden;background:linear-gradient(135deg,rgba(37,99,235,.10),rgba(147,51,234,.10));border:1px solid var(--border);border-radius:14px;padding:22px 28px;margin-bottom:20px;display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.quiz-bar::before{content:"";position:absolute;left:-60px;bottom:-60px;width:180px;height:180px;border-radius:50%;background:rgba(37,99,235,.08);filter:blur(10px)}
 .quiz-bar .info{flex:1;min-width:220px}
-.quiz-bar .title{font-size:16px;font-weight:700;margin-bottom:6px}
-.quiz-bar .desc{font-size:12.5px;color:var(--muted)}
+.quiz-bar .title{font-size:17px;font-weight:800;margin-bottom:7px;display:flex;align-items:center;gap:9px;letter-spacing:.4px}
+.quiz-bar .title .pct{font-size:11px;font-weight:700;padding:3px 10px;border-radius:12px;background:rgba(37,99,235,.14);color:var(--blue);letter-spacing:.5px}
+.quiz-bar .desc{font-size:13px;color:var(--muted);line-height:1.6}
 .btn-lg{padding:12px 28px;border-radius:10px;border:none;background:linear-gradient(135deg,#2563eb,#7c3aed);color:#fff;cursor:pointer;font-size:15px;font-weight:700;transition:.2s}
 .btn-lg:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 8px 22px rgba(37,99,235,.4)}
 .btn-lg:disabled{background:var(--border);color:var(--muted2);cursor:not-allowed}
@@ -85,7 +95,7 @@ tbody tr:hover td{background:var(--bg3)}
   <div class="stats" id="stats"></div>
   <div class="quiz-bar">
     <div class="info">
-      <div class="title">🎯 今日复习任务</div>
+      <div class="title">🎯 今日复习任务 <span class="pct" id="duePct"></span></div>
       <div class="desc" id="quizDesc">加载中…</div>
     </div>
     <button class="btn-lg" id="startBtn">开始复习</button>
