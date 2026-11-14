@@ -720,6 +720,86 @@
       },
       "answer": "C",
       "analysis": "甲：Σ n/i = n·H(n) ≈ n·ln n（调和级数）；乙：Σ log₂ i = log₂(n!) ≈ n·log₂ n。机理不同但量级相同。"
+    },
+    {
+      "id": "ds-r1-1001",
+      "itemId": "数据结构-常数步长除法循环",
+      "round": 1,
+      "subject": "数据结构",
+      "topic": "常数步长·基础复现",
+      "question": "设 n ≥ 2，下列程序段的时间复杂度是（ ）。\n\nfor (i = 1; i <= n; i++)\n    for (j = 1; j <= n; j += n / 2)\n        count++;",
+      "options": {
+        "A": "O(log₂ n)",
+        "B": "O(n)",
+        "C": "O(n log₂ n)",
+        "D": "O(n²)"
+      },
+      "answer": "B",
+      "analysis": "内层步长 n/2，j 依次为 1 → 1+n/2 → 1+n，第 3 次退出，内层常数次，总 O(n)。"
+    },
+    {
+      "id": "ds-r1-1002",
+      "itemId": "数据结构-常数步长除法循环",
+      "round": 1,
+      "subject": "数据结构",
+      "topic": "常数步长·步长退化为 n",
+      "question": "for (i = 1; i <= n; i++)\n    for (j = 1; j <= n; j += n)\n        count++;",
+      "options": {
+        "A": "O(n)",
+        "B": "O(n log n)",
+        "C": "O(n²)",
+        "D": "O(n³)"
+      },
+      "answer": "A",
+      "analysis": "内层步长 n，每轮只执行 1 次，总 O(n)。"
+    },
+    {
+      "id": "ds-r1-1003",
+      "itemId": "数据结构-常数步长除法循环",
+      "round": 1,
+      "subject": "数据结构",
+      "topic": "常数步长·步长 n/4",
+      "question": "for (i = 1; i <= n; i++)\n    for (j = 1; j <= n; j += n / 4)\n        count++;",
+      "options": {
+        "A": "O(n)",
+        "B": "O(n log n)",
+        "C": "O(n²)",
+        "D": "O(n³)"
+      },
+      "answer": "A",
+      "analysis": "j 每次跨 n/4，内层执行 4~5 次，仍是常数，总 O(n)。"
+    },
+    {
+      "id": "ds-r1-1004",
+      "itemId": "数据结构-常数步长除法循环",
+      "round": 1,
+      "subject": "数据结构",
+      "topic": "常数步长·对照线性内层",
+      "question": "for (i = 1; i <= n; i++)\n    for (j = 1; j <= n; j++)\n        count++;",
+      "options": {
+        "A": "O(n)",
+        "B": "O(n log n)",
+        "C": "O(n²)",
+        "D": "O(n³)"
+      },
+      "answer": "C",
+      "analysis": "线性步长 j++ 内层执行 n 次，总 O(n²)。"
+    },
+    {
+      "id": "ds-r1-1005",
+      "itemId": "数据结构-常数步长除法循环",
+      "round": 1,
+      "subject": "数据结构",
+      "topic": "常数步长·概念辨析",
+      "question": "下列说法正确的是（ ）。",
+      "options": {
+        "A": "两层嵌套循环的复杂度一定是 O(n²)",
+        "B": "内层步长为 n 的固定比例时，内层执行次数是 O(n)",
+        "C": "内层次数固定时，总复杂度由外层循环决定",
+        "D": "内层步长依赖外层变量时，可直接相乘"
+      },
+      "answer": "C",
+      "analysis": "内层常数次时总量 = 外层次数 × 常数；A 忽略内层次数、B 应为常数次、D 需逐层求和。"
     }
   ]
 }
