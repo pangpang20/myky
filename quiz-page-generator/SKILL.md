@@ -68,6 +68,9 @@ description: >-
 Rules:
 - Single choice: clicking an option judges immediately.
 - Multi choice: checkboxes + submit button; submit disabled until selection.
+- Newly added questions must be placed at the FRONT of the questions
+  array (newest first), so the user sees new exercises immediately on
+  refresh without replaying older questions.
 - Wrong answers append to `localStorage.ky_wrong_log` and show 已记入错题集.
 - Final page shows total count and wrong question ids.
 - Every question must include analysis for learning.
