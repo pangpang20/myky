@@ -209,24 +209,28 @@ const FENCE='```';
 function toMath(tex){
   return tex
     .replace(/log_\{?2\}?/g,'\\log_{2}')
-    .replace(/log_(\d)/g,'\\log_{$1}')
-    .replace(/log(_?[0-9]+)?/g,'\\log$1')
+    .replace(/log_\{?(\d+)\}?/g,'\\log_{$1}')
     .replace(/sqrt/g,'\\sqrt')
     .replace(/\^\{?\(1\/2\)\}?/g,'^{1/2}')
     .replace(/\^\{?\(1\/3\)\}?/g,'^{1/3}')
     .replace(/\^\{?\(2\/3\)\}?/g,'^{2/3}')
     .replace(/\^\{?\(3\/2\)\}?/g,'^{3/2}')
-    .replace(/n\/2/g,'\\frac{n}{2}');
+    .replace(/n\/2/g,'\\\\frac{n}{2}');
+}
+function katexO(inner){
+  try{
+    return katex.renderToString('O(' + toMath(inner) + ')',{throwOnError:false});
+  }catch(e){
+    return 'O(' + inner + ')';
+  }
 }
 function renderQuestion(text){
   const parts=String(text).split(FENCE);
   let out='';
   parts.forEach((part,i)=>{
     if(i%2===0){
-      let seg=esc(part).replace(/\*\*(.+?)\*\*/g,'<b>$1</b>').replace(/([^`]|^)`([^`]+)`([^`]|$)/g,'$1<code>$2</code>$3');
-      seg=seg.replace(/O\(([^)]+)\)/g,function(m,inner){
-        return '<span class="math-inline">$O(' + toMath(inner) + ')$</span>';
-      });
+      let seg=esc(part).replace(/\*\*(.+?)\*\*/g,'<b>$1</b>');
+      seg=seg.replace(/O\(([^)]+)\)/g,function(m,inner){return katexO(inner);});
       out+=seg;
     }
     else{

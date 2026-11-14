@@ -58,7 +58,7 @@ function report(q, sel, ok) {
 function toMathQuiz(tex){
   return tex
     .replace(/log_\{?2\}?/g,'\\log_{2}')
-    .replace(/log_(\d)/g,'\\log_{$1}')
+    .replace(/log_\{?3\}?/g,'\\log_{3}')
     .replace(/log\(?2\)? n/g,'\\log_{2} n')
     .replace(/log\(?3\)? n/g,'\\log_{3} n')
     .replace(/sqrt/g,'\\sqrt')
@@ -67,6 +67,13 @@ function toMathQuiz(tex){
     .replace(/\^\{?\(2\/3\)\}?/g,'^{2/3}')
     .replace(/\^\{?\(3\/2\)\}?/g,'^{3/2}')
     .replace(/\^2/g,'^{2}');
+}
+function katexO(inner){
+  try{
+    return katex.renderToString('O(' + toMathQuiz(inner) + ')',{throwOnError:false});
+  }catch(e){
+    return 'O(' + inner + ')';
+  }
 }
 function renderQuestion(text) {
   const LNBREAK = '\\n';
@@ -82,7 +89,7 @@ function renderQuestion(text) {
     } else {
       let seg = parts[i].split(LNBREAK).join('<br>');
       seg = seg.replace(/O\(([^)<]+)\)/g, function(m,inner){
-        return '<span class="math-inline">$O(' + toMathQuiz(inner) + ')$</span>';
+        return katexO(inner);
       });
       out += seg;
     }
