@@ -473,7 +473,10 @@ function renderTrend(){
   out+='<line x1="'+PL+'" y1="'+(PT+ih)+'" x2="'+(PL+iw)+'" y2="'+(PT+ih)+'" stroke="'+axisC+'" stroke-width="1"/>';
   out+='<text x="'+(PL+iw)+'" y="'+(PT+ih+46)+'" fill="'+labelC+'" font-size="11" text-anchor="end">'+(trendMode==="month"?"近 6 个月":"近 7 天")+" · "+(trendMode==="month"?"按月汇总":"按日汇总")+'</text>';
   ["ans","kp","q"].forEach((s,si)=>{
-    out+='<circle class="trend-runner" r="3.5" fill="'+COLORS[s]+'" stroke="var(--bg2)" stroke-width="1.5"><animateMotion dur="6s" begin="'+(si*0.6)+'s" repeatCount="indefinite" path="'+smoothPath(pts[s])+'"/></circle>';
+    const d=smoothPath(pts[s]);
+    for(let k=0;k<4;k++){
+      out+='<circle class="trend-runner" r="3" fill="'+COLORS[s]+'" opacity="0.85"><animateMotion dur="2.4s" begin="'+(si*0.3+k*0.6)+'s" repeatCount="indefinite" path="'+d+'"/></circle>';
+    }
   });
   svg.innerHTML=out;
 }
