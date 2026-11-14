@@ -1,5 +1,6 @@
 'use strict';
 let DB=null,QS=[],KB={},page=1,pageSize=10,queue=[],qi=0,roundId='',forceMode=false,results=[];
+let trendMode='day';
 
 function nowEast8Iso(){const d=new Date(Date.now()+8*3600*1000);return d.toISOString().replace('Z','+08:00')}
 
@@ -17,7 +18,7 @@ async function init(){
   KB=await kbR.json();
   const t=today();
   document.getElementById('todayBadge').textContent='今天 '+t;
-  renderStats();renderCurve();fillSubjectFilter();renderAll();renderDueBar();
+  renderStats();renderCurve();renderTrend();fillSubjectFilter();renderAll();renderDueBar();
   bindDrillClicks();
 }
 
@@ -28,7 +29,7 @@ function updateThemeBtn(){
 function toggleTheme(){
   document.documentElement.dataset.theme=document.documentElement.dataset.theme==='dark'?'light':'dark';
   localStorage.setItem('eb_theme',document.documentElement.dataset.theme);
-  updateThemeBtn();renderCurve();
+  updateThemeBtn();renderCurve();renderTrend();
 }
 
 function fmtTs(v){
@@ -108,9 +109,10 @@ function drillStatus(status){
 }
 function drillAnswersByDay(){
   const map={};
-  (DB.answers||[]).forEach(a=>{const d=String(a.at||'').slice(0,10);if(d)map[d]=(map[d]||0)+1});
-  const rows=Object.keys(map).sort().reverse().map(d=>({main:d,count:map[d]+" 次"}));
-  openDrill('✏️ 累计作答 · 按日期',drillRows(rows));
+  (DB.answers||[]).forEach(a=>{const d=String(a.at||'').slice(0,10)||'日期未知';map[d]=(map[d]||0)+1});
+  const keys=Object.keys(map).sort((a,b)=>a==='日期未知'?1:b==='日期未知'?-1:b.localeCompare(a));
+  const rows=keys.map(d=>({main:d,count:map[d]+' 次'}));
+  openDrill('✏️ 累计作答 · 按日期（共 '+((DB.answers||[]).length)+' 次）',drillRows(rows));
 }
 function filterTable(opt){
   if(opt.subject!==undefined)document.getElementById('fSubject').value=opt.subject;
@@ -374,4 +376,91 @@ async function finishRound(){
   document.getElementById('quizLog').textContent='';
 }
 
+function toggleCurve(){
+  const sec=document.getElementById('curveSection');
+  sec.classList.toggle('collapsed');
+  if(!sec.classList.contains('collapsed'))renderCurve();
+}
+function setTrendMode(mode){
+  trendMode=mode;
+  document.getElementById('trendDayBtn').classList.toggle('active',mode==='day');
+  document.getElementById('trendMonthBtn').classList.toggle('active',mode==='month');
+  renderTrend();
+}
+function trendBuckets(){
+  const perDay={};
+  (DB.answers||[]).forEach(a=>{const d=String(a.at||'').slice(0,10);if(!d)return;perDay[d]=(perDay[d]||0)+1});
+  const addDay={};
+  DB.items.forEach(i=>{const d=String(i.createdAt||i.firstLearned||'').slice(0,10);if(!d)return;addDay[d]=(addDay[d]||0)+1});
+  const all=[...Object.keys(perDay),...Object.keys(addDay)].sort();
+  if(!all.length)return [];
+  const keyOf=d=>trendMode==="month"?d.slice(0,7):d;
+  const sums={};
+  const bump=(d,f)=>{const k=keyOf(d);const b=sums[k]||(sums[k]={ans:0,add:0});b[f]+=1};
+  Object.keys(perDay).forEach(d=>{for(let i=0;i<perDay[d];i++)bump(d,"ans")});
+  Object.keys(addDay).forEach(d=>{for(let i=0;i<addDay[d];i++)bump(d,"add")});
+  const keys=[];
+  if(trendMode==="month"){
+    const months=[...new Set(all.map(d=>d.slice(0,7)))].sort();
+    let [y,m]=months[0].split("-").map(Number);
+    const [ey,em]=months[months.length-1].split("-").map(Number);
+    while(y<ey||(y===ey&&m<=em)){keys.push(y+"-"+String(m).padStart(2,"0"));m++;if(m>12){m=1;y++}}
+  } else {
+    const startD=new Date(all[0]+"T00:00:00Z"),endD=new Date(all[all.length-1]+"T00:00:00Z");
+    for(let d=new Date(startD);d<=endD;d.setUTCDate(d.getUTCDate()+1))keys.push(d.toISOString().slice(0,10));
+  }
+  return keys.map(k=>({key:k,ans:sums[k]?sums[k].ans:0,add:sums[k]?sums[k].add:0}));
+}
+function smoothPath(pts){
+  if(pts.length<2)return '';
+  let d='M '+pts[0].x+' '+pts[0].y;
+  for(let i=0;i<pts.length-1;i++){
+    const p0=pts[i>0?i-1:i],p1=pts[i],p2=pts[i+1],p3=pts[i+2]||p2;
+    const c1x=p1.x+(p2.x-p0.x)/6,c1y=p1.y+(p2.y-p0.y)/6;
+    const c2x=p2.x-(p3.x-p1.x)/6,c2y=p2.y-(p3.y-p1.y)/6;
+    d+=' C '+c1x+' '+c1y+', '+c2x+' '+c2y+', '+p2.x+' '+p2.y;
+  }
+  return d;
+}
+function renderTrend(){
+  const svg=document.getElementById('trendSvg');
+  if(!svg)return;
+  const data=trendBuckets();
+  const W=960,H=320,PL=64,PR=36,PT=30,PB=64;
+  const iw=W-PL-PR,ih=H-PT-PB;
+  const dark=document.documentElement.dataset.theme==='dark';
+  const grid=dark?'rgba(148,163,184,.16)':'rgba(71,85,105,.16)';
+  const labelC=dark?'#94a3b8':'#475569';
+  if(!data.length){svg.innerHTML='<text x="'+(W/2)+'" y="'+(H/2)+'" fill="'+labelC+'" font-size="14" text-anchor="middle">暂无数据</text>';return}
+  const maxV=Math.max(1,...data.map(d=>Math.max(d.ans,d.add)));
+  const step=Math.pow(10,Math.floor(Math.log10(maxV)));
+  const niceMax=Math.ceil(maxV/(step/2))*(step/2);
+  const xOf=i=>data.length===1?PL+iw/2:PL+i*(iw/(data.length-1));
+  const yOf=v=>PT+ih-(v/niceMax)*ih;
+  let out='<defs><linearGradient id="ansGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="rgba(37,99,235,.26)"/><stop offset="1" stop-color="rgba(37,99,235,0)"/></linearGradient></defs>';
+  for(let g=0;g<=4;g++){
+    const v=niceMax*g/4,y=yOf(v);
+    out+='<line x1="'+PL+'" y1="'+y+'" x2="'+(PL+iw)+'" y2="'+y+'" stroke="'+grid+'" stroke-width="1"/>';
+    out+='<text x="'+(PL-12)+'" y="'+(y+4)+'" fill="'+labelC+'" font-size="11" text-anchor="end">'+(Math.round(v*10)/10)+'</text>';
+  }
+  const ansPts=data.map((d,i)=>({x:xOf(i),y:yOf(d.ans),v:d.ans}));
+  const addPts=data.map((d,i)=>({x:xOf(i),y:yOf(d.add),v:d.add}));
+  out+='<path d="'+smoothPath(ansPts)+' L '+ansPts[ansPts.length-1].x+' '+(PT+ih)+' L '+ansPts[0].x+' '+(PT+ih)+' Z" fill="url(#ansGrad)"/>';
+  out+='<path d="'+smoothPath(ansPts)+'" fill="none" stroke="#2563eb" stroke-width="2.6" stroke-linecap="round"/>';
+  out+='<path d="'+smoothPath(addPts)+'" fill="none" stroke="#16a34a" stroke-width="2.6" stroke-linecap="round" stroke-dasharray="6 4"/>';
+  const labelEvery=Math.ceil(data.length/8);
+  data.forEach((d,i)=>{
+    const x=xOf(i);
+    if(i%labelEvery===0||i===data.length-1){
+      const lab=trendMode==='month'?d.key.slice(2):d.key.slice(5);
+      out+='<text x="'+x+'" y="'+(PT+ih+24)+'" fill="'+labelC+'" font-size="11" text-anchor="middle">'+lab+'</text>';
+    }
+    out+='<circle cx="'+x+'" cy="'+yOf(d.ans)+'" r="4" fill="var(--bg2)" stroke="#2563eb" stroke-width="2"/>';
+    out+='<text x="'+x+'" y="'+(yOf(d.ans)-10)+'" fill="#2563eb" font-size="11" font-weight="700" text-anchor="middle">'+d.ans+'</text>';
+    out+='<circle cx="'+x+'" cy="'+yOf(d.add)+'" r="4" fill="var(--bg2)" stroke="#16a34a" stroke-width="2"/>';
+    out+='<text x="'+x+'" y="'+(yOf(d.add)-10)+'" fill="#16a34a" font-size="11" font-weight="700" text-anchor="middle">'+d.add+'</text>';
+  });
+  out+='<text x="'+(PL+iw)+'" y="'+(PT+ih+46)+'" fill="'+labelC+'" font-size="11" text-anchor="end">'+(trendMode==='month'?'按月份汇总':'按日期汇总')+'</text>';
+  svg.innerHTML=out;
+}
 init();document.getElementById('startBtn').onclick=()=>startQuiz(false);document.getElementById('forceBtn').onclick=()=>startQuiz(true);

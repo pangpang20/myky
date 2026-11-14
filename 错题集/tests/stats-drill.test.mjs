@@ -23,6 +23,12 @@ check(app.includes('String(a.at||' + String.fromCharCode(39,39) + ').slice(0,10)
 check(html.includes('drillModal'), 'drill modal markup must exist')
 check(html.includes('.modal-mask.open{display:flex}'), 'modal must be toggleable via class')
 check(html.includes('.stat.cyan{color:var(--cyan)}'), 'cyan color variable must be defined for total card')
+check(app.includes('function toggleCurve()'), 'memory curve must be collapsible')
+check(html.includes('class="section collapsed" id="curveSection"'), 'memory curve must default to collapsed')
+check(app.includes('function renderTrend()'), 'trend chart must render')
+check(app.includes('trendMode==="month"?d.slice(0,7):d'), 'trend must aggregate by month when selected')
+check(html.includes('trendSvg'), 'trend svg must exist')
+check(html.includes('按日')&&html.includes('按月'), 'trend must offer day/month toggle')
 check(html.includes('--cyan:#22d3ee'), 'cyan color must be defined in dark theme')
 
 if (failed) { console.error(failed + ' check(s) failed'); process.exit(1) }
