@@ -68,7 +68,9 @@ write('../quiz/knowledge.json', qkb)
 if (p.quizQuestions?.length) {
   const quiz = read('../quiz/questions.json')
   const existingIds = new Set(quiz.map(q => q.id))
-  const fresh = p.quizQuestions.filter(q => !existingIds.has(q.id))
+  const fresh = p.quizQuestions
+    .filter(q => !existingIds.has(q.id))
+    .map(q => ({ itemId: p.itemId, ...q }))
   write('../quiz/questions.json', [...fresh, ...quiz])
 }
 

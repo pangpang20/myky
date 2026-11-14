@@ -12,7 +12,8 @@
       "D": "O(n²)"
     },
     "answer": "C",
-    "analysis": "中层 j *= 2 执行 ⌈log₂ i⌉ 次，内层固定 10 次是常数。总 Σ log₂ i = log₂(n!) ≈ n·log₂ n（Stirling 公式）。"
+    "analysis": "中层 j *= 2 执行 ⌈log₂ i⌉ 次，内层固定 10 次是常数。总 Σ log₂ i = log₂(n!) ≈ n·log₂ n（Stirling 公式）。",
+    "itemId": "数据结构-对数步长循环"
   },
   {
     "id": "ds-lg2",
@@ -27,7 +28,8 @@
       "D": "O(n²)"
     },
     "answer": "C",
-    "analysis": "常数层不影响量级。Σ log₂ i ≈ n·log₂ n。"
+    "analysis": "常数层不影响量级。Σ log₂ i ≈ n·log₂ n。",
+    "itemId": "数据结构-对数步长循环"
   },
   {
     "id": "ds-lg3",
@@ -42,7 +44,8 @@
       "D": "n²"
     },
     "answer": "A",
-    "analysis": "Σ log₂ i = log₂(n!)，由 Stirling ≈ n·log₂ n − 1.44n。这是 j *= 2 型循环复杂度的数学基础。"
+    "analysis": "Σ log₂ i = log₂(n!)，由 Stirling ≈ n·log₂ n − 1.44n。这是 j *= 2 型循环复杂度的数学基础。",
+    "itemId": "数据结构-对数步长循环"
   },
   {
     "id": "ds-lg4",
@@ -57,7 +60,8 @@
       "D": "O(n²)"
     },
     "answer": "B",
-    "analysis": "外层步长 i /= 2 → log₂ n 次，内层 n 次 → n·log n。"
+    "analysis": "外层步长 i /= 2 → log₂ n 次，内层 n 次 → n·log n。",
+    "itemId": "数据结构-对数步长循环"
   },
   {
     "id": "ds-lg5",
@@ -72,7 +76,8 @@
       "D": "j += i 的总次数是 O(n²)"
     },
     "answer": "B",
-    "analysis": "两种步长机理不同但最终都是 O(n log n)：调和级数 n·H(n) 与对数求和 log₂(n!) ≈ n·log₂ n。"
+    "analysis": "两种步长机理不同但最终都是 O(n log n)：调和级数 n·H(n) 与对数求和 log₂(n!) ≈ n·log₂ n。",
+    "itemId": "数据结构-对数步长循环"
   },
   {
     "id": "ds-n1",
