@@ -55,8 +55,7 @@ async function init() {
   ]);
   questions = await qRes.json();
   knowledgeBase = await kbRes.json();
-  if (questions.length) renderStudy();
-  else render();
+  render();
 }
 
 function report(q, sel, ok) {
