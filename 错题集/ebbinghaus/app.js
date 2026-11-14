@@ -206,12 +206,33 @@ function renderQ(){
   
 }
 const FENCE='```';
+function toMath(tex){
+  return tex
+    .replace(/log_\{?2\}?/g,'\\log_{2}')
+    .replace(/log_(\d)/g,'\\log_{$1}')
+    .replace(/log(_?[0-9]+)?/g,'\\log$1')
+    .replace(/sqrt/g,'\\sqrt')
+    .replace(/\^\{?\(1\/2\)\}?/g,'^{1/2}')
+    .replace(/\^\{?\(1\/3\)\}?/g,'^{1/3}')
+    .replace(/\^\{?\(2\/3\)\}?/g,'^{2/3}')
+    .replace(/\^\{?\(3\/2\)\}?/g,'^{3/2}')
+    .replace(/n\/2/g,'\\frac{n}{2}');
+}
 function renderQuestion(text){
   const parts=String(text).split(FENCE);
   let out='';
   parts.forEach((part,i)=>{
-    if(i%2===0){out+=esc(part).replace(/\*\*(.+?)\*\*/g,'<b>$1</b>').replace(/([^`]|^)`([^`]+)`([^`]|$)/g,'$1<code>$2</code>$3');}
-    else{const nl=part.replace(/^\n/,'').replace(/\n$/,'');out+='<pre><code>'+esc(nl)+'</code></pre>';}
+    if(i%2===0){
+      let seg=esc(part).replace(/\*\*(.+?)\*\*/g,'<b>$1</b>').replace(/([^`]|^)`([^`]+)`([^`]|$)/g,'$1<code>$2</code>$3');
+      seg=seg.replace(/O\(([^)]+)\)/g,function(m,inner){
+        return '<span class="math-inline">$O(' + toMath(inner) + ')$</span>';
+      });
+      out+=seg;
+    }
+    else{
+      const nl=part.replace(/^\n/,'').replace(/\n$/,'');
+      out+='<pre><code>'+esc(nl)+'</code></pre>';
+    }
   });
   return out;
 }
@@ -235,6 +256,7 @@ function choose(k){
   if(kb.keyPoints&&kb.keyPoints.length)html+='<div class="analysis-block analysis-kp"><h4>🔑 关键点</h4><ul>'+kb.keyPoints.map(p=>'<li>'+renderQuestion(p)+'</li>').join('')+'</ul></div>';
   ana.innerHTML=html;
   ana.style.display='block';
+  if(window.renderMathInElement){renderMathInElement(ana,{delimiters:[{left:'\$',right:'\$',display:false}],throwOnError:false});}
   results[qi]={selected:k,correct:ok};
   renderSide();
   renderNavBar();
