@@ -62,11 +62,16 @@ tbody tr:hover td{background:var(--bg3)}
 .section h2.collapsible .chev{font-size:10px;opacity:.7;transition:transform .2s}
 .section.collapsed h2.collapsible .chev{transform:rotate(-90deg)}
 .section.collapsed .curve-box{display:none}
-.trend-head{display:flex;align-items:center;justify-content:center;gap:10px;padding:14px 20px;border-bottom:1px solid var(--border);flex-wrap:wrap}
-.trend-title{font-size:14px;color:var(--muted);font-weight:700;letter-spacing:1px}
-.seg{display:inline-flex;border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-left:6px}
-.seg button{background:transparent;border:none;color:var(--muted);padding:6px 14px;font-size:12px;font-weight:700;cursor:pointer}
-.seg button.active{background:var(--blue);color:#fff}
+.trend-head{position:relative;display:flex;align-items:center;justify-content:center;gap:14px;padding:20px 22px;border-bottom:1px solid var(--border);flex-wrap:wrap;background:linear-gradient(135deg,rgba(37,99,235,.07),rgba(22,163,74,.06))}
+.trend-title{display:flex;align-items:center;gap:8px;font-size:15px;color:var(--text);font-weight:800;letter-spacing:.6px}
+.trend-title .dot{width:8px;height:8px;border-radius:50%;background:linear-gradient(135deg,#2563eb,#16a34a);box-shadow:0 0 8px rgba(37,99,235,.5)}
+.seg{display:inline-flex;background:var(--bg3);border:1px solid var(--border);border-radius:999px;padding:3px;gap:2px}
+.seg button{background:transparent;border:none;color:var(--muted);padding:6px 18px;font-size:12.5px;font-weight:700;border-radius:999px;cursor:pointer;transition:.18s}
+.seg button:hover{color:var(--text)}
+.seg button.active{background:var(--blue);color:#fff;box-shadow:0 2px 8px rgba(37,99,235,.35)}
+.trend-legend{display:flex;gap:12px;justify-content:center;padding:14px 0 4px;font-size:12px;flex-wrap:wrap}
+.trend-legend .chip{display:inline-flex;align-items:center;gap:7px;padding:5px 13px;border-radius:999px;background:var(--bg3);border:1px solid var(--border);font-weight:600;color:var(--muted)}
+.trend-legend .chip i{width:9px;height:9px;border-radius:50%}
 .trend-box{padding:18px 20px 8px}
 .trend-svg{display:block;width:100%;height:auto;overflow:visible}
 .trend-legend{display:flex;gap:18px;justify-content:center;padding:0 0 14px;font-size:12px;color:var(--muted);flex-wrap:wrap}
@@ -168,10 +173,10 @@ tbody tr:hover td{background:var(--bg3)}
   </div>
   <div class="section">
     <div class="trend-head">
-      <span class="trend-title">📈 学习趋势 · 每日/每月</span>
+      <span class="trend-title"><span class="dot"></span>学习趋势</span>
       <div class="seg"><button id="trendDayBtn" class="active" onclick="setTrendMode('day')">按日</button><button id="trendMonthBtn" onclick="setTrendMode('month')">按月</button></div>
     </div>
-    <div class="trend-legend"><span><i style="background:#2563eb"></i>每日做题数</span><span><i style="background:#16a34a"></i>新增错题（知识点）</span></div>
+    <div class="trend-legend"><span class="chip"><i style="background:#2563eb"></i>每日做题数</span><span class="chip"><i style="background:#16a34a"></i>新增错题</span></div>
     <div class="trend-box"><svg id="trendSvg" class="trend-svg" viewBox="0 0 960 320"></svg></div>
   </div>
   <div class="section">
