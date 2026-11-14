@@ -65,7 +65,10 @@ tbody tr:hover td{background:var(--bg3)}
 .btn-lg:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 8px 22px rgba(37,99,235,.4)}
 .btn-lg:disabled{background:var(--border);color:var(--muted2);cursor:not-allowed}
 .btn-lg.alt{background:linear-gradient(135deg,#0891b2,#2563eb)}
-#quizCard{max-width:700px;margin:0 auto;padding:26px}
+#quizView{display:flex;align-items:flex-start}
+#quizView .wrap{flex:1;margin:0;padding:24px;max-width:none;min-height:calc(100vh - 57px)}
+
+#quizCard{width:100%;max-width:none;padding:26px}
 .opt{border:none;border-radius:10px;padding:14px 16px;margin:10px 0;cursor:pointer;transition:.15s;font-size:14px}
 .opt:hover{border-color:var(--blue);background:rgba(37,99,235,.08)}
 .opt.correct{border-color:var(--green);background:rgba(74,222,128,.12);color:var(--green)}
@@ -79,7 +82,7 @@ tbody tr:hover td{background:var(--bg3)}
 .analysis-block ul{padding-left:18px;list-style:disc}
 .analysis-mnemonic{background:rgba(147,51,234,.1);border-left:3px solid var(--purple);border-radius:6px;padding:10px 14px;font-size:12.5px;color:var(--purple);font-weight:600;margin-bottom:14px}
 .analysis-kp{background:rgba(37,99,235,.06);border-radius:8px;padding:10px 14px;border:1px solid var(--border)}
-.side-panel{position:fixed;right:0;top:0;bottom:0;width:230px;background:var(--bg2);border-left:1px solid var(--border);padding:18px 14px;overflow-y:auto;z-index:50}
+.side-panel{width:250px;flex:0 0 250px;background:var(--bg2);border-left:1px solid var(--border);padding:18px 14px;overflow-y:auto}
 .side-panel h3{font-size:12px;color:var(--muted);font-weight:700;margin-bottom:14px;letter-spacing:.5px}
 .side-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
 .side-cell{aspect-ratio:1;display:flex;align-items:center;justify-content:center;border-radius:8px;border:1.5px solid var(--border);font-size:12px;font-weight:700;color:var(--muted2);cursor:pointer;transition:.15s;background:var(--bg3)}
@@ -95,22 +98,19 @@ tbody tr:hover td{background:var(--bg3)}
 .side-status.correct{background:rgba(74,222,128,.2);border-color:var(--green);color:var(--green)}
 .side-status.wrong{background:rgba(248,113,113,.2);border-color:var(--red);color:var(--red)}
 .side-title{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.main-with-side{margin-right:230px}
-#quizView .wrap.main-with-side{max-width:none;margin:0 230px 0 0;padding:24px}
-#quizView #quizCard{width:100%;max-width:none;margin:0}
-#quizView #quizCard{width:100%;max-width:100%;margin:24px 0}
-.nav-bar{display:flex;gap:12px;margin:18px 0;justify-content:space-between}
-.nav-bar .btn{flex:1;padding:11px 0;font-size:14px;font-weight:700;border-radius:9px;cursor:pointer;transition:.15s}
+
+.nav-bar{display:flex;gap:16px;margin:22px 0 0;justify-content:center}
+.nav-bar .btn{width:180px;padding:11px 0;font-size:14px;font-weight:700;border-radius:9px;cursor:pointer;transition:.15s;text-align:center}
 .nav-bar .btn-prev{background:var(--bg3);color:var(--text);border:1px solid var(--border)}
 .nav-bar .btn-prev:hover{border-color:var(--blue);color:var(--blue)}
 .nav-bar .btn-next2{background:var(--blue);color:#fff;border:none}
 .nav-bar .btn-next2:hover{background:#3b82f6;transform:translateY(-1px)}
 .nav-bar .btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
-.q{font-size:16px;font-weight:600;margin-bottom:16px;line-height:1.75}
+.q{font-size:21px;font-weight:800;margin-bottom:20px;line-height:1.7;letter-spacing:.2px;color:var(--text)}
 .q pre{background:var(--bg3);color:var(--blue);border-radius:8px;padding:14px 16px;margin:12px 0;overflow-x:auto;font-family:Consolas,Menlo,monospace;font-size:13px;line-height:1.65;font-weight:400;border:1px solid var(--border)}
 .q code{font-family:Consolas,Menlo,monospace;background:rgba(96,165,250,.12);padding:2px 6px;border-radius:4px}
 .q pre code{background:none;padding:0}
-.meta{color:var(--muted2);font-size:12px;margin-bottom:16px;text-align:center;font-weight:600}
+.meta{color:var(--muted);font-size:12.5px;margin-bottom:18px;text-align:center;font-weight:700;letter-spacing:.6px}
 .log{margin-top:16px;font-size:13px;color:var(--muted);min-height:20px;text-align:center}
 .empty{padding:44px;text-align:center;color:var(--muted2);font-size:13px}
 @media(max-width:900px){.stats{grid-template-columns:repeat(2,1fr)}.filters{grid-template-columns:1fr 1fr}}
@@ -166,7 +166,6 @@ tbody tr:hover td{background:var(--bg3)}
 <div id="quizView" style="display:none">
   <div class="wrap main-with-side">
     <div id="quizCard"></div>
-    <div class="log" id="quizLog"></div>
   </div>
   <div class="side-panel">
     <h3>📋 答题状态</h3>
