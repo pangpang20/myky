@@ -1,6 +1,86 @@
 [
   {
     "subject": "数据结构",
+    "itemId": "数据结构-随机存取存储方式",
+    "id": "ds-sa1",
+    "topic": "随机存取·基础复现",
+    "type": "single",
+    "question": "若线性表最常用的操作是存取第 i 个元素及其前驱和后继元素的值，为了提高效率，应采用（　）的存储方式。",
+    "options": {
+      "A": "单链表",
+      "B": "双链表",
+      "C": "循环单链表",
+      "D": "顺序表"
+    },
+    "answer": "D",
+    "analysis": "顺序表随机存取 O(1)，i、i-1、i+1 都是下标直达；双链表定位第 i 个仍需遍历 O(n)。"
+  },
+  {
+    "subject": "数据结构",
+    "itemId": "数据结构-随机存取存储方式",
+    "id": "ds-sa2",
+    "topic": "随机存取·定位+前驱",
+    "type": "single",
+    "question": "若线性表最常用的操作是存取第 i 个元素及其前驱的值，最节省时间的存储方式是（ ）。",
+    "options": {
+      "A": "单链表",
+      "B": "双链表",
+      "C": "循环单链表",
+      "D": "顺序表"
+    },
+    "answer": "D",
+    "analysis": "随机存取，i 与 i-1 都是下标直达，O(1)。"
+  },
+  {
+    "subject": "数据结构",
+    "itemId": "数据结构-随机存取存储方式",
+    "id": "ds-sa3",
+    "topic": "随机存取·双链表插入",
+    "type": "single",
+    "question": "在双链表中，已知 p 指向某结点，在 p 之后插入 s 结点的正确操作顺序是（ ）。",
+    "options": {
+      "A": "p->next=s; s->prior=p; s->next=p->next; p->next=s",
+      "B": "s->prior=p; s->next=p->next; p->next->prior=s; p->next=s",
+      "C": "s->next=p->next; p->next=s; s->prior=p; p->next->prior=s",
+      "D": "任意顺序均可"
+    },
+    "answer": "B",
+    "analysis": "先接 s 的两根指针，再断开 p 与后继，避免丢失 p->next。"
+  },
+  {
+    "subject": "数据结构",
+    "itemId": "数据结构-随机存取存储方式",
+    "id": "ds-sa4",
+    "topic": "随机存取·地址计算",
+    "type": "single",
+    "question": "顺序表中第 i 个元素的地址（LOC 为首元素地址，每个元素占 L 字节）是（ ）。",
+    "options": {
+      "A": "LOC + i×L",
+      "B": "LOC + (i-1)×L",
+      "C": "LOC + (i+1)×L",
+      "D": "无法计算"
+    },
+    "answer": "B",
+    "analysis": "下标从 1 开始时偏移 i-1 个元素。"
+  },
+  {
+    "subject": "数据结构",
+    "itemId": "数据结构-随机存取存储方式",
+    "id": "ds-sa5",
+    "topic": "随机存取·本质区别",
+    "type": "single",
+    "question": "下列关于线性表存储结构的说法，正确的是（ ）。",
+    "options": {
+      "A": "顺序表插入删除不需要移动元素",
+      "B": "链表支持随机存取",
+      "C": "顺序表支持随机存取，链表只能顺序存取",
+      "D": "双链表的存取效率高于顺序表"
+    },
+    "answer": "C",
+    "analysis": "顺序表随机存取 O(1)，链表顺序存取 O(n)；插入删除链表占优。"
+  },
+  {
+    "subject": "数据结构",
     "itemId": "数据结构-递归函数时间复杂度",
     "id": "ds-rc1",
     "topic": "递归·基础复现",
