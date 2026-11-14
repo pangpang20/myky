@@ -281,15 +281,6 @@
   ],
   "answers": [
     {
-      "roundId": "t1"
-    },
-    {
-      "roundId": "t1",
-      "itemId": "计算机-网络基本概念",
-      "id": "cn-r1-001",
-      "correct": true
-    },
-    {
       "roundId": "eb-1794618656004",
       "itemId": "计算机-网络基本概念",
       "id": "cn-r1-001",

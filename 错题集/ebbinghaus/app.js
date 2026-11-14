@@ -411,6 +411,17 @@ function trendBuckets(){
   return keys.map(k=>({key:k,ans:sums[k]?sums[k].ans:0,add:sums[k]?sums[k].add:0}));
 }
 function clampY(y,pt,pb){return Math.max(pt,Math.min(pb,y))}
+function smoothPath(pts){
+  if(!pts||pts.length<2)return "";
+  let d="M "+pts[0].x+" "+pts[0].y;
+  for(let i=0;i<pts.length-1;i++){
+    const p0=pts[i>0?i-1:i],p1=pts[i],p2=pts[i+1],p3=pts[i+2]||p2;
+    const c1x=p1.x+(p2.x-p0.x)/6,c1y=p1.y+(p2.y-p0.y)/6;
+    const c2x=p2.x-(p3.x-p1.x)/6,c2y=p2.y-(p3.y-p1.y)/6;
+    d+=" C "+c1x+" "+c1y+", "+c2x+" "+c2y+", "+p2.x+" "+p2.y;
+  }
+  return d;
+}
 function renderTrend(){
   const svg=document.getElementById("trendSvg");
   if(!svg)return;
