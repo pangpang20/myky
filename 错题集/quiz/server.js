@@ -24,7 +24,7 @@ h.createServer((req,res)=>{
   f.readFile(fp,(e,d)=>{
     if(e){res.writeHead(404);res.end('not found');return;}
     const ext=p.extname(fp);
-    const mime={'.html':'text/html; charset=utf-8','.json':'application/json; charset=utf-8'}[ext]||'text/plain; charset=utf-8';
+    const mime={'.html':'text/html; charset=utf-8','.json':'application/json; charset=utf-8','.js':'application/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.woff2':'font/woff2','.woff':'font/woff','.ttf':'font/ttf'}[ext]||'text/plain; charset=utf-8';
     res.writeHead(200,{'Content-Type':mime,'Cache-Control':'no-store'});
     res.end(d);
   });
