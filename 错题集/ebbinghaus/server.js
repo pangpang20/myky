@@ -1,5 +1,6 @@
 const h = require('http'), f = require('fs'), p = require('path');
 const ROOT = 'C:/data/code/ky/错题集';
+const ROOT_RES = p.resolve(ROOT);
 const WEB_DIR = p.join(ROOT, 'ebbinghaus');
 const DB_FILE = p.join(ROOT, 'data', 'db.json');
 
@@ -79,6 +80,23 @@ const server = h.createServer((req, res) => {
     const db = loadDB();
     res.writeHead(200, { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' });
     res.end(JSON.stringify(db));
+    return;
+  }
+
+  // ---- API: 读取错题 Markdown ----
+  if (req.url.startsWith('/api/note/') && req.method === 'GET') {
+    const rel = decodeURIComponent(req.url.split('/api/note/')[1]);
+    if (!rel.endsWith('.md') || rel.includes('..') || p.isAbsolute(rel)) {
+      res.writeHead(400); res.end('bad path'); return;
+    }
+    const fp = p.resolve(ROOT, rel);
+    if (!fp.startsWith(ROOT_RES + p.sep)) { res.writeHead(404); res.end('not found'); return; }
+    if (!f.existsSync(fp)) { res.writeHead(404); res.end('not found'); return; }
+    f.readFile(fp, (e, d) => {
+      if (e) { res.writeHead(404); res.end('not found'); return; }
+      res.writeHead(200, { 'Content-Type': 'text/markdown; charset=utf-8', 'Cache-Control': 'no-store' });
+      res.end(d);
+    });
     return;
   }
 

@@ -149,6 +149,21 @@ tbody tr:hover td{background:var(--bg3)}
 .modal td .row-sub{font-size:11px;color:var(--muted2);margin-top:2px}
 .modal td.clickable{cursor:pointer}
 .modal td.clickable:hover{background:var(--bg3)}
+.note-body{padding:20px 24px;font-size:13.5px;line-height:1.8;color:var(--text)}
+.note-body h1{font-size:19px;margin:18px 0 10px;color:var(--text)}
+.note-body h1:first-child{margin-top:0}
+.note-body h2{font-size:16px;margin:16px 0 8px;padding-bottom:4px;border-bottom:1px solid var(--border);color:var(--text)}
+.note-body h3{font-size:14px;margin:14px 0 6px;color:var(--text)}
+.note-body p{margin:6px 0}
+.note-body ul,.note-body ol{margin:6px 0;padding-left:22px}
+.note-body table{border-collapse:collapse;width:100%;margin:10px 0;font-size:12.5px}
+.note-body th,.note-body td{border:1px solid var(--border);padding:6px 10px;text-align:left}
+.note-body th{background:var(--bg3);font-weight:600}
+.note-body pre{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:12px 14px;overflow-x:auto;font-family:Consolas,Menlo,monospace;font-size:12.5px;line-height:1.65;margin:10px 0}
+.note-body code{font-family:Consolas,Menlo,monospace;background:rgba(96,165,250,.12);padding:2px 6px;border-radius:4px;font-size:12.5px}
+.note-body pre code{background:none;padding:0}
+.note-body blockquote{margin:10px 0;padding:8px 14px;border-left:3px solid var(--blue);background:var(--bg3);border-radius:0 8px 8px 0;color:var(--muted)}
+.note-body strong{color:var(--text)}
 </style>
 </head>
 <body>
@@ -206,6 +221,7 @@ tbody tr:hover td{background:var(--bg3)}
     <div class="pager" id="pager"></div>
   </div>
 </div>
+<div class="modal-mask" id="noteModal" onclick="if(event.target===this)closeNote()"><div class="modal" style="max-width:720px"><h3><span id="noteTitle"></span><button onclick="closeNote()">✕</button></h3><div class="note-body" id="noteBody"></div></div></div>
 <div class="modal-mask" id="drillModal" onclick="if(event.target===this)closeDrill()"><div class="modal"><h3><span id="drillTitle"></span><button onclick="closeDrill()">✕</button></h3><div class="modal-body" id="drillBody"></div></div></div>
 <div id="quizView" style="display:none">
   <div class="wrap main-with-side">

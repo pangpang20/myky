@@ -46,5 +46,12 @@ check(html.includes('trendSvg'), 'trend svg must exist')
 check(html.includes('按日')&&html.includes('按月'), 'trend must offer day/month toggle')
 check(html.includes('--cyan:#22d3ee'), 'cyan color must be defined in dark theme')
 
+check(app.includes('function mdToHtml(md)'), 'note modal must render markdown content')
+check(app.includes('function openNote(itemId)'), 'table knowledge point must open note modal')
+check(app.includes("/api/note/'+item.file"), 'note modal must fetch markdown API')
+check(app.includes('function closeNote()'), 'note modal must be closable')
+check(html.includes('id="noteModal"'), 'note modal markup must exist')
+check(html.includes('class="note-body"'), 'note modal must have styled markdown body')
+check(read('ebbinghaus/server.js').includes("/api/note/"), 'server must expose markdown note API')
 if (failed) { console.error(failed + ' check(s) failed'); process.exit(1) }
 console.log('Stats drill validation passed.')

@@ -55,6 +55,90 @@ function renderStats(){
     '<div class="stat green"><div class="stat-top"><div class="stat-ico"><span>✅</span></div><div class="stat-label">已掌握</div></div><div class="num link" onclick="drillStatus(\'mastered\')" title="按科目查看知识点数">'+mast+'<span class="unit">个</span></div><div class="stat-hint">完成全部 6 轮复习</div></div>'+
     '<div class="stat purple"><div class="stat-top"><div class="stat-ico"><span>✏️</span></div><div class="stat-label">累计作答</div></div><div class="num link" onclick="drillAnswersByDay()" title="按日期查看答题数">'+rev+'<span class="unit">次</span></div><div class="stat-hint">含即时练习与复习</div></div>';
 }
+
+// ---- 错题 Markdown 查看 ----
+function mdInline(t){
+  let x=esc(t);
+  x=x.replace(/`([^`]+)/g,'<code>$1</code>');
+  x=x.replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>');
+  x=x.replace(/\[([^\]]+)\]\(([^)]+)\)/g,'<a href="$2" target="_blank" rel="noopener">$1</a>');
+  return x;
+}
+function mdToHtml(md){
+  const lines=String(md).replace(/\r\n/g,'\n').split('\n');
+  let out=[],i=0;
+  const isTableSep=l=>/^\s*\|?[\s:-]+\|[\s:|-]*$/.test(l)&&l.includes('|')&&l.includes('-');
+  const cells=l=>l.trim().replace(/^\|/,'').replace(/\|$/,'').split('|').map(c=>c.trim());
+  while(i<lines.length){
+    const line=lines[i];
+    if(/^\s*$/.test(line)){i++;continue}
+    if(/^\s*```/.test(line)){
+      const buf=[];i++;
+      while(i<lines.length&&!/^\s*```/.test(lines[i])){buf.push(lines[i]);i++}
+      i++;
+      out.push('<pre><code>'+esc(buf.join('\n'))+'</code></pre>');
+      continue;
+    }
+    const h=/^(#{1,6})\s+(.*)$/.exec(line);
+    if(h){const n=Math.min(h[1].length,3);out.push('<h'+n+'>'+mdInline(h[2])+'</h'+n+'>');i++;continue}
+    if(/^\s*>/.test(line)){
+      const buf=[];
+      while(i<lines.length&&/^\s*>/.test(lines[i])){buf.push(lines[i].replace(/^\s*>\s?/,''));i++}
+      out.push('<blockquote>'+buf.map(mdInline).join('<br>')+'</blockquote>');
+      continue;
+    }
+    if(line.includes('|')&&i+1<lines.length&&isTableSep(lines[i+1])){
+      const head=cells(line);i+=2;
+      const body=[];
+      while(i<lines.length&&lines[i].includes('|')&&!/^\s*$/.test(lines[i])){body.push(cells(lines[i]));i++}
+      out.push('<table><thead><tr>'+head.map(c=>'<th>'+mdInline(c)+'</th>').join('')+'</tr></thead><tbody>'+
+        body.map(r=>'<tr>'+head.map((_,k)=>'<td>'+mdInline(r[k]||'')+'</td>').join('')+'</tr>').join('')+'</tbody></table>');
+      continue;
+    }
+    if(/^\s*([-*+]|\d+\.)\s+/.test(line)){
+      const ordered=/^\s*\d+\./.test(line);
+      const items=[];
+      while(i<lines.length&&/^\s*([-*+]|\d+\.)\s+/.test(lines[i])){
+        let it=lines[i].replace(/^\s*([-*+]|\d+\.)\s+/,'');
+        i++;
+        while(i<lines.length&&lines[i]!==''&&!/^\s*([-*+]|\d+\.)\s+/.test(lines[i])&&!/^#{1,6}\s/.test(lines[i])&&!/^\s*```/.test(lines[i])){
+          it+=' '+lines[i].trim();i++;
+        }
+        items.push(it);
+      }
+      out.push('<'+(ordered?'ol':'ul')+'>'+items.map(t=>'<li>'+mdInline(t)+'</li>').join('')+'</'+(ordered?'ol':'ul')+'>');
+      continue;
+    }
+    const buf=[line];i++;
+    while(i<lines.length&&!/^\s*$/.test(lines[i])&&!/^#{1,6}\s/.test(lines[i])&&!/^\s*([-*+]|\d+\.)\s+/.test(lines[i])&&!/^\s*```/.test(lines[i])&&!/^\s*>/.test(lines[i])&&!(lines[i].includes('|')&&i+1<lines.length&&isTableSep(lines[i+1]))){
+      buf.push(lines[i]);i++;
+    }
+    out.push('<p>'+buf.map(mdInline).join('<br>')+'</p>');
+  }
+  return out.join('\n');
+}
+async function openNote(itemId){
+  const item=DB.items.find(x=>x.id===itemId);
+  if(!item){alert('未找到该知识点');return}
+  document.getElementById('noteTitle').textContent='📄 '+item.id;
+  const body=document.getElementById('noteBody');
+  body.innerHTML='<div class="empty">加载中…</div>';
+  document.getElementById('noteModal').classList.add('open');
+  try{
+    const r=await fetch('/api/note/'+item.file.split('/').map(encodeURIComponent).join('/'));
+    if(!r.ok)throw new Error('HTTP '+r.status);
+    body.innerHTML=mdToHtml(await r.text());
+    if(window.renderMathInElement){
+      try{renderMathInElement(body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})}catch(e){}
+    }
+  }catch(e){
+    body.innerHTML='<div class="empty">无法加载：'+esc(e.message)+'<br>'+esc(item.file)+'</div>';
+  }
+}
+function closeNote(){
+  document.getElementById('noteModal').classList.remove('open');
+}
+
 function bindDrillClicks(){
   const body=document.getElementById('drillBody');
   if(!body||body.dataset.bound)return;
@@ -210,7 +294,7 @@ function renderAll(){
     const addedAt=fmtTs(i.createdAt||i.firstLearned);
     const due=i.status==='learning'&&i.dueDate<=t;
     const tag=i.status==='mastered'?'<span class="tag mastered">已掌握</span>':due?'<span class="tag due">今日到期</span>':'<span class="tag learning">学习中</span>';
-    return '<tr><td style="color:var(--muted2);font-size:12px;white-space:nowrap">'+esc(addedAt)+'</td><td style="text-align:left;font-weight:600">'+esc(i.id)+'</td><td>'+esc(i.subject)+'</td><td>'+tag+'</td><td>'+qCount+' 题</td><td>第 '+i.round+' 轮</td><td>'+(i.status==='mastered'?'—':i.dueDate)+'</td><td>'+(i.reviews||[]).length+' 次</td><td><button class="btn ghost" onclick="resetItem(\''+i.id+'\')">重置</button></td></tr>';
+    return '<tr><td style="color:var(--muted2);font-size:12px;white-space:nowrap">'+esc(addedAt)+'</td><td style="text-align:left;font-weight:600"><a href="javascript:void(0)" onclick="openNote(\''+i.id+'\')" title="查看错题 Markdown" style="color:inherit;text-decoration:none;border-bottom:1px dashed var(--muted2)">'+esc(i.id)+'</a></td><td>'+esc(i.subject)+'</td><td>'+tag+'</td><td>'+qCount+' 题</td><td>第 '+i.round+' 轮</td><td>'+(i.status==='mastered'?'—':i.dueDate)+'</td><td>'+(i.reviews||[]).length+' 次</td><td><button class="btn ghost" onclick="resetItem(\''+i.id+'\')">重置</button></td></tr>';
   }).join(''):'<tr><td colspan="9" class="empty">没有符合条件的数据</td></tr>';
   renderPager(total,tp);
 }
@@ -360,7 +444,7 @@ function renderSide(){
 }
 function jumpTo(i){qi=i;renderQ()}
 document.addEventListener('keydown',e=>{
-  if(e.key==='Escape'){const m=document.getElementById('drillModal');if(m&&m.classList.contains('open')){closeDrill();return}}
+  if(e.key==='Escape'){const n=document.getElementById('noteModal');if(n&&n.classList.contains('open')){closeNote();return}const m=document.getElementById('drillModal');if(m&&m.classList.contains('open')){closeDrill();return}}
   if(document.getElementById('quizView').style.display==='none')return;
   if(e.key==='ArrowRight'&&qi<queue.length-1){e.preventDefault();nextQ()}
   if(e.key==='ArrowLeft'&&qi>0){e.preventDefault();prevQ()}
