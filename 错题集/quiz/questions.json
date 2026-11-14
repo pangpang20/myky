@@ -1,5 +1,80 @@
 [
   {
+    "id": "ds-q9",
+    "subject": "数据结构",
+    "topic": "sqrt 边界·基础复现",
+    "type": "single",
+    "question": "设 n 为正整数，sqrt(n) 按常数时间计算。下列程序段的时间复杂度是（ ）。\n\n```c\nfor (i = 0; i <= sqrt(n); i++)\n    count++;\n```",
+    "options": {
+      "A": "O(log2 n)",
+      "B": "O(n^(1/2))",
+      "C": "O(n^(1/3))",
+      "D": "O(n)"
+    },
+    "answer": "B",
+    "analysis": "步长不变（i++），边界是 sqrt(n) = n^(1/2)，执行 n^(1/2)+1 次，量级 O(n^(1/2))。这是多项式家族，不是对数家族。"
+  },
+  {
+    "id": "ds-q10",
+    "subject": "数据结构",
+    "topic": "步长不变·三次方根边界",
+    "type": "single",
+    "question": "下列程序段的时间复杂度是（ ）。\n\n```c\nfor (i = 1; i * i * i <= n; i++)\n    count++;\n```",
+    "options": {
+      "A": "O(n)",
+      "B": "O(n^(1/2))",
+      "C": "O(n^(1/3))",
+      "D": "O(log n)"
+    },
+    "answer": "C",
+    "analysis": "终止时 i*i*i 约等于 n，即 i 约等于 n^(1/3)，共执行 n^(1/3) 次。步长不变时，次数由边界决定。"
+  },
+  {
+    "id": "ds-q11",
+    "subject": "数据结构",
+    "topic": "步长不变·平方边界",
+    "type": "single",
+    "question": "下列程序段的时间复杂度是（ ）。\n\n```c\nfor (i = 0; i <= n * n; i++)\n    count++;\n```",
+    "options": {
+      "A": "O(n)",
+      "B": "O(n^2)",
+      "C": "O(log n)",
+      "D": "O(n log n)"
+    },
+    "answer": "B",
+    "analysis": "步长仍为 i++，边界为 n 的平方，执行 n^2+1 次，量级 O(n^2)。"
+  },
+  {
+    "id": "ds-q12",
+    "subject": "数据结构",
+    "topic": "步长减半·除以三",
+    "type": "single",
+    "question": "下列程序段的时间复杂度是（ ）。\n\n```c\ni = n;\nwhile (i > 1)\n    i = i / 3;\n```",
+    "options": {
+      "A": "O(n)",
+      "B": "O(log3 n)",
+      "C": "O(n^(1/3))",
+      "D": "O(log log n)"
+    },
+    "answer": "B",
+    "analysis": "每轮缩小 3 倍，需 log3(n) 轮。底数不影响量级，记为 O(log n)。"
+  },
+  {
+    "id": "ds-q13",
+    "subject": "数据结构",
+    "topic": "相同形状·不同答案对比",
+    "type": "single",
+    "question": "比较下列两段程序，时间复杂度分别是（ ）。\n\n```c\n// 甲\ni = n;\nwhile (i > 1) i = i / 2;\n\n// 乙\nfor (i = 0; i < sqrt(n); i++) count++;\n```",
+    "options": {
+      "A": "甲 O(n)、乙 O(log n)",
+      "B": "甲 O(log n)、乙 O(n^(1/2))",
+      "C": "甲 O(log log n)、乙 O(log n)",
+      "D": "甲 O(n^(1/2))、乙 O(n)"
+    },
+    "answer": "B",
+    "analysis": "甲是步长减半，属对数家族 O(log n)；乙是步长不变且边界为 sqrt(n)，属多项式家族 O(n^(1/2))。判定依据不同：一个看步长，一个看边界。"
+  },
+  {
     "id": "ds-q1",
     "subject": "数据结构",
     "topic": "算法特性",
@@ -118,80 +193,5 @@
     },
     "answer": "B",
     "analysis": "与上一题相同：外层 √n 次，内层求和 ≈ n/2，总次数 O(n)。关键：双层循环必须写求和式，不能量级相乘。"
-  },
-  {
-    "id": "ds-q9",
-    "subject": "数据结构",
-    "topic": "sqrt 边界·基础复现",
-    "type": "single",
-    "question": "设 n 为正整数，sqrt(n) 按常数时间计算。下列程序段的时间复杂度是（ ）。\n\n```c\nfor (i = 0; i <= sqrt(n); i++)\n    count++;\n```",
-    "options": {
-      "A": "O(log2 n)",
-      "B": "O(n^(1/2))",
-      "C": "O(n^(1/3))",
-      "D": "O(n)"
-    },
-    "answer": "B",
-    "analysis": "步长不变（i++），边界是 sqrt(n) = n^(1/2)，执行 n^(1/2)+1 次，量级 O(n^(1/2))。这是多项式家族，不是对数家族。"
-  },
-  {
-    "id": "ds-q10",
-    "subject": "数据结构",
-    "topic": "步长不变·三次方根边界",
-    "type": "single",
-    "question": "下列程序段的时间复杂度是（ ）。\n\n```c\nfor (i = 1; i * i * i <= n; i++)\n    count++;\n```",
-    "options": {
-      "A": "O(n)",
-      "B": "O(n^(1/2))",
-      "C": "O(n^(1/3))",
-      "D": "O(log n)"
-    },
-    "answer": "C",
-    "analysis": "终止时 i*i*i 约等于 n，即 i 约等于 n^(1/3)，共执行 n^(1/3) 次。步长不变时，次数由边界决定。"
-  },
-  {
-    "id": "ds-q11",
-    "subject": "数据结构",
-    "topic": "步长不变·平方边界",
-    "type": "single",
-    "question": "下列程序段的时间复杂度是（ ）。\n\n```c\nfor (i = 0; i <= n * n; i++)\n    count++;\n```",
-    "options": {
-      "A": "O(n)",
-      "B": "O(n^2)",
-      "C": "O(log n)",
-      "D": "O(n log n)"
-    },
-    "answer": "B",
-    "analysis": "步长仍为 i++，边界为 n 的平方，执行 n^2+1 次，量级 O(n^2)。"
-  },
-  {
-    "id": "ds-q12",
-    "subject": "数据结构",
-    "topic": "步长减半·除以三",
-    "type": "single",
-    "question": "下列程序段的时间复杂度是（ ）。\n\n```c\ni = n;\nwhile (i > 1)\n    i = i / 3;\n```",
-    "options": {
-      "A": "O(n)",
-      "B": "O(log3 n)",
-      "C": "O(n^(1/3))",
-      "D": "O(log log n)"
-    },
-    "answer": "B",
-    "analysis": "每轮缩小 3 倍，需 log3(n) 轮。底数不影响量级，记为 O(log n)。"
-  },
-  {
-    "id": "ds-q13",
-    "subject": "数据结构",
-    "topic": "相同形状·不同答案对比",
-    "type": "single",
-    "question": "比较下列两段程序，时间复杂度分别是（ ）。\n\n```c\n// 甲\ni = n;\nwhile (i > 1) i = i / 2;\n\n// 乙\nfor (i = 0; i < sqrt(n); i++) count++;\n```",
-    "options": {
-      "A": "甲 O(n)、乙 O(log n)",
-      "B": "甲 O(log n)、乙 O(n^(1/2))",
-      "C": "甲 O(log log n)、乙 O(log n)",
-      "D": "甲 O(n^(1/2))、乙 O(n)"
-    },
-    "answer": "B",
-    "analysis": "甲是步长减半，属对数家族 O(log n)；乙是步长不变且边界为 sqrt(n)，属多项式家族 O(n^(1/2))。判定依据不同：一个看步长，一个看边界。"
   }
 ]
