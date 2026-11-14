@@ -1,5 +1,85 @@
 [
   {
+    "subject": "数据结构",
+    "itemId": "数据结构-递归函数时间复杂度",
+    "id": "ds-rc1",
+    "topic": "递归·基础复现",
+    "type": "single",
+    "question": "设 n 为正整数。下列递归函数的时间复杂度是（ ）。\\n\\n```c\\nint f(int n) {\n    if (n <= 1) return 1;\n    return f(n / 2) + 1;\n}\\n```",
+    "options": {
+      "A": "O(log₂ n)",
+      "B": "O(n)",
+      "C": "O(n log₂ n)",
+      "D": "O(n²)"
+    },
+    "answer": "A",
+    "analysis": "单分支递归，每次只有一个调用，深度 log₂ n，每层 O(1)。"
+  },
+  {
+    "subject": "数据结构",
+    "itemId": "数据结构-递归函数时间复杂度",
+    "id": "ds-rc2",
+    "topic": "递归·归并型",
+    "type": "single",
+    "question": "设 n 为正整数。下列递归函数的时间复杂度是（ ）。\\n\\n```c\\nvoid f(int n) {\n    if (n <= 1) return;\n    f(n / 2);\n    f(n / 2);\n    for (i = 1; i <= n; i++) count++;\n}\\n```",
+    "options": {
+      "A": "O(log₂ n)",
+      "B": "O(n)",
+      "C": "O(n log₂ n)",
+      "D": "O(n²)"
+    },
+    "answer": "C",
+    "analysis": "T(n)=2T(n/2)+O(n)，主定理 a=2,b=2,d=1 → O(n log n)，即归并排序型。"
+  },
+  {
+    "subject": "数据结构",
+    "itemId": "数据结构-递归函数时间复杂度",
+    "id": "ds-rc3",
+    "topic": "递归·双分支线性缩减",
+    "type": "single",
+    "question": "设 n 为正整数。下列递归函数的时间复杂度是（ ）。\\n\\n```c\\nvoid f(int n) {\n    if (n <= 1) return;\n    f(n - 1);\n    f(n - 1);\n}\\n```",
+    "options": {
+      "A": "O(n)",
+      "B": "O(n log₂ n)",
+      "C": "O(n²)",
+      "D": "O(2ⁿ)"
+    },
+    "answer": "D",
+    "analysis": "每层分裂两个分支，线性缩减，满二叉递归树，节点数 2ⁿ-1。"
+  },
+  {
+    "subject": "数据结构",
+    "itemId": "数据结构-递归函数时间复杂度",
+    "id": "ds-rc4",
+    "topic": "递归·斐波那契",
+    "type": "single",
+    "question": "设 n 为正整数。下列递归函数的时间复杂度是（ ）。\\n\\n```c\\nint fib(int n) {\n    if (n <= 1) return n;\n    return fib(n - 1) + fib(n - 2);\n}\\n```",
+    "options": {
+      "A": "O(n)",
+      "B": "O(n log₂ n)",
+      "C": "O(n²)",
+      "D": "O(2ⁿ)"
+    },
+    "answer": "D",
+    "analysis": "每层 fib(n-1)+fib(n-2) 分裂两个分支，调用树≈2ⁿ。"
+  },
+  {
+    "subject": "数据结构",
+    "itemId": "数据结构-递归函数时间复杂度",
+    "id": "ds-rc5",
+    "topic": "递归·双分支无层",
+    "type": "single",
+    "question": "设 n 为正整数。下列递归函数的时间复杂度是（ ）。\\n\\n```c\\nvoid f(int n) {\n    if (n <= 1) return;\n    f(n / 3);\n    f(n / 3);\n}\\n```",
+    "options": {
+      "A": "O(log₂ n)",
+      "B": "O(n^(log₂ 3)) ≈ O(n^1.585)",
+      "C": "O(n)",
+      "D": "O(n log₂ n)"
+    },
+    "answer": "B",
+    "analysis": "T(n)=2T(n/3)+O(1)，主定理 a=2,b=3 → n^(log₂ 3)，量级介于 log 与 n 之间。"
+  },
+  {
     "itemId": "数据结构-常数步长除法循环",
     "id": "ds-cs1",
     "topic": "常数步长·基础复现",

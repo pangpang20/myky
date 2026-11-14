@@ -71,7 +71,7 @@ if (p.quizQuestions?.length) {
   const existingIds = new Set(quiz.map(q => q.id))
   const fresh = p.quizQuestions
     .filter(q => !existingIds.has(q.id))
-    .map(q => ({ itemId: p.itemId, ...q }))
+    .map(q => ({ subject: p.subject, itemId: p.itemId, ...q }))
   write('../quiz/questions.json', [...fresh, ...quiz])
 }
 
