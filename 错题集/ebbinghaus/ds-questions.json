@@ -475,6 +475,91 @@
       },
       "answer": "B",
       "analysis": "判定看「内层是否依赖」：依赖则求和（本题 ≈ 2n → O(n)），独立则相乘（n log n）。"
+    },
+    {
+      "id": "ds-r1-010101041",
+      "itemId": "数据结构-调和级数步长循环",
+      "round": 1,
+      "subject": "数据结构",
+      "topic": "调和·基础·变式1",
+      "type": "single",
+      "question": "下列程序段的时间复杂度是（ ）。\n\n```c\nfor (i = 1; i <= n; i++)\n    for (j = i; j <= n; j += i)\n        count++;\n```",
+      "options": {
+        "A": "O(n)",
+        "B": "O(n log n)",
+        "C": "O(n²)",
+        "D": "O(n√n)"
+      },
+      "answer": "B",
+      "analysis": "内层次数 ⌊n/i⌋，Σn/i = n·H(n) ≈ n log n。"
+    },
+    {
+      "id": "ds-r1-010101042",
+      "itemId": "数据结构-调和级数步长循环",
+      "round": 1,
+      "subject": "数据结构",
+      "topic": "调和·等差对照·变式2",
+      "type": "single",
+      "question": "下列程序段的时间复杂度是（ ）。\n\n```c\nfor (i = 1; i <= n; i++)\n    for (j = i; j <= n; j++)\n        count++;\n```",
+      "options": {
+        "A": "O(n)",
+        "B": "O(n log n)",
+        "C": "O(n²)",
+        "D": "O(n√n)"
+      },
+      "answer": "C",
+      "analysis": "内层步长 1，次数 n−i+1，等差求和 ≈ n²/2。"
+    },
+    {
+      "id": "ds-r1-010101043",
+      "itemId": "数据结构-调和级数步长循环",
+      "round": 1,
+      "subject": "数据结构",
+      "topic": "调和·起点无关·变式3",
+      "type": "single",
+      "question": "下列程序段的时间复杂度是（ ）。\n\n```c\nfor (i = 1; i <= n; i++)\n    for (j = 1; j <= n; j += i)\n        count++;\n```",
+      "options": {
+        "A": "O(n)",
+        "B": "O(n log n)",
+        "C": "O(n²)",
+        "D": "O(n log log n)"
+      },
+      "answer": "B",
+      "analysis": "次数 ⌈n/i⌉ ≈ n/i，起点不影响量级，仍是 n log n。"
+    },
+    {
+      "id": "ds-r1-010101044",
+      "itemId": "数据结构-调和级数步长循环",
+      "round": 1,
+      "subject": "数据结构",
+      "topic": "调和·常数步长·变式4",
+      "type": "single",
+      "question": "下列程序段的时间复杂度是（ ）。\n\n```c\nfor (i = 1; i <= n; i++)\n    for (j = i; j <= n; j += 2 * i)\n        count++;\n```",
+      "options": {
+        "A": "O(n)",
+        "B": "O(n log n)",
+        "C": "O(n²)",
+        "D": "O(n√n)"
+      },
+      "answer": "B",
+      "analysis": "次数 n/(2i)，求和 (n/2)·H(n)，量级 O(n log n)。"
+    },
+    {
+      "id": "ds-r1-010101045",
+      "itemId": "数据结构-调和级数步长循环",
+      "round": 1,
+      "subject": "数据结构",
+      "topic": "调和·数学性质·变式5",
+      "type": "single",
+      "question": "调和级数 H(n) = 1 + 1/2 + … + 1/n 的量级是（ ）。",
+      "options": {
+        "A": "O(1)",
+        "B": "O(√n)",
+        "C": "O(log n)",
+        "D": "O(n)"
+      },
+      "answer": "C",
+      "analysis": "H(n) ≈ ln n + γ，量级 O(log n)。"
     }
   ]
 }
