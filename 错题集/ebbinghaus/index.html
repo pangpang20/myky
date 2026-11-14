@@ -7,8 +7,8 @@
 <script src="/vendor/katex/katex.min.js"></script>
 <script src="/vendor/katex/auto-render.min.js"></script>
 <style>
-:root{--bg:#0f172a;--bg2:#1e293b;--bg3:#0b1220;--border:#334155;--text:#e2e8f0;--muted:#94a3b8;--muted2:#64748b;--blue:#60a5fa;--green:#4ade80;--orange:#fb923c;--purple:#c084fc;--red:#f87171}
-html[data-theme="light"]{--bg:#f1f5f9;--bg2:#ffffff;--bg3:#e2e8f0;--border:#cbd5e1;--text:#1e293b;--muted:#475569;--muted2:#64748b;--blue:#2563eb;--green:#16a34a;--orange:#ea580c;--purple:#9333ea;--red:#dc2626}
+:root{--bg:#0f172a;--bg2:#1e293b;--bg3:#0b1220;--border:#334155;--text:#e2e8f0;--muted:#94a3b8;--muted2:#64748b;--blue:#60a5fa;--green:#4ade80;--orange:#fb923c;--purple:#c084fc;--cyan:#22d3ee;--red:#f87171}
+html[data-theme="light"]{--bg:#f1f5f9;--bg2:#ffffff;--bg3:#e2e8f0;--border:#cbd5e1;--text:#1e293b;--muted:#475569;--muted2:#64748b;--blue:#2563eb;--green:#16a34a;--orange:#ea580c;--purple:#9333ea;--cyan:#0891b2;--red:#dc2626}
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--bg);color:var(--text);font-family:system-ui,"Microsoft YaHei",sans-serif;min-height:100vh;transition:background .25s,color .25s}
 .topbar{background:var(--bg2);border-bottom:1px solid var(--border);padding:14px 24px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
@@ -18,12 +18,12 @@ body{background:var(--bg);color:var(--text);font-family:system-ui,"Microsoft YaH
 .theme-btn{padding:8px 16px;border-radius:8px;border:1px solid var(--border);background:var(--bg);color:var(--text);cursor:pointer;font-size:13px;font-weight:600;transition:.2s}
 .theme-btn:hover{border-color:var(--blue);transform:translateY(-1px)}
 .wrap{max-width:1200px;margin:0 auto;padding:24px}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:20px}
+.stats{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-bottom:20px}
 .stat{position:relative;overflow:hidden;background:var(--bg2);border-radius:14px;padding:20px 22px;border:1px solid var(--border);transition:transform .2s,box-shadow .2s,border-color .2s}
 .stat::before{content:"";position:absolute;left:0;top:0;width:3px;height:100%;background:currentColor;opacity:.9}
 .stat::after{content:"";position:absolute;right:-40px;top:-40px;width:120px;height:120px;border-radius:50%;background:currentColor;opacity:.07;filter:blur(6px)}
 .stat:hover{transform:translateY(-3px);border-color:currentColor;box-shadow:0 10px 24px rgba(0,0,0,.14)}
-.stat.orange{color:var(--orange)}.stat.blue{color:var(--blue)}.stat.green{color:var(--green)}.stat.purple{color:var(--purple)}
+.stat.orange{color:var(--orange)}.stat.blue{color:var(--blue)}.stat.green{color:var(--green)}.stat.purple{color:var(--purple)}.stat.cyan{color:var(--cyan)}
 .stat-top{display:flex;align-items:center;gap:9px;position:relative;z-index:1}
 .stat-ico{width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:15px;background:currentColor;flex:0 0 auto}
 .stat-ico span{filter:brightness(0) invert(1);opacity:.95}
@@ -116,7 +116,20 @@ tbody tr:hover td{background:var(--bg3)}
 .meta{color:var(--muted);font-size:12.5px;margin-bottom:18px;text-align:center;font-weight:700;letter-spacing:.6px}
 .log{margin-top:16px;font-size:13px;color:var(--muted);min-height:20px;text-align:center}
 .empty{padding:44px;text-align:center;color:var(--muted2);font-size:13px}
-@media(max-width:900px){.stats{grid-template-columns:repeat(2,1fr)}.filters{grid-template-columns:1fr 1fr}}
+@media(max-width:1100px){.stats{grid-template-columns:repeat(3,1fr)}}
+.num.link{cursor:pointer}
+.num.link:hover{opacity:.75;text-decoration:underline;text-underline-offset:6px}
+.modal-mask{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:50;align-items:flex-start;justify-content:center;padding:60px 16px}
+.modal-mask.open{display:flex}
+.modal{background:var(--bg2);border:1px solid var(--border);border-radius:14px;min-width:340px;max-width:520px;width:100%;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.35)}
+.modal h3{font-size:14px;padding:16px 20px;border-bottom:1px solid var(--border);color:var(--muted);display:flex;justify-content:space-between;align-items:center}
+.modal h3 button{background:transparent;border:none;color:var(--muted2);font-size:16px;cursor:pointer;padding:0 4px}
+.modal .modal-body{max-height:60vh;overflow:auto}
+.modal table td,.modal table th{text-align:left}
+.modal td .row-main{font-weight:600}
+.modal td .row-sub{font-size:11px;color:var(--muted2);margin-top:2px}
+.modal td.clickable{cursor:pointer}
+.modal td.clickable:hover{background:var(--bg3)}
 </style>
 </head>
 <body>
@@ -166,6 +179,7 @@ tbody tr:hover td{background:var(--bg3)}
     <div class="pager" id="pager"></div>
   </div>
 </div>
+<div class="modal-mask" id="drillModal" onclick="if(event.target===this)closeDrill()"><div class="modal"><h3><span id="drillTitle"></span><button onclick="closeDrill()">✕</button></h3><div class="modal-body" id="drillBody"></div></div></div>
 <div id="quizView" style="display:none">
   <div class="wrap main-with-side">
     <div id="quizCard"></div>

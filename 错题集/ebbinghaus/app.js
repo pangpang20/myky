@@ -18,6 +18,7 @@ async function init(){
   const t=today();
   document.getElementById('todayBadge').textContent='今天 '+t;
   renderStats();renderCurve();fillSubjectFilter();renderAll();renderDueBar();
+  bindDrillClicks();
 }
 
 function updateThemeBtn(){
@@ -43,13 +44,81 @@ function renderStats(){
   const due=DB.items.filter(i=>i.status==='learning'&&i.dueDate<=t).length;
   const learn=DB.items.filter(i=>i.status==='learning').length;
   const mast=DB.items.filter(i=>i.status==='mastered').length;
+  const totalQ=QS.length;
   const rev=(DB.answers||[]).length;
   const s=document.getElementById('stats');
   s.innerHTML=
-    '<div class="stat orange"><div class="stat-top"><div class="stat-ico"><span>⏰</span></div><div class="stat-label">今日到期</div></div><div class="num">'+due+'<span class="unit">个</span></div><div class="stat-hint">'+(due?'需要立即复习':'暂无到期任务')+'</div></div>'+
-    '<div class="stat blue"><div class="stat-top"><div class="stat-ico"><span>📖</span></div><div class="stat-label">学习中</div></div><div class="num">'+learn+'<span class="unit">个</span></div><div class="stat-hint">按遗忘曲线推进中</div></div>'+
-    '<div class="stat green"><div class="stat-top"><div class="stat-ico"><span>✅</span></div><div class="stat-label">已掌握</div></div><div class="num">'+mast+'<span class="unit">个</span></div><div class="stat-hint">完成全部 6 轮复习</div></div>'+
-    '<div class="stat purple"><div class="stat-top"><div class="stat-ico"><span>✏️</span></div><div class="stat-label">累计作答</div></div><div class="num">'+rev+'<span class="unit">次</span></div><div class="stat-hint">含即时练习与复习</div></div>';
+    '<div class="stat cyan"><div class="stat-top"><div class="stat-ico"><span>📚</span></div><div class="stat-label">总题数</div></div><div class="num link" onclick="drillQuestions()" title="按科目查看题数">'+totalQ+'<span class="unit">题</span></div><div class="stat-hint">'+DB.items.length+' 个知识点</div></div>'+
+    '<div class="stat orange"><div class="stat-top"><div class="stat-ico"><span>⏰</span></div><div class="stat-label">今日到期</div></div><div class="num link" onclick="drillStatus(\'due\')" title="按科目查看知识点数">'+due+'<span class="unit">个</span></div><div class="stat-hint">'+(due?'需要立即复习':'暂无到期任务')+'</div></div>'+
+    '<div class="stat blue"><div class="stat-top"><div class="stat-ico"><span>📖</span></div><div class="stat-label">学习中</div></div><div class="num link" onclick="drillStatus(\'learning\')" title="按科目查看知识点数">'+learn+'<span class="unit">个</span></div><div class="stat-hint">按遗忘曲线推进中</div></div>'+
+    '<div class="stat green"><div class="stat-top"><div class="stat-ico"><span>✅</span></div><div class="stat-label">已掌握</div></div><div class="num link" onclick="drillStatus(\'mastered\')" title="按科目查看知识点数">'+mast+'<span class="unit">个</span></div><div class="stat-hint">完成全部 6 轮复习</div></div>'+
+    '<div class="stat purple"><div class="stat-top"><div class="stat-ico"><span>✏️</span></div><div class="stat-label">累计作答</div></div><div class="num link" onclick="drillAnswersByDay()" title="按日期查看答题数">'+rev+'<span class="unit">次</span></div><div class="stat-hint">含即时练习与复习</div></div>';
+}
+function bindDrillClicks(){
+  const body=document.getElementById('drillBody');
+  if(!body||body.dataset.bound)return;
+  body.dataset.bound='1';
+  body.addEventListener('click',e=>{
+    const td=e.target.closest('td[data-filter]');
+    if(!td)return;
+    try{filterTable(JSON.parse(td.dataset.filter))}catch(err){console.error(err)}
+  });
+}
+function openDrill(title,rowsHtml){
+  document.getElementById('drillTitle').textContent=title;
+  document.getElementById('drillBody').innerHTML=rowsHtml;
+  document.getElementById('drillModal').classList.add('open');
+}
+function closeDrill(){
+  document.getElementById('drillModal').classList.remove('open');
+}
+function drillRows(rows){
+  if(!rows.length)return '<div class="empty">暂无数据</div>';
+  return '<table><tbody>'+rows.map(r=>'<tr><td class="'+(r.filter?'clickable':'')+'"'+(r.filter?' data-filter="'+esc(JSON.stringify(r.filter))+ '"':'')+'><div class="row-main">'+esc(r.main)+'</div>'+(r.sub?'<div class="row-sub">'+esc(r.sub)+'</div>':'')+'</td><td style="text-align:right;white-space:nowrap;color:var(--muted)">'+esc(r.count)+'</td></tr>').join('')+'</tbody></table>';
+}
+function drillQuestions(){
+  const map={};
+  QS.forEach(q=>{map[q.subject]=(map[q.subject]||0)+1});
+  const rows=Object.keys(map).sort((a,b)=>map[b]-map[a]).map(sub=>({
+    main:sub||'未分类',
+    sub:'点击筛选下方知识点表',
+    count:map[sub]+' 题',
+    filter:{subject:sub}
+  }));
+  openDrill('📚 总题数 · 按科目',drillRows(rows));
+}
+function drillStatus(status){
+  const t=today();
+  const items=DB.items.filter(i=>{
+    if(status==='learning')return i.status==='learning';
+    if(status==='mastered')return i.status==='mastered';
+    if(status==='due')return i.status==='learning'&&i.dueDate<=t;
+    return true;
+  });
+  const map={};
+  items.forEach(i=>{map[i.subject]=(map[i.subject]||0)+1});
+  const label={due:'今日到期',learning:'学习中',mastered:'已掌握'}[status]||'知识点';
+  const rows=Object.keys(map).sort((a,b)=>map[b]-map[a]).map(sub=>({
+    main:sub||'未分类',
+    sub:'点击筛选下方知识点表',
+    count:map[sub]+' 个',
+    filter:{subject:sub,status:status}
+  }));
+  openDrill('📊 '+label+' · 按科目知识点数',drillRows(rows));
+}
+function drillAnswersByDay(){
+  const map={};
+  (DB.answers||[]).forEach(a=>{const d=String(a.at||'').slice(0,10);if(d)map[d]=(map[d]||0)+1});
+  const rows=Object.keys(map).sort().reverse().map(d=>({main:d,count:map[d]+" 次"}));
+  openDrill('✏️ 累计作答 · 按日期',drillRows(rows));
+}
+function filterTable(opt){
+  if(opt.subject!==undefined)document.getElementById('fSubject').value=opt.subject;
+  document.getElementById('fStatus').value=opt.status||'';
+  document.getElementById('fKeyword').value='';
+  document.getElementById('fReviews').value='0';
+  page=1;closeDrill();renderAll();
+  document.getElementById('mainView').scrollIntoView({behavior:'smooth'});
 }
 function renderDueBar(){
   const due=dueItems();const d=document.getElementById('quizDesc');
@@ -289,6 +358,7 @@ function renderSide(){
 }
 function jumpTo(i){qi=i;renderQ()}
 document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){const m=document.getElementById('drillModal');if(m&&m.classList.contains('open')){closeDrill();return}}
   if(document.getElementById('quizView').style.display==='none')return;
   if(e.key==='ArrowRight'&&qi<queue.length-1){e.preventDefault();nextQ()}
   if(e.key==='ArrowLeft'&&qi>0){e.preventDefault();prevQ()}
