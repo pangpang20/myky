@@ -459,7 +459,7 @@ function renderTrend(){
   ["ans","kp","q"].forEach(s=>{pts[s]=data.map((d,i)=>({x:xOf(i),y:clampY(yOf(d[s]),PT,PT+ih),v:d[s]}))});
   const areaOf=p=>smoothPath(p)+' L '+p[p.length-1].x+' '+(PT+ih)+' L '+p[0].x+' '+(PT+ih)+' Z';
   out+='<path d="'+areaOf(pts.ans)+'" fill="url(#ansGrad)" stroke="none"/>';
-  ["kp","q","ans"].forEach(s=>{out+='<path d="'+smoothPath(pts[s])+'" fill="none" stroke="'+COLORS[s]+'" stroke-width="2.4" stroke-linecap="round" filter="url(#trendShadow)"'+(s==="kp"?"":s==="q"?" stroke-dasharray='7 5'":"")+'/>'});
+  ["kp","q","ans"].forEach(s=>{out+='<path d="'+smoothPath(pts[s])+'" fill="none" stroke="'+COLORS[s]+'" stroke-width="2.4" stroke-linecap="round" filter="url(#trendShadow)"/>'});
   data.forEach((d,i)=>{
     const x=xOf(i);
     const lab=trendMode==="month"?(d.key.slice(0,4)+"年"+Number(d.key.slice(5))+"月"):d.key.slice(5).replace("-","/");
@@ -472,6 +472,9 @@ function renderTrend(){
   });
   out+='<line x1="'+PL+'" y1="'+(PT+ih)+'" x2="'+(PL+iw)+'" y2="'+(PT+ih)+'" stroke="'+axisC+'" stroke-width="1"/>';
   out+='<text x="'+(PL+iw)+'" y="'+(PT+ih+46)+'" fill="'+labelC+'" font-size="11" text-anchor="end">'+(trendMode==="month"?"近 6 个月":"近 7 天")+" · "+(trendMode==="month"?"按月汇总":"按日汇总")+'</text>';
+  ["ans","kp","q"].forEach((s,si)=>{
+    out+='<circle class="trend-runner" r="3.5" fill="'+COLORS[s]+'" stroke="var(--bg2)" stroke-width="1.5"><animateMotion dur="6s" begin="'+(si*0.6)+'s" repeatCount="indefinite" path="'+smoothPath(pts[s])+'"/></circle>';
+  });
   svg.innerHTML=out;
 }
 init();document.getElementById('startBtn').onclick=()=>startQuiz(false);document.getElementById('forceBtn').onclick=()=>startQuiz(true);
