@@ -16,71 +16,111 @@
       "subject": "计算机网络",
       "file": "计算机网络/计算机网络基本概念.md",
       "firstLearned": "2026-11-13",
-      "reviews": [],
-      "dueDate": "2026-11-14",
-      "nextRound": 1
+      "reviews": [
+        {
+          "date": "2026-11-14",
+          "wrong": false
+        }
+      ],
+      "dueDate": "2026-11-15",
+      "nextRound": 2
     },
     {
       "id": "计算机-分组交换的缺点",
       "subject": "计算机网络",
       "file": "计算机网络/分组交换的缺点.md",
       "firstLearned": "2026-11-13",
-      "reviews": [],
-      "dueDate": "2026-11-14",
-      "nextRound": 1
+      "reviews": [
+        {
+          "date": "2026-11-14",
+          "wrong": false
+        }
+      ],
+      "dueDate": "2026-11-15",
+      "nextRound": 2
     },
     {
       "id": "计算机-分组交换缺点辨析",
       "subject": "计算机网络",
       "file": "计算机网络/分组交换缺点辨析.md",
       "firstLearned": "2026-11-13",
-      "reviews": [],
-      "dueDate": "2026-11-14",
-      "nextRound": 1
+      "reviews": [
+        {
+          "date": "2026-11-14",
+          "wrong": false
+        }
+      ],
+      "dueDate": "2026-11-15",
+      "nextRound": 2
     },
     {
       "id": "计算机-数据交换方式性能与改进",
       "subject": "计算机网络",
       "file": "计算机网络/数据交换方式性能与改进.md",
       "firstLearned": "2026-11-13",
-      "reviews": [],
-      "dueDate": "2026-11-14",
-      "nextRound": 1
+      "reviews": [
+        {
+          "date": "2026-11-14",
+          "wrong": false
+        }
+      ],
+      "dueDate": "2026-11-15",
+      "nextRound": 2
     },
     {
       "id": "计算机-信道利用率比较",
       "subject": "计算机网络",
       "file": "计算机网络/信道利用率比较.md",
       "firstLearned": "2026-11-13",
-      "reviews": [],
-      "dueDate": "2026-11-14",
-      "nextRound": 1
+      "reviews": [
+        {
+          "date": "2026-11-14",
+          "wrong": false
+        }
+      ],
+      "dueDate": "2026-11-15",
+      "nextRound": 2
     },
     {
       "id": "计算机-分组化直接结果辨析",
       "subject": "计算机网络",
       "file": "计算机网络/分组化直接结果辨析.md",
       "firstLearned": "2026-11-13",
-      "reviews": [],
-      "dueDate": "2026-11-14",
-      "nextRound": 1
+      "reviews": [
+        {
+          "date": "2026-11-14",
+          "wrong": false
+        }
+      ],
+      "dueDate": "2026-11-15",
+      "nextRound": 2
     },
     {
       "id": "数据结构-算法特性",
       "subject": "数据结构",
       "file": "数据结构/算法特性与时间复杂度专项错题.md",
       "firstLearned": "2026-11-13",
-      "reviews": [],
-      "dueDate": "2026-11-14",
-      "nextRound": 1
+      "reviews": [
+        {
+          "date": "2026-11-14",
+          "wrong": false
+        }
+      ],
+      "dueDate": "2026-11-15",
+      "nextRound": 2
     },
     {
       "id": "数据结构-大O定义",
       "subject": "数据结构",
       "file": "数据结构/算法特性与时间复杂度专项错题.md",
       "firstLearned": "2026-11-13",
-      "reviews": [],
-      "dueDate": "2026-11-14",
+      "reviews": [
+        {
+          "date": "2026-11-14",
+          "wrong": true
+        }
+      ],
+      "dueDate": "2026-11-15",
       "nextRound": 1
     },
     {
@@ -88,17 +128,27 @@
       "subject": "数据结构",
       "file": "数据结构/算法特性与时间复杂度专项错题.md",
       "firstLearned": "2026-11-13",
-      "reviews": [],
-      "dueDate": "2026-11-14",
-      "nextRound": 1
+      "reviews": [
+        {
+          "date": "2026-11-14",
+          "wrong": false
+        }
+      ],
+      "dueDate": "2026-11-15",
+      "nextRound": 2
     },
     {
       "id": "数据结构-嵌套循环计数",
       "subject": "数据结构",
       "file": "数据结构/算法特性与时间复杂度专项错题.md",
       "firstLearned": "2026-11-13",
-      "reviews": [],
-      "dueDate": "2026-11-14",
+      "reviews": [
+        {
+          "date": "2026-11-14",
+          "wrong": true
+        }
+      ],
+      "dueDate": "2026-11-15",
       "nextRound": 1
     },
     {
@@ -106,8 +156,13 @@
       "subject": "数据结构",
       "file": "数据结构/算法特性与时间复杂度专项错题.md",
       "firstLearned": "2026-11-13",
-      "reviews": [],
-      "dueDate": "2026-11-14",
+      "reviews": [
+        {
+          "date": "2026-11-14",
+          "wrong": true
+        }
+      ],
+      "dueDate": "2026-11-15",
       "nextRound": 1
     },
     {
@@ -115,9 +170,14 @@
       "subject": "数据结构",
       "file": "数据结构/算法特性与时间复杂度专项错题.md",
       "firstLearned": "2026-11-13",
-      "reviews": [],
-      "dueDate": "2026-11-14",
-      "nextRound": 1
+      "reviews": [
+        {
+          "date": "2026-11-14",
+          "wrong": false
+        }
+      ],
+      "dueDate": "2026-11-15",
+      "nextRound": 2
     }
   ]
 }
