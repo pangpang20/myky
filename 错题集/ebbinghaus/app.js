@@ -215,7 +215,8 @@ function toMath(tex){
     .replace(/\^\{?\(1\/3\)\}?/g,'^{1/3}')
     .replace(/\^\{?\(2\/3\)\}?/g,'^{2/3}')
     .replace(/\^\{?\(3\/2\)\}?/g,'^{3/2}')
-    .replace(/n\/2/g,'\\\\frac{n}{2}');
+    .replace(/n\/2/g,'\\\\frac{n}{2}')
+    .replace(/²/g,'^2').replace(/³/g,'^3').replace(/⁴/g,'^4');
 }
 function katexO(inner){
   try{
