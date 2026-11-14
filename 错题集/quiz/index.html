@@ -157,7 +157,8 @@ function render() {
     });
     const analysisEl = card.querySelector('#analysis');
     analysisEl.style.display = 'block';
-    analysisEl.innerHTML = `<p><b>${ok ? '✅ 回答正确' : '❌ 回答错误'}</b>　正确答案：${Array.isArray(q.answer) ? q.answer.join('、') : q.answer}</p><p>${q.analysis}</p>`;
+    analysisEl.innerHTML = `<p><b>${ok ? '✅ 回答正确' : '❌ 回答错误'}</b>　正确答案：${Array.isArray(q.answer) ? q.answer.join('、') : q.answer}</p><p>${renderQuestion(q.analysis)}</p>`;
+    if(window.renderMathInElement)renderMathInElement(analysisEl,{delimiters:[{left:'$',right:'$',display:false}],throwOnError:false});
     report(q, sel, ok);
     log.textContent = ok ? '已记录：本题答对。' : '已记录：本题答错，将进入错题集。';
     nextBtn.style.display = 'inline-block';
