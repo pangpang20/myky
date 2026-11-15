@@ -438,31 +438,41 @@ async function loadProgress(){
 async function resumeQuiz(){
   const p=await loadProgress();
   if(!p)return false;
-  const map=new Map(QS.map(q=>[q.id,q]));
-  const q2=p.ids.map(id=>map.get(id)).filter(Boolean);
+  const roundStartMs=Number(String(p.roundId||'').replace('eb-',''));
+  const roundStartLocal=Number.isFinite(roundStartMs)&&roundStartMs>0
+    ? new Date(roundStartMs+8*3600*1000).toISOString().replace('Z','+08:00').slice(0,19)
+    : null;
+  // 按当前模式重建队列：复习=今日到期知识点的全部题目；巩固=全部非掌握知识点的全部题目
+  const roundDate=roundStartLocal?roundStartLocal.slice(0,10):today();
+  const eligible=forceMode
+    ? DB.items.filter(i=>i.status!=='mastered')
+    : DB.items.filter(i=>{
+        if(i.status==='mastered')return false;
+        if(i.dueDate&&i.dueDate<=roundDate)return true;
+        return roundStartLocal&&(i.createdAt||'')>=roundStartLocal;
+      });
+  const q2=[];
+  eligible.forEach(it=>{
+    QS.filter(q=>q.itemId===it.id).forEach(q=>q2.push(q));
+  });
   if(!q2.length){clearProgress();return false}
-  const savedIds=new Set(p.ids);
-  const roundItemIds=new Set(q2.map(q=>q.itemId));
-  const newQs=QS.filter(q=>roundItemIds.has(q.itemId)&&!savedIds.has(q.id));
-  if(newQs.length){
-    const shuffled=newQs.slice().sort(()=>Math.random()-.5);
-    shuffled.forEach(q=>q2.push(q));
-  }
   queue=q2;
-  qi=Math.min(Math.max(0,p.qi||0),queue.length-1);
-  roundId=p.roundId||("eb-"+Date.now());
-  forceMode=!!p.forceMode;
-  results=Array.isArray(p.results)?p.results:[];
-  results=results.map(r=>r&&!r.realSelected?{...r,realSelected:r.selected}:r);
+  const savedIds=new Set(p.ids);
+  qi=0;
   const answered=p.answerResults||[];
+  results=new Array(queue.length);
   answered.forEach(a=>{
     const idx=queue.findIndex(q=>q.id===a.id);
-    if(idx>=0&&!results[idx]&&a.realSelected)results[idx]={selected:a.selected,correct:!!a.correct,realSelected:a.realSelected};
-    if(idx>=0&&!results[idx]&&!a.realSelected){const q=queue[idx];const dk=displayKeyForReal(q,a.selected);if(dk)results[idx]={selected:dk,correct:!!a.correct,realSelected:a.selected}}
+    if(idx>=0&&a.realSelected)results[idx]={selected:displayKeyForReal(queue[idx],a.realSelected)||a.selected,correct:!!a.correct,realSelected:a.realSelected};
+    else if(idx>=0&&!a.realSelected){const q=queue[idx];const dk=displayKeyForReal(q,a.selected);if(dk)results[idx]={selected:dk,correct:!!a.correct,realSelected:a.selected}}
   });
-  document.getElementById("mainView").style.display="none";
-  document.getElementById("quizView").style.display="";
-  document.getElementById("quizView").classList.add("main-with-side");
+  // 跳到第一个未作答的题
+  while(qi<queue.length&&results[qi])qi++;
+  roundId=p.roundId||('eb-'+Date.now());
+  forceMode=!!p.forceMode;
+  document.getElementById('mainView').style.display='none';
+  document.getElementById('quizView').style.display='';
+  document.getElementById('quizView').classList.add('main-with-side');
   renderQ();renderSide();
   return true;
 }
@@ -470,7 +480,9 @@ async function startQuiz(force){
   forceMode=!!force;
   const restored=await resumeQuiz();
   if(restored)return;
-  const items=forceMode?DB.items.filter(i=>i.status!=='mastered'):dueItems();
+  const items=forceMode
+    ? DB.items.filter(i=>i.status!=='mastered')
+    : dueItems();
   if(!items.length){renderDueBar();return;}
   roundId='eb-'+Date.now();
   const saved=await loadProgress();

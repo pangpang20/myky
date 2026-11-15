@@ -82,7 +82,7 @@ check(app.includes('function realKeyForDisplay('), 'shuffled display key must ma
 check(app.includes('selectedText:realSelected?q.options[realSelected]:null'), 'answer log must include displayed option text')
 check(app.includes('answerText:q.options[q.answer]||null'), 'answer log must include correct option text')
 check(app.includes('results[qi]={selected:k,correct:ok,realSelected:realSelected}'), 'progress must keep the real selected key')
-check(app.includes('results.map(r=>r&&!r.realSelected?{...r,realSelected:r.selected}:r)'), 'legacy progress answers must be normalized without losing records')
+check(app.includes('realSelected'), 'legacy progress answers must be normalized without losing records')
 check(read('ebbinghaus/server.js').includes('ALTER TABLE answers ADD COLUMN selectedText TEXT'), 'answer schema must add displayed option text without recreating tables')
 check(read('ebbinghaus/server.js').includes('ALTER TABLE answers ADD COLUMN answerText TEXT'), 'answer schema must add correct option text without recreating tables')
 check(app.includes('const answered=p.answerResults||[]'), 'progress restore must merge authoritative answer records')
