@@ -18,7 +18,8 @@ Payload schema:
   "keyPoints": ["…"],
   "rootCauses": { "题组 topic": "根因说明" },
   "ebbinghausQuestions": [ { "topic": "...", "question": "...", "options": {...}, "answer": "A", "analysis": "..." } ],
-  "quizQuestions": [ { "id": "ds-n1", "topic": "...", "type": "single", "question": "...", "options": {...}, "answer": "D", "analysis": "...", "itemId": "..." } ]
+  "quizQuestions": [ { "id": "ds-n1", "topic": "...", "type": "single", "question": "...", "options": {...}, "answer": "D", "analysis": "...", "itemId": "..." } ],
+  "examQuestions": [ { "topic": "...", "question": "...（历年真题风格）", "options": {...}, "answer": "A", "analysis": "..." } ]
 }`
 
 const payloadPath = process.argv[2]
@@ -75,6 +76,17 @@ write(dsqPath, dsq)
 const qkb = read('../quiz/knowledge.json')
 qkb[p.itemId] = { knowledge: p.knowledge, mnemonic: p.mnemonic, keyPoints: p.keyPoints, rootCauses: p.rootCauses }
 write('../quiz/knowledge.json', qkb)
+
+// 4b. Ebbinghaus exam-style questions (真题风格练习 also go to both ends)
+if (Array.isArray(p.examQuestions)) {
+  const exq = read(dsqPath)
+  for (const q of p.examQuestions) {
+    if (!exq.questions.some(x => x.itemId === p.itemId && x.question === q.question)) {
+      exq.questions.push({ id: `r1-${randomUUID()}`, itemId: p.itemId, round: 1, subject: p.subject, ...q })
+    }
+  }
+  write(dsqPath, exq)
+}
 
 // 5. Quiz questions.json (4317 practice) — newest first
 if (p.quizQuestions?.length) {
