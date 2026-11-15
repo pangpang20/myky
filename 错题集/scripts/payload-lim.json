@@ -1,0 +1,124 @@
+{
+  "itemId": "高等数学-重要极限1的无穷次方型",
+  "subject": "高等数学",
+  "file": "高等数学/重要极限1的无穷次方型错题.md",
+  "knowledge": "1^∞ 型极限标准套路：lim f(n)^{g(n)} = e^{lim g(n)[f(n)-1]}，推导来自 f^g = e^{g ln f} 且 ln f ~ f-1（f→1 时）。本题 f=(n-2)/(n+1)，f-1=-3/(n+1)，g(f-1)→-3，故极限为 e^{-3}。常用结论：((n+a)/(n+b))^n → e^{a-b}。",
+  "mnemonic": "一的无穷次方，底数减一乘指数，算出多少就是 e 的多少次方。",
+  "keyPoints": [
+    "第二个重要极限：$\\lim(1+\\frac{1}{x})^x=e$，等价 $\\lim(1+u)^{1/u}=e$",
+    "$1^\\infty$ 型公式：$\\lim f^g = e^{\\lim g(f-1)}$",
+    "底数减一：$\\frac{n-2}{n+1}-1=\\frac{-3}{n+1}$（注意负号）",
+    "指数极限：$\\frac{-3n}{n+1}\\to -3$",
+    "常用结论：$\\left(\\frac{n+a}{n+b}\\right)^n \\to e^{a-b}$"
+  ],
+  "rootCauses": {
+    "重要极限 1^∞ 型": "未作答。不熟悉 1^∞ 型极限的标准套路：底数写 1+u(n)，指数凑 1/u(n) 形式，或取对数化为 ∞·0 型。"
+  },
+  "ebbinghausQuestions": [
+    {
+      "topic": "重要极限 1^∞ 型",
+      "question": "lim (n→∞) [(n+3)/(n+1)]^n =（ ）",
+      "options": { "A": "e²", "B": "e⁻²", "C": "e³", "D": "e⁻³" },
+      "answer": "A",
+      "analysis": "底数减一=2/(n+1)，乘 n→2，故极限 e²。"
+    },
+    {
+      "topic": "重要极限 1^∞ 型",
+      "question": "lim (n→∞) [(n-1)/(n+2)]^n =（ ）",
+      "options": { "A": "e³", "B": "e⁻³", "C": "e⁻¹", "D": "e" },
+      "answer": "B",
+      "analysis": "底数减一=-3/(n+2)，乘 n→-3，故极限 e⁻³。"
+    },
+    {
+      "topic": "重要极限 1^∞ 型",
+      "question": "lim (n→∞) (1+5/n)^n =（ ）",
+      "options": { "A": "e⁵", "B": "e⁻⁵", "C": "1", "D": "e" },
+      "answer": "A",
+      "analysis": "第二个重要极限直接形式，指数 5。"
+    },
+    {
+      "topic": "重要极限 1^∞ 型",
+      "question": "lim (n→∞) [(n+2)/(n-3)]^n =（ ）",
+      "options": { "A": "e⁵", "B": "e⁻⁵", "C": "e", "D": "e⁻¹" },
+      "answer": "A",
+      "analysis": "底数减一=5/(n-3)，乘 n→5，故极限 e⁵。"
+    },
+    {
+      "topic": "重要极限 1^∞ 型",
+      "question": "lim (n→∞) [n/(n+4)]^n =（ ）",
+      "options": { "A": "e⁴", "B": "e⁻⁴", "C": "1", "D": "e" },
+      "answer": "B",
+      "analysis": "底数减一=-4/(n+4)，乘 n→-4，故极限 e⁻⁴。"
+    }
+  ],
+  "examQuestions": [
+    {
+      "topic": "重要极限 1^∞ 型",
+      "question": "lim (x→∞) [(x+a)/(x-a)]^x =（ ）",
+      "options": { "A": "e^{2a}", "B": "e^{-2a}", "C": "e^{a}", "D": "e^{-a}" },
+      "answer": "A",
+      "analysis": "底数减一=2a/(x-a)，乘 x→2a，故极限 e^{2a}。"
+    },
+    {
+      "topic": "重要极限 1^∞ 型",
+      "question": "lim (n→∞) (1-2/(n+1))^{n+1} =（ ）",
+      "options": { "A": "e²", "B": "e⁻²", "C": "e⁻¹", "D": "e" },
+      "answer": "B",
+      "analysis": "底数减一=-2/(n+1)，乘 (n+1)→-2，故极限 e⁻²。"
+    },
+    {
+      "topic": "重要极限 1^∞ 型",
+      "question": "lim (n→∞) [(n+k)/n]^n = e²，则 k =（ ）",
+      "options": { "A": "2", "B": "-2", "C": "1/2", "D": "1" },
+      "answer": "A",
+      "analysis": "底数减一=k/n，乘 n→k，e^k=e² 故 k=2。"
+    }
+  ],
+  "quizQuestions": [
+    {
+      "id": "hm-lim1",
+      "topic": "重要极限 1^∞ 型",
+      "type": "single",
+      "question": "$\\lim_{n\\to\\infty}\\left(\\dfrac{n+3}{n+1}\\right)^n=$（ ）",
+      "options": { "A": "$e^{2}$", "B": "$e^{-2}$", "C": "$e^{3}$", "D": "$e^{-3}$" },
+      "answer": "A",
+      "analysis": "底数减一 $=\\dfrac{2}{n+1}$，乘 $n\\to2$，故极限 $e^2$。"
+    },
+    {
+      "id": "hm-lim2",
+      "topic": "重要极限 1^∞ 型",
+      "type": "single",
+      "question": "$\\lim_{n\\to\\infty}\\left(\\dfrac{n-1}{n+2}\\right)^n=$（ ）",
+      "options": { "A": "$e^{3}$", "B": "$e^{-3}$", "C": "$e^{-1}$", "D": "$e$" },
+      "answer": "B",
+      "analysis": "底数减一 $=\\dfrac{-3}{n+2}$，乘 $n\\to-3$，故极限 $e^{-3}$。"
+    },
+    {
+      "id": "hm-lim3",
+      "topic": "重要极限 1^∞ 型",
+      "type": "single",
+      "question": "$\\lim_{n\\to\\infty}\\left(1+\\dfrac{5}{n}\\right)^n=$（ ）",
+      "options": { "A": "$e^{5}$", "B": "$e^{-5}$", "C": "$1$", "D": "$e$" },
+      "answer": "A",
+      "analysis": "第二个重要极限直接形式，指数 $5$。"
+    },
+    {
+      "id": "hm-lim4",
+      "topic": "重要极限 1^∞ 型",
+      "type": "single",
+      "question": "$\\lim_{n\\to\\infty}\\left(\\dfrac{n+2}{n-3}\\right)^n=$（ ）",
+      "options": { "A": "$e^{5}$", "B": "$e^{-5}$", "C": "$e$", "D": "$e^{-1}$" },
+      "answer": "A",
+      "analysis": "底数减一 $=\\dfrac{5}{n-3}$，乘 $n\\to5$，故极限 $e^5$。"
+    },
+    {
+      "id": "hm-lim5",
+      "topic": "重要极限 1^∞ 型",
+      "type": "single",
+      "question": "$\\lim_{n\\to\\infty}\\left(\\dfrac{n}{n+4}\\right)^n=$（ ）",
+      "options": { "A": "$e^{4}$", "B": "$e^{-4}$", "C": "$1$", "D": "$e$" },
+      "answer": "B",
+      "analysis": "底数减一 $=\\dfrac{-4}{n+4}$，乘 $n\\to-4$，故极限 $e^{-4}$。"
+    }
+  ]
+}

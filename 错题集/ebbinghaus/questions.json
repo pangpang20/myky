@@ -741,7 +741,6 @@
         "C": "15(1+3x)⁴",
         "D": "45(1+3x)³"
       },
-      "answer": "A",
       "answer": "B",
       "analysis": "y'=15(1+3x)⁴；y''=15·4·3(1+3x)³=180(1+3x)³。"
     },
@@ -776,6 +775,134 @@
       },
       "answer": "A",
       "analysis": "通式 y^{(n)}=(-1)^{n-1}(n-1)!·a^n/(1+ax)^n，n=3 时 (-1)²·2!·a³/(1+ax)³ = +2a³/(1+ax)³。"
+    },
+    {
+      "id": "r1-610ffc7b-3529-4c04-89fc-32f8d2e78ace",
+      "itemId": "高等数学-重要极限1的无穷次方型",
+      "round": 1,
+      "subject": "高等数学",
+      "topic": "重要极限 1^∞ 型",
+      "question": "lim (n→∞) [(n+3)/(n+1)]^n =（ ）",
+      "options": {
+        "A": "e²",
+        "B": "e⁻²",
+        "C": "e³",
+        "D": "e⁻³"
+      },
+      "answer": "A",
+      "analysis": "底数减一=2/(n+1)，乘 n→2，故极限 e²。"
+    },
+    {
+      "id": "r1-13ec4cb2-eeb2-453e-bbbd-e9d55a545bd2",
+      "itemId": "高等数学-重要极限1的无穷次方型",
+      "round": 1,
+      "subject": "高等数学",
+      "topic": "重要极限 1^∞ 型",
+      "question": "lim (n→∞) [(n-1)/(n+2)]^n =（ ）",
+      "options": {
+        "A": "e³",
+        "B": "e⁻³",
+        "C": "e⁻¹",
+        "D": "e"
+      },
+      "answer": "B",
+      "analysis": "底数减一=-3/(n+2)，乘 n→-3，故极限 e⁻³。"
+    },
+    {
+      "id": "r1-54717b75-a311-4d1c-99e7-f084669b6741",
+      "itemId": "高等数学-重要极限1的无穷次方型",
+      "round": 1,
+      "subject": "高等数学",
+      "topic": "重要极限 1^∞ 型",
+      "question": "lim (n→∞) (1+5/n)^n =（ ）",
+      "options": {
+        "A": "e⁵",
+        "B": "e⁻⁵",
+        "C": "1",
+        "D": "e"
+      },
+      "answer": "A",
+      "analysis": "第二个重要极限直接形式，指数 5。"
+    },
+    {
+      "id": "r1-93f8d4ea-1e1c-4880-8523-d87de95d8992",
+      "itemId": "高等数学-重要极限1的无穷次方型",
+      "round": 1,
+      "subject": "高等数学",
+      "topic": "重要极限 1^∞ 型",
+      "question": "lim (n→∞) [(n+2)/(n-3)]^n =（ ）",
+      "options": {
+        "A": "e⁵",
+        "B": "e⁻⁵",
+        "C": "e",
+        "D": "e⁻¹"
+      },
+      "answer": "A",
+      "analysis": "底数减一=5/(n-3)，乘 n→5，故极限 e⁵。"
+    },
+    {
+      "id": "r1-a292d6a6-256d-4b19-bffd-e7bf8d568fae",
+      "itemId": "高等数学-重要极限1的无穷次方型",
+      "round": 1,
+      "subject": "高等数学",
+      "topic": "重要极限 1^∞ 型",
+      "question": "lim (n→∞) [n/(n+4)]^n =（ ）",
+      "options": {
+        "A": "e⁴",
+        "B": "e⁻⁴",
+        "C": "1",
+        "D": "e"
+      },
+      "answer": "B",
+      "analysis": "底数减一=-4/(n+4)，乘 n→-4，故极限 e⁻⁴。"
+    },
+    {
+      "id": "r1-4b8db81b-1dd8-4996-a3ee-1f94fcb91ece",
+      "itemId": "高等数学-重要极限1的无穷次方型",
+      "round": 1,
+      "subject": "高等数学",
+      "topic": "重要极限 1^∞ 型",
+      "question": "lim (x→∞) [(x+a)/(x-a)]^x =（ ）",
+      "options": {
+        "A": "e^{2a}",
+        "B": "e^{-2a}",
+        "C": "e^{a}",
+        "D": "e^{-a}"
+      },
+      "answer": "A",
+      "analysis": "底数减一=2a/(x-a)，乘 x→2a，故极限 e^{2a}。"
+    },
+    {
+      "id": "r1-2cc03832-aadb-4e87-9501-ae7740424c78",
+      "itemId": "高等数学-重要极限1的无穷次方型",
+      "round": 1,
+      "subject": "高等数学",
+      "topic": "重要极限 1^∞ 型",
+      "question": "lim (n→∞) (1-2/(n+1))^{n+1} =（ ）",
+      "options": {
+        "A": "e²",
+        "B": "e⁻²",
+        "C": "e⁻¹",
+        "D": "e"
+      },
+      "answer": "B",
+      "analysis": "底数减一=-2/(n+1)，乘 (n+1)→-2，故极限 e⁻²。"
+    },
+    {
+      "id": "r1-8cbe4abe-9bc9-42d0-b820-66199f539b97",
+      "itemId": "高等数学-重要极限1的无穷次方型",
+      "round": 1,
+      "subject": "高等数学",
+      "topic": "重要极限 1^∞ 型",
+      "question": "lim (n→∞) [(n+k)/n]^n = e²，则 k =（ ）",
+      "options": {
+        "A": "2",
+        "B": "-2",
+        "C": "1/2",
+        "D": "1"
+      },
+      "answer": "A",
+      "analysis": "底数减一=k/n，乘 n→k，e^k=e² 故 k=2。"
     }
   ]
 }

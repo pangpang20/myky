@@ -1,6 +1,86 @@
 [
   {
     "subject": "高等数学",
+    "itemId": "高等数学-重要极限1的无穷次方型",
+    "id": "hm-lim1",
+    "topic": "重要极限 1^∞ 型",
+    "type": "single",
+    "question": "$\\lim_{n\\to\\infty}\\left(\\dfrac{n+3}{n+1}\\right)^n=$（ ）",
+    "options": {
+      "A": "$e^{2}$",
+      "B": "$e^{-2}$",
+      "C": "$e^{3}$",
+      "D": "$e^{-3}$"
+    },
+    "answer": "A",
+    "analysis": "底数减一 $=\\dfrac{2}{n+1}$，乘 $n\\to2$，故极限 $e^2$。"
+  },
+  {
+    "subject": "高等数学",
+    "itemId": "高等数学-重要极限1的无穷次方型",
+    "id": "hm-lim2",
+    "topic": "重要极限 1^∞ 型",
+    "type": "single",
+    "question": "$\\lim_{n\\to\\infty}\\left(\\dfrac{n-1}{n+2}\\right)^n=$（ ）",
+    "options": {
+      "A": "$e^{3}$",
+      "B": "$e^{-3}$",
+      "C": "$e^{-1}$",
+      "D": "$e$"
+    },
+    "answer": "B",
+    "analysis": "底数减一 $=\\dfrac{-3}{n+2}$，乘 $n\\to-3$，故极限 $e^{-3}$。"
+  },
+  {
+    "subject": "高等数学",
+    "itemId": "高等数学-重要极限1的无穷次方型",
+    "id": "hm-lim3",
+    "topic": "重要极限 1^∞ 型",
+    "type": "single",
+    "question": "$\\lim_{n\\to\\infty}\\left(1+\\dfrac{5}{n}\\right)^n=$（ ）",
+    "options": {
+      "A": "$e^{5}$",
+      "B": "$e^{-5}$",
+      "C": "$1$",
+      "D": "$e$"
+    },
+    "answer": "A",
+    "analysis": "第二个重要极限直接形式，指数 $5$。"
+  },
+  {
+    "subject": "高等数学",
+    "itemId": "高等数学-重要极限1的无穷次方型",
+    "id": "hm-lim4",
+    "topic": "重要极限 1^∞ 型",
+    "type": "single",
+    "question": "$\\lim_{n\\to\\infty}\\left(\\dfrac{n+2}{n-3}\\right)^n=$（ ）",
+    "options": {
+      "A": "$e^{5}$",
+      "B": "$e^{-5}$",
+      "C": "$e$",
+      "D": "$e^{-1}$"
+    },
+    "answer": "A",
+    "analysis": "底数减一 $=\\dfrac{5}{n-3}$，乘 $n\\to5$，故极限 $e^5$。"
+  },
+  {
+    "subject": "高等数学",
+    "itemId": "高等数学-重要极限1的无穷次方型",
+    "id": "hm-lim5",
+    "topic": "重要极限 1^∞ 型",
+    "type": "single",
+    "question": "$\\lim_{n\\to\\infty}\\left(\\dfrac{n}{n+4}\\right)^n=$（ ）",
+    "options": {
+      "A": "$e^{4}$",
+      "B": "$e^{-4}$",
+      "C": "$1$",
+      "D": "$e$"
+    },
+    "answer": "B",
+    "analysis": "底数减一 $=\\dfrac{-4}{n+4}$，乘 $n\\to-4$，故极限 $e^{-4}$。"
+  },
+  {
+    "subject": "高等数学",
     "itemId": "高等数学-复合函数二阶导数",
     "id": "hm-d2-1",
     "topic": "复合函数二阶导数",
@@ -60,7 +140,6 @@
       "C": "$15(1+3x)^4$",
       "D": "$45(1+3x)^3$"
     },
-    "answer": "A",
     "answer": "B",
     "analysis": "$y'=15(1+3x)^4$；$y''=15\\cdot4\\cdot3(1+3x)^3=180(1+3x)^3$。"
   },
