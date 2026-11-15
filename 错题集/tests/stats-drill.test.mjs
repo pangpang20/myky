@@ -76,5 +76,7 @@ check(app.includes('progressTimer=setTimeout(saveProgress,300)'), 'progress save
 check(app.includes('if(!saved)clearProgress();'), 'startQuiz clears only when no saved progress')
 check(app.includes('const saved=await loadProgress();'), 'startQuiz must check server progress before clearing')
 check(app.includes('const saved=await loadProgress();'), 'startQuiz must check server progress before clearing')
+check(read('ebbinghaus/server.js').includes('function dedupeQuestionIds()'), 'ebbinghaus server must dedupe question ids on startup')
+check(read('quiz/server.js').includes('function dedupeQuestionIds()'), 'quiz server must dedupe question ids on startup')
 if (failed) { console.error(failed + ' check(s) failed'); process.exit(1) }
 console.log('Stats drill validation passed.')

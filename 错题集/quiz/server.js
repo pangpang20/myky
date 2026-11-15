@@ -1,6 +1,27 @@
 const h=require('http'),f=require('fs'),p=require('path');
 const root='C:/data/code/ky/错题集/quiz';
 const resultsFile=p.join(root,'results.json');
+// ---- 启动校验：题库 JSON 重复 ID 自动去重 ----
+function dedupeQuestionIds(){
+  const qFile=p.join(root,'questions.json');
+  if(!f.existsSync(qFile))return;
+  try{
+    const data=JSON.parse(f.readFileSync(qFile,'utf8'));
+    const seen=new Set();
+    const before=data.length;
+    const out=data.filter(q=>{
+      const key=String(q.id||'');
+      if(seen.has(key))return false;
+      seen.add(key);
+      return true;
+    });
+    if(out.length!==before){
+      f.writeFileSync(qFile,JSON.stringify(out,null,2)+'\n','utf8');
+      console.log('[dedupe] quiz questions.json: removed '+(before-out.length)+' duplicate-id question(s)');
+    }
+  }catch(e){console.error('[dedupe] quiz failed:',e.message)}
+}
+dedupeQuestionIds();
 h.createServer((req,res)=>{
   if(req.url==='/api/answer'&&req.method==='POST'){
     let body='';

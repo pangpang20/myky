@@ -19,6 +19,54 @@ function addDays(dateStr, days) {
   return d.toISOString().slice(0, 10);
 }
 
+
+// ---- 启动校验：题库 JSON 重复 ID 自动去重 ----
+function dedupeQuestionIds() {
+  let totalRemoved = 0;
+  ['ds-questions.json', 'questions.json'].forEach(name => {
+    const fp = p.join(WEB_DIR, name);
+    if (!f.existsSync(fp)) return;
+    try {
+      const data = JSON.parse(f.readFileSync(fp, 'utf8'));
+      const seen = new Set();
+      const before = data.questions.length;
+      data.questions = data.questions.filter(q => {
+        const key = String(q.id || '');
+        if (seen.has(key)) return false;
+        seen.add(key);
+        return true;
+      });
+      const removed = before - data.questions.length;
+      if (removed > 0) {
+        f.writeFileSync(fp, JSON.stringify(data, null, 2) + '\n', 'utf8');
+        console.log('[dedupe] ' + name + ': removed ' + removed + ' duplicate-id question(s)');
+        totalRemoved += removed;
+      }
+    } catch (e) { console.error('[dedupe] failed for ' + name + ':', e.message); }
+  });
+  // 清理 db.progress 中引用已删除 id 的进度
+  if (totalRemoved > 0) {
+    try {
+      const db = loadDB();
+      if (db.progress && Array.isArray(db.progress.ids)) {
+        const valid = new Set();
+        ['ds-questions.json', 'questions.json'].forEach(name => {
+          try {
+            const data = JSON.parse(f.readFileSync(p.join(WEB_DIR, name), 'utf8'));
+            data.questions.forEach(q => valid.add(String(q.id)));
+          } catch (e) {}
+        });
+        db.progress.ids = db.progress.ids.filter(id => valid.has(String(id)));
+        db.progress.results = (db.progress.results || []).slice(0, db.progress.ids.length);
+        db.progress.qi = Math.min(db.progress.qi || 0, Math.max(0, db.progress.ids.length - 1));
+        saveDB(db);
+        console.log('[dedupe] db.progress filtered, remaining ids: ' + db.progress.ids.length);
+      }
+    } catch (e) { console.error('[dedupe] progress filter failed:', e.message); }
+  }
+}
+dedupeQuestionIds();
+
 const server = h.createServer((req, res) => {
   // ---- API: 提交单题作答 ----
   if (req.url === '/api/answer' && req.method === 'POST') {
