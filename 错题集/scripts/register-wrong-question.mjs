@@ -1,7 +1,11 @@
 #!/usr/bin/env node
 import { readFileSync, writeFileSync } from 'node:fs'
 import { randomUUID } from 'node:crypto'
+import { createRequire } from 'node:module'
 import { dateEast8, isoEast8 } from '../lib/east8-time.mjs'
+
+const require = createRequire(import.meta.url)
+const Database = require('better-sqlite3')
 
 const usage = `Usage: node register-wrong-question.mjs <payload.json>
 Payload schema:
@@ -37,6 +41,23 @@ if (!db.items.some(x => x.id === p.itemId)) {
     round: 1, dueDate: due, createdAt: isoEast8()
   })
   write('../data/db.json', db)
+}
+
+// 1b. SQLite (4318 runtime source of truth, server reads data/ky.db)
+{
+  const dbPath = new URL('../data/ky.db', import.meta.url).pathname
+    .replace(/^\/([A-Za-z]:)/, '$1')
+    .replace(/%E9%94%99%E9%A2%98%E9%9B%86/g, '错题集')
+  const sqlite = new Database(dbPath)
+  sqlite.exec(`CREATE TABLE IF NOT EXISTS items (
+    id TEXT PRIMARY KEY, subject TEXT NOT NULL, file TEXT NOT NULL,
+    firstLearned TEXT, status TEXT NOT NULL DEFAULT 'learning',
+    round INTEGER NOT NULL DEFAULT 1, dueDate TEXT, createdAt TEXT
+  )`)
+  const inserted = sqlite.prepare(`INSERT OR IGNORE INTO items (id, subject, file, firstLearned, status, round, dueDate, createdAt)
+    VALUES (?, ?, ?, ?, 'learning', 1, ?, ?)`).run(p.itemId, p.subject, p.file, today, due, isoEast8())
+  sqlite.close()
+  if (inserted.changes) console.log(`SQLite: inserted "${p.itemId}" into data/ky.db`)
 }
 
 // 2. Ebbinghaus knowledge.json
