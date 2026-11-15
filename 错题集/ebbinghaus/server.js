@@ -1,14 +1,107 @@
 const h = require('http'), f = require('fs'), p = require('path');
+const Database = require('../scripts/node_modules/better-sqlite3');
 const ROOT = 'C:/data/code/ky/错题集';
 const ROOT_RES = p.resolve(ROOT);
 const WEB_DIR = p.join(ROOT, 'ebbinghaus');
-const DB_FILE = p.join(ROOT, 'data', 'db.json');
+const DB_FILE = p.join(ROOT, 'data', 'ky.db');
+const LEGACY_JSON = p.join(ROOT, 'data', 'db.json');
+
+const sqlite = new Database(DB_FILE);
+sqlite.pragma('journal_mode = WAL');
+sqlite.exec(`
+CREATE TABLE IF NOT EXISTS meta (key TEXT PRIMARY KEY, value TEXT);
+CREATE TABLE IF NOT EXISTS items (
+  id TEXT PRIMARY KEY, subject TEXT NOT NULL, file TEXT NOT NULL,
+  firstLearned TEXT, status TEXT NOT NULL DEFAULT 'learning',
+  round INTEGER NOT NULL DEFAULT 1, dueDate TEXT, createdAt TEXT
+);
+CREATE TABLE IF NOT EXISTS reviews (
+  id INTEGER PRIMARY KEY AUTOINCREMENT, itemId TEXT NOT NULL,
+  date TEXT NOT NULL, correct INTEGER NOT NULL
+);
+CREATE TABLE IF NOT EXISTS answers (
+  id INTEGER PRIMARY KEY AUTOINCREMENT, roundId TEXT, itemId TEXT NOT NULL,
+  questionId TEXT, topic TEXT, selected TEXT, answer TEXT,
+  correct INTEGER NOT NULL, at TEXT NOT NULL
+);
+CREATE TABLE IF NOT EXISTS progress (
+  id INTEGER PRIMARY KEY CHECK (id = 1), roundId TEXT,
+  forceMode INTEGER NOT NULL DEFAULT 0, qi INTEGER NOT NULL DEFAULT 0,
+  results TEXT, ids TEXT, at TEXT
+);
+`);
+
+// JSON -> SQLite 一次性迁移（若 SQLite 为空且 legacy 存在）
+function migrateFromJsonIfNeeded() {
+  const hasItems = sqlite.prepare('SELECT COUNT(*) c FROM items').get().c > 0;
+  if (hasItems || !f.existsSync(LEGACY_JSON)) return;
+  try {
+    const src = JSON.parse(f.readFileSync(LEGACY_JSON, 'utf8'));
+    const tx = sqlite.transaction(() => {
+      const meta = sqlite.prepare('INSERT INTO meta(key,value) VALUES (?,?)');
+      meta.run('version', String(src.version || 2));
+      meta.run('schedule', JSON.stringify(src.schedule || [1,2,4,7,15,30]));
+      const insItem = sqlite.prepare('INSERT INTO items (id,subject,file,firstLearned,status,round,dueDate,createdAt) VALUES (?,?,?,?,?,?,?,?)');
+      const insReview = sqlite.prepare('INSERT INTO reviews (itemId,date,correct) VALUES (?,?,?)');
+      (src.items || []).forEach(it => {
+        insItem.run(it.id, it.subject, it.file, it.firstLearned || null, it.status || 'learning', it.round || 1, it.dueDate || null, it.createdAt || null);
+        (it.reviews || []).forEach(r => insReview.run(it.id, r.date, r.correct ? 1 : 0));
+      });
+      const insAns = sqlite.prepare('INSERT INTO answers (roundId,itemId,questionId,topic,selected,answer,correct,at) VALUES (?,?,?,?,?,?,?,?)');
+      (src.answers || []).forEach(a => insAns.run(a.roundId || null, a.itemId, a.id || null, a.topic || null, a.selected || null, a.answer || null, a.correct ? 1 : 0, a.at));
+      const pr = src.progress;
+      if (pr) sqlite.prepare('INSERT INTO progress (id,roundId,forceMode,qi,results,ids,at) VALUES (1,?,?,?,?,?,?)')
+        .run(pr.roundId || null, pr.forceMode ? 1 : 0, pr.qi || 0, JSON.stringify(pr.results || []), JSON.stringify(pr.ids || []), pr.at || null);
+    });
+    tx();
+    console.log('[sqlite] migrated from legacy db.json');
+  } catch (e) { console.error('[sqlite] migration failed:', e.message); }
+}
+migrateFromJsonIfNeeded();
 
 function loadDB() {
-  return JSON.parse(f.readFileSync(DB_FILE, 'utf8'));
+  const items = sqlite.prepare('SELECT * FROM items ORDER BY createdAt').all().map(it => ({
+    id: it.id, subject: it.subject, file: it.file, firstLearned: it.firstLearned,
+    status: it.status, round: it.round, dueDate: it.dueDate, createdAt: it.createdAt,
+    reviews: sqlite.prepare('SELECT date, correct FROM reviews WHERE itemId=? ORDER BY id').all(it.id).map(r => ({ date: r.date, correct: !!r.correct }))
+  }));
+  const answers = sqlite.prepare('SELECT * FROM answers ORDER BY id').all().map(a => ({
+    roundId: a.roundId, itemId: a.itemId, id: a.questionId, topic: a.topic,
+    selected: a.selected, answer: a.answer, correct: !!a.correct, at: a.at
+  }));
+  const pr = sqlite.prepare('SELECT * FROM progress WHERE id=1').get();
+  const meta = {};
+  sqlite.prepare('SELECT key,value FROM meta').all().forEach(r => meta[r.key] = r.value);
+  const db = { version: Number(meta.version || 2), schedule: JSON.parse(meta.schedule || '[1,2,4,7,15,30]'), items, answers };
+  if (pr) {
+    db.progress = { roundId: pr.roundId, forceMode: !!pr.forceMode, qi: pr.qi, results: JSON.parse(pr.results || '[]'), ids: JSON.parse(pr.ids || '[]'), at: pr.at };
+  }
+  return db;
 }
 function saveDB(db) {
-  f.writeFileSync(DB_FILE, JSON.stringify(db, null, 2), 'utf8');
+  const tx = sqlite.transaction(() => {
+    sqlite.prepare('DELETE FROM reviews').run();
+    sqlite.prepare('DELETE FROM items').run();
+    (db.items || []).forEach(it => {
+      sqlite.prepare('INSERT INTO items (id,subject,file,firstLearned,status,round,dueDate,createdAt) VALUES (?,?,?,?,?,?,?,?)')
+        .run(it.id, it.subject, it.file, it.firstLearned || null, it.status || 'learning', it.round || 1, it.dueDate || null, it.createdAt || null);
+      (it.reviews || []).forEach(r => sqlite.prepare('INSERT INTO reviews (itemId,date,correct) VALUES (?,?,?)').run(it.id, r.date, r.correct ? 1 : 0));
+    });
+    // answers/progress 由专用 SQL 更新，saveDB 不覆盖
+  });
+  tx();
+}
+function insertAnswer(a) {
+  sqlite.prepare('INSERT INTO answers (roundId,itemId,questionId,topic,selected,answer,correct,at) VALUES (?,?,?,?,?,?,?,?)')
+    .run(a.roundId || null, a.itemId, a.id || null, a.topic || null, a.selected || null, a.answer || null, a.correct ? 1 : 0, a.at);
+}
+function saveProgressRow(p) {
+  if (!p || !Array.isArray(p.ids) || !p.ids.length) {
+    sqlite.prepare('DELETE FROM progress WHERE id=1').run();
+    return;
+  }
+  sqlite.prepare('INSERT OR REPLACE INTO progress (id,roundId,forceMode,qi,results,ids,at) VALUES (1,?,?,?,?,?,?)')
+    .run(p.roundId || null, p.forceMode ? 1 : 0, p.qi || 0, JSON.stringify(p.results || []), JSON.stringify(p.ids), p.at || todayEast8());
 }
 function todayEast8() {
   return new Date(Date.now() + 8 * 3600 * 1000).toISOString().slice(0, 10);
@@ -48,19 +141,24 @@ function dedupeQuestionIds() {
   if (totalRemoved > 0) {
     try {
       const db = loadDB();
-      if (db.progress && Array.isArray(db.progress.ids)) {
-        const valid = new Set();
-        ['ds-questions.json', 'questions.json'].forEach(name => {
-          try {
-            const data = JSON.parse(f.readFileSync(p.join(WEB_DIR, name), 'utf8'));
-            data.questions.forEach(q => valid.add(String(q.id)));
-          } catch (e) {}
-        });
-        db.progress.ids = db.progress.ids.filter(id => valid.has(String(id)));
-        db.progress.results = (db.progress.results || []).slice(0, db.progress.ids.length);
-        db.progress.qi = Math.min(db.progress.qi || 0, Math.max(0, db.progress.ids.length - 1));
-        saveDB(db);
-        console.log('[dedupe] db.progress filtered, remaining ids: ' + db.progress.ids.length);
+      const valid = new Set();
+      ['ds-questions.json', 'questions.json'].forEach(name => {
+        try {
+          const data = JSON.parse(f.readFileSync(p.join(WEB_DIR, name), 'utf8'));
+          data.questions.forEach(q => valid.add(String(q.id)));
+        } catch (e) {}
+      });
+      const pr = sqlite.prepare('SELECT * FROM progress WHERE id=1').get();
+      if (pr) {
+        const ids = JSON.parse(pr.ids || '[]').filter(id => valid.has(String(id)));
+        const results = JSON.parse(pr.results || '[]').slice(0, ids.length);
+        const qi = Math.min(pr.qi || 0, Math.max(0, ids.length - 1));
+        if (ids.length) {
+          sqlite.prepare('UPDATE progress SET ids=?, results=?, qi=? WHERE id=1').run(JSON.stringify(ids), JSON.stringify(results), qi);
+        } else {
+          sqlite.prepare('DELETE FROM progress WHERE id=1').run();
+        }
+        console.log('[dedupe] db.progress filtered, remaining ids: ' + ids.length);
       }
     } catch (e) { console.error('[dedupe] progress filter failed:', e.message); }
   }
@@ -75,10 +173,7 @@ const server = h.createServer((req, res) => {
     req.on('end', () => {
       try {
         const item = JSON.parse(body);
-        const db = loadDB();
-        db.answers = db.answers || [];
-        db.answers.push(item);
-        saveDB(db);
+        insertAnswer(item);
         res.writeHead(200, { 'Content-Type': 'application/json' });
         res.end(JSON.stringify({ ok: true }));
       } catch (e) { console.error('API error:', e.message); res.writeHead(500); res.end('bad: ' + e.message); }
@@ -136,14 +231,8 @@ const server = h.createServer((req, res) => {
     req.on('data', c => body += c);
     req.on('end', () => {
       try {
-        const db = loadDB();
         const p = JSON.parse(body);
-        if (!p || !Array.isArray(p.ids) || !p.ids.length) {
-          db.progress = null;
-        } else {
-          db.progress = { roundId: p.roundId || null, forceMode: !!p.forceMode, qi: p.qi || 0, results: Array.isArray(p.results) ? p.results : [], ids: p.ids, at: todayEast8() };
-        }
-        saveDB(db);
+        saveProgressRow(p && Array.isArray(p.ids) && p.ids.length ? p : null);
         res.writeHead(200, { 'Content-Type': 'application/json' });
         res.end(JSON.stringify({ ok: true }));
       } catch (e) { console.error('progress error:', e.message); res.writeHead(500); res.end('bad: ' + e.message); }
