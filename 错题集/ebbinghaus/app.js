@@ -459,7 +459,8 @@ async function startQuiz(force){
   const items=forceMode?DB.items.filter(i=>i.status!=='mastered'):dueItems();
   if(!items.length){renderDueBar();return;}
   roundId='eb-'+Date.now();
-  clearProgress();
+  const saved=await loadProgress();
+  if(!saved)clearProgress();
   queue=[];qi=0;results=[];
   results=new Array();
   items.forEach(it=>{
