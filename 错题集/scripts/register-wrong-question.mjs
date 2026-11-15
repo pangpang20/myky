@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import { readFileSync, writeFileSync } from 'node:fs'
+import { randomUUID } from 'node:crypto'
 import { dateEast8, isoEast8 } from '../lib/east8-time.mjs'
 
 const usage = `Usage: node register-wrong-question.mjs <payload.json>
@@ -49,11 +50,8 @@ write('../ebbinghaus/knowledge.json', kb)
 // 3. Ebbinghaus round-1 questions (subject-specific file)
 const dsqPath = p.subject === '数据结构' ? '../ebbinghaus/ds-questions.json' : '../ebbinghaus/questions.json'
 const dsq = read(dsqPath)
-const baseNum = 1000 + dsq.questions.filter(q => q.itemId === p.itemId).length
-let n = 0
 for (const q of p.ebbinghausQuestions) {
-  n += 1
-  const id = `ds-r1-${String(baseNum + n).padStart(3, '0')}`
+  const id = `r1-${randomUUID()}`
   if (!dsq.questions.some(x => x.itemId === p.itemId && x.topic === q.topic)) {
     dsq.questions.push({ id, itemId: p.itemId, round: 1, subject: p.subject, ...q })
   }
