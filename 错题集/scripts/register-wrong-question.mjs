@@ -33,8 +33,7 @@ const write = (rel, data) => writeFileSync(new URL(rel, import.meta.url), JSON.s
 const today = dateEast8()
 const due = dateEast8(new Date(Date.now() + 86400000))
 
-// 1. Ebbinghaus db.json (4318 source of truth)
-// (4318 runtime reads SQLite data/ky.db directly; legacy db.json no longer written)
+// 1. SQLite items (4318 runtime source of truth)
 
 // 1b. SQLite (4318 runtime source of truth, server reads data/ky.db)
 {

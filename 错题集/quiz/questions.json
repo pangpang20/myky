@@ -5,12 +5,12 @@
     "id": "hm-exam-01f5fc8e",
     "topic": "重要极限 1^∞ 型",
     "type": "single",
-    "question": "lim (x→∞) [(x+a)/(x-a)]^x =（ ）",
+    "question": "$\\lim\\limits_{x\\to\\infty}\\left(\\dfrac{x+a}{x-a}\\right)^{x}=$（ ）",
     "options": {
-      "A": "e^{2a}",
-      "B": "e^{-2a}",
-      "C": "e^{a}",
-      "D": "e^{-a}"
+      "A": "$e^{2a}$",
+      "B": "$e^{-2a}$",
+      "C": "$e^{a}$",
+      "D": "$e^{-a}$"
     },
     "answer": "A",
     "analysis": "底数减一=2a/(x-a)，乘 x→2a，故极限 e^{2a}。"
@@ -21,12 +21,12 @@
     "id": "hm-exam-c8e10a46",
     "topic": "重要极限 1^∞ 型",
     "type": "single",
-    "question": "lim (n→∞) (1-2/(n+1))^{n+1} =（ ）",
+    "question": "$\\lim\\limits_{n\\to\\infty}\\left(1-\\dfrac{2}{n+1}\\right)^{n+1}=$（ ）",
     "options": {
-      "A": "e²",
-      "B": "e⁻²",
-      "C": "e⁻¹",
-      "D": "e"
+      "A": "$e^{2}$",
+      "B": "$e^{-2}$",
+      "C": "$e^{-1}$",
+      "D": "$e$"
     },
     "answer": "B",
     "analysis": "底数减一=-2/(n+1)，乘 (n+1)→-2，故极限 e⁻²。"
@@ -37,12 +37,12 @@
     "id": "hm-exam-c4591342",
     "topic": "重要极限 1^∞ 型",
     "type": "single",
-    "question": "lim (n→∞) [(n+k)/n]^n = e²，则 k =（ ）",
+    "question": "若 $\\lim\\limits_{n\\to\\infty}\\left(\\dfrac{n+k}{n}\\right)^{n}=e^{2}$，则 $k=$（ ）",
     "options": {
-      "A": "2",
-      "B": "-2",
-      "C": "1/2",
-      "D": "1"
+      "A": "$2$",
+      "B": "$-2$",
+      "C": "$\\dfrac{1}{2}$",
+      "D": "$1$"
     },
     "answer": "A",
     "analysis": "底数减一=k/n，乘 n→k，e^k=e² 故 k=2。"
@@ -53,12 +53,12 @@
     "id": "hm-exam-cc69c591",
     "topic": "导数积分换元",
     "type": "single",
-    "question": "设 f(x) 可导，则 ∫_0^{π/2} f'(cos x)·sin x dx =（ ）",
+    "question": "设 $f(x)$ 可导，则 $\\displaystyle\\int_{0}^{\\pi/2} f'(\\cos x)\\sin x\\,\\mathrm{d}x=$（ ）",
     "options": {
-      "A": "f(1)-f(0)",
-      "B": "f(0)-f(1)",
-      "C": "f'(1)-f'(0)",
-      "D": "0"
+      "A": "$f(1)-f(0)$",
+      "B": "$f(0)-f(1)$",
+      "C": "$f'(1)-f'(0)$",
+      "D": "$0$"
     },
     "answer": "A",
     "analysis": "令 u=cos x，du=-sin x dx，x:0→π/2 时 u:1→0，积分=-∫_1^0 f'(u)du=f(1)-f(0)。"
@@ -69,12 +69,12 @@
     "id": "hm-exam-fe185433",
     "topic": "导数积分换元",
     "type": "single",
-    "question": "已知可导函数 f 满足 f(0)=1，f(2)=5，则 ∫_0^1 f'(2x) dx =（ ）",
+    "question": "已知可导函数 $f(x)$ 满足 $f(0)=1$，$f(2)=5$，则 $\\displaystyle\\int_{0}^{1} f'(2x)\\,\\mathrm{d}x=$（ ）",
     "options": {
-      "A": "4",
-      "B": "2",
-      "C": "6",
-      "D": "1/2"
+      "A": "$4$",
+      "B": "$2$",
+      "C": "$6$",
+      "D": "$\\dfrac{1}{2}$"
     },
     "answer": "B",
     "analysis": "[f(2)-f(0)]/2=(5-1)/2=2。"
@@ -85,12 +85,12 @@
     "id": "hm-exam-1b5f288b",
     "topic": "导数积分换元",
     "type": "single",
-    "question": "∫_{-1}^{1} f'(3x) dx =（ ）",
+    "question": "$\\displaystyle\\int_{-1}^{1} f'(3x)\\,\\mathrm{d}x=$（ ）",
     "options": {
-      "A": "[f(3)-f(-3)]/3",
-      "B": "3[f(3)-f(-3)]",
-      "C": "[f(1)-f(-1)]/3",
-      "D": "f(3)-f(-3)"
+      "A": "$\\dfrac{f(3)-f(-3)}{3}$",
+      "B": "$3[f(3)-f(-3)]$",
+      "C": "$\\dfrac{f(1)-f(-1)}{3}$",
+      "D": "$f(3)-f(-3)$"
     },
     "answer": "A",
     "analysis": "u=3x，上下限变 -3 到 3，结果 [f(3)-f(-3)]/3。"

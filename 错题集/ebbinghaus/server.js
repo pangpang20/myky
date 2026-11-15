@@ -4,8 +4,6 @@ const ROOT = 'C:/data/code/ky/错题集';
 const ROOT_RES = p.resolve(ROOT);
 const WEB_DIR = p.join(ROOT, 'ebbinghaus');
 const DB_FILE = p.join(ROOT, 'data', 'ky.db');
-const LEGACY_JSON = p.join(ROOT, 'data', 'db.json');
-
 const sqlite = new Database(DB_FILE);
 sqlite.pragma('journal_mode = WAL');
 sqlite.exec(`
@@ -37,33 +35,6 @@ try { sqlite.prepare('ALTER TABLE answers ADD COLUMN selectedText TEXT').run(); 
 try { sqlite.prepare('ALTER TABLE answers ADD COLUMN answerText TEXT').run(); } catch (e) {}
 try { sqlite.prepare('ALTER TABLE answers ADD COLUMN realSelected TEXT').run(); } catch (e) {}
 
-// JSON -> SQLite 一次性迁移（若 SQLite 为空且 legacy 存在）
-function migrateFromJsonIfNeeded() {
-  const hasItems = sqlite.prepare('SELECT COUNT(*) c FROM items').get().c > 0;
-  if (hasItems || !f.existsSync(LEGACY_JSON)) return;
-  try {
-    const src = JSON.parse(f.readFileSync(LEGACY_JSON, 'utf8'));
-    const tx = sqlite.transaction(() => {
-      const meta = sqlite.prepare('INSERT INTO meta(key,value) VALUES (?,?)');
-      meta.run('version', String(src.version || 2));
-      meta.run('schedule', JSON.stringify(src.schedule || [1,2,4,7,15,30]));
-      const insItem = sqlite.prepare('INSERT INTO items (id,subject,file,firstLearned,status,round,dueDate,createdAt) VALUES (?,?,?,?,?,?,?,?)');
-      const insReview = sqlite.prepare('INSERT INTO reviews (itemId,date,correct) VALUES (?,?,?)');
-      (src.items || []).forEach(it => {
-        insItem.run(it.id, it.subject, it.file, it.firstLearned || null, it.status || 'learning', it.round || 1, it.dueDate || null, it.createdAt || null);
-        (it.reviews || []).forEach(r => insReview.run(it.id, r.date, r.correct ? 1 : 0));
-      });
-      const insAns = sqlite.prepare('INSERT INTO answers (roundId,itemId,questionId,topic,selected,answer,correct,at) VALUES (?,?,?,?,?,?,?,?)');
-      (src.answers || []).forEach(a => insAns.run(a.roundId || null, a.itemId, a.id || null, a.topic || null, a.selected || null, a.answer || null, a.correct ? 1 : 0, a.at));
-      const pr = src.progress;
-      if (pr) sqlite.prepare('INSERT INTO progress (id,roundId,forceMode,qi,results,ids,at) VALUES (1,?,?,?,?,?,?)')
-        .run(pr.roundId || null, pr.forceMode ? 1 : 0, pr.qi || 0, JSON.stringify(pr.results || []), JSON.stringify(pr.ids || []), pr.at || null);
-    });
-    tx();
-    console.log('[sqlite] migrated from legacy db.json');
-  } catch (e) { console.error('[sqlite] migration failed:', e.message); }
-}
-migrateFromJsonIfNeeded();
 
 function loadDB() {
   const items = sqlite.prepare('SELECT * FROM items ORDER BY createdAt').all().map(it => ({
