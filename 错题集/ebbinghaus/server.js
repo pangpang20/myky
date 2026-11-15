@@ -75,6 +75,34 @@ const server = h.createServer((req, res) => {
     return;
   }
 
+
+  // ---- API: 答题进度（存服务端，跨浏览器共用） ----
+  if (req.url === '/api/progress' && req.method === 'GET') {
+    const db = loadDB();
+    res.writeHead(200, { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' });
+    res.end(JSON.stringify(db.progress || null));
+    return;
+  }
+  if (req.url === '/api/progress' && req.method === 'POST') {
+    let body = '';
+    req.on('data', c => body += c);
+    req.on('end', () => {
+      try {
+        const db = loadDB();
+        const p = JSON.parse(body);
+        if (!p || !Array.isArray(p.ids) || !p.ids.length) {
+          db.progress = null;
+        } else {
+          db.progress = { roundId: p.roundId || null, forceMode: !!p.forceMode, qi: p.qi || 0, results: Array.isArray(p.results) ? p.results : [], ids: p.ids, at: todayEast8() };
+        }
+        saveDB(db);
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ ok: true }));
+      } catch (e) { console.error('progress error:', e.message); res.writeHead(500); res.end('bad: ' + e.message); }
+    });
+    return;
+  }
+
   // ---- API: 读取数据库（供页面渲染） ----
   if (req.url === '/api/db' && req.method === 'GET') {
     const db = loadDB();

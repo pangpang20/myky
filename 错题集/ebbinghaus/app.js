@@ -410,29 +410,32 @@ async function resetItem(id){
   renderStats();renderAll();renderDueBar();
 }
 
-const PROGRESS_KEY="eb_progress_v1";
+let progressDirty=false;
 function saveProgress(){
   try{
     if(!queue.length)return;
-    localStorage.setItem(PROGRESS_KEY,JSON.stringify({roundId,forceMode,qi,results,ids:queue.map(q=>q.id),at:nowEast8Iso()}));
-  }catch(e){console.warn("save progress failed",e)}
+    const payload={roundId,forceMode,qi,results,ids:queue.map(q=>q.id)};
+    fetch('/api/progress',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)}).catch(e=>console.warn('save progress failed',e));
+  }catch(e){console.warn('save progress failed',e)}
 }
-function clearProgress(){try{localStorage.removeItem(PROGRESS_KEY)}catch(e){}}
-function loadProgress(){
+function clearProgress(){
+  fetch('/api/progress',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({})}).catch(e=>console.warn('clear progress failed',e));
+}
+async function loadProgress(){
   try{
-    const raw=localStorage.getItem(PROGRESS_KEY);
-    if(!raw)return null;
-    const p=JSON.parse(raw);
+    const r=await fetch('/api/progress',{cache:'no-store'});
+    if(!r.ok)return null;
+    const p=await r.json();
     if(!p||!Array.isArray(p.ids)||!p.ids.length)return null;
     return p;
   }catch(e){return null}
 }
-function resumeQuiz(){
-  const p=loadProgress();
-  if(!p)return;
+async function resumeQuiz(){
+  const p=await loadProgress();
+  if(!p)return false;
   const map=new Map(QS.map(q=>[q.id,q]));
   const q2=p.ids.map(id=>map.get(id)).filter(Boolean);
-  if(!q2.length){clearProgress();renderDueBar();return}
+  if(!q2.length){clearProgress();return false}
   queue=q2;
   qi=Math.min(Math.max(0,p.qi||0),queue.length-1);
   roundId=p.roundId||("eb-"+Date.now());
@@ -442,11 +445,12 @@ function resumeQuiz(){
   document.getElementById("quizView").style.display="";
   document.getElementById("quizView").classList.add("main-with-side");
   renderQ();renderSide();
+  return true;
 }
-function startQuiz(force){
+async function startQuiz(force){
   forceMode=!!force;
-  const saved=loadProgress();
-  if(saved&&!!saved.forceMode===forceMode&&saved.ids&&saved.ids.length){resumeQuiz();return}
+  const restored=await resumeQuiz();
+  if(restored)return;
   const items=forceMode?DB.items.filter(i=>i.status!=='mastered'):dueItems();
   if(!items.length){renderDueBar();return;}
   roundId='eb-'+Date.now();
@@ -468,7 +472,7 @@ function startQuiz(force){
   saveProgress();
 }
 function exitQuiz(){
-  saveProgress();
+  if(document.getElementById('quizView').style.display!=='none')saveProgress();
   document.getElementById('quizView').style.display='none';
   document.getElementById('mainView').style.display='';
   const log=document.getElementById('quizLog');if(log)log.textContent='';
