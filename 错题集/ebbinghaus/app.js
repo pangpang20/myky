@@ -306,6 +306,7 @@ function renderDueBar(){
     pct.textContent='进度良好';
     btn.disabled=true;
   }
+  updateResumeBtn();
 }
 
 const SCHEDULE=[1,2,4,7,15,30];
@@ -410,11 +411,58 @@ async function resetItem(id){
   renderStats();renderAll();renderDueBar();
 }
 
+const PROGRESS_KEY="eb_progress_v1";
+function saveProgress(){
+  try{
+    if(!queue.length)return;
+    localStorage.setItem(PROGRESS_KEY,JSON.stringify({roundId,forceMode,qi,results,ids:queue.map(q=>q.id),at:nowEast8Iso()}));
+  }catch(e){console.warn("save progress failed",e)}
+}
+function clearProgress(){try{localStorage.removeItem(PROGRESS_KEY)}catch(e){}}
+function loadProgress(){
+  try{
+    const raw=localStorage.getItem(PROGRESS_KEY);
+    if(!raw)return null;
+    const p=JSON.parse(raw);
+    if(!p||!Array.isArray(p.ids)||!p.ids.length)return null;
+    return p;
+  }catch(e){return null}
+}
+function resumeQuiz(){
+  const p=loadProgress();
+  if(!p)return;
+  const map=new Map(QS.map(q=>[q.id,q]));
+  const q2=p.ids.map(id=>map.get(id)).filter(Boolean);
+  if(!q2.length){clearProgress();renderDueBar();return}
+  queue=q2;
+  qi=Math.min(Math.max(0,p.qi||0),queue.length-1);
+  roundId=p.roundId||("eb-"+Date.now());
+  forceMode=!!p.forceMode;
+  results=Array.isArray(p.results)?p.results:[];
+  document.getElementById("mainView").style.display="none";
+  document.getElementById("quizView").style.display="";
+  document.getElementById("quizView").classList.add("main-with-side");
+  renderQ();renderSide();
+}
+function updateResumeBtn(){
+  const btn=document.getElementById("resumeBtn");
+  if(!btn)return;
+  const p=loadProgress();
+  if(p&&p.ids.length){
+    const done=(p.results||[]).filter(Boolean).length;
+    btn.style.display="";
+    btn.textContent="继续上次答题（"+(Math.min(p.qi||0,p.ids.length-1)+1)+"/"+p.ids.length+"，已答 "+done+" 题）";
+  }else{
+    btn.style.display="none";
+  }
+}
+
 function startQuiz(force){
   forceMode=!!force;
   const items=forceMode?DB.items.filter(i=>i.status!=='mastered'):dueItems();
   if(!items.length){renderDueBar();return;}
   roundId='eb-'+Date.now();
+  clearProgress();
   queue=[];qi=0;results=[];
   results=new Array();
   items.forEach(it=>{
@@ -429,12 +477,13 @@ function startQuiz(force){
   document.getElementById('quizView').classList.add('main-with-side');
   renderQ();
   renderSide();
+  saveProgress();
 }
 function exitQuiz(){
   document.getElementById('quizView').style.display='none';
   document.getElementById('mainView').style.display='';
   document.getElementById('quizLog').textContent='';
-  results=[];
+  saveProgress();
   init();
 }
 function renderQ(){
@@ -448,6 +497,8 @@ function renderQ(){
     '<div class="analysis" id="ana"></div>';
   renderNavBar();
   renderSide();
+  const r0=results[qi];
+  if(r0)paintAnswer(q,r0.selected,r0.correct);
 }
 const FENCE='```';
 function toMath(tex){
@@ -486,17 +537,7 @@ function renderQuestion(text){
   });
   return out;
 }
-function choose(k){
-  const q=queue[qi];
-  const opts=document.querySelectorAll('#opts .opt');
-  opts.forEach(o=>{o.classList.add('disabled');o.onclick=null});
-  const picked=document.querySelector('#opts .opt[data-k="'+k+'"]');
-  const ok=k===q.answer;
-  const ansEl=document.querySelector('#opts .opt[data-k="'+q.answer+'"]');
-  if(ansEl)ansEl.classList.add('correct');
-  if(!ok&&picked)picked.classList.add('wrong');
-  fetch('/api/answer',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({roundId:roundId,itemId:q.itemId,id:q.id,topic:q.topic,selected:k,answer:q.answer,correct:ok,at:nowEast8Iso()})});
-  const ana=document.getElementById('ana');
+function analysisHtml(q){
   const kb=KB[q.itemId]||{};
   const rootCause=(kb.rootCauses||{})[q.topic]||'暂无针对此题的根因分析。';
   let html='<div class="analysis-block"><h4>🔍 解析</h4><p>'+renderQuestion(q.analysis)+'</p></div>';
@@ -504,14 +545,31 @@ function choose(k){
   if(kb.knowledge)html+='<div class="analysis-block"><h4>📚 完整知识点梳理</h4><p>'+renderQuestion(kb.knowledge)+'</p></div>';
   if(kb.mnemonic)html+='<div class="analysis-mnemonic">🧠 记忆口诀：'+renderQuestion(kb.mnemonic)+'</div>';
   if(kb.keyPoints&&kb.keyPoints.length)html+='<div class="analysis-block analysis-kp"><h4>🔑 关键点</h4><ul>'+kb.keyPoints.map(p=>'<li>'+renderQuestion(p)+'</li>').join('')+'</ul></div>';
-  ana.innerHTML=html;
-  ana.style.display='block';
-  if(window.renderMathInElement){renderMathInElement(ana,{delimiters:[{left:'\$',right:'\$',display:false}],throwOnError:false});}
-  results[qi]={selected:k,correct:ok};
-  renderSide();
-  renderNavBar();
-  if(window.renderMathInElement)renderMathInElement(document.getElementById('quizCard'),{delimiters:[{left:'\$',right:'\$',display:false}],throwOnError:false});
+  return html;
 }
+function paintAnswer(q,selected,correct){
+  const opts=document.querySelectorAll('#opts .opt');
+  opts.forEach(o=>{o.classList.add("disabled");o.onclick=null});
+  const picked=document.querySelector('#opts .opt[data-k="'+selected+'"]');
+  const ansEl=document.querySelector('#opts .opt[data-k="'+q.answer+'"]');
+  if(ansEl)ansEl.classList.add('correct');
+  if(!correct&&picked)picked.classList.add('wrong');
+  const ana=document.getElementById('ana');
+  ana.innerHTML=analysisHtml(q);
+  ana.style.display='block';
+  if(window.renderMathInElement){renderMathInElement(ana,{delimiters:[{left:'$',right:'$',display:false}],throwOnError:false});}
+}
+function judgeAnswer(k,post){
+  const q=queue[qi];
+  const ok=k===q.answer;
+  if(post)fetch('/api/answer',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({roundId:roundId,itemId:q.itemId,id:q.id,topic:q.topic,selected:k,answer:q.answer,correct:ok,at:nowEast8Iso()})});
+  results[qi]={selected:k,correct:ok};
+  paintAnswer(q,k,ok);
+  renderSide();renderNavBar();saveProgress();
+  if(window.renderMathInElement)renderMathInElement(document.getElementById('quizCard'),{delimiters:[{left:'$',right:'$',display:false}],throwOnError:false});
+}
+function choose(k){judgeAnswer(k,true)}
+
 function renderNavBar(){
   const nw=document.getElementById('navWrap');
   if(!nw)return;
@@ -519,8 +577,8 @@ function renderNavBar(){
     '<button class="btn btn-prev" onclick="prevQ()"'+(qi===0?' disabled':'')+'>← 上一题</button>'+
     '<button class="btn btn-next2" onclick="nextQ()"'+(qi===queue.length-1?' disabled':'')+'>'+(qi===queue.length-1?'完成本轮':'下一题 →')+'</button>';
 }
-function nextQ(){if(qi<queue.length-1){qi++;renderQ()}else{finishRound()}}
-function prevQ(){if(qi>0){qi--;renderQ()}}
+function nextQ(){if(qi<queue.length-1){qi++;renderQ();saveProgress()}else{finishRound()}}
+function prevQ(){if(qi>0){qi--;renderQ();saveProgress()}}
 function renderSide(){
   const el=document.getElementById('sideList');
   el.innerHTML=queue.map((q,i)=>{
@@ -529,17 +587,23 @@ function renderSide(){
     return '<div class="side-cell'+(i===qi?' active':'')+' '+cls+'" onclick="jumpTo('+i+')">'+(i+1)+'</div>';
   }).join('');
 }
-function jumpTo(i){qi=i;renderQ()}
+function jumpTo(i){qi=i;renderQ();saveProgress()}
 document.addEventListener('keydown',e=>{
   if(e.key==='Escape'){const n=document.getElementById('noteModal');if(n&&n.classList.contains('open')){closeNote();return}const m=document.getElementById('drillModal');if(m&&m.classList.contains('open')){closeDrill();return}}
   if(document.getElementById('quizView').style.display==='none')return;
   if(e.key==='ArrowRight'&&qi<queue.length-1){e.preventDefault();nextQ()}
   if(e.key==='ArrowLeft'&&qi>0){e.preventDefault();prevQ()}
+  const q=queue[qi];
+  if(q&&!results[qi]&&!e.ctrlKey&&!e.metaKey&&!e.altKey){
+    const k=String(e.key).trim().toUpperCase();
+    if(k.length===1&&q.options&&q.options[k]){e.preventDefault();judgeAnswer(k,true);return}
+  }
   if(e.key===' '){const ana=document.getElementById('ana');if(ana&&ana.style.display==='block'){e.preventDefault();nextQ()}}
 });
 async function finishRound(){
   const r=await fetch('/api/finish',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({roundId:roundId,date:today()})});
   const res=await r.json();
+  clearProgress();
   document.getElementById('quizCard').innerHTML='<div style="text-align:center;padding:36px 0">'+
     '<div style="font-size:44px">'+(res.wrongCount?'💪':'🎉')+'</div>'+
     '<h2 style="margin:12px 0">本轮完成</h2>'+
@@ -651,4 +715,4 @@ function renderTrend(){
   });
   svg.innerHTML=out;
 }
-init();document.getElementById('startBtn').onclick=()=>startQuiz(false);document.getElementById('forceBtn').onclick=()=>startQuiz(true);
+init().then(()=>{updateResumeBtn()});document.getElementById('startBtn').onclick=()=>startQuiz(false);document.getElementById('forceBtn').onclick=()=>startQuiz(true);document.getElementById('resumeBtn').onclick=()=>resumeQuiz();
