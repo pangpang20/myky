@@ -99,6 +99,12 @@ function saveDB(db) {
   tx();
 }
 function insertAnswer(a) {
+  const existing = a.roundId && a.id ? sqlite.prepare('SELECT id FROM answers WHERE roundId=? AND questionId=?').get(a.roundId, a.id) : null;
+  if (existing) {
+    sqlite.prepare('UPDATE answers SET itemId=?,topic=?,selected=?,answer=?,selectedText=?,answerText=?,realSelected=?,correct=?,at=? WHERE id=?')
+      .run(a.itemId, a.topic || null, a.selected || null, a.answer || null, a.selectedText || null, a.answerText || null, a.realSelected || null, a.correct ? 1 : 0, a.at, existing.id);
+    return;
+  }
   sqlite.prepare('INSERT INTO answers (roundId,itemId,questionId,topic,selected,answer,selectedText,answerText,realSelected,correct,at) VALUES (?,?,?,?,?,?,?,?,?,?,?)')
     .run(a.roundId || null, a.itemId, a.id || null, a.topic || null, a.selected || null, a.answer || null, a.selectedText || null, a.answerText || null, a.realSelected || null, a.correct ? 1 : 0, a.at);
 }
@@ -195,6 +201,12 @@ const server = h.createServer((req, res) => {
     req.on('end', () => {
       try {
         const { roundId, date } = JSON.parse(body);
+        const preliminary = loadDB();
+        if (!(preliminary.answers || []).some(a => a.roundId === roundId)) {
+          res.writeHead(200, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify({ ok: true, wrongCount: 0, empty: true }));
+          return;
+        }
         const finished = sqlite.prepare('SELECT wrongCount FROM finished_rounds WHERE roundId=?').get(roundId);
         if (finished) {
           sqlite.prepare('DELETE FROM progress WHERE id=1').run();
@@ -203,6 +215,8 @@ const server = h.createServer((req, res) => {
           return;
         }
         const db = loadDB();
+        const roundProgress = sqlite.prepare('SELECT forceMode FROM progress WHERE roundId=?').get(roundId);
+        const forceMode = roundProgress ? !!roundProgress.forceMode : false;
         const today = (db.answers || []).filter(a => a.roundId === roundId);
         const todayStr = date || todayEast8();
         const itemIds = [...new Set(today.map(a => a.itemId))];
@@ -223,7 +237,9 @@ const server = h.createServer((req, res) => {
             if (it.round > db.schedule.length) it.status = 'mastered';
           }
         });
-        saveDB(db);
+        if (!forceMode) {
+          saveDB(db);
+        }
         const wrongCount = [...new Set(today.filter(a => !a.correct).map(a => a.itemId))].length;
         sqlite.prepare('INSERT OR REPLACE INTO finished_rounds (roundId,at,wrongCount) VALUES (?,?,?)').run(roundId, todayEast8(), wrongCount);
         res.writeHead(200, { 'Content-Type': 'application/json' });

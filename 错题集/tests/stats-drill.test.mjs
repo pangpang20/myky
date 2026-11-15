@@ -91,5 +91,9 @@ check(read('ebbinghaus/server.js').includes("CREATE TABLE IF NOT EXISTS finished
 check(read('ebbinghaus/server.js').includes("finished_rounds WHERE roundId=?"), 'round completion must be idempotent')
 check(read('ebbinghaus/server.js').includes('answerResults'), 'progress API must expose authoritative answer records')
 check(app.includes("const dbR=await fetch('/api/db',{cache:'no-store'});DB=await dbR.json();"), 'round completion must refresh homepage data')
+check(read('ebbinghaus/server.js').includes('wrongCount: 0, empty: true'), 'empty rounds must not be marked as finished')
+check(read('ebbinghaus/server.js').includes('UPDATE answers SET'), 'repeat answers in one round must update instead of duplicating')
+check(read('ebbinghaus/server.js').includes('SELECT forceMode FROM progress WHERE roundId=?'), 'completion must respect force mode')
+check(read('ebbinghaus/server.js').includes('if (!forceMode) {\n          saveDB(db);'), 'reinforcement rounds must not advance memory schedule')
 if (failed) { console.error(failed + ' check(s) failed'); process.exit(1) }
 console.log('Stats drill validation passed.')
