@@ -89,13 +89,20 @@ if (Array.isArray(p.examQuestions)) {
 }
 
 // 5. Quiz questions.json (4317 practice) — newest first
-if (p.quizQuestions?.length) {
+{
   const quiz = read('../quiz/questions.json')
   const existingIds = new Set(quiz.map(q => q.id))
-  const fresh = p.quizQuestions
+  const examFresh = (Array.isArray(p.examQuestions) ? p.examQuestions : []).map((q, i) => ({
+    id: `hm-exam-${randomUUID().slice(0, 8)}`,
+    topic: q.topic || p.ebbinghausQuestions[0]?.topic || '综合',
+    type: 'single',
+    ...q
+  }))
+  const fresh = [...(p.quizQuestions || []), ...examFresh]
     .filter(q => !existingIds.has(q.id))
     .map(q => ({ subject: p.subject, itemId: p.itemId, ...q }))
   write('../quiz/questions.json', [...fresh, ...quiz])
+  if (examFresh.length) console.log(`Quiz: added ${examFresh.length} exam-style question(s)`)
 }
 
 console.log(`Registered "${p.itemId}": db item + knowledge + ${p.ebbinghausQuestions.length} round-1 questions + quiz sync.`)
