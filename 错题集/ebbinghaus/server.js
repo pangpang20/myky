@@ -30,6 +30,8 @@ CREATE TABLE IF NOT EXISTS progress (
   results TEXT, ids TEXT, at TEXT
 );
 `);
+try { sqlite.prepare('ALTER TABLE answers ADD COLUMN selectedText TEXT').run(); } catch (e) {}
+try { sqlite.prepare('ALTER TABLE answers ADD COLUMN answerText TEXT').run(); } catch (e) {}
 
 // JSON -> SQLite 一次性迁移（若 SQLite 为空且 legacy 存在）
 function migrateFromJsonIfNeeded() {
@@ -92,8 +94,8 @@ function saveDB(db) {
   tx();
 }
 function insertAnswer(a) {
-  sqlite.prepare('INSERT INTO answers (roundId,itemId,questionId,topic,selected,answer,correct,at) VALUES (?,?,?,?,?,?,?,?)')
-    .run(a.roundId || null, a.itemId, a.id || null, a.topic || null, a.selected || null, a.answer || null, a.correct ? 1 : 0, a.at);
+  sqlite.prepare('INSERT INTO answers (roundId,itemId,questionId,topic,selected,answer,selectedText,answerText,correct,at) VALUES (?,?,?,?,?,?,?,?,?,?)')
+    .run(a.roundId || null, a.itemId, a.id || null, a.topic || null, a.selected || null, a.answer || null, a.selectedText || null, a.answerText || null, a.correct ? 1 : 0, a.at);
 }
 function saveProgressRow(p) {
   if (!p || !Array.isArray(p.ids) || !p.ids.length) {

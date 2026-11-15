@@ -446,6 +446,7 @@ async function resumeQuiz(){
   roundId=p.roundId||("eb-"+Date.now());
   forceMode=!!p.forceMode;
   results=Array.isArray(p.results)?p.results:[];
+  results=results.map(r=>r&&!r.realSelected?{...r,realSelected:r.selected}:r);
   document.getElementById("mainView").style.display="none";
   document.getElementById("quizView").style.display="";
   document.getElementById("quizView").classList.add("main-with-side");
@@ -487,15 +488,33 @@ function renderQ(){
   if(qi>=queue.length){finishRound();return;}
   const q=queue[qi];
   const card=document.getElementById('quizCard');
+  const order=optionDisplay(q);
   card.innerHTML='<div class="meta">第 '+(qi+1)+' / '+queue.length+' 题 · '+esc(q.subject)+' · '+esc(q.topic)+' · 单选</div>'+
     '<div class="q">'+renderQuestion(q.question)+'</div>'+
-    '<div id="opts">'+Object.keys(q.options).map(k=>'<div class="opt" data-k="'+k+'" onclick="choose(\''+k+'\')"><span class="badge">'+k+'</span>'+renderQuestion(q.options[k])+'</div>').join('')+'</div>'+
+    '<div id="opts">'+order.map((real,i)=>{const dk=String.fromCharCode(65+i);return '<div class="opt" data-k="'+dk+'" onclick="choose(\''+dk+'\')"><span class="badge">'+dk+'</span>'+renderQuestion(q.options[real])+'</div>'}).join('')+'</div>'+
     '<div class="nav-bar" id="navWrap"></div>'+
     '<div class="analysis" id="ana"></div>';
   renderNavBar();
   renderSide();
   const r0=results[qi];
-  if(r0)paintAnswer(q,r0.selected,r0.correct);
+  if(r0)paintAnswer(q,r0.realSelected?displayKeyForReal(q,r0.realSelected):r0.selected,r0.correct);
+}
+function shuffleKeys(q){
+  const keys=Object.keys(q.options||{});
+  for(let i=keys.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[keys[i],keys[j]]=[keys[j],keys[i]]}
+  return keys;
+}
+function optionDisplay(q){
+  if(!q.__optionOrder)q.__optionOrder=shuffleKeys(q);
+  return q.__optionOrder;
+}
+function realKeyForDisplay(q,displayKey){
+  const index=String(displayKey||'').toUpperCase().charCodeAt(0)-65;
+  return index>=0&&index<optionDisplay(q).length?optionDisplay(q)[index]:null;
+}
+function displayKeyForReal(q,realKey){
+  const index=optionDisplay(q).indexOf(realKey);
+  return index>=0?String.fromCharCode(65+index):null;
 }
 const FENCE='```';
 function toMath(tex){
@@ -548,7 +567,8 @@ function paintAnswer(q,selected,correct){
   const opts=document.querySelectorAll('#opts .opt');
   opts.forEach(o=>{o.classList.add("disabled");o.onclick=null});
   const picked=document.querySelector('#opts .opt[data-k="'+selected+'"]');
-  const ansEl=document.querySelector('#opts .opt[data-k="'+q.answer+'"]');
+  const ansDk=displayKeyForReal(q,q.answer);
+  const ansEl=ansDk?document.querySelector('#opts .opt[data-k="'+ansDk+'"]'):null;
   if(ansEl)ansEl.classList.add('correct');
   if(!correct&&picked)picked.classList.add('wrong');
   const ana=document.getElementById('ana');
@@ -558,9 +578,10 @@ function paintAnswer(q,selected,correct){
 }
 function judgeAnswer(k,post){
   const q=queue[qi];
-  const ok=k===q.answer;
-  if(post)fetch('/api/answer',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({roundId:roundId,itemId:q.itemId,id:q.id,topic:q.topic,selected:k,answer:q.answer,correct:ok,at:nowEast8Iso()})});
-  results[qi]={selected:k,correct:ok};
+  const realSelected=realKeyForDisplay(q,k);
+  const ok=realSelected===q.answer;
+  if(post)fetch('/api/answer',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({roundId:roundId,itemId:q.itemId,id:q.id,topic:q.topic,selected:k,answer:q.answer,selectedText:realSelected?q.options[realSelected]:null,answerText:q.options[q.answer]||null,correct:ok,at:nowEast8Iso()})});
+  results[qi]={selected:k,correct:ok,realSelected:realSelected};
   paintAnswer(q,k,ok);
   renderSide();renderNavBar();
   scheduleProgressSave();
@@ -594,7 +615,7 @@ document.addEventListener('keydown',e=>{
   const q=queue[qi];
   if(q&&!results[qi]&&!e.ctrlKey&&!e.metaKey&&!e.altKey){
     const k=String(e.key).trim().toUpperCase();
-    if(k.length===1&&q.options&&q.options[k]){e.preventDefault();judgeAnswer(k,true);return}
+    if(k.length===1&&realKeyForDisplay(q,k)){e.preventDefault();judgeAnswer(k,true);return}
   }
   if(e.key===' '){const ana=document.getElementById('ana');if(ana&&ana.style.display==='block'){e.preventDefault();nextQ()}}
 });
