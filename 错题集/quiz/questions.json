@@ -1,5 +1,85 @@
 [
   {
+    "subject": "高等数学",
+    "itemId": "高等数学-复合函数二阶导数",
+    "id": "hm-d2-1",
+    "topic": "复合函数二阶导数",
+    "type": "single",
+    "question": "设 $y=\\ln(1+2x)$，则 $y''=$（ ）",
+    "options": {
+      "A": "$\\dfrac{2}{(1+2x)^2}$",
+      "B": "$-\\dfrac{2}{(1+2x)^2}$",
+      "C": "$-\\dfrac{4}{(1+2x)^2}$",
+      "D": "$\\dfrac{4}{(1+2x)^2}$"
+    },
+    "answer": "C",
+    "analysis": "$y'=2(1+2x)^{-1}$；$y''=2\\cdot(-1)(1+2x)^{-2}\\cdot2=-\\dfrac{4}{(1+2x)^2}$。"
+  },
+  {
+    "subject": "高等数学",
+    "itemId": "高等数学-复合函数二阶导数",
+    "id": "hm-d2-2",
+    "topic": "复合函数二阶导数",
+    "type": "single",
+    "question": "设 $y=\\ln(1+ax)$（$a\\neq0$），$y''=$（ ）",
+    "options": {
+      "A": "$\\dfrac{a^2}{(1+ax)^2}$",
+      "B": "$-\\dfrac{a^2}{(1+ax)^2}$",
+      "C": "$-\\dfrac{a}{(1+ax)^2}$",
+      "D": "$\\dfrac{2a^2}{(1+ax)^3}$"
+    },
+    "answer": "B",
+    "analysis": "$y'=a(1+ax)^{-1}$；$y''=a\\cdot(-1)(1+ax)^{-2}\\cdot a=-\\dfrac{a^2}{(1+ax)^2}$。"
+  },
+  {
+    "subject": "高等数学",
+    "itemId": "高等数学-复合函数二阶导数",
+    "id": "hm-d2-3",
+    "topic": "复合函数二阶导数",
+    "type": "single",
+    "question": "设 $y=e^{2x}$，则 $y''=$（ ）",
+    "options": {
+      "A": "$2e^{2x}$",
+      "B": "$4e^{2x}$",
+      "C": "$4e^{x}$",
+      "D": "$e^{2x}$"
+    },
+    "answer": "B",
+    "analysis": "$y'=2e^{2x}$；$y''=4e^{2x}$。"
+  },
+  {
+    "subject": "高等数学",
+    "itemId": "高等数学-复合函数二阶导数",
+    "id": "hm-d2-4",
+    "topic": "复合函数二阶导数",
+    "type": "single",
+    "question": "设 $y=(1+3x)^5$，则 $y''=$（ ）",
+    "options": {
+      "A": "$60(1+3x)^3$",
+      "B": "$20(1+3x)^3$",
+      "C": "$15(1+3x)^4$",
+      "D": "$45(1+3x)^3$"
+    },
+    "answer": "A",
+    "analysis": "$y'=15(1+3x)^4$；$y''=15\\cdot4\\cdot3(1+3x)^3=60(1+3x)^3$。"
+  },
+  {
+    "subject": "高等数学",
+    "itemId": "高等数学-复合函数二阶导数",
+    "id": "hm-d2-5",
+    "topic": "复合函数二阶导数",
+    "type": "single",
+    "question": "设 $y=\\ln(1-x)$，则 $y''=$（ ）",
+    "options": {
+      "A": "$\\dfrac{1}{(1-x)^2}$",
+      "B": "$-\\dfrac{1}{(1-x)^2}$",
+      "C": "$\\dfrac{1}{1-x}$",
+      "D": "$-\\dfrac{1}{1-x}$"
+    },
+    "answer": "B",
+    "analysis": "$y'=(1-x)^{-1}\\cdot(-1)$；$y''=(-1)\\cdot(1-x)^{-2}\\cdot(-1)\\cdot(-1)=-\\dfrac{1}{(1-x)^2}$。"
+  },
+  {
     "subject": "英语",
     "itemId": "英语-2000年完形填空词义与逻辑",
     "id": "en-2000-1",

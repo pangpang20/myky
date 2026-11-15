@@ -679,6 +679,22 @@
       },
       "answer": "A",
       "analysis": "replace…with…「以新换旧」；dispose 需接 of；supplement 表补充。"
+    },
+    {
+      "id": "r1-b3c9504b-7fca-4196-8388-e761bef5cd72",
+      "itemId": "高等数学-复合函数二阶导数",
+      "round": 1,
+      "subject": "高等数学",
+      "topic": "复合函数二阶导数",
+      "question": "设 y=ln(1+2x)，则 y''=（ ）",
+      "options": {
+        "A": "2/(1+2x)²",
+        "B": "-2/(1+2x)²",
+        "C": "-4/(1+2x)²",
+        "D": "4/(1+2x)²"
+      },
+      "answer": "C",
+      "analysis": "y'=2/(1+2x)=2(1+2x)^{-1}；y''=2·(-1)(1+2x)^{-2}·2=-4/(1+2x)²。"
     }
   ]
 }
