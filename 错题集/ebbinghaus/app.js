@@ -441,6 +441,13 @@ async function resumeQuiz(){
   const map=new Map(QS.map(q=>[q.id,q]));
   const q2=p.ids.map(id=>map.get(id)).filter(Boolean);
   if(!q2.length){clearProgress();return false}
+  const savedIds=new Set(p.ids);
+  const roundItemIds=new Set(q2.map(q=>q.itemId));
+  const newQs=QS.filter(q=>roundItemIds.has(q.itemId)&&!savedIds.has(q.id));
+  if(newQs.length){
+    const shuffled=newQs.slice().sort(()=>Math.random()-.5);
+    shuffled.forEach(q=>q2.push(q));
+  }
   queue=q2;
   qi=Math.min(Math.max(0,p.qi||0),queue.length-1);
   roundId=p.roundId||("eb-"+Date.now());
