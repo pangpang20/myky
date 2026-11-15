@@ -71,5 +71,7 @@ check(!html.includes('id="resumeBtn"'), 'resume button must be removed from html
 check(app.includes('await resumeQuiz()'), 'startQuiz must await server progress restore')
 check(app.includes('String(e.key).trim().toUpperCase()'), 'keyboard answer must accept lowercase letters')
 check(app.includes('function judgeAnswer('), 'answer judging must be reusable for keyboard input')
+check(app.includes('function scheduleProgressSave()'), 'answer must trigger debounced immediate progress save')
+check(app.includes('progressTimer=setTimeout(saveProgress,300)'), 'progress save must debounce 300ms')
 if (failed) { console.error(failed + ' check(s) failed'); process.exit(1) }
 console.log('Stats drill validation passed.')

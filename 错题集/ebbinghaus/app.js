@@ -418,6 +418,11 @@ function saveProgress(){
     fetch('/api/progress',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)}).catch(e=>console.warn('save progress failed',e));
   }catch(e){console.warn('save progress failed',e)}
 }
+let progressTimer=null;
+function scheduleProgressSave(){
+  clearTimeout(progressTimer);
+  progressTimer=setTimeout(saveProgress,300);
+}
 function clearProgress(){
   fetch('/api/progress',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({})}).catch(e=>console.warn('clear progress failed',e));
 }
@@ -556,7 +561,8 @@ function judgeAnswer(k,post){
   if(post)fetch('/api/answer',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({roundId:roundId,itemId:q.itemId,id:q.id,topic:q.topic,selected:k,answer:q.answer,correct:ok,at:nowEast8Iso()})});
   results[qi]={selected:k,correct:ok};
   paintAnswer(q,k,ok);
-  renderSide();renderNavBar();saveProgress();
+  renderSide();renderNavBar();
+  scheduleProgressSave();
   if(window.renderMathInElement)renderMathInElement(document.getElementById('quizCard'),{delimiters:[{left:'$',right:'$',display:false}],throwOnError:false});
 }
 function choose(k){judgeAnswer(k,true)}
@@ -568,8 +574,8 @@ function renderNavBar(){
     '<button class="btn btn-prev" onclick="prevQ()"'+(qi===0?' disabled':'')+'>← 上一题</button>'+
     '<button class="btn btn-next2" onclick="nextQ()"'+(qi===queue.length-1?' disabled':'')+'>'+(qi===queue.length-1?'完成本轮':'下一题 →')+'</button>';
 }
-function nextQ(){if(qi<queue.length-1){qi++;renderQ();saveProgress()}else{finishRound()}}
-function prevQ(){if(qi>0){qi--;renderQ();saveProgress()}}
+function nextQ(){if(qi<queue.length-1){qi++;renderQ();scheduleProgressSave()}else{finishRound()}}
+function prevQ(){if(qi>0){qi--;renderQ();scheduleProgressSave()}}
 function renderSide(){
   const el=document.getElementById('sideList');
   el.innerHTML=queue.map((q,i)=>{
@@ -578,7 +584,7 @@ function renderSide(){
     return '<div class="side-cell'+(i===qi?' active':'')+' '+cls+'" onclick="jumpTo('+i+')">'+(i+1)+'</div>';
   }).join('');
 }
-function jumpTo(i){qi=i;renderQ();saveProgress()}
+function jumpTo(i){qi=i;renderQ();scheduleProgressSave()}
 document.addEventListener('keydown',e=>{
   if(e.key==='Escape'){const n=document.getElementById('noteModal');if(n&&n.classList.contains('open')){closeNote();return}const m=document.getElementById('drillModal');if(m&&m.classList.contains('open')){closeDrill();return}}
   if(document.getElementById('quizView').style.display==='none')return;
