@@ -33,15 +33,7 @@ const today = dateEast8()
 const due = dateEast8(new Date(Date.now() + 86400000))
 
 // 1. Ebbinghaus db.json (4318 source of truth)
-const db = read('../data/db.json')
-if (!db.items.some(x => x.id === p.itemId)) {
-  db.items.push({
-    id: p.itemId, subject: p.subject, file: p.file,
-    firstLearned: today, reviews: [], status: 'learning',
-    round: 1, dueDate: due, createdAt: isoEast8()
-  })
-  write('../data/db.json', db)
-}
+// (4318 runtime reads SQLite data/ky.db directly; legacy db.json no longer written)
 
 // 1b. SQLite (4318 runtime source of truth, server reads data/ky.db)
 {
@@ -73,7 +65,7 @@ const dsqPath = p.subject === '数据结构' ? '../ebbinghaus/ds-questions.json'
 const dsq = read(dsqPath)
 for (const q of p.ebbinghausQuestions) {
   const id = `r1-${randomUUID()}`
-  if (!dsq.questions.some(x => x.itemId === p.itemId && x.topic === q.topic)) {
+  if (!dsq.questions.some(x => x.itemId === p.itemId && x.question === q.question)) {
     dsq.questions.push({ id, itemId: p.itemId, round: 1, subject: p.subject, ...q })
   }
 }
