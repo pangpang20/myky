@@ -73,5 +73,8 @@ check(app.includes('String(e.key).trim().toUpperCase()'), 'keyboard answer must 
 check(app.includes('function judgeAnswer('), 'answer judging must be reusable for keyboard input')
 check(app.includes('function scheduleProgressSave()'), 'answer must trigger debounced immediate progress save')
 check(app.includes('progressTimer=setTimeout(saveProgress,300)'), 'progress save must debounce 300ms')
+check(app.includes('if(!saved)clearProgress();'), 'startQuiz clears only when no saved progress')
+check(app.includes('const saved=await loadProgress();'), 'startQuiz must check server progress before clearing')
+check(app.includes('const saved=await loadProgress();'), 'startQuiz must check server progress before clearing')
 if (failed) { console.error(failed + ' check(s) failed'); process.exit(1) }
 console.log('Stats drill validation passed.')
