@@ -447,6 +447,12 @@ async function resumeQuiz(){
   forceMode=!!p.forceMode;
   results=Array.isArray(p.results)?p.results:[];
   results=results.map(r=>r&&!r.realSelected?{...r,realSelected:r.selected}:r);
+  const answered=p.answerResults||[];
+  answered.forEach(a=>{
+    const idx=queue.findIndex(q=>q.id===a.id);
+    if(idx>=0&&!results[idx]&&a.realSelected)results[idx]={selected:a.selected,correct:!!a.correct,realSelected:a.realSelected};
+    if(idx>=0&&!results[idx]&&!a.realSelected){const q=queue[idx];const dk=displayKeyForReal(q,a.selected);if(dk)results[idx]={selected:dk,correct:!!a.correct,realSelected:a.selected}}
+  });
   document.getElementById("mainView").style.display="none";
   document.getElementById("quizView").style.display="";
   document.getElementById("quizView").classList.add("main-with-side");
@@ -623,6 +629,8 @@ async function finishRound(){
   const r=await fetch('/api/finish',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({roundId:roundId,date:today()})});
   const res=await r.json();
   clearProgress();
+  const dbR=await fetch('/api/db',{cache:'no-store'});DB=await dbR.json();
+  renderStats();renderAll();renderDueBar();
   document.getElementById('quizCard').innerHTML='<div style="text-align:center;padding:36px 0">'+
     '<div style="font-size:44px">'+(res.wrongCount?'💪':'🎉')+'</div>'+
     '<h2 style="margin:12px 0">本轮完成</h2>'+

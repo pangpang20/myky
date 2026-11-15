@@ -86,5 +86,10 @@ check(app.includes('results[qi]={selected:k,correct:ok,realSelected:realSelected
 check(app.includes('results.map(r=>r&&!r.realSelected?{...r,realSelected:r.selected}:r)'), 'legacy progress answers must be normalized without losing records')
 check(read('ebbinghaus/server.js').includes('ALTER TABLE answers ADD COLUMN selectedText TEXT'), 'answer schema must add displayed option text without recreating tables')
 check(read('ebbinghaus/server.js').includes('ALTER TABLE answers ADD COLUMN answerText TEXT'), 'answer schema must add correct option text without recreating tables')
+check(app.includes('const answered=p.answerResults||[]'), 'progress restore must merge authoritative answer records')
+check(read('ebbinghaus/server.js').includes("CREATE TABLE IF NOT EXISTS finished_rounds"), 'finished rounds must be persisted for idempotent completion')
+check(read('ebbinghaus/server.js').includes("finished_rounds WHERE roundId=?"), 'round completion must be idempotent')
+check(read('ebbinghaus/server.js').includes('answerResults'), 'progress API must expose authoritative answer records')
+check(app.includes("const dbR=await fetch('/api/db',{cache:'no-store'});DB=await dbR.json();"), 'round completion must refresh homepage data')
 if (failed) { console.error(failed + ' check(s) failed'); process.exit(1) }
 console.log('Stats drill validation passed.')

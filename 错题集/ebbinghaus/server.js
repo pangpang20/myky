@@ -24,6 +24,9 @@ CREATE TABLE IF NOT EXISTS answers (
   questionId TEXT, topic TEXT, selected TEXT, answer TEXT,
   correct INTEGER NOT NULL, at TEXT NOT NULL
 );
+CREATE TABLE IF NOT EXISTS finished_rounds (
+  roundId TEXT PRIMARY KEY, at TEXT NOT NULL, wrongCount INTEGER NOT NULL
+);
 CREATE TABLE IF NOT EXISTS progress (
   id INTEGER PRIMARY KEY CHECK (id = 1), roundId TEXT,
   forceMode INTEGER NOT NULL DEFAULT 0, qi INTEGER NOT NULL DEFAULT 0,
@@ -32,6 +35,7 @@ CREATE TABLE IF NOT EXISTS progress (
 `);
 try { sqlite.prepare('ALTER TABLE answers ADD COLUMN selectedText TEXT').run(); } catch (e) {}
 try { sqlite.prepare('ALTER TABLE answers ADD COLUMN answerText TEXT').run(); } catch (e) {}
+try { sqlite.prepare('ALTER TABLE answers ADD COLUMN realSelected TEXT').run(); } catch (e) {}
 
 // JSON -> SQLite 一次性迁移（若 SQLite 为空且 legacy 存在）
 function migrateFromJsonIfNeeded() {
@@ -69,7 +73,8 @@ function loadDB() {
   }));
   const answers = sqlite.prepare('SELECT * FROM answers ORDER BY id').all().map(a => ({
     roundId: a.roundId, itemId: a.itemId, id: a.questionId, topic: a.topic,
-    selected: a.selected, answer: a.answer, correct: !!a.correct, at: a.at
+    selected: a.selected, answer: a.answer, realSelected: a.realSelected || null,
+    correct: !!a.correct, at: a.at
   }));
   const pr = sqlite.prepare('SELECT * FROM progress WHERE id=1').get();
   const meta = {};
@@ -94,8 +99,8 @@ function saveDB(db) {
   tx();
 }
 function insertAnswer(a) {
-  sqlite.prepare('INSERT INTO answers (roundId,itemId,questionId,topic,selected,answer,selectedText,answerText,correct,at) VALUES (?,?,?,?,?,?,?,?,?,?)')
-    .run(a.roundId || null, a.itemId, a.id || null, a.topic || null, a.selected || null, a.answer || null, a.selectedText || null, a.answerText || null, a.correct ? 1 : 0, a.at);
+  sqlite.prepare('INSERT INTO answers (roundId,itemId,questionId,topic,selected,answer,selectedText,answerText,realSelected,correct,at) VALUES (?,?,?,?,?,?,?,?,?,?,?)')
+    .run(a.roundId || null, a.itemId, a.id || null, a.topic || null, a.selected || null, a.answer || null, a.selectedText || null, a.answerText || null, a.realSelected || null, a.correct ? 1 : 0, a.at);
 }
 function saveProgressRow(p) {
   if (!p || !Array.isArray(p.ids) || !p.ids.length) {
@@ -190,6 +195,13 @@ const server = h.createServer((req, res) => {
     req.on('end', () => {
       try {
         const { roundId, date } = JSON.parse(body);
+        const finished = sqlite.prepare('SELECT wrongCount FROM finished_rounds WHERE roundId=?').get(roundId);
+        if (finished) {
+          sqlite.prepare('DELETE FROM progress WHERE id=1').run();
+          res.writeHead(200, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify({ ok: true, wrongCount: finished.wrongCount, idempotent: true }));
+          return;
+        }
         const db = loadDB();
         const today = (db.answers || []).filter(a => a.roundId === roundId);
         const todayStr = date || todayEast8();
@@ -213,6 +225,7 @@ const server = h.createServer((req, res) => {
         });
         saveDB(db);
         const wrongCount = [...new Set(today.filter(a => !a.correct).map(a => a.itemId))].length;
+        sqlite.prepare('INSERT OR REPLACE INTO finished_rounds (roundId,at,wrongCount) VALUES (?,?,?)').run(roundId, todayEast8(), wrongCount);
         res.writeHead(200, { 'Content-Type': 'application/json' });
         res.end(JSON.stringify({ ok: true, wrongCount }));
       } catch (e) { console.error('API error:', e.message); res.writeHead(500); res.end('bad: ' + e.message); }
@@ -224,8 +237,11 @@ const server = h.createServer((req, res) => {
   // ---- API: 答题进度（存服务端，跨浏览器共用） ----
   if (req.url === '/api/progress' && req.method === 'GET') {
     const db = loadDB();
+    const answerResults = (db.answers || [])
+      .filter(a => db.progress && a.roundId === db.progress.roundId)
+      .map(a => ({ id: a.id, selected: a.selected, realSelected: a.realSelected, correct: a.correct }));
     res.writeHead(200, { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' });
-    res.end(JSON.stringify(db.progress || null));
+    res.end(JSON.stringify(db.progress ? { ...db.progress, answerResults } : null));
     return;
   }
   if (req.url === '/api/progress' && req.method === 'POST') {
