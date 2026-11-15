@@ -1,6 +1,86 @@
 [
   {
     "subject": "高等数学",
+    "itemId": "高等数学-导数积分换元",
+    "id": "hm-int1",
+    "topic": "导数积分换元",
+    "type": "single",
+    "question": "$\\displaystyle\\int_0^1 f'(3x)\\,\\mathrm{d}x=$（ ）",
+    "options": {
+      "A": "$f(3)-f(0)$",
+      "B": "$\\dfrac{f(3)-f(0)}{3}$",
+      "C": "$3[f(3)-f(0)]$",
+      "D": "$\\dfrac{f(1)-f(0)}{3}$"
+    },
+    "answer": "B",
+    "analysis": "$u=3x$，$\\mathrm{d}x=\\frac{\\mathrm{d}u}{3}$，结果为 $\\dfrac{f(3)-f(0)}{3}$。"
+  },
+  {
+    "subject": "高等数学",
+    "itemId": "高等数学-导数积分换元",
+    "id": "hm-int2",
+    "topic": "导数积分换元",
+    "type": "single",
+    "question": "设 $f(x)=e^{x}$，则 $\\displaystyle\\int_0^1 f'(2x)\\,\\mathrm{d}x=$（ ）",
+    "options": {
+      "A": "$e^{2}-1$",
+      "B": "$\\dfrac{e^{2}-1}{2}$",
+      "C": "$e-1$",
+      "D": "$\\dfrac{e-1}{2}$"
+    },
+    "answer": "B",
+    "analysis": "$f'(u)=e^{u}$，$f'(2x)=e^{2x}$，$\\int_0^1 e^{2x}\\mathrm{d}x=\\dfrac{e^2-1}{2}$。"
+  },
+  {
+    "subject": "高等数学",
+    "itemId": "高等数学-导数积分换元",
+    "id": "hm-int3",
+    "topic": "导数积分换元",
+    "type": "single",
+    "question": "设 $f'(x)=\\cos x$，则 $\\displaystyle\\int_0^{\\pi} f'\\left(\\frac{x}{2}\\right)\\mathrm{d}x=$（ ）",
+    "options": {
+      "A": "$1$",
+      "B": "$2$",
+      "C": "$0$",
+      "D": "$4$"
+    },
+    "answer": "B",
+    "analysis": "$\\int_0^{\\pi}\\cos\\frac{x}{2}\\,\\mathrm{d}x=2\\sin\\frac{x}{2}\\Big|_0^{\\pi}=2$。"
+  },
+  {
+    "subject": "高等数学",
+    "itemId": "高等数学-导数积分换元",
+    "id": "hm-int4",
+    "topic": "导数积分换元",
+    "type": "single",
+    "question": "设 $f(x)=\\ln x$，则 $\\displaystyle\\int_1^2 f'\\left(\\frac{x}{2}\\right)\\mathrm{d}x=$（ ）",
+    "options": {
+      "A": "$2\\ln 2$",
+      "B": "$\\ln 2$",
+      "C": "$-\\ln 2$",
+      "D": "$\\dfrac{\\ln 2}{2}$"
+    },
+    "answer": "A",
+    "analysis": "$f'(x)=\\frac1x$，$f'\\left(\\frac{x}{2}\\right)=\\frac{2}{x}$，$\\int_1^2\\frac{2}{x}\\mathrm{d}x=2\\ln2$。"
+  },
+  {
+    "subject": "高等数学",
+    "itemId": "高等数学-导数积分换元",
+    "id": "hm-int5",
+    "topic": "导数积分换元",
+    "type": "single",
+    "question": "设 $k\\neq0$ 为常数，则 $\\displaystyle\\int_a^b f'(kx)\\,\\mathrm{d}x=$（ ）",
+    "options": {
+      "A": "$f(kb)-f(ka)$",
+      "B": "$k[f(kb)-f(ka)]$",
+      "C": "$\\dfrac{f(kb)-f(ka)}{k}$",
+      "D": "$\\dfrac{f(b)-f(a)}{k}$"
+    },
+    "answer": "C",
+    "analysis": "$u=kx$，$\\mathrm{d}x=\\frac{\\mathrm{d}u}{k}$，上下限变 $ka,kb$，结果 $\\dfrac{f(kb)-f(ka)}{k}$。"
+  },
+  {
+    "subject": "高等数学",
     "itemId": "高等数学-重要极限1的无穷次方型",
     "id": "hm-lim1",
     "topic": "重要极限 1^∞ 型",

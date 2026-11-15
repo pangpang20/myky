@@ -404,5 +404,19 @@
     "rootCauses": {
       "重要极限 1^∞ 型": "未作答。不熟悉 1^∞ 型极限的标准套路：底数写 1+u(n)，指数凑 1/u(n) 形式，或取对数化为 ∞·0 型。"
     }
+  },
+  "高等数学-导数积分换元": {
+    "knowledge": "不定积分：∫f'(x)dx = f(x)+C。复合倒数积分须换元：u=kx，du=k dx，故 ∫f'(kx)dx = f(kx)/k + C；定积分 ∫_a^b f'(kx)dx = [f(kb)-f(ka)]/k，注意 dx 要除以 k 且上下限同步变为 ka、kb。",
+    "mnemonic": "导数里面有 kx，积出来要除以 k；定积分还得换上下限。",
+    "keyPoints": [
+      "基本公式：$\\int f'(x)\\,\\mathrm{d}x = f(x)+C$",
+      "换元：$u=kx$，$\\mathrm{d}x=\\frac{1}{k}\\mathrm{d}u$",
+      "不定积分：$\\int f'(kx)\\,\\mathrm{d}x = \\frac{f(kx)}{k}+C$",
+      "定积分：$\\int_a^b f'(kx)\\,\\mathrm{d}x = \\frac{f(kb)-f(ka)}{k}$",
+      "定积分换元后上下限同步变为 $ka$、$kb$"
+    ],
+    "rootCauses": {
+      "导数积分换元": "未作答。没掌握复合函数导数积分须换元，dx 要除以 k，且定积分上下限要同步变换。"
+    }
   }
 }
