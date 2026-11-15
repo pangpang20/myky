@@ -29,6 +29,9 @@ check(html.includes('我已阅读，开始答题'), 'study view must require con
 check(Array.isArray(questions) && questions.length >= 5, 'at least 5 questions')
 check(questions.every(q => typeof q.itemId === 'string' && q.itemId.length > 0), 'each question must link to knowledge item')
 
+const d2Q4 = questions.find(q => q.id === 'hm-d2-4')
+check(d2Q4 && d2Q4.answer === 'B', 'hm-d2-4 second derivative of (1+3x)^5 must be 180(1+3x)^3')
+
 const ids = new Set()
 const subjects = new Set(['数据结构','计算机组成原理','操作系统','计算机网络','高等数学','英语'])
 for (const q of questions) {
