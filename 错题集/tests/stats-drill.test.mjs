@@ -63,8 +63,9 @@ check(html.includes('.note-body{flex:1;overflow:auto'), 'note modal body must sc
 check(app.includes('function saveProgress()'), 'quiz progress must be persisted')
 check(app.includes('function resumeQuiz()'), 'quiz progress must be resumable')
 check(app.includes('clearProgress()'), 'progress must clear when round finishes')
-check(app.includes('updateResumeBtn()'), 'resume button must refresh on init')
-check(html.includes('id="resumeBtn"'), 'resume button must exist')
+check(!app.includes('updateResumeBtn'), 'no separate resume button logic should remain')
+check(!html.includes('id="resumeBtn"'), 'resume button must be removed from html')
+check(app.includes('resumeQuiz();return'), 'startQuiz must resume saved progress first')
 check(app.includes('String(e.key).trim().toUpperCase()'), 'keyboard answer must accept lowercase letters')
 check(app.includes('function judgeAnswer('), 'answer judging must be reusable for keyboard input')
 if (failed) { console.error(failed + ' check(s) failed'); process.exit(1) }

@@ -306,7 +306,6 @@ function renderDueBar(){
     pct.textContent='进度良好';
     btn.disabled=true;
   }
-  updateResumeBtn();
 }
 
 const SCHEDULE=[1,2,4,7,15,30];
@@ -444,21 +443,10 @@ function resumeQuiz(){
   document.getElementById("quizView").classList.add("main-with-side");
   renderQ();renderSide();
 }
-function updateResumeBtn(){
-  const btn=document.getElementById("resumeBtn");
-  if(!btn)return;
-  const p=loadProgress();
-  if(p&&p.ids.length){
-    const done=(p.results||[]).filter(Boolean).length;
-    btn.style.display="";
-    btn.textContent="继续上次答题（"+(Math.min(p.qi||0,p.ids.length-1)+1)+"/"+p.ids.length+"，已答 "+done+" 题）";
-  }else{
-    btn.style.display="none";
-  }
-}
-
 function startQuiz(force){
   forceMode=!!force;
+  const saved=loadProgress();
+  if(saved&&!!saved.forceMode===forceMode&&saved.ids&&saved.ids.length){resumeQuiz();return}
   const items=forceMode?DB.items.filter(i=>i.status!=='mastered'):dueItems();
   if(!items.length){renderDueBar();return;}
   roundId='eb-'+Date.now();
@@ -480,11 +468,10 @@ function startQuiz(force){
   saveProgress();
 }
 function exitQuiz(){
+  saveProgress();
   document.getElementById('quizView').style.display='none';
   document.getElementById('mainView').style.display='';
-  document.getElementById('quizLog').textContent='';
-  saveProgress();
-  init();
+  const log=document.getElementById('quizLog');if(log)log.textContent='';
 }
 function renderQ(){
   if(qi>=queue.length){finishRound();return;}
@@ -608,7 +595,7 @@ async function finishRound(){
     '<div style="font-size:44px">'+(res.wrongCount?'💪':'🎉')+'</div>'+
     '<h2 style="margin:12px 0">本轮完成</h2>'+
     '<p style="color:var(--muted);font-size:14px">'+(res.wrongCount?res.wrongCount+' 个知识点答错，已重置到第 1 轮（明天到期）':'全部正确！记忆周期已推进到下一轮')+'</p></div>';
-  document.getElementById('quizLog').textContent='';
+  const log=document.getElementById('quizLog');if(log)log.textContent='';
 }
 
 function toggleCurve(){
@@ -715,4 +702,4 @@ function renderTrend(){
   });
   svg.innerHTML=out;
 }
-init().then(()=>{updateResumeBtn()});document.getElementById('startBtn').onclick=()=>startQuiz(false);document.getElementById('forceBtn').onclick=()=>startQuiz(true);document.getElementById('resumeBtn').onclick=()=>resumeQuiz();
+init();document.getElementById('startBtn').onclick=()=>startQuiz(false);document.getElementById('forceBtn').onclick=()=>startQuiz(true);
