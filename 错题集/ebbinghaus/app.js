@@ -311,7 +311,7 @@ function renderDueBar(){
 const SCHEDULE=[1,2,4,7,15,30];
 function renderCurve(){
   const svg=document.getElementById('curveSvg');
-  const W=960,H=330,PL=64,PR=32,PT=30,PB=54;
+  const W=1280,H=336,PL=34,PR=16,PT=30,PB=54;
   const iw=W-PL-PR,ih=H-PT-PB;
   const dark=document.documentElement.dataset.theme==='dark';
   const grid=dark?'rgba(148,163,184,.14)':'rgba(71,85,105,.14)';
