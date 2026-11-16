@@ -317,27 +317,41 @@ function renderCurve(){
   const grid=dark?'rgba(148,163,184,.14)':'rgba(71,85,105,.14)';
   const axis=dark?'#475569':'#cbd5e1';
   const labelC=dark?'#94a3b8':'#475569';
-  const g=d=>d/30*ih;
-  const pts=SCHEDULE.map((d,i)=>({x:PL+i*(iw/(SCHEDULE.length-1)),y:PT+ih-g(d),d:d}));
-  let area='M '+pts[0].x+' '+(PT+ih);
-  pts.forEach(p=>{area+=' L '+p.x+' '+p.y});
-  area+=' L '+pts[pts.length-1].x+' '+(PT+ih)+' Z';
+  const counts=SCHEDULE.map((d,i)=>DB.items.filter(it=>it.status!=='mastered'&&(it.round||1)===i+1).length);
+  const masteredCount=DB.items.filter(i=>i.status==='mastered').length;
+  const allPts=counts.concat([masteredCount]);
+  const maxCount=Math.max(1,...allPts);
+  const g=c=>c/maxCount*ih;
+  const step=iw/(SCHEDULE.length);
+  const pts=SCHEDULE.map((d,i)=>({x:PL+i*step,y:PT+ih-g(counts[i]),d:d,n:counts[i]}));
+  const masteredPt={x:PL+SCHEDULE.length*step,y:PT+ih-g(masteredCount),n:masteredCount};
+  const allX=pts.concat([masteredPt]);
+  let area='M '+allX[0].x+' '+(PT+ih);
+  allX.forEach(p=>{area+=' L '+p.x+' '+p.y});
+  area+=' L '+allX[allX.length-1].x+' '+(PT+ih)+' Z';
   let line='';
-  pts.forEach((p,i)=>{line+=(i?' L ':'M ')+p.x+' '+p.y});
+  allX.forEach((p,i)=>{line+=(i?' L ':'M ')+p.x+' '+p.y});
   let out='<defs><linearGradient id="curveGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="rgba(37,99,235,.28)"/><stop offset="1" stop-color="rgba(37,99,235,0)"/></linearGradient></defs>';
-  [25,50,75,100].forEach(v=>{const y=PT+ih-(v/100*ih);out+='<line x1="'+PL+'" y1="'+y+'" x2="'+(W-PR)+'" y2="'+y+'" stroke="'+grid+'" stroke-width="1"/><text x="'+(PL-10)+'" y="'+(y+4)+'" fill="'+labelC+'" font-size="11" text-anchor="end">'+v+'%</text>'});
+  for(let v=0;v<=4;v++){const c=Math.round(maxCount*v/4);const y=PT+ih-g(c);out+='<line x1="'+PL+'" y1="'+y+'" x2="'+(W-PR)+'" y2="'+y+'" stroke="'+grid+'" stroke-width="1"/><text x="'+(PL-10)+'" y="'+(y+4)+'" fill="'+labelC+'" font-size="11" text-anchor="end">'+c+'</text>'}
+  out+='<text x="'+(PL-10)+'" y="'+(PT+10)+'" fill="'+labelC+'" font-size="11" text-anchor="end">个</text>';
   out+='<path d="'+area+'" fill="url(#curveGrad)"/>';
   out+='<path d="'+line+'" fill="none" stroke="var(--blue)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>';
   pts.forEach((p,i)=>{
     out+='<line x1="'+p.x+'" y1="'+p.y+'" x2="'+p.x+'" y2="'+(PT+ih)+'" stroke="'+grid+'" stroke-width="1" stroke-dasharray="3 3"/>';
     out+='<circle cx="'+p.x+'" cy="'+p.y+'" r="5" fill="var(--bg2)" stroke="var(--blue)" stroke-width="2.5"/>';
-    out+='<text x="'+p.x+'" y="'+(p.y-14)+'" fill="var(--blue)" font-size="13" font-weight="700" text-anchor="middle"'+(i%2?'':'')+'>'+p.d+'天</text>';
+    out+='<text x="'+p.x+'" y="'+(p.y-14)+'" fill="var(--blue)" font-size="13" font-weight="700" text-anchor="middle">'+p.n+'个</text>';
     out+='<text x="'+p.x+'" y="'+(PT+ih+24)+'" fill="'+labelC+'" font-size="12" text-anchor="middle">第'+(i+1)+'轮</text>';
     out+='<text x="'+p.x+'" y="'+(PT+ih+42)+'" fill="'+labelC+'" font-size="10" text-anchor="middle">'+p.d+'天</text>';
   });
-  out+='<text x="'+(PL+iw/2)+'" y="'+(H-6)+'" fill="'+labelC+'" font-size="12" text-anchor="middle">间隔天数</text>';
+  out+='<line x1="'+masteredPt.x+'" y1="'+masteredPt.y+'" x2="'+masteredPt.x+'" y2="'+(PT+ih)+'" stroke="'+grid+'" stroke-width="1" stroke-dasharray="3 3"/>';
+  out+='<circle cx="'+masteredPt.x+'" cy="'+masteredPt.y+'" r="6" fill="var(--bg2)" stroke="var(--green)" stroke-width="2.5"/>';
+  out+='<text x="'+masteredPt.x+'" y="'+(masteredPt.y-16)+'" fill="var(--green)" font-size="13" font-weight="700" text-anchor="middle">'+masteredCount+'个 已掌握</text>';
+  out+='<text x="'+masteredPt.x+'" y="'+(PT+ih+24)+'" fill="var(--green)" font-size="12" font-weight="700" text-anchor="middle">已掌握</text>';
+  out+='<text x="'+masteredPt.x+'" y="'+(PT+ih+42)+'" fill="'+labelC+'" font-size="10" text-anchor="middle">&gt;6轮</text>';
+  out+='<text x="'+(PL+iw/2)+'" y="'+(H-6)+'" fill="'+labelC+'" font-size="12" text-anchor="middle">复习轮次（间隔天数）</text>';
   svg.innerHTML=out;
 }
+
 
 function filteredItems(){
   const kw=document.getElementById('fKeyword').value.trim().toLowerCase();
