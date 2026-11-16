@@ -69,14 +69,28 @@ function mdToHtml(md){
   let out=[],i=0;
   const isTableSep=l=>/^\s*\|?[\s:-]+\|[\s:|-]*$/.test(l)&&l.includes('|')&&l.includes('-');
   const cells=l=>l.trim().replace(/^\|/,'').replace(/\|$/,'').split('|').map(c=>c.trim());
+  let mermaidSeq=0;
   while(i<lines.length){
     const line=lines[i];
     if(/^\s*$/.test(line)){i++;continue}
     if(/^\s*```/.test(line)){
+      const isMermaid=/^```mermaid/i.test(line.trim());
       const buf=[];i++;
       while(i<lines.length&&!/^\s*```/.test(lines[i])){buf.push(lines[i]);i++}
       i++;
+      if(isMermaid){
+        const id='mermaid-'+(++mermaidSeq)+'-'+Math.random().toString(36).slice(2,8);
+        out.push('<div class="mermaid" id="'+id+'">'+esc(buf.join('\n'))+'</div>');
+        continue;
+      }
       out.push('<pre><code>'+esc(buf.join('\n'))+'</code></pre>');
+      continue;
+    }
+    if(/^\s*\$\$\s*$/.test(line)){
+      const buf=[];i++;
+      while(i<lines.length&&!/^\s*\$\$\s*$/.test(lines[i])){buf.push(lines[i]);i++}
+      if(i<lines.length)i++;
+      out.push('<p class="math-block">$$'+buf.join('\n')+'$$</p>');
       continue;
     }
     const h=/^(#{1,6})\s+(.*)$/.exec(line);
@@ -110,8 +124,12 @@ function mdToHtml(md){
       continue;
     }
     const buf=[line];i++;
-    while(i<lines.length&&!/^\s*$/.test(lines[i])&&!/^#{1,6}\s/.test(lines[i])&&!/^\s*([-*+]|\d+\.)\s+/.test(lines[i])&&!/^\s*```/.test(lines[i])&&!/^\s*>/.test(lines[i])&&!(lines[i].includes('|')&&i+1<lines.length&&isTableSep(lines[i+1]))){
+    while(i<lines.length&&!/^\s*$/.test(lines[i])&&!/^#{1,6}\s/.test(lines[i])&&!/^\s*([-*+]|\d+\.)\s+/.test(lines[i])&&!/^\s*```/.test(lines[i])&&!/^\s*>/.test(lines[i])&&!/^\s*\$\$\s*$/.test(lines[i])&&!(lines[i].includes('|')&&i+1<lines.length&&isTableSep(lines[i+1]))){
       buf.push(lines[i]);i++;
+    }
+    if(/^\s*\$\$\s*$/.test(line)){
+      out.push('<p class="math-block">$$'+buf.slice(1).join('\n')+'$$</p>');
+      continue;
     }
     out.push('<p>'+buf.map(mdInline).join('<br>')+'</p>');
   }
@@ -130,6 +148,12 @@ async function openNote(itemId){
     body.innerHTML=mdToHtml(await r.text());
     if(window.renderMathInElement){
       try{renderMathInElement(body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})}catch(e){}
+    }
+    if(window.mermaid&&body.querySelector('.mermaid')){
+      try{
+        mermaid.initialize({startOnLoad:false,theme:document.documentElement.dataset.theme==='dark'?'dark':'neutral'});
+        mermaid.run({nodes:body.querySelectorAll('.mermaid')});
+      }catch(e){console.warn('mermaid render failed',e)}
     }
   }catch(e){
     body.innerHTML='<div class="empty">无法加载：'+esc(e.message)+'<br>'+esc(item.file)+'</div>';
