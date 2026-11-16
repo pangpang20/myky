@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS finished_rounds (
   roundId TEXT PRIMARY KEY, at TEXT NOT NULL, wrongCount INTEGER NOT NULL
 );
 CREATE TABLE IF NOT EXISTS progress (
-  id INTEGER PRIMARY KEY CHECK (id = 1), roundId TEXT,
+  id INTEGER PRIMARY KEY, roundId TEXT,
   forceMode INTEGER NOT NULL DEFAULT 0, qi INTEGER NOT NULL DEFAULT 0,
   results TEXT, ids TEXT, at TEXT
 );
@@ -34,6 +34,23 @@ CREATE TABLE IF NOT EXISTS progress (
 try { sqlite.prepare('ALTER TABLE answers ADD COLUMN selectedText TEXT').run(); } catch (e) {}
 try { sqlite.prepare('ALTER TABLE answers ADD COLUMN answerText TEXT').run(); } catch (e) {}
 try { sqlite.prepare('ALTER TABLE answers ADD COLUMN realSelected TEXT').run(); } catch (e) {}
+// 旧表把 progress 限制为 id=1（复习/巩固共用进度）；重建为双槽位：1=复习，2=巩固
+try {
+  const progressSql = sqlite.prepare("SELECT sql FROM sqlite_master WHERE type='table' AND name='progress'").get();
+  if (progressSql && /CHECK\s*\(\s*id\s*=\s*1\s*\)/i.test(progressSql.sql || '')) {
+    const rows = sqlite.prepare('SELECT * FROM progress').all();
+    sqlite.exec('ALTER TABLE progress RENAME TO progress_legacy');
+    sqlite.exec(`CREATE TABLE progress (
+      id INTEGER PRIMARY KEY, roundId TEXT,
+      forceMode INTEGER NOT NULL DEFAULT 0, qi INTEGER NOT NULL DEFAULT 0,
+      results TEXT, ids TEXT, at TEXT
+    )`);
+    rows.forEach(r => sqlite.prepare('INSERT OR REPLACE INTO progress (id,roundId,forceMode,qi,results,ids,at) VALUES (?,?,?,?,?,?,?)')
+      .run(r.id, r.roundId, r.forceMode, r.qi, r.results, r.ids, r.at));
+    sqlite.exec('DROP TABLE progress_legacy');
+    console.log('[migrate] progress 表已重建为复习/巩固双槽位');
+  }
+} catch (e) { console.error('[migrate] progress table rebuild failed:', e.message); }
 
 
 function loadDB() {
@@ -47,13 +64,14 @@ function loadDB() {
     selected: a.selected, answer: a.answer, realSelected: a.realSelected || null,
     correct: !!a.correct, at: a.at
   }));
-  const pr = sqlite.prepare('SELECT * FROM progress WHERE id=1').get();
+  const progressRows = sqlite.prepare('SELECT * FROM progress WHERE id IN (1,2) ORDER BY id').all();
   const meta = {};
   sqlite.prepare('SELECT key,value FROM meta').all().forEach(r => meta[r.key] = r.value);
   const db = { version: Number(meta.version || 2), schedule: JSON.parse(meta.schedule || '[1,2,4,7,15,30]'), items, answers };
-  if (pr) {
-    db.progress = { roundId: pr.roundId, forceMode: !!pr.forceMode, qi: pr.qi, results: JSON.parse(pr.results || '[]'), ids: JSON.parse(pr.ids || '[]'), at: pr.at };
-  }
+  progressRows.forEach(pr => {
+    const progress = { roundId: pr.roundId, forceMode: !!pr.forceMode, qi: pr.qi, results: JSON.parse(pr.results || '[]'), ids: JSON.parse(pr.ids || '[]'), at: pr.at };
+    if (pr.id === 1) db.progress = progress; else db.progressForce = progress;
+  });
   return db;
 }
 function saveDB(db) {
@@ -80,12 +98,13 @@ function insertAnswer(a) {
     .run(a.roundId || null, a.itemId, a.id || null, a.topic || null, a.selected || null, a.answer || null, a.selectedText || null, a.answerText || null, a.realSelected || null, a.correct ? 1 : 0, a.at);
 }
 function saveProgressRow(p) {
+  const slot = p && p.forceMode ? 2 : 1;
   if (!p || !Array.isArray(p.ids) || !p.ids.length) {
-    sqlite.prepare('DELETE FROM progress WHERE id=1').run();
+    sqlite.prepare('DELETE FROM progress WHERE id=?').run(slot);
     return;
   }
-  sqlite.prepare('INSERT OR REPLACE INTO progress (id,roundId,forceMode,qi,results,ids,at) VALUES (1,?,?,?,?,?,?)')
-    .run(p.roundId || null, p.forceMode ? 1 : 0, p.qi || 0, JSON.stringify(p.results || []), JSON.stringify(p.ids), p.at || todayEast8());
+  sqlite.prepare('INSERT OR REPLACE INTO progress (id,roundId,forceMode,qi,results,ids,at) VALUES (?,?,?,?,?,?,?)')
+    .run(slot, p.roundId || null, p.forceMode ? 1 : 0, p.qi || 0, JSON.stringify(p.results || []), JSON.stringify(p.ids), p.at || todayEast8());
 }
 function todayEast8() {
   return new Date(Date.now() + 8 * 3600 * 1000).toISOString().slice(0, 10);
@@ -132,18 +151,17 @@ function dedupeQuestionIds() {
           data.questions.forEach(q => valid.add(String(q.id)));
         } catch (e) {}
       });
-      const pr = sqlite.prepare('SELECT * FROM progress WHERE id=1').get();
-      if (pr) {
+      sqlite.prepare('SELECT * FROM progress WHERE id IN (1,2)').all().forEach(pr => {
         const ids = JSON.parse(pr.ids || '[]').filter(id => valid.has(String(id)));
         const results = JSON.parse(pr.results || '[]').slice(0, ids.length);
         const qi = Math.min(pr.qi || 0, Math.max(0, ids.length - 1));
         if (ids.length) {
-          sqlite.prepare('UPDATE progress SET ids=?, results=?, qi=? WHERE id=1').run(JSON.stringify(ids), JSON.stringify(results), qi);
+          sqlite.prepare('UPDATE progress SET ids=?, results=?, qi=? WHERE id=?').run(JSON.stringify(ids), JSON.stringify(results), qi, pr.id);
         } else {
-          sqlite.prepare('DELETE FROM progress WHERE id=1').run();
+          sqlite.prepare('DELETE FROM progress WHERE id=?').run(pr.id);
         }
-        console.log('[dedupe] db.progress filtered, remaining ids: ' + ids.length);
-      }
+        console.log('[dedupe] progress slot ' + pr.id + ' filtered, remaining ids: ' + ids.length);
+      });
     } catch (e) { console.error('[dedupe] progress filter failed:', e.message); }
   }
 }
@@ -178,15 +196,16 @@ const server = h.createServer((req, res) => {
           res.end(JSON.stringify({ ok: true, wrongCount: 0, empty: true }));
           return;
         }
+        const roundProgress = sqlite.prepare('SELECT forceMode FROM progress WHERE roundId=?').get(roundId);
+        const progressSlot = roundProgress && roundProgress.forceMode ? 2 : 1;
         const finished = sqlite.prepare('SELECT wrongCount FROM finished_rounds WHERE roundId=?').get(roundId);
         if (finished) {
-          sqlite.prepare('DELETE FROM progress WHERE id=1').run();
+          sqlite.prepare('DELETE FROM progress WHERE id=?').run(progressSlot);
           res.writeHead(200, { 'Content-Type': 'application/json' });
           res.end(JSON.stringify({ ok: true, wrongCount: finished.wrongCount, idempotent: true }));
           return;
         }
         const db = loadDB();
-        const roundProgress = sqlite.prepare('SELECT forceMode FROM progress WHERE roundId=?').get(roundId);
         const forceMode = roundProgress ? !!roundProgress.forceMode : false;
         const today = (db.answers || []).filter(a => a.roundId === roundId);
         const todayStr = date || todayEast8();
@@ -222,16 +241,19 @@ const server = h.createServer((req, res) => {
 
 
   // ---- API: 答题进度（存服务端，跨浏览器共用） ----
-  if (req.url === '/api/progress' && req.method === 'GET') {
+  if (req.url.startsWith('/api/progress') && req.method === 'GET') {
+    const forceParam = new URL(req.url, 'http://localhost').searchParams.get('force');
+    const wantForce = forceParam === '1' || forceParam === 'true';
     const db = loadDB();
+    const progress = wantForce ? db.progressForce : db.progress;
     const answerResults = (db.answers || [])
-      .filter(a => db.progress && a.roundId === db.progress.roundId)
+      .filter(a => progress && a.roundId === progress.roundId)
       .map(a => ({ id: a.id, selected: a.selected, realSelected: a.realSelected, correct: a.correct }));
     res.writeHead(200, { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' });
-    res.end(JSON.stringify(db.progress ? { ...db.progress, answerResults } : null));
+    res.end(JSON.stringify(progress ? { ...progress, answerResults } : null));
     return;
   }
-  if (req.url === '/api/progress' && req.method === 'POST') {
+  if (req.url.startsWith('/api/progress') && req.method === 'POST') {
     let body = '';
     req.on('data', c => body += c);
     req.on('end', () => {

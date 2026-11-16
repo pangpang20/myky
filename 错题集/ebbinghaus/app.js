@@ -424,11 +424,11 @@ function scheduleProgressSave(){
   progressTimer=setTimeout(saveProgress,300);
 }
 function clearProgress(){
-  fetch('/api/progress',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({})}).catch(e=>console.warn('clear progress failed',e));
+  fetch('/api/progress',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({forceMode})}).catch(e=>console.warn('clear progress failed',e));
 }
 async function loadProgress(){
   try{
-    const r=await fetch('/api/progress',{cache:'no-store'});
+    const r=await fetch('/api/progress?force='+(forceMode?1:0),{cache:'no-store'});
     if(!r.ok)return null;
     const p=await r.json();
     if(!p||!Array.isArray(p.ids)||!p.ids.length)return null;
@@ -438,7 +438,7 @@ async function loadProgress(){
 async function resumeQuiz(){
   const p=await loadProgress();
   if(!p)return false;
-  forceMode=resumeMode!==null?resumeMode:!!p.forceMode;
+  forceMode=!!forceMode;
   const roundStartMs=Number(String(p.roundId||'').replace('eb-',''));
   const roundStartLocal=Number.isFinite(roundStartMs)&&roundStartMs>0
     ? new Date(roundStartMs+8*3600*1000).toISOString().replace('Z','+08:00').slice(0,19)
@@ -480,16 +480,13 @@ async function resumeQuiz(){
   // 跳到第一个未作答的题
   while(qi<queue.length&&results[qi])qi++;
   roundId=p.roundId||('eb-'+Date.now());
-  resumeMode=null;
   document.getElementById('mainView').style.display='none';
   document.getElementById('quizView').style.display='';
   document.getElementById('quizView').classList.add('main-with-side');
   renderQ();renderSide();
   return true;
 }
-let resumeMode=null;
 async function startQuiz(force){
-  resumeMode=!!force;
   forceMode=!!force;
   const restored=await resumeQuiz();
   if(restored)return;
@@ -498,8 +495,6 @@ async function startQuiz(force){
     : dueItems();
   if(!items.length){renderDueBar();return;}
   roundId='eb-'+Date.now();
-  const saved=await loadProgress();
-  if(!saved)clearProgress();
   queue=[];qi=0;results=[];
   results=new Array();
   items.forEach(it=>{
