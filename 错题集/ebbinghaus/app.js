@@ -579,9 +579,10 @@ function renderQuestion(text){
   const parts=String(text).split(FENCE);
   let out='';
   parts.forEach((part,i)=>{
-    const seg0=part.replace(/\\n/g,'\n');
+    // 只在代码块内把字面量 \n 转成换行；正文保留 LaTeX 的 \n（如 \neq、\ln）不被破坏
+    const seg0=i%2===1?part.replace(/\\n/g,'\n'):part;
     if(i%2===0){
-      let seg=esc(seg0).replace(/\*\*(.+?)\*\*/g,'<b>$1</b>').replace(/\n/g,'<br>');
+      let seg=esc(seg0).replace(/\*\*(.+?)\*\*/g,'<b>$1</b>');
       seg=seg.replace(/O\(([^)<]+)\)/g,function(m,inner){return katexO(inner);});
       out+=seg;
     }
