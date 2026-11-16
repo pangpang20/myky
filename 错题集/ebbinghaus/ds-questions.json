@@ -2016,6 +2016,134 @@
       },
       "answer": "C",
       "analysis": "最小值增大后，最大值可能已拉得更远，D' 可能变大；算法靠维护 best 而不是靠单调下降。"
+    },
+    {
+      "id": "r1-d500370e-2eb1-4671-944a-e82002b7cb4a",
+      "itemId": "数据结构-数组乘积最大值calMulMax",
+      "round": 1,
+      "subject": "数据结构",
+      "topic": "calMulMax·复杂度",
+      "question": "计算所有 res[i]（res[i]=max(A[i]·A[j], i≤j≤n-1)）的最优时间复杂度是（ ）。",
+      "options": {
+        "A": "O(n)",
+        "B": "O(n log n)",
+        "C": "O(n²)",
+        "D": "O(n² log n)"
+      },
+      "answer": "A",
+      "analysis": "从右往左一遍扫描，每元素 O(1) 更新与计算。"
+    },
+    {
+      "id": "r1-c814647f-e627-45c0-a316-3bef9769b4a8",
+      "itemId": "数据结构-数组乘积最大值calMulMax",
+      "round": 1,
+      "subject": "数据结构",
+      "topic": "calMulMax·符号分治",
+      "question": "若 A[i]≥0，res[i] 应等于 A[i] 乘以 A[i..n-1] 中的（ ）。",
+      "options": {
+        "A": "最大值",
+        "B": "最小值",
+        "C": "绝对值最大者",
+        "D": "任意元素"
+      },
+      "answer": "A",
+      "analysis": "非负乘非负，取后缀最大即可。"
+    },
+    {
+      "id": "r1-d2d53668-11ef-4565-aca2-47ddc2df1c14",
+      "itemId": "数据结构-数组乘积最大值calMulMax",
+      "round": 1,
+      "subject": "数据结构",
+      "topic": "calMulMax·符号分治",
+      "question": "若 A[i]<0，res[i] 应等于 A[i] 乘以 A[i..n-1] 中的（ ）。",
+      "options": {
+        "A": "最大值",
+        "B": "最小值",
+        "C": "0",
+        "D": "绝对值最大者（不区分正负）"
+      },
+      "answer": "B",
+      "analysis": "负乘负得正，乘最小（最负）数才最大。"
+    },
+    {
+      "id": "r1-58de8e10-c267-4280-a622-40b7cde4b693",
+      "itemId": "数据结构-数组乘积最大值calMulMax",
+      "round": 1,
+      "subject": "数据结构",
+      "topic": "calMulMax·区间边界",
+      "question": "从右往左扫描时，sufMax/sufMin 的更新与 res[i] 的计算顺序是（ ）。（因 j 可等于 i）",
+      "options": {
+        "A": "先算 res[i] 再更新极值",
+        "B": "先更新极值再算 res[i]",
+        "C": "顺序无所谓",
+        "D": "只需在 i=n-1 时特殊处理"
+      },
+      "answer": "B",
+      "analysis": "闭区间 [i,n-1] 需先并入 A[i] 自身，否则 res[n-1] 无定义。"
+    },
+    {
+      "id": "r1-b81a8883-b262-4a45-b80d-c9bb6aa2f983",
+      "itemId": "数据结构-数组乘积最大值calMulMax",
+      "round": 1,
+      "subject": "数据结构",
+      "topic": "calMulMax·样例验证",
+      "question": "数组 A={1,4,-9,6}，res[2] 的值是（ ）。（A[2]=-9）",
+      "options": {
+        "A": "-54",
+        "B": "81",
+        "C": "0",
+        "D": "-81"
+      },
+      "answer": "B",
+      "analysis": "A[2]=-9<0，乘后缀最小值（含自身）-9，得 81。"
+    },
+    {
+      "id": "r1-7a24f050-1939-4435-9cf7-4870dc8e1840",
+      "itemId": "数据结构-数组乘积最大值calMulMax",
+      "round": 1,
+      "subject": "数据结构",
+      "topic": "calMulMax·统考真题",
+      "question": "【2024 统考真题】函数 calMulMax(int A[], int res[], int n) 计算 res[i]=max(A[i]·A[j])（i≤j≤n-1），其核心设计思想是（ ）。",
+      "options": {
+        "A": "从右往左维护后缀最大/最小，按 A[i] 正负选取",
+        "B": "从左往右维护前缀最大/最小",
+        "C": "两层循环枚举所有 (i,j) 对",
+        "D": "先排序再取两端相乘"
+      },
+      "answer": "A",
+      "analysis": "官方参考答案即「后缀极值 + 符号分治」，O(n)/O(1)。"
+    },
+    {
+      "id": "r1-d6224af1-27af-4a1a-9bf6-cbfac6b554b1",
+      "itemId": "数据结构-数组乘积最大值calMulMax",
+      "round": 1,
+      "subject": "数据结构",
+      "topic": "calMulMax·真题改编",
+      "question": "若把区间改为 0≤j≤i（前缀区间），正确做法是（ ）。",
+      "options": {
+        "A": "仍从右往左，维护后缀极值",
+        "B": "改为从左往右，维护前缀最大/最小",
+        "C": "两层循环暴力",
+        "D": "排序后取两端"
+      },
+      "answer": "B",
+      "analysis": "区间镜像，扫描方向与极值同步镜像。"
+    },
+    {
+      "id": "r1-51d974ea-1c5d-45fa-8757-99ad587a3b49",
+      "itemId": "数据结构-数组乘积最大值calMulMax",
+      "round": 1,
+      "subject": "数据结构",
+      "topic": "calMulMax·真题改编",
+      "question": "数组 A={1,4,-9,6}，按题意计算 res 的结果是（ ）。",
+      "options": {
+        "A": "{6,24,81,36}",
+        "B": "{1,4,-9,6}",
+        "C": "{6,24,-54,36}",
+        "D": "{0,0,0,0}"
+      },
+      "answer": "A",
+      "analysis": "res[0]=1·6=6, res[1]=4·6=24, res[2]=-9·-9=81, res[3]=6·6=36。"
     }
   ]
 }
