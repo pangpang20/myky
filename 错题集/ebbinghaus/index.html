@@ -17,7 +17,7 @@ body{background:var(--bg);color:var(--text);font-family:system-ui,"Microsoft YaH
 .topbar .spacer{flex:1}
 .theme-btn{padding:8px 16px;border-radius:8px;border:1px solid var(--border);background:var(--bg);color:var(--text);cursor:pointer;font-size:13px;font-weight:600;transition:.2s}
 .theme-btn:hover{border-color:var(--blue);transform:translateY(-1px)}
-.wrap{max-width:1200px;margin:0 auto;padding:24px}
+.wrap{max-width:1680px;margin:0 auto;padding:18px 22px}
 .stats{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-bottom:20px}
 .stat{position:relative;overflow:hidden;background:var(--bg2);border-radius:14px;padding:20px 22px;border:1px solid var(--border);transition:transform .2s,box-shadow .2s,border-color .2s}
 .stat::before{content:"";position:absolute;left:0;top:0;width:3px;height:100%;background:currentColor;opacity:.9}
@@ -57,7 +57,7 @@ tbody tr:hover td{background:var(--bg3)}
 .pager input{width:58px;text-align:center}
 .pager .info{color:var(--muted);font-size:12px;font-weight:600}
 .curve-box{padding:26px 22px 12px}
-.curve-svg{display:block;width:100%;height:auto;overflow:visible}
+.curve-svg{display:block;width:100%;height:auto;max-height:430px;overflow:visible}
 .section h2.collapsible{cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;user-select:none}
 .section h2.collapsible .chev{font-size:10px;opacity:.7;transition:transform .2s}
 .section.collapsed h2.collapsible .chev{transform:rotate(-90deg)}
@@ -190,9 +190,9 @@ tbody tr:hover td{background:var(--bg3)}
     <button class="btn-lg" id="startBtn">开始复习</button>
     <button class="btn-lg alt" id="forceBtn">全部练习</button>
   </div>
-  <div class="section collapsed" id="curveSection">
+  <div class="section" id="curveSection">
     <h2 class="collapsible" onclick="toggleCurve()"><span class="chev">▼</span>📊 记忆保持曲线 · 艾宾浩斯遗忘曲线</h2>
-    <div class="curve-box"><svg id="curveSvg" class="curve-svg" viewBox="0 0 960 300"></svg></div>
+    <div class="curve-box"><svg id="curveSvg" class="curve-svg" viewBox="0 0 960 330"></svg></div>
   </div>
   <div class="section">
     <div class="trend-head">

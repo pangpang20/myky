@@ -27,7 +27,7 @@ check(app.includes('function toggleCurve()'), 'memory curve must be collapsible'
 check(app.includes("const counts=SCHEDULE.map((d,i)=>DB.items.filter(it=>it.status!=='mastered'&&(it.round||1)===i+1).length)"), 'curve must plot knowledge-point count per round')
 check(app.includes("masteredCount") && app.includes('已掌握'), 'curve must include a mastered end point')
 check(html.includes('.trend-legend{display:flex;align-items:center'), 'trend legend must be vertically centered')
-check(html.includes('class="section collapsed" id="curveSection"'), 'memory curve must default to collapsed')
+check(!html.includes('class="section collapsed" id="curveSection"'), 'memory curve must default to expanded')
 check(app.includes('function renderTrend()'), 'trend chart must render')
 check(app.includes("keyOf=d=>trendMode==='month'?d.slice(0,7):d"), 'trend must aggregate by month when selected')
 check(app.includes('for(let i=6;i>=0;i--)'), 'day view must default to last 7 days')

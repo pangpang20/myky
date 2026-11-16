@@ -311,7 +311,7 @@ function renderDueBar(){
 const SCHEDULE=[1,2,4,7,15,30];
 function renderCurve(){
   const svg=document.getElementById('curveSvg');
-  const W=960,H=300,PL=64,PR=32,PT=30,PB=54;
+  const W=960,H=330,PL=64,PR=32,PT=30,PB=54;
   const iw=W-PL-PR,ih=H-PT-PB;
   const dark=document.documentElement.dataset.theme==='dark';
   const grid=dark?'rgba(148,163,184,.14)':'rgba(71,85,105,.14)';
@@ -326,16 +326,27 @@ function renderCurve(){
   const pts=SCHEDULE.map((d,i)=>({x:PL+i*step,y:PT+ih-g(counts[i]),d:d,n:counts[i]}));
   const masteredPt={x:PL+SCHEDULE.length*step,y:PT+ih-g(masteredCount),n:masteredCount};
   const allX=pts.concat([masteredPt]);
-  let area='M '+allX[0].x+' '+(PT+ih);
-  allX.forEach(p=>{area+=' L '+p.x+' '+p.y});
-  area+=' L '+allX[allX.length-1].x+' '+(PT+ih)+' Z';
-  let line='';
-  allX.forEach((p,i)=>{line+=(i?' L ':'M ')+p.x+' '+p.y});
-  let out='<defs><linearGradient id="curveGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="rgba(37,99,235,.28)"/><stop offset="1" stop-color="rgba(37,99,235,0)"/></linearGradient></defs>';
+  // Catmull-Rom → cubic Bézier 平滑，控制点垂直方向夹在相邻点之间，避免 0 值附近下坠过冲
+  const tension=0.28;
+  const clampY=(v,lo,hi)=>Math.min(Math.max(v,lo),hi);
+  let line='M '+allX[0].x+' '+allX[0].y;
+  for(let i=0;i<allX.length-1;i++){
+    const p0=allX[Math.max(0,i-1)],p1=allX[i],p2=allX[i+1],p3=allX[Math.min(allX.length-1,i+2)];
+    const c1x=p1.x+(p2.x-p0.x)*tension;
+    const c2x=p2.x-(p3.x-p1.x)*tension;
+    const c1y=clampY(p1.y+(p2.y-p0.y)*tension,Math.min(p1.y,p2.y),Math.max(p1.y,p2.y));
+    const c2y=clampY(p2.y-(p3.y-p1.y)*tension,Math.min(p1.y,p2.y),Math.max(p1.y,p2.y));
+    line+=' C '+c1x+' '+c1y+' '+c2x+' '+c2y+' '+p2.x+' '+p2.y;
+  }
+  let area=line+' L '+allX[allX.length-1].x+' '+(PT+ih)+' L '+allX[0].x+' '+(PT+ih)+' Z';
+  let out='<defs>'
+    +'<linearGradient id="curveGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="rgba(99,102,241,.34)"/><stop offset=".55" stop-color="rgba(59,130,246,.16)"/><stop offset="1" stop-color="rgba(34,211,238,0)"/></linearGradient>'
+    +'<linearGradient id="curveLine" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#8b5cf6"/><stop offset=".45" stop-color="#3b82f6"/><stop offset="1" stop-color="#22d3ee"/></linearGradient>'
+    +'</defs>';
   for(let v=0;v<=4;v++){const c=Math.round(maxCount*v/4);const y=PT+ih-g(c);out+='<line x1="'+PL+'" y1="'+y+'" x2="'+(W-PR)+'" y2="'+y+'" stroke="'+grid+'" stroke-width="1"/><text x="'+(PL-10)+'" y="'+(y+4)+'" fill="'+labelC+'" font-size="11" text-anchor="end">'+c+'</text>'}
-  out+='<text x="'+(PL-10)+'" y="'+(PT+10)+'" fill="'+labelC+'" font-size="11" text-anchor="end">个</text>';
+  out+='<text x="'+(PL-10)+'" y="'+(PT-10)+'" fill="'+labelC+'" font-size="11" text-anchor="end">个</text>';
   out+='<path d="'+area+'" fill="url(#curveGrad)"/>';
-  out+='<path d="'+line+'" fill="none" stroke="var(--blue)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>';
+  out+='<path d="'+line+'" fill="none" stroke="url(#curveLine)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>';
   pts.forEach((p,i)=>{
     out+='<line x1="'+p.x+'" y1="'+p.y+'" x2="'+p.x+'" y2="'+(PT+ih)+'" stroke="'+grid+'" stroke-width="1" stroke-dasharray="3 3"/>';
     out+='<circle cx="'+p.x+'" cy="'+p.y+'" r="5" fill="var(--bg2)" stroke="var(--blue)" stroke-width="2.5"/>';
@@ -348,7 +359,7 @@ function renderCurve(){
   out+='<text x="'+masteredPt.x+'" y="'+(masteredPt.y-16)+'" fill="var(--green)" font-size="13" font-weight="700" text-anchor="middle">'+masteredCount+'个 已掌握</text>';
   out+='<text x="'+masteredPt.x+'" y="'+(PT+ih+24)+'" fill="var(--green)" font-size="12" font-weight="700" text-anchor="middle">已掌握</text>';
   out+='<text x="'+masteredPt.x+'" y="'+(PT+ih+42)+'" fill="'+labelC+'" font-size="10" text-anchor="middle">&gt;6轮</text>';
-  out+='<text x="'+(PL+iw/2)+'" y="'+(H-6)+'" fill="'+labelC+'" font-size="12" text-anchor="middle">复习轮次（间隔天数）</text>';
+  out+='<text x="'+(PL+iw/2)+'" y="'+(H-2)+'" fill="'+labelC+'" font-size="12" text-anchor="middle">复习轮次（间隔天数）</text>';
   svg.innerHTML=out;
 }
 
