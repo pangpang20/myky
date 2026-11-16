@@ -438,12 +438,13 @@ async function loadProgress(){
 async function resumeQuiz(){
   const p=await loadProgress();
   if(!p)return false;
+  forceMode=resumeMode!==null?resumeMode:!!p.forceMode;
   const roundStartMs=Number(String(p.roundId||'').replace('eb-',''));
   const roundStartLocal=Number.isFinite(roundStartMs)&&roundStartMs>0
     ? new Date(roundStartMs+8*3600*1000).toISOString().replace('Z','+08:00').slice(0,19)
     : null;
   // 按当前模式重建队列：复习=今日到期知识点的全部题目；巩固=全部非掌握知识点的全部题目
-  const roundDate=roundStartLocal?roundStartLocal.slice(0,10):today();
+  const roundDate=today();
   const eligible=forceMode
     ? DB.items.filter(i=>i.status!=='mastered')
     : DB.items.filter(i=>{
@@ -451,10 +452,20 @@ async function resumeQuiz(){
         if(i.dueDate&&i.dueDate<=roundDate)return true;
         return roundStartLocal&&(i.createdAt||'')>=roundStartLocal;
       });
-  const q2=[];
+  const prevOrder=p.ids.slice();
+  const prevSet=new Set(p.ids);
+  const byId=new Map(QS.map(q=>[q.id,q]));
+  // 队列严格按 eligible 知识点重建：复习=今日到期知识点的全部题；巩固=全部非掌握知识点的全部题
+  const eligibleIds=new Set(eligible.map(i=>i.id));
+  const inRound=prevOrder.map(id=>byId.get(id)).filter(q=>q&&eligibleIds.has(q.itemId));
+  const fresh=[];
   eligible.forEach(it=>{
-    QS.filter(q=>q.itemId===it.id).forEach(q=>q2.push(q));
+    if(!prevOrder.some(id=>{const q=byId.get(id);return q&&q.itemId===it.id})){
+      QS.filter(q=>q.itemId===it.id).forEach(q=>fresh.push(q));
+    }
   });
+  fresh.sort(()=>Math.random()-.5);
+  const q2=[...inRound,...fresh];
   if(!q2.length){clearProgress();return false}
   queue=q2;
   const savedIds=new Set(p.ids);
@@ -469,14 +480,16 @@ async function resumeQuiz(){
   // 跳到第一个未作答的题
   while(qi<queue.length&&results[qi])qi++;
   roundId=p.roundId||('eb-'+Date.now());
-  forceMode=!!p.forceMode;
+  resumeMode=null;
   document.getElementById('mainView').style.display='none';
   document.getElementById('quizView').style.display='';
   document.getElementById('quizView').classList.add('main-with-side');
   renderQ();renderSide();
   return true;
 }
+let resumeMode=null;
 async function startQuiz(force){
+  resumeMode=!!force;
   forceMode=!!force;
   const restored=await resumeQuiz();
   if(restored)return;
@@ -521,6 +534,7 @@ function renderQ(){
     '<div class="analysis" id="ana"></div>';
   renderNavBar();
   renderSide();
+  if(window.renderMathInElement)renderMathInElement(card,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],throwOnError:false});
   const r0=results[qi];
   if(r0)paintAnswer(q,r0.realSelected?displayKeyForReal(q,r0.realSelected):r0.selected,r0.correct);
 }

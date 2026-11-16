@@ -910,12 +910,12 @@
       "round": 1,
       "subject": "高等数学",
       "topic": "导数积分换元",
-      "question": "∫_0^1 f'(3x) dx =（ ）",
+      "question": "$\\int_0^1 f'(3x)\\,\\mathrm{d}x=$（ ）",
       "options": {
-        "A": "f(3)-f(0)",
-        "B": "[f(3)-f(0)]/3",
-        "C": "3[f(3)-f(0)]",
-        "D": "[f(1)-f(0)]/3"
+        "A": "$f(3)-f(0)$",
+        "B": "$[f(3)-f(0)]/3$",
+        "C": "$3[f(3)-f(0)]$",
+        "D": "$[f(1)-f(0)]/3$"
       },
       "answer": "B",
       "analysis": "u=3x，dx=du/3，∫_0^1=[f(3)-f(0)]/3。"
@@ -926,12 +926,12 @@
       "round": 1,
       "subject": "高等数学",
       "topic": "导数积分换元",
-      "question": "设 f(x)=e^x，则 ∫_0^1 f'(2x) dx =（ ）",
+      "question": "设 $f(x)=e^{x}$，则 $\\int_0^1 f'(2x)\\,\\mathrm{d}x=$（ ）",
       "options": {
-        "A": "e²-1",
-        "B": "(e²-1)/2",
-        "C": "e-1",
-        "D": "(e-1)/2"
+        "A": "$e²-1$",
+        "B": "$(e²-1)/2$",
+        "C": "$e-1$",
+        "D": "$(e-1)/2$"
       },
       "answer": "B",
       "analysis": "f'(2x)=2e^{2x}，∫_0^1 2e^{2x}dx=e²-1… 注意：f'(u)=e^u，f'(2x)=e^{2x}，∫_0^1 e^{2x}dx=(e²-1)/2。"
@@ -942,12 +942,12 @@
       "round": 1,
       "subject": "高等数学",
       "topic": "导数积分换元",
-      "question": "设 f'(x)=cos x，则 ∫_0^π f'(x/2) dx =（ ）",
+      "question": "设 $f'(x)=\\cos x$，则 $\\int_0^{\\pi} f'\\left(\\frac{x}{2}\\right)\\mathrm{d}x=$（ ）",
       "options": {
-        "A": "1",
-        "B": "2",
-        "C": "0",
-        "D": "4"
+        "A": "$1$",
+        "B": "$2$",
+        "C": "$0$",
+        "D": "$4$"
       },
       "answer": "B",
       "analysis": "∫_0^π cos(x/2)dx = 2sin(x/2)|_0^π = 2。"
@@ -958,12 +958,12 @@
       "round": 1,
       "subject": "高等数学",
       "topic": "导数积分换元",
-      "question": "设 f(x)=ln x，则 ∫_1^2 f'(x/2) dx =（ ）",
+      "question": "设 $f(x)=\\ln x$，则 $\\int_1^2 f'\\left(\\frac{x}{2}\\right)\\mathrm{d}x=$（ ）",
       "options": {
-        "A": "2ln2",
-        "B": "ln2",
-        "C": "-ln2",
-        "D": "(1/2)ln2"
+        "A": "$2ln2$",
+        "B": "$ln2$",
+        "C": "$-ln2$",
+        "D": "$(\\frac{1}{2})ln2$"
       },
       "answer": "A",
       "analysis": "f'(x)=1/x，f'(x/2)=2/x，∫_1^2 2/x dx = 2ln2。"
@@ -974,12 +974,12 @@
       "round": 1,
       "subject": "高等数学",
       "topic": "导数积分换元",
-      "question": "设 k≠0 为常数，则 ∫_a^b f'(kx) dx =（ ）",
+      "question": "设 $k\\neq0$ 为常数，则 $\\int_a^b f'(kx)\\,\\mathrm{d}x=$（ ）",
       "options": {
-        "A": "f(kb)-f(ka)",
-        "B": "k[f(kb)-f(ka)]",
-        "C": "[f(kb)-f(ka)]/k",
-        "D": "[f(b)-f(a)]/k"
+        "A": "$f(kb)-f(ka)$",
+        "B": "$k[f(kb)-f(ka)]$",
+        "C": "$[f(kb)-f(ka)]/k$",
+        "D": "$[f(b)-f(a)]/k$"
       },
       "answer": "C",
       "analysis": "u=kx，dx=du/k，上下限变 ka、kb，结果 [f(kb)-f(ka)]/k。"
@@ -990,12 +990,12 @@
       "round": 1,
       "subject": "高等数学",
       "topic": "导数积分换元",
-      "question": "设 f(x) 可导，则 ∫_0^{π/2} f'(cos x)·sin x dx =（ ）",
+      "question": "设 $f(x)$ 可导，则 $\\int_0^{\\pi/2} f'(\\cos x)\\sin x\\,\\mathrm{d}x=$（ ）",
       "options": {
-        "A": "f(1)-f(0)",
-        "B": "f(0)-f(1)",
-        "C": "f'(1)-f'(0)",
-        "D": "0"
+        "A": "$f(1)-f(0)$",
+        "B": "$f(0)-f(1)$",
+        "C": "$f'(1)-f'(0)$",
+        "D": "$0$"
       },
       "answer": "A",
       "analysis": "令 u=cos x，du=-sin x dx，x:0→π/2 时 u:1→0，积分=-∫_1^0 f'(u)du=f(1)-f(0)。"
@@ -1006,12 +1006,12 @@
       "round": 1,
       "subject": "高等数学",
       "topic": "导数积分换元",
-      "question": "已知可导函数 f 满足 f(0)=1，f(2)=5，则 ∫_0^1 f'(2x) dx =（ ）",
+      "question": "已知可导函数 $f(x)$ 满足 $f(0)=1$，$f(2)=5$，则 $\\int_0^1 f'(2x)\\,\\mathrm{d}x=$（ ）",
       "options": {
-        "A": "4",
-        "B": "2",
-        "C": "6",
-        "D": "1/2"
+        "A": "$4$",
+        "B": "$2$",
+        "C": "$6$",
+        "D": "$\\frac{1}{2}$"
       },
       "answer": "B",
       "analysis": "[f(2)-f(0)]/2=(5-1)/2=2。"
@@ -1022,12 +1022,12 @@
       "round": 1,
       "subject": "高等数学",
       "topic": "导数积分换元",
-      "question": "∫_{-1}^{1} f'(3x) dx =（ ）",
+      "question": "$\\int_{-1}^{1} f'(3x)\\,\\mathrm{d}x=$（ ）",
       "options": {
-        "A": "[f(3)-f(-3)]/3",
-        "B": "3[f(3)-f(-3)]",
-        "C": "[f(1)-f(-1)]/3",
-        "D": "f(3)-f(-3)"
+        "A": "$[f(3)-f(-3)]/3$",
+        "B": "$3[f(3)-f(-3)]$",
+        "C": "$[f(1)-f(-1)]/3$",
+        "D": "$f(3)-f(-3)$"
       },
       "answer": "A",
       "analysis": "u=3x，上下限变 -3 到 3，结果 [f(3)-f(-3)]/3。"
