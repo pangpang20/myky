@@ -535,5 +535,20 @@
       "calMulMax·符号分治": "未作答，首次接触。只维护后缀最大值不够，A[i]<0 时需用后缀最小值；负负得正才最大。",
       "calMulMax·区间边界": "j 范围含 i 自身（闭区间），极值更新顺序错会导致 res[n-1] 取到未初始化值。"
     }
+  },
+  "高等数学-摆线参数方程求导": {
+    "knowledge": "参数方程 $x=x(t), y=y(t)$：一阶导 $\\frac{dy}{dx}=\\frac{y'(t)}{x'(t)}$；二阶导 $\\frac{d^{2}y}{dx^{2}}=\\frac{\\frac{d}{dt}\\left(\\frac{dy}{dx}\\right)}{\\frac{dx}{dt}}$（不是 $y''/x''$）。摆线 $x=5(t-\\sin t), y=5(1-\\cos t)$：利用半角公式 $1-\\cos t=2\\sin^{2}\\frac{t}{2}$、$\\sin t=2\\sin\\frac{t}{2}\\cos\\frac{t}{2}$ 约分得 $\\frac{dy}{dx}=\\cot\\frac{t}{2}$；再对 $t$ 求导除以 $x'$ 得 $\\frac{d^{2}y}{dx^{2}}=\\frac{-\\frac{1}{2}\\csc^{2}\\frac{t}{2}}{10\\sin^{2}\\frac{t}{2}}=-\\frac{1}{20\\sin^{4}\\frac{t}{2}}$，在 $0<t<2\\pi$ 恒负（上凸）。",
+    "mnemonic": "半角约分得余切，再对 t 求导除以 x'；csc 平方带负号，链式乘二分之一",
+    "keyPoints": [
+      "一阶导数 $dy/dx = y'(t)/x'(t)$",
+      "二阶导数公式：对 $dy/dx$ 先关于 $t$ 求导，再除以 $x'(t)$",
+      "半角公式 $1-\\cos t=2\\sin^{2}\\frac{t}{2}$，$\\sin t=2\\sin\\frac{t}{2}\\cos\\frac{t}{2}$",
+      "摆线一阶斜率 $\\cot\\frac{t}{2}$，$t=\\pi$ 处切线水平",
+      "二阶导数 $-\\frac{1}{20\\sin^{4}\\frac{t}{2}}<0$（$0<t<2\\pi$），摆线上凸"
+    ],
+    "rootCauses": {
+      "摆线·半角约分": "未作答。半角公式 $1-\\cos t=2\\sin^{2}\\frac{t}{2}$ 与 $\\sin t=2\\sin\\frac{t}{2}\\cos\\frac{t}{2}$ 不熟，导致约分卡住。",
+      "摆线·二阶导数公式": "参数方程二阶导数不是 $y''(t)/x''(t)$，正确做法是对 $dy/dx$ 先关于 $t$ 求导再除以 $x'(t)$。"
+    }
   }
 }

@@ -1,5 +1,133 @@
 [
   {
+    "subject": "高等数学",
+    "itemId": "高等数学-摆线参数方程求导",
+    "id": "hm-cyc1",
+    "topic": "摆线·一阶导数",
+    "type": "single",
+    "question": "已知 $x=t-\\sin t$，$y=1-\\cos t$（$0<t<2\\pi$），$\\frac{dy}{dx}=$（ ）。",
+    "options": {
+      "A": "$\\cot\\frac{t}{2}$",
+      "B": "$\\tan\\frac{t}{2}$",
+      "C": "$\\cot t$",
+      "D": "$\\tan t$"
+    },
+    "answer": "A",
+    "analysis": "半角公式约分：$x'=2\\sin^{2}\\frac{t}{2}$，$y'=2\\sin\\frac{t}{2}\\cos\\frac{t}{2}$，商为 $\\cot\\frac{t}{2}$。"
+  },
+  {
+    "subject": "高等数学",
+    "itemId": "高等数学-摆线参数方程求导",
+    "id": "hm-cyc2",
+    "topic": "摆线·二阶导数符号",
+    "type": "single",
+    "question": "摆线 $x=5(t-\\sin t)$，$y=5(1-\\cos t)$ 的二阶导数 $-\\frac{1}{20\\sin^{4}\\frac{t}{2}}$ 在 $0<t<2\\pi$ 时的符号是（ ）。",
+    "options": {
+      "A": "恒为负",
+      "B": "恒为正",
+      "C": "恒为零",
+      "D": "无法确定"
+    },
+    "answer": "A",
+    "analysis": "$\\sin^{4}\\frac{t}{2}>0$，负号不变，恒为负，摆线上凸。"
+  },
+  {
+    "subject": "高等数学",
+    "itemId": "高等数学-摆线参数方程求导",
+    "id": "hm-cyc3",
+    "topic": "摆线·切线斜率",
+    "type": "single",
+    "question": "摆线 $x=5(t-\\sin t)$，$y=5(1-\\cos t)$ 在 $t=\\frac{\\pi}{2}$ 处的切线斜率是（ ）。",
+    "options": {
+      "A": "0",
+      "B": "1",
+      "C": "-1",
+      "D": "不存在"
+    },
+    "answer": "B",
+    "analysis": "$\\frac{dy}{dx}=\\cot\\frac{t}{2}=\\cot\\frac{\\pi}{4}=1$。"
+  },
+  {
+    "subject": "高等数学",
+    "itemId": "高等数学-摆线参数方程求导",
+    "id": "hm-cyc4",
+    "topic": "摆线·半角公式",
+    "type": "single",
+    "question": "$x'(t)=5(1-\\cos t)$ 可化简为（ ）。",
+    "options": {
+      "A": "$10\\sin^{2}\\frac{t}{2}$",
+      "B": "$10\\cos^{2}\\frac{t}{2}$",
+      "C": "$5\\sin t$",
+      "D": "$-10\\sin^{2}\\frac{t}{2}$"
+    },
+    "answer": "A",
+    "analysis": "$1-\\cos t=2\\sin^{2}\\frac{t}{2}$，乘 5 得 $10\\sin^{2}\\frac{t}{2}$。"
+  },
+  {
+    "subject": "高等数学",
+    "itemId": "高等数学-摆线参数方程求导",
+    "id": "hm-cyc5",
+    "topic": "参数方程·二阶导数公式",
+    "type": "single",
+    "question": "参数方程 $x=x(t)$，$y=y(t)$ 的二阶导数 $\\frac{d^{2}y}{dx^{2}}$ 的正确公式是（ ）。",
+    "options": {
+      "A": "$\\frac{\\frac{d}{dt}\\left(\\frac{dy}{dx}\\right)}{\\frac{dx}{dt}}$",
+      "B": "$\\frac{y''(t)}{x''(t)}$",
+      "C": "$\\frac{x'(t)}{y'(t)}$",
+      "D": "$\\frac{d^{2}y/dt^{2}}{d^{2}x/dt^{2}}$"
+    },
+    "answer": "A",
+    "analysis": "先对 $dy/dx$ 关于 $t$ 求导，再除以 $x'(t)$，选项 B/D 是常见错误公式。"
+  },
+  {
+    "subject": "高等数学",
+    "itemId": "高等数学-摆线参数方程求导",
+    "id": "hm-exam-c1e46391",
+    "topic": "摆线·统考真题",
+    "type": "single",
+    "question": "【统考真题风格】摆线 $x=a(t-\\sin t)$，$y=a(1-\\cos t)$ 在 $t=\\frac{\\pi}{3}$ 处的切线斜率是（ ）。",
+    "options": {
+      "A": "$\\frac{\\sqrt{3}}{3}$",
+      "B": "$\\sqrt{3}$",
+      "C": "1",
+      "D": "0"
+    },
+    "answer": "B",
+    "analysis": "$\\frac{dy}{dx}=\\cot\\frac{t}{2}=\\cot\\frac{\\pi}{6}=\\sqrt{3}$。"
+  },
+  {
+    "subject": "高等数学",
+    "itemId": "高等数学-摆线参数方程求导",
+    "id": "hm-exam-631d7061",
+    "topic": "参数方程·真题改编",
+    "type": "single",
+    "question": "【真题改编】已知 $x=t^{3}$，$y=t^{2}$（$t>0$），$\\frac{dy}{dx}=$（ ）。",
+    "options": {
+      "A": "$\\frac{2}{3t}$",
+      "B": "$\\frac{3t}{2}$",
+      "C": "$\\frac{2t}{3}$",
+      "D": "$\\frac{3}{2t}$"
+    },
+    "answer": "A",
+    "analysis": "$y'=2t$，$x'=3t^{2}$，商为 $\\frac{2t}{3t^{2}}=\\frac{2}{3t}$。"
+  },
+  {
+    "subject": "高等数学",
+    "itemId": "高等数学-摆线参数方程求导",
+    "id": "hm-exam-f8182d4a",
+    "topic": "摆线·凹凸性",
+    "type": "single",
+    "question": "【真题改编】摆线二阶导数 $-\\frac{1}{20\\sin^{4}\\frac{t}{2}}$（$0<t<2\\pi$），曲线的凹凸性是（ ）。",
+    "options": {
+      "A": "上凸（凸）",
+      "B": "下凹（凹）",
+      "C": "既有凸又有凹",
+      "D": "无法判断"
+    },
+    "answer": "A",
+    "analysis": "$\\sin^{4}\\frac{t}{2}>0$，二阶导数恒负，曲线上凸。"
+  },
+  {
     "subject": "数据结构",
     "itemId": "数据结构-数组乘积最大值calMulMax",
     "id": "ds-mul1",

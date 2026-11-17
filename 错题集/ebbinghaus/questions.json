@@ -1031,6 +1031,134 @@
       },
       "answer": "A",
       "analysis": "u=3x，上下限变 -3 到 3，结果 [f(3)-f(-3)]/3。"
+    },
+    {
+      "id": "r1-c24337b1-2067-4b55-a542-2c6fb6db58fc",
+      "itemId": "高等数学-摆线参数方程求导",
+      "round": 1,
+      "subject": "高等数学",
+      "topic": "摆线·一阶导数",
+      "question": "已知 $x=t-\\sin t$，$y=1-\\cos t$（$0<t<2\\pi$），$\\frac{dy}{dx}=$（ ）。",
+      "options": {
+        "A": "$\\cot\\frac{t}{2}$",
+        "B": "$\\tan\\frac{t}{2}$",
+        "C": "$\\cot t$",
+        "D": "$\\tan t$"
+      },
+      "answer": "A",
+      "analysis": "利用半角公式 $x'=2\\sin^{2}\\frac{t}{2}$、$y'=2\\sin\\frac{t}{2}\\cos\\frac{t}{2}$，约分得 $\\cot\\frac{t}{2}$。"
+    },
+    {
+      "id": "r1-eaf243e4-59e7-48de-9dd4-30afa5b6f197",
+      "itemId": "高等数学-摆线参数方程求导",
+      "round": 1,
+      "subject": "高等数学",
+      "topic": "摆线·二阶导数符号",
+      "question": "摆线 $x=5(t-\\sin t)$，$y=5(1-\\cos t)$ 的二阶导数 $-\\frac{1}{20\\sin^{4}\\frac{t}{2}}$ 在 $0<t<2\\pi$ 时的符号是（ ）。",
+      "options": {
+        "A": "恒为负",
+        "B": "恒为正",
+        "C": "恒为零",
+        "D": "无法确定"
+      },
+      "answer": "A",
+      "analysis": "$\\sin^{4}\\frac{t}{2}>0$（$0<t<2\\pi$），负号不变，恒为负，说明摆线在该段上凸。"
+    },
+    {
+      "id": "r1-d3516517-37ab-4a50-afc8-c0451bfb2057",
+      "itemId": "高等数学-摆线参数方程求导",
+      "round": 1,
+      "subject": "高等数学",
+      "topic": "摆线·切线斜率",
+      "question": "摆线 $x=5(t-\\sin t)$，$y=5(1-\\cos t)$ 在 $t=\\frac{\\pi}{2}$ 处的切线斜率是（ ）。",
+      "options": {
+        "A": "0",
+        "B": "1",
+        "C": "-1",
+        "D": "不存在"
+      },
+      "answer": "B",
+      "analysis": "$\\frac{dy}{dx}=\\cot\\frac{t}{2}$，$t=\\frac{\\pi}{2}$ 时 $\\cot\\frac{\\pi}{4}=1$。"
+    },
+    {
+      "id": "r1-045ea6ad-7741-486f-beff-b9ebb1aad985",
+      "itemId": "高等数学-摆线参数方程求导",
+      "round": 1,
+      "subject": "高等数学",
+      "topic": "摆线·半角公式",
+      "question": "$x'(t)=5(1-\\cos t)$ 可化简为（ ）。",
+      "options": {
+        "A": "$10\\sin^{2}\\frac{t}{2}$",
+        "B": "$10\\cos^{2}\\frac{t}{2}$",
+        "C": "$5\\sin t$",
+        "D": "$-10\\sin^{2}\\frac{t}{2}$"
+      },
+      "answer": "A",
+      "analysis": "半角公式 $1-\\cos t=2\\sin^{2}\\frac{t}{2}$，所以 $5(1-\\cos t)=10\\sin^{2}\\frac{t}{2}$。"
+    },
+    {
+      "id": "r1-fb8549c6-cc7e-4942-b813-cc69a7915e8f",
+      "itemId": "高等数学-摆线参数方程求导",
+      "round": 1,
+      "subject": "高等数学",
+      "topic": "参数方程·二阶导数公式",
+      "question": "参数方程 $x=x(t)$，$y=y(t)$ 的二阶导数 $\\frac{d^{2}y}{dx^{2}}$ 的正确公式是（ ）。",
+      "options": {
+        "A": "$\\frac{\\frac{d}{dt}\\left(\\frac{dy}{dx}\\right)}{\\frac{dx}{dt}}$",
+        "B": "$\\frac{y''(t)}{x''(t)}$",
+        "C": "$\\frac{x'(t)}{y'(t)}$",
+        "D": "$\\frac{d^{2}y/dt^{2}}{d^{2}x/dt^{2}}$"
+      },
+      "answer": "A",
+      "analysis": "先对 $\\frac{dy}{dx}$ 关于 $t$ 求导，再除以 $x'(t)$；选项 B/D 是常见错误。"
+    },
+    {
+      "id": "r1-4a4dd2f4-1ba8-45e2-8784-aaa81eaa4aa4",
+      "itemId": "高等数学-摆线参数方程求导",
+      "round": 1,
+      "subject": "高等数学",
+      "topic": "摆线·统考真题",
+      "question": "【统考真题风格】摆线 $x=a(t-\\sin t)$，$y=a(1-\\cos t)$ 在 $t=\\frac{\\pi}{3}$ 处的切线斜率是（ ）。",
+      "options": {
+        "A": "$\\frac{\\sqrt{3}}{3}$",
+        "B": "$\\sqrt{3}$",
+        "C": "1",
+        "D": "0"
+      },
+      "answer": "B",
+      "analysis": "$\\frac{dy}{dx}=\\cot\\frac{t}{2}=\\cot\\frac{\\pi}{6}=\\sqrt{3}$。"
+    },
+    {
+      "id": "r1-f7c81c95-90e9-4be1-b8b8-11c6d08c48bf",
+      "itemId": "高等数学-摆线参数方程求导",
+      "round": 1,
+      "subject": "高等数学",
+      "topic": "参数方程·真题改编",
+      "question": "【真题改编】已知 $x=t^{3}$，$y=t^{2}$（$t>0$），$\\frac{dy}{dx}=$（ ）。",
+      "options": {
+        "A": "$\\frac{2}{3t}$",
+        "B": "$\\frac{3t}{2}$",
+        "C": "$\\frac{2t}{3}$",
+        "D": "$\\frac{3}{2t}$"
+      },
+      "answer": "A",
+      "analysis": "$y'=2t$，$x'=3t^{2}$，商为 $\\frac{2t}{3t^{2}}=\\frac{2}{3t}$。"
+    },
+    {
+      "id": "r1-73daa85b-3049-4781-8fea-f6d618193650",
+      "itemId": "高等数学-摆线参数方程求导",
+      "round": 1,
+      "subject": "高等数学",
+      "topic": "摆线·凹凸性",
+      "question": "【真题改编】摆线二阶导数 $-\\frac{1}{20\\sin^{4}\\frac{t}{2}}$（$0<t<2\\pi$），曲线的凹凸性是（ ）。",
+      "options": {
+        "A": "上凸（凸）",
+        "B": "下凹（凹）",
+        "C": "既有凸又有凹",
+        "D": "无法判断"
+      },
+      "answer": "A",
+      "analysis": "$\\sin^{4}\\frac{t}{2}>0$，二阶导数恒负，曲线上凸。"
     }
   ]
 }
