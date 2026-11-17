@@ -1,0 +1,37 @@
+{
+  "itemId": "数据结构-数组乘积最大值calMulMax",
+  "subject": "数据结构",
+  "file": "数据结构/数组乘积最大值calMulMax错题.md",
+  "knowledge": "res[i] = max{A[i]·A[j] | i≤j≤n-1}。从右往左一次扫描，维护后缀最大值 sufMax 与后缀最小值 sufMin：A[i]≥0 时乘 sufMax（正乘越大越好），A[i]<0 时乘 sufMin（负乘越负越大）。因 j 可等于 i，必须先把 A[i] 并入极值再计算 res[i]。时间 O(n)、空间 O(1)。暴力 O(n²) 不符合「尽可能高效」。样例 A={1,4,-9,6} → res={6,24,81,36}。",
+  "mnemonic": "右往左扫，正取最大负取小；先更新再算，闭区间别忘掉",
+  "keyPoints": [
+    "区间是闭区间 [i, n-1]，极值更新必须在 res[i] 计算之前",
+    "A[i]≥0 取后缀最大值，A[i]<0 取后缀最小值",
+    "从右往左一遍扫描，两个辅助变量，O(n)/O(1)",
+    "负数乘最小负数才是最大值，易错点在只维护 sufMax",
+    "边界 n=1 时 res[0]=A[0]²"
+  ],
+  "rootCauses": {
+    "calMulMax·符号分治": "未作答，首次接触。只维护后缀最大值不够，A[i]<0 时需用后缀最小值；负负得正才最大。",
+    "calMulMax·区间边界": "j 范围含 i 自身（闭区间），极值更新顺序错会导致 res[n-1] 取到未初始化值。"
+  },
+  "ebbinghausQuestions": [
+    {"topic": "calMulMax·复杂度", "question": "计算所有 res[i]（res[i]=max(A[i]·A[j], i≤j≤n-1)）的最优时间复杂度是（ ）。", "options": {"A": "O(n)", "B": "O(n log n)", "C": "O(n²)", "D": "O(n² log n)"}, "answer": "A", "analysis": "从右往左一遍扫描，每元素 O(1) 更新与计算。"},
+    {"topic": "calMulMax·符号分治", "question": "若 A[i]≥0，res[i] 应等于 A[i] 乘以 A[i..n-1] 中的（ ）。", "options": {"A": "最大值", "B": "最小值", "C": "绝对值最大者", "D": "任意元素"}, "answer": "A", "analysis": "非负乘非负，取后缀最大即可。"},
+    {"topic": "calMulMax·符号分治", "question": "若 A[i]<0，res[i] 应等于 A[i] 乘以 A[i..n-1] 中的（ ）。", "options": {"A": "最大值", "B": "最小值", "C": "0", "D": "绝对值最大者（不区分正负）"}, "answer": "B", "analysis": "负乘负得正，乘最小（最负）数才最大。"},
+    {"topic": "calMulMax·区间边界", "question": "从右往左扫描时，sufMax/sufMin 的更新与 res[i] 的计算顺序是（ ）。（因 j 可等于 i）", "options": {"A": "先算 res[i] 再更新极值", "B": "先更新极值再算 res[i]", "C": "顺序无所谓", "D": "只需在 i=n-1 时特殊处理"}, "answer": "B", "analysis": "闭区间 [i,n-1] 需先并入 A[i] 自身，否则 res[n-1] 无定义。"},
+    {"topic": "calMulMax·样例验证", "question": "数组 A={1,4,-9,6}，res[2] 的值是（ ）。（A[2]=-9）", "options": {"A": "-54", "B": "81", "C": "0", "D": "-81"}, "answer": "B", "analysis": "A[2]=-9<0，乘后缀最小值（含自身）-9，得 81。"}
+  ],
+  "quizQuestions": [
+    {"id": "ds-mul1", "topic": "calMulMax·复杂度", "type": "single", "question": "计算所有 res[i]（res[i]=max(A[i]·A[j], i≤j≤n-1)）的最优时间复杂度是（ ）。", "options": {"A": "O(n)", "B": "O(n log n)", "C": "O(n²)", "D": "O(n² log n)"}, "answer": "A", "analysis": "一遍扫描 O(n)。"},
+    {"id": "ds-mul2", "topic": "calMulMax·符号分治", "type": "single", "question": "若 A[i]≥0，res[i] 应等于 A[i] 乘以 A[i..n-1] 中的（ ）。", "options": {"A": "最大值", "B": "最小值", "C": "绝对值最大者", "D": "任意元素"}, "answer": "A", "analysis": "非负乘非负，取最大。"},
+    {"id": "ds-mul3", "topic": "calMulMax·符号分治", "type": "single", "question": "若 A[i]<0，res[i] 应等于 A[i] 乘以 A[i..n-1] 中的（ ）。", "options": {"A": "最大值", "B": "最小值", "C": "0", "D": "绝对值最大者（不区分正负）"}, "answer": "B", "analysis": "负乘最负数才最大。"},
+    {"id": "ds-mul4", "topic": "calMulMax·区间边界", "type": "single", "question": "从右往左扫描时，sufMax/sufMin 的更新与 res[i] 的计算顺序是（ ）。（因 j 可等于 i）", "options": {"A": "先算 res[i] 再更新极值", "B": "先更新极值再算 res[i]", "C": "顺序无所谓", "D": "只需在 i=n-1 时特殊处理"}, "answer": "B", "analysis": "闭区间需先并入 A[i] 自身。"},
+    {"id": "ds-mul5", "topic": "calMulMax·样例验证", "type": "single", "question": "数组 A={1,4,-9,6}，res[2] 的值是（ ）。（A[2]=-9）", "options": {"A": "-54", "B": "81", "C": "0", "D": "-81"}, "answer": "B", "analysis": "-9 乘后缀最小 -9 = 81。"}
+  ],
+  "examQuestions": [
+    {"topic": "calMulMax·统考真题", "question": "【2024 统考真题】函数 calMulMax(int A[], int res[], int n) 计算 res[i]=max(A[i]·A[j])（i≤j≤n-1），其核心设计思想是（ ）。", "options": {"A": "从右往左维护后缀最大/最小，按 A[i] 正负选取", "B": "从左往右维护前缀最大/最小", "C": "两层循环枚举所有 (i,j) 对", "D": "先排序再取两端相乘"}, "answer": "A", "analysis": "官方参考答案即「后缀极值 + 符号分治」，O(n)/O(1)。"},
+    {"topic": "calMulMax·真题改编", "question": "若把区间改为 0≤j≤i（前缀区间），正确做法是（ ）。", "options": {"A": "仍从右往左，维护后缀极值", "B": "改为从左往右，维护前缀最大/最小", "C": "两层循环暴力", "D": "排序后取两端"}, "answer": "B", "analysis": "区间镜像，扫描方向与极值同步镜像。"},
+    {"topic": "calMulMax·真题改编", "question": "数组 A={1,4,-9,6}，按题意计算 res 的结果是（ ）。", "options": {"A": "{6,24,81,36}", "B": "{1,4,-9,6}", "C": "{6,24,-54,36}", "D": "{0,0,0,0}"}, "answer": "A", "analysis": "res[0]=1·6=6, res[1]=4·6=24, res[2]=-9·-9=81, res[3]=6·6=36。"}
+  ]
+}
