@@ -386,18 +386,18 @@ $$\int_{0}^{2\pi}\sin^{3}x\,\mathrm{d}x=0\qquad\text{（周期内正负抵消，
 
 **考研风格练习（6 题，全部数值验证过）**：
 
-1. $\displaystyle\int_{-1}^{1}(x^{5}+x^{2})\,\mathrm{d}x=$？
-   <details><summary>答案</summary>$x^5$ 奇为 $0$，$x^2$ 偶翻倍：$2\int_0^1 x^2dx=\frac{2}{3}$。</details>
-2. $\displaystyle\int_{-1}^{1}\frac{x^{2}\sin x}{x^{2}+1}\,\mathrm{d}x=$？
-   <details><summary>答案</summary>分子 $x^{2}\sin x$ 是奇函数，整体为 $0$。</details>
-3. $\displaystyle\int_{0}^{\pi}x\cos x\,\mathrm{d}x=$？
-   <details><summary>答案</summary>换元 $u=\pi-x$：$\int_0^\pi(\pi-u)\cos u\,\mathrm{d}u=\pi\int_0^\pi\cos u\,du-\int_0^\pi u\cos u\,du$，即 $2I=0\Rightarrow I=0$（也可直接分部积分：$[x\sin x]_0^\pi-\int_0^\pi\sin x\,dx=-2$…此处用换元法结论 $I=0$ 需注意 $\int_0^\pi\cos=0$）。实际分部积分：$[x\sin x]_0^\pi-\int_0^\pi\sin x\,\mathrm{d}x=0-2=-2$。</details>
-4. $\displaystyle\int_{-2}^{2}(x^{3}+\sqrt{4-x^{2}})\,\mathrm{d}x=$？
-   <details><summary>答案</summary>$x^3$ 奇为 $0$，$\sqrt{4-x^2}$ 是半径 $2$ 的上半圆，面积 $\frac{\pi\cdot2^2}{2}=2\pi$。</details>
-5. $\displaystyle\int_{0}^{\frac{\pi}{2}}\sin^{6}x\,\mathrm{d}x=$？
-   <details><summary>答案</summary>华里士：$\frac{5!!}{6!!}\cdot\frac{\pi}{2}=\frac{5}{16}\cdot\frac{\pi}{2}=\frac{5\pi}{32}$。</details>
-6. $\displaystyle\int_{-1}^{1}\frac{\sin x+(\sqrt{1-x^{2}}+x)}{1+x^{2}}\,\mathrm{d}x$ 的奇偶拆分思路（不定积分难度）？
-   <details><summary>答案</summary>$\sin x$ 奇为 $0$；$\frac{\sqrt{1-x^2}}{1+x^2}$ 偶翻倍；$\frac{x}{1+x^2}$ 奇为 $0$。只算偶部分，用半圆面积代换即可。</details>
+1. $\displaystyle\int_{-1}^{1}(x^{5}+x^{2})\,\mathrm{d}x=\frac{2}{3}$。
+   **答案**：$x^5$ 奇为 $0$，$x^2$ 偶翻倍：$2\int_0^1 x^2dx=\frac{2}{3}$。
+2. $\displaystyle\int_{-1}^{1}\frac{x^{2}\sin x}{x^{2}+1}\,\mathrm{d}x=0$。
+   **答案**：分子 $x^{2}\sin x$ 是奇函数，整体为 $0$。
+3. $\displaystyle\int_{0}^{\pi}x\cos x\,\mathrm{d}x=-2$。
+   **答案**：分部积分：$\int_0^\pi x\cos x\,\mathrm{d}x=[x\sin x]_0^\pi-\int_0^\pi\sin x\,\mathrm{d}x=0-2=-2$。
+4. $\displaystyle\int_{-2}^{2}(x^{3}+\sqrt{4-x^{2}})\,\mathrm{d}x=2\pi$。
+   **答案**：$x^3$ 奇为 $0$，$\sqrt{4-x^2}$ 是半径 $2$ 的上半圆，面积 $\frac{\pi\cdot2^2}{2}=2\pi$。
+5. $\displaystyle\int_{0}^{\frac{\pi}{2}}\sin^{6}x\,\mathrm{d}x=\frac{5\pi}{32}$。
+   **答案**：华里士：$\frac{5!!}{6!!}\cdot\frac{\pi}{2}=\frac{5}{16}\cdot\frac{\pi}{2}=\frac{5\pi}{32}$。
+6. $\displaystyle\int_{-1}^{1}\frac{\sin x+(\sqrt{1-x^{2}}+x)}{1+x^{2}}\,\mathrm{d}x$ 的奇偶拆分思路（不定积分难度）。
+   **答案**：$\sin x$ 奇为 $0$；$\frac{\sqrt{1-x^2}}{1+x^2}$ 偶翻倍；$\frac{x}{1+x^2}$ 奇为 $0$。只算偶部分，用半圆面积代换即可。
 
 > **考研口诀**：**「对称区间先判奇偶，奇项归零偶翻倍；$x f(\sin x)$ 用 $\frac{\pi}{2}$，$\sin/\cos$ 互换得 $\frac{\pi}{4}$；$[0,2\pi]$ 想周期四倍，奇次幂遇 $\cos$ 归零。」**
 
