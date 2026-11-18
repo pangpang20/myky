@@ -1,6 +1,134 @@
 [
   {
     "subject": "高等数学",
+    "itemId": "高等数学-旋转体体积正弦曲线",
+    "id": "hm-rot1",
+    "topic": "旋转体·圆盘法",
+    "type": "single",
+    "question": "曲线 $y=f(x)$ 与 $x$ 轴在 $[a,b]$ 上围成的图形绕 $Ox$ 轴旋转，体积公式是（ ）。",
+    "options": {
+      "A": "$\\pi\\int_a^b y^2\\,\\mathrm{d}x$",
+      "B": "$\\int_a^b y\\,\\mathrm{d}x$",
+      "C": "$2\\pi\\int_a^b y\\,\\mathrm{d}x$",
+      "D": "$\\pi\\int_a^b y\\,\\mathrm{d}x$"
+    },
+    "answer": "A",
+    "analysis": "圆盘法：$V=\\pi\\int_a^b y^2\\,\\mathrm{d}x$。"
+  },
+  {
+    "subject": "高等数学",
+    "itemId": "高等数学-旋转体体积正弦曲线",
+    "id": "hm-rot2",
+    "topic": "sin²积分",
+    "type": "single",
+    "question": "$\\int_0^\\pi\\sin^2x\\,\\mathrm{d}x=$（ ）。",
+    "options": {
+      "A": "$\\frac{\\pi}{2}$",
+      "B": "$\\pi$",
+      "C": "$2$",
+      "D": "$\\frac{\\pi}{4}$"
+    },
+    "answer": "A",
+    "analysis": "降幂公式积分得 $\\frac{\\pi}{2}$。"
+  },
+  {
+    "subject": "高等数学",
+    "itemId": "高等数学-旋转体体积正弦曲线",
+    "id": "hm-rot3",
+    "topic": "sin积分",
+    "type": "single",
+    "question": "$\\int_0^\\pi\\sin x\\,\\mathrm{d}x=$（ ）。",
+    "options": {
+      "A": "$2$",
+      "B": "$0$",
+      "C": "$1$",
+      "D": "$\\pi$"
+    },
+    "answer": "A",
+    "analysis": "$-\\cos\\pi+\\cos0=2$。"
+  },
+  {
+    "subject": "高等数学",
+    "itemId": "高等数学-旋转体体积正弦曲线",
+    "id": "hm-rot4",
+    "topic": "完全平方展开",
+    "type": "single",
+    "question": "$(\\sin x+1)^2$ 展开正确的是（ ）。",
+    "options": {
+      "A": "$\\sin^2x+2\\sin x+1$",
+      "B": "$\\sin^2x+1$",
+      "C": "$\\sin^2x+\\sin x+1$",
+      "D": "$2\\sin x+1$"
+    },
+    "answer": "A",
+    "analysis": "完全平方公式，中间项 $2\\sin x$ 不能漏。"
+  },
+  {
+    "subject": "高等数学",
+    "itemId": "高等数学-旋转体体积正弦曲线",
+    "id": "hm-rot5",
+    "topic": "本题结果",
+    "type": "single",
+    "question": "$y=\\sin x+1$ 在 $[0,\\pi]$ 上绕 $Ox$ 轴旋转一周的体积是（ ）。",
+    "options": {
+      "A": "$\\frac{3\\pi^2}{2}+4\\pi$",
+      "B": "$\\frac{\\pi^2}{2}+2\\pi$",
+      "C": "$\\frac{\\pi^2}{2}+4\\pi$",
+      "D": "$3\\pi^2+4\\pi$"
+    },
+    "answer": "A",
+    "analysis": "$V=\\pi(\\frac{\\pi}{2}+4+\\pi)=\\frac{3\\pi^2}{2}+4\\pi$。"
+  },
+  {
+    "subject": "高等数学",
+    "itemId": "高等数学-旋转体体积正弦曲线",
+    "id": "hm-exam-0481eb34",
+    "topic": "cosx+1 绕 Ox",
+    "type": "single",
+    "question": "【真题风格】$y=\\cos x+1$ 在 $\\left[-\\frac{\\pi}{2},\\frac{\\pi}{2}\\right]$ 上绕 $Ox$ 轴旋转的体积是（ ）。",
+    "options": {
+      "A": "$\\frac{3\\pi^2}{2}+4\\pi$",
+      "B": "$\\frac{\\pi^2}{2}+4\\pi$",
+      "C": "$\\frac{\\pi^2}{2}+2\\pi$",
+      "D": "$\\pi^2+4\\pi$"
+    },
+    "answer": "A",
+    "analysis": "$\\int_{-\\pi/2}^{\\pi/2}\\cos^2x\\,\\mathrm{d}x=\\frac{\\pi}{2}$，$\\int_{-\\pi/2}^{\\pi/2}\\cos x\\,\\mathrm{d}x=2$，$\\int_{-\\pi/2}^{\\pi/2}1\\,\\mathrm{d}x=\\pi$，合计 $\\frac{3\\pi}{2}+4$，所以 $V=\\pi(\\frac{3\\pi}{2}+4)=\\frac{3\\pi^2}{2}+4\\pi\\approx 27.37$。"
+  },
+  {
+    "subject": "高等数学",
+    "itemId": "高等数学-旋转体体积正弦曲线",
+    "id": "hm-exam-8b139d78",
+    "topic": "常函数旋转体",
+    "type": "single",
+    "question": "【真题改编】$y=2$ 与 $y=0$、$x\\in[0,3]$ 围成的矩形绕 $Ox$ 轴旋转的体积是（ ）。",
+    "options": {
+      "A": "$12\\pi$",
+      "B": "$6\\pi$",
+      "C": "$4\\pi$",
+      "D": "$36\\pi$"
+    },
+    "answer": "A",
+    "analysis": "$V=\\pi\\int_0^3 4\\,\\mathrm{d}x=12\\pi$（圆柱体 $\\pi r^2 h$）。"
+  },
+  {
+    "subject": "高等数学",
+    "itemId": "高等数学-旋转体体积正弦曲线",
+    "id": "hm-exam-ee7639cd",
+    "topic": "sinx 绕 Ox",
+    "type": "single",
+    "question": "【真题改编】$y=\\sin x$ 与 $y=0$、$x\\in[0,\\pi]$ 围成图形绕 $Ox$ 轴旋转的体积是（ ）。",
+    "options": {
+      "A": "$\\frac{\\pi^2}{2}$",
+      "B": "$\\frac{\\pi^2}{4}$",
+      "C": "$\\pi^2$",
+      "D": "$\\frac{\\pi}{2}$"
+    },
+    "answer": "A",
+    "analysis": "$V=\\pi\\int_0^\\pi\\sin^2x\\,\\mathrm{d}x=\\pi\\cdot\\frac{\\pi}{2}=\\frac{\\pi^2}{2}$。"
+  },
+  {
+    "subject": "高等数学",
     "itemId": "高等数学-定积分x乘arcsinx",
     "id": "hm-arc1",
     "topic": "分部积分·选 u",

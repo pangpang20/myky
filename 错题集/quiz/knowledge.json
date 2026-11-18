@@ -565,5 +565,20 @@
       "分部积分·选 u 顺序": "未作答。LIATE 规则不熟：反三角（I）优先于代数式（A），应取 $\\arcsin x$ 为 $u$。",
       "三角换元·上下限": "换元 $x=\\sin\\theta$ 后忘记同步换积分上下限，或在 $\\theta\\in[0,\\frac{\\pi}{2}]$ 上处理 $\\sqrt{1-x^2}=\\cos\\theta$ 时出错。"
     }
+  },
+  "高等数学-旋转体体积正弦曲线": {
+    "knowledge": "绕 $Ox$ 轴旋转体体积用圆盘法：$V=\\pi\\int_a^b y^2\\,\\mathrm{d}x$。本题 $V=\\pi\\int_0^\\pi(\\sin x+1)^2\\mathrm{d}x$，展开为 $\\sin^2x+2\\sin x+1$，三项在 $[0,\\pi]$ 上分别积分得 $\\frac{\\pi}{2}+4+\\pi=\\frac{3\\pi}{2}+4$，所以 $V=\\pi(\\frac{3\\pi}{2}+4)=\\frac{3\\pi^2}{2}+4\\pi\\approx 27.37$。关键结论：$\\int_0^\\pi\\sin^2x\\,\\mathrm{d}x=\\frac{\\pi}{2}$（降幂公式），$\\int_0^\\pi\\sin x\\,\\mathrm{d}x=2$。",
+    "mnemonic": "绕轴平方再乘 π，完全平方先展开；sin² 降幂得 π/2，sin 积分上下限差是 2",
+    "keyPoints": [
+      "圆盘法公式：绕 $Ox$ 轴 $V=\\pi\\int_a^b y^2\\,\\mathrm{d}x$，外面有 $\\pi$",
+      "完全平方展开：$(\\sin x+1)^2=\\sin^2x+2\\sin x+1$，不能写成 $\\sin^2x+1$",
+      "$\\int_0^\\pi\\sin^2x\\,\\mathrm{d}x=\\frac{\\pi}{2}$（降幂 $\\sin^2x=\\frac{1-\\cos2x}{2}$）",
+      "$\\int_0^\\pi\\sin x\\,\\mathrm{d}x=\\left[-\\cos x\\right]_0^\\pi=2$",
+      "本题答案 $V=\\frac{3\\pi^2}{2}+4\\pi\\approx 27.37$"
+    ],
+    "rootCauses": {
+      "旋转体·公式与展开": "未作答。圆盘法 $V=\\pi\\int y^2\\mathrm{d}x$ 容易漏 $\\pi$；$(\\sin x+1)^2$ 忘记展开成三项是常见错误。",
+      "三角积分·降幂与符号": "$\\sin^2x$ 在 $[0,\\pi]$ 上积分为 $\\frac{\\pi}{2}$ 不是 $\\pi$；$\\int_0^\\pi\\sin x\\,\\mathrm{d}x=2$ 不是 0。"
+    }
   }
 }
