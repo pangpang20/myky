@@ -341,6 +341,37 @@ $$\int_{0}^{\pi}x\sin x\,\mathrm{d}x=\frac{\pi}{2}\int_{0}^{\pi}\sin x\,\mathrm{
 
 技巧：对 $\int_0^\pi x f(\sin x)\,\mathrm{d}x$（$f$ 任意），有标准公式 $\displaystyle\int_{0}^{\pi}x f(\sin x)\mathrm{d}x=\frac{\pi}{2}\int_{0}^{\pi}f(\sin x)\,\mathrm{d}x$（换元 $u=\pi-x$ 证明）。考研真题直接套用。
 
+**对比：$\displaystyle\int_{0}^{\pi}x\cos x\,\mathrm{d}x$（必须分部积分，不能套上面的公式）**
+
+上面的公式只对 $f(\sin x)$ 成立。$\cos x$ 在 $[0,\pi]$ 上不满足 $\cos(\pi-x)=-\cos x$ 的「同型」结构（它满足的是 $\cos(\pi-x)=-\cos x$，即 $x\cos x$ 换元后变成 $(\pi-u)(-\cos u)$，展开出现 $\pi\cos u$ 项，无法像 $\sin$ 那样直接得到 $\frac{\pi}{2}$ 倍关系），所以要用**分部积分**：
+
+取 $u=x$，$\mathrm{d}v=\cos x\,\mathrm{d}x$，则 $v=\sin x$：
+
+$$\int_{0}^{\pi}x\cos x\,\mathrm{d}x=\left[x\sin x\right]_{0}^{\pi}-\int_{0}^{\pi}\sin x\,\mathrm{d}x=0-\left[-\cos x\right]_{0}^{\pi}=-(1+1)=-2$$
+
+（$x\sin x$ 在 $x=\pi$ 和 $x=0$ 处都为 $0$，边界项消失；$\int_0^\pi\sin x\,\mathrm{d}x=2$。）
+
+**为什么一个是 $\pi$、一个是 $-2$？——图形直觉**
+
+| 被积函数 | 图形特征 | 积分值 |
+| --- | --- | --- |
+| $x\sin x$ | $x>0$、$\sin x\ge 0$，整段**非负** | $\pi$（正值） |
+| $x\cos x$ | $\cos x$ 在 $\frac{\pi}{2}$ 后变负，且权重 $x$ 越来越大 | $-2$（负值占优） |
+
+$x\cos x$ 的负面积集中在右半段（$x$ 大），正面积在左半段（$x$ 小），所以整体为负。
+
+**同族积分速查**（全部数值验证过）：
+
+| 积分 | 结果 | 方法 |
+| --- | --- | --- |
+| $\displaystyle\int_{0}^{\pi}x\sin x\,\mathrm{d}x$ | $\pi$ | 分部积分（或 $\frac{\pi}{2}$ 公式） |
+| $\displaystyle\int_{0}^{\pi}x\cos x\,\mathrm{d}x$ | $-2$ | 分部积分 |
+| $\displaystyle\int_{0}^{\frac{\pi}{2}}x\cos x\,\mathrm{d}x$ | $\dfrac{\pi}{2}-1$ | 分部积分：$\left[x\sin x+\cos x\right]_{0}^{\frac{\pi}{2}}=\frac{\pi}{2}+0-(0+1)$ |
+| $\displaystyle\int_{0}^{2\pi}x\cos x\,\mathrm{d}x$ | $0$ | $\left[x\sin x+\cos x\right]_{0}^{2\pi}=0+(1-1)=0$ |
+| $\displaystyle\int_{0}^{2\pi}x\sin x\,\mathrm{d}x$ | $-2\pi$ | $\left[-x\cos x+\sin x\right]_{0}^{2\pi}=-2\pi+0$ |
+
+**考研提示**：看到 $x$ 乘三角函数在 $[0,\pi]$ 上，先想分部积分（取 $u=x$）；只有 $f(\sin x)$ 这种「关于 $x=\frac{\pi}{2}$ 对称」的结构才能用 $\frac{\pi}{2}$ 倍公式秒杀。
+
 **例 5（$[0,\frac{\pi}{2}]$ 的「互换对称」）**：
 
 $$\int_{0}^{\frac{\pi}{2}}\frac{\sin x}{\sin x+\cos x}\,\mathrm{d}x=\frac{\pi}{4}$$
