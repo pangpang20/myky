@@ -463,7 +463,7 @@ let progressDirty=false;
 function saveProgress(){
   try{
     if(!queue.length)return;
-    const payload={roundId,forceMode,qi,results,ids:queue.map(q=>q.id)};
+    const payload={roundId,forceMode,qi,results,ids:queue.map(q=>q.id),day:today()};
     fetch('/api/progress',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)}).catch(e=>console.warn('save progress failed',e));
   }catch(e){console.warn('save progress failed',e)}
 }

@@ -103,11 +103,18 @@ function saveProgressRow(p) {
     sqlite.prepare('DELETE FROM progress WHERE id=?').run(slot);
     return;
   }
+  const today = todayEast8();
+  // 旧进度保留日期；新进度记录当天日期，跨天自动失效
+  const day = p.day || today;
   sqlite.prepare('INSERT OR REPLACE INTO progress (id,roundId,forceMode,qi,results,ids,at) VALUES (?,?,?,?,?,?,?)')
-    .run(slot, p.roundId || null, p.forceMode ? 1 : 0, p.qi || 0, JSON.stringify(p.results || []), JSON.stringify(p.ids), p.at || todayEast8());
+    .run(slot, p.roundId || null, p.forceMode ? 1 : 0, p.qi || 0, JSON.stringify(p.results || []), JSON.stringify(p.ids), day);
 }
 function todayEast8() {
   return new Date(Date.now() + 8 * 3600 * 1000).toISOString().slice(0, 10);
+}
+function roundDayEast8(roundId) {
+  const ms = Number(String(roundId || '').replace('eb-', ''));
+  return Number.isFinite(ms) && ms > 0 ? new Date(ms + 8 * 3600 * 1000).toISOString().slice(0, 10) : null;
 }
 function addDays(dateStr, days) {
   const d = new Date(dateStr);
@@ -245,7 +252,13 @@ const server = h.createServer((req, res) => {
     const forceParam = new URL(req.url, 'http://localhost').searchParams.get('force');
     const wantForce = forceParam === '1' || forceParam === 'true';
     const db = loadDB();
-    const progress = wantForce ? db.progressForce : db.progress;
+    let progress = wantForce ? db.progressForce : db.progress;
+    // 跨天自动失效：轮次创建日期早于今天就不再恢复，每天从全新一轮开始
+    const stale = progress && ((progress.at && progress.at < todayEast8()) || (roundDayEast8(progress.roundId) && roundDayEast8(progress.roundId) < todayEast8()));
+    if (stale) {
+      sqlite.prepare('DELETE FROM progress WHERE id=?').run(wantForce ? 2 : 1);
+      progress = null;
+    }
     const answerResults = (db.answers || [])
       .filter(a => progress && a.roundId === progress.roundId)
       .map(a => ({ id: a.id, selected: a.selected, realSelected: a.realSelected, correct: a.correct }));
