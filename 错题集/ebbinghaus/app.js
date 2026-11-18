@@ -192,6 +192,26 @@ function resetNoteBox(){
   noteLayout.x=(window.innerWidth-760)/2;noteLayout.y=48;
   applyNoteLayout();
 }
+function maximizeNote(){
+  const box=document.getElementById('noteBox');
+  if(!noteLayout)captureNoteLayout();
+  noteLayout.__prev={x:noteLayout.x,y:noteLayout.y,w:noteLayout.w,h:noteLayout.h,scale:1};
+  noteLayout.x=0;noteLayout.y=0;
+  noteLayout.w=window.innerWidth;noteLayout.h=window.innerHeight;
+  noteLayout.scale=1;
+  applyNoteLayout();
+  box.classList.add('note-maximized');
+}
+function restoreNote(){
+  const box=document.getElementById('noteBox');
+  if(noteLayout&&noteLayout.__prev){
+    const p=noteLayout.__prev;
+    noteLayout.x=p.x;noteLayout.y=p.y;noteLayout.w=p.w;noteLayout.h=p.h;noteLayout.scale=1;
+    noteLayout.__prev=null;
+    applyNoteLayout();
+  }
+  box.classList.remove('note-maximized');
+}
 function captureNoteLayout(){
   const box=document.getElementById('noteBox');
   noteLayout={x:parseFloat(box.style.left)||((window.innerWidth-box.offsetWidth)/2),y:parseFloat(box.style.top)||48,w:760,h:Math.min(window.innerHeight*.78,720),scale:1};
@@ -206,6 +226,7 @@ function initNoteDragResize(){
   let drag=null;
   bar.addEventListener('pointerdown',e=>{
     if(e.target.tagName==='BUTTON')return;
+    if(box.classList.contains('note-maximized'))box.classList.remove('note-maximized');
     const r=box.getBoundingClientRect();
     drag={type:'move',offX:e.clientX-r.left,offY:e.clientY-r.top,w:r.width,h:r.height};
     captureNoteLayout();
