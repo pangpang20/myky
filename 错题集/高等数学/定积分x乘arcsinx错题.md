@@ -270,6 +270,71 @@ $$\int_{-2}^{2}x^{2}\sqrt{4-x^{2}}\,\mathrm{d}x=2\int_{0}^{2}x^{2}\sqrt{4-x^{2}}
 
 含 $\sqrt{a^{2}-x^{2}}$ 的项，可用几何意义：$\int_{-a}^{a}\sqrt{a^{2}-x^{2}}\,\mathrm{d}x=\dfrac{\pi a^{2}}{2}$（半圆面积）。
 
+**为什么 $\int_{-a}^{a}\sqrt{a^{2}-x^{2}}\,\mathrm{d}x=\dfrac{\pi a^{2}}{2}$？三种推导**
+
+**推导一：几何意义（最快，考试首选）**
+
+曲线 $y=\sqrt{a^{2}-x^{2}}$ 两边平方得 $x^{2}+y^{2}=a^{2}$（$y\ge 0$），是以原点为圆心、半径 $a$ 的**上半圆**。
+
+定积分的几何意义是「曲线与 $x$ 轴围成的面积」。$x$ 从 $-a$ 到 $a$ 恰好覆盖整个上半圆，面积就是整圆面积的一半：
+
+$$\int_{-a}^{a}\sqrt{a^{2}-x^{2}}\,\mathrm{d}x=\frac{1}{2}\cdot\pi a^{2}=\frac{\pi a^{2}}{2}$$
+
+**推导二：三角换元（代数验证）**
+
+令 $x=a\sin\theta$，$\mathrm{d}x=a\cos\theta\,\mathrm{d}\theta$。$x=-a\Rightarrow\theta=-\dfrac{\pi}{2}$，$x=a\Rightarrow\theta=\dfrac{\pi}{2}$，且 $\sqrt{a^{2}-x^{2}}=a\cos\theta$（$\theta\in\left[-\frac{\pi}{2},\frac{\pi}{2}\right]$ 上 $\cos\theta\ge0$）：
+
+$$\int_{-\frac{\pi}{2}}^{\frac{\pi}{2}}a\cos\theta\cdot a\cos\theta\,\mathrm{d}\theta=a^{2}\int_{-\frac{\pi}{2}}^{\frac{\pi}{2}}\cos^{2}\theta\,\mathrm{d}\theta=a^{2}\cdot\frac{\pi}{2}=\frac{\pi a^{2}}{2}$$
+
+其中 $\int_{-\frac{\pi}{2}}^{\frac{\pi}{2}}\cos^{2}\theta\,\mathrm{d}\theta=2\int_{0}^{\frac{\pi}{2}}\cos^{2}\theta\,\mathrm{d}\theta=2\cdot\frac{\pi}{4}=\frac{\pi}{2}$（偶函数翻倍 + 华里士）。
+
+**推导三：记住三个常用「半圆类」公式**
+
+| 积分 | 结果 | 记忆方式 |
+| --- | --- | --- |
+| $\displaystyle\int_{-a}^{a}\sqrt{a^{2}-x^{2}}\,\mathrm{d}x$ | $\dfrac{\pi a^{2}}{2}$ | 上半圆面积 |
+| $\displaystyle\int_{0}^{a}\sqrt{a^{2}-x^{2}}\,\mathrm{d}x$ | $\dfrac{\pi a^{2}}{4}$ | 四分之一圆面积 |
+| $\displaystyle\int_{-a}^{a}x^{2}\sqrt{a^{2}-x^{2}}\,\mathrm{d}x$ | $\dfrac{\pi a^{4}}{8}$ | 需换元推导（见下） |
+
+**$\displaystyle\int_{0}^{a}x^{2}\sqrt{a^{2}-x^{2}}\,\mathrm{d}x=\dfrac{\pi a^{4}}{16}$ 的完整推导**
+
+这个积分**不能**直接用面积（多了 $x^{2}$），必须换元。令 $x=a\sin\theta$，$\mathrm{d}x=a\cos\theta\,\mathrm{d}\theta$，$x:0\to a$ 对应 $\theta:0\to\dfrac{\pi}{2}$：
+
+$$\int_{0}^{a}x^{2}\sqrt{a^{2}-x^{2}}\,\mathrm{d}x=\int_{0}^{\frac{\pi}{2}}a^{2}\sin^{2}\theta\cdot a\cos\theta\cdot a\cos\theta\,\mathrm{d}\theta=a^{4}\int_{0}^{\frac{\pi}{2}}\sin^{2}\theta\cos^{2}\theta\,\mathrm{d}\theta$$
+
+用混合幂华里士公式（$m=n=2$，均为偶数）：
+
+$$\int_{0}^{\frac{\pi}{2}}\sin^{2}\theta\cos^{2}\theta\,\mathrm{d}\theta=\frac{(2-1)!!(2-1)!!}{(2+2)!!}\cdot\frac{\pi}{2}=\frac{1\cdot1}{4!!}\cdot\frac{\pi}{2}=\frac{1}{8}\cdot\frac{\pi}{2}=\frac{\pi}{16}$$
+
+所以：
+
+$$\int_{0}^{a}x^{2}\sqrt{a^{2}-x^{2}}\,\mathrm{d}x=a^{4}\cdot\frac{\pi}{16}=\frac{\pi a^{4}}{16}$$
+
+**若区间是 $[-a,a]$**（被积函数是偶函数，翻倍）：
+
+$$\int_{-a}^{a}x^{2}\sqrt{a^{2}-x^{2}}\,\mathrm{d}x=2\cdot\frac{\pi a^{4}}{16}=\frac{\pi a^{4}}{8}$$
+
+**回到例 3**：取 $a=2$，
+
+$$\int_{-2}^{2}x^{2}\sqrt{4-x^{2}}\,\mathrm{d}x=\frac{\pi\cdot 2^{4}}{8}=\frac{16\pi}{8}=2\pi$$
+
+与前面写的一致。也可以用另一种写法：$\displaystyle\int_{-2}^{2}x^{2}\sqrt{4-x^{2}}\,\mathrm{d}x=2\int_{0}^{2}x^{2}\sqrt{4-x^{2}}\,\mathrm{d}x=2\cdot\frac{\pi\cdot2^{4}}{16}=2\cdot\pi=2\pi$。
+
+**数值验证**（Node，$a=1,2,3,5$ 全部吻合）：
+
+| $a$ | $\int_{-a}^{a}x^{2}\sqrt{a^{2}-x^{2}}\,\mathrm{d}x$ | $\dfrac{\pi a^{4}}{8}$ |
+| --- | --- | --- |
+| $1$ | $0.39269908$ | $0.39269908$ |
+| $2$ | $6.28318527$ | $6.28318531$ |
+| $3$ | $31.80862541$ | $31.80862562$ |
+| $5$ | $245.43692446$ | $245.43692606$ |
+
+**常见错误提醒**：
+
+1. 把 $\int_{-a}^{a}x^{2}\sqrt{a^{2}-x^{2}}\,\mathrm{d}x$ 当成「圆面积 × 某系数」乱猜——必须换元推导。
+2. 换元后忘记 $\mathrm{d}x=a\cos\theta\,\mathrm{d}\theta$ 中的 $a$（一共会带出 $a^{4}$：$a^{2}$ 来自 $x^{2}$，$a$ 来自 $\sqrt{}$，$a$ 来自 $\mathrm{d}x$）。
+3. 区间 $[0,a]$ 与 $[-a,a]$ 混淆——偶函数在对称区间上要**翻倍**。
+
 **例 4（$[0,\pi]$ 上 $x\sin x$ 的「区间平移对称」）**：
 
 $$\int_{0}^{\pi}x\sin x\,\mathrm{d}x=\frac{\pi}{2}\int_{0}^{\pi}\sin x\,\mathrm{d}x=\pi$$
