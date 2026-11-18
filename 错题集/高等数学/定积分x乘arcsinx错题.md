@@ -129,6 +129,88 @@ $$\int_{0}^{\frac{\pi}{2}}\sin^{2}\theta\,\mathrm{d}\theta=\int_{0}^{\frac{\pi}{
 
 同理 $\cos^{2}\theta=\dfrac{1+\cos2\theta}{2}$，$\displaystyle\int_{0}^{\frac{\pi}{2}}\cos^{2}\theta\,\mathrm{d}\theta=\dfrac{\pi}{4}$。推广到完整周期区间：$\displaystyle\int_{0}^{\pi}\sin^{2}x\,\mathrm{d}x=\dfrac{\pi}{2}$、$\displaystyle\int_{0}^{\pi}\cos^{2}x\,\mathrm{d}x=\dfrac{\pi}{2}$。
 
+### 高阶公式（$\sin^n$ / $\cos^n$ 的华里士公式）
+
+$\sin^{2}\theta=\frac{1-\cos2\theta}{2}$ 只解决二次幂。遇到 $\sin^{n}x$、$\cos^{n}x$（$n\ge 3$）时，逐次降幂展开会很繁琐，直接用**华里士（Wallis）公式**：
+
+$$\int_{0}^{\frac{\pi}{2}}\sin^{n}x\,\mathrm{d}x=\int_{0}^{\frac{\pi}{2}}\cos^{n}x\,\mathrm{d}x=\begin{cases}\dfrac{(n-1)!!}{n!!}\cdot\dfrac{\pi}{2}, & n \text{ 为偶数}\\[2mm] \dfrac{(n-1)!!}{n!!}, & n \text{ 为奇数}\end{cases}$$
+
+其中双阶乘 $(2k)!!=2\cdot4\cdot6\cdots(2k)$，$(2k-1)!!=1\cdot3\cdot5\cdots(2k-1)$，并约定 $0!!=(-1)!!=1$。
+
+**常用数值（务必背熟）**：
+
+| $n$ | 偶数次幂公式 | 数值 |
+| --- | --- | --- |
+| $2$ | $\dfrac{1!!}{2!!}\cdot\dfrac{\pi}{2}=\dfrac{\pi}{4}$ | $0.7854$ |
+| $4$ | $\dfrac{3!!}{4!!}\cdot\dfrac{\pi}{2}=\dfrac{3}{8}\cdot\dfrac{\pi}{2}=\dfrac{3\pi}{16}$ | $0.5890$ |
+| $6$ | $\dfrac{5!!}{6!!}\cdot\dfrac{\pi}{2}=\dfrac{5}{16}\cdot\dfrac{\pi}{2}=\dfrac{5\pi}{32}$ | $0.4909$ |
+| $8$ | $\dfrac{7!!}{8!!}\cdot\dfrac{\pi}{2}=\dfrac{35}{128}\cdot\dfrac{\pi}{2}=\dfrac{35\pi}{256}$ | $0.4295$ |
+
+| $n$ | 奇数次幂公式 | 数值 |
+| --- | --- | --- |
+| $1$ | $\dfrac{0!!}{1!!}=1$ | $1$ |
+| $3$ | $\dfrac{2!!}{3!!}=\dfrac{2}{3}$ | $0.6667$ |
+| $5$ | $\dfrac{4!!}{5!!}=\dfrac{8}{15}$ | $0.5333$ |
+| $7$ | $\dfrac{6!!}{7!!}=\dfrac{16}{35}$ | $0.4571$ |
+
+**递推公式（推导师华里士公式的工具）**：
+
+$$\int_{0}^{\frac{\pi}{2}}\sin^{n}x\,\mathrm{d}x=\frac{n-1}{n}\int_{0}^{\frac{\pi}{2}}\sin^{n-2}x\,\mathrm{d}x\qquad(n\ge 2)$$
+
+推导：分部积分，取 $u=\sin^{n-1}x$，$\mathrm{d}v=\sin x\,\mathrm{d}x$，得 $v=-\cos x$，
+
+$$I_n=\left[-\sin^{n-1}x\cos x\right]_{0}^{\frac{\pi}{2}}+(n-1)\int_{0}^{\frac{\pi}{2}}\sin^{n-2}x\cos^{2}x\,\mathrm{d}x=(n-1)\int_{0}^{\frac{\pi}{2}}\sin^{n-2}x(1-\sin^{2}x)\mathrm{d}x$$
+
+即 $I_n=(n-1)I_{n-2}-(n-1)I_n$，整理得 $nI_n=(n-1)I_{n-2}$，也就是 $I_n=\dfrac{n-1}{n}I_{n-2}$。
+
+**四次幂的完整推导（以 $n=4$ 为例，两种做法对照）**：
+
+方法 A（华里士递推，快）：
+
+$$\int_{0}^{\frac{\pi}{2}}\sin^{4}x\,\mathrm{d}x=\frac{3}{4}\int_{0}^{\frac{\pi}{2}}\sin^{2}x\,\mathrm{d}x=\frac{3}{4}\cdot\frac{\pi}{4}=\frac{3\pi}{16}$$
+
+方法 B（多次降幂，慢但直观）：$\sin^{4}x=\left(\dfrac{1-\cos2x}{2}\right)^{2}=\dfrac{1-2\cos2x+\cos^{2}2x}{4}$，再用 $\cos^{2}2x=\dfrac{1+\cos4x}{2}$ 化为
+
+$$\sin^{4}x=\frac{3}{8}-\frac{1}{2}\cos2x+\frac{1}{8}\cos4x$$
+
+在 $\left[0,\frac{\pi}{2}\right]$ 上逐项积分（$\cos2x$、$\cos4x$ 一整周期或整数周期积分为 0）：
+
+$$\int_{0}^{\frac{\pi}{2}}\sin^{4}x\,\mathrm{d}x=\frac{3}{8}\cdot\frac{\pi}{2}=\frac{3\pi}{16}$$
+
+两法结果一致，验证了华里士公式。
+
+**混合幂的华里士公式（考研高频）**：
+
+$$\int_{0}^{\frac{\pi}{2}}\sin^{m}x\cos^{n}x\,\mathrm{d}x=\begin{cases}\dfrac{(m-1)!!(n-1)!!}{(m+n)!!}\cdot\dfrac{\pi}{2}, & m,n \text{ 均为偶数}\\[2mm] \dfrac{(m-1)!!(n-1)!!}{(m+n)!!}, & \text{其他情形}\end{cases}$$
+
+例如 $\displaystyle\int_{0}^{\frac{\pi}{2}}\sin^{2}x\cos^{2}x\,\mathrm{d}x=\frac{1!!\cdot1!!}{4!!}\cdot\frac{\pi}{2}=\frac{1}{8}\cdot\frac{\pi}{2}=\frac{\pi}{16}$。
+
+**完整区间上的推广**（$[0,\pi]$ 与 $[0,2\pi]$）：
+
+| 区间 | $\sin^{n}x$ | $\cos^{n}x$ |
+| --- | --- | --- |
+| $\left[0,\frac{\pi}{2}\right]$ | 华里士公式 | 华里士公式 |
+| $[0,\pi]$（$n$ 偶数） | $2\times$ 半区间值 | $2\times$ 半区间值 |
+| $[0,\pi]$（$n$ 奇数） | $2\times$ 半区间值 | $0$（正负抵消） |
+| $[0,2\pi]$ | $4\times$ 半区间值 | $4\times$ 半区间值 |
+
+所以 $\displaystyle\int_{0}^{\pi}\sin^{4}x\,\mathrm{d}x=2\cdot\frac{3\pi}{16}=\frac{3\pi}{8}$，而 $\displaystyle\int_{0}^{\pi}\cos^{3}x\,\mathrm{d}x=0$。
+
+**验证结果**（Node：Simpson 数值积分 vs 华里士公式，$n=1\sim10$ 全部一致，误差 $<10^{-8}$）：
+
+| $n$ | 数值积分 | 公式值 |
+| --- | --- | --- |
+| $3$ | $0.6666666667$ | $\frac{2}{3}$ |
+| $4$ | $0.5890486225$ | $\frac{3\pi}{16}$ |
+| $5$ | $0.5333333333$ | $\frac{8}{15}$ |
+| $6$ | $0.4908738521$ | $\frac{5\pi}{32}$ |
+| $8$ | $0.4295146206$ | $\frac{35\pi}{256}$ |
+| $10$ | $0.3865631585$ | $\frac{63\pi}{512}$ |
+
+**记忆口诀**：
+
+> **「偶带 $\pi/2$ 奇不带，分子降两阶分母连乘；$\sin^4$ 是 $\frac{3\pi}{16}$，$\sin^3$ 是 $\frac{2}{3}$。」**
+
 **思路图例**（Mermaid，两条解法路径）：
 
 ```mermaid
