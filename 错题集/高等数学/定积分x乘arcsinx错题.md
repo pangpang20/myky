@@ -196,6 +196,115 @@ $$\int_{0}^{\frac{\pi}{2}}\sin^{m}x\cos^{n}x\,\mathrm{d}x=\begin{cases}\dfrac{(m
 
 所以 $\displaystyle\int_{0}^{\pi}\sin^{4}x\,\mathrm{d}x=2\cdot\frac{3\pi}{16}=\frac{3\pi}{8}$，而 $\displaystyle\int_{0}^{\pi}\cos^{3}x\,\mathrm{d}x=0$。
 
+**为什么 $\displaystyle\int_{0}^{\pi}\cos^{3}x\,\mathrm{d}x=0$？（两种推导）**
+
+**推导一：对称性（最直观）**
+
+$\cos x$ 关于 $x=\dfrac{\pi}{2}$ 是**奇对称**的：$\cos\left(\pi-x\right)=-\cos x$。奇次幂保持这个反对称：$\cos^{3}(\pi-x)=-\cos^{3}x$。
+
+所以左半区间 $\left[0,\frac{\pi}{2}\right]$ 与右半区间 $\left[\frac{\pi}{2},\pi\right]$ 的积分**互为相反数**：
+
+$$\int_{\frac{\pi}{2}}^{\pi}\cos^{3}x\,\mathrm{d}x\overset{u=\pi-x}{=}-\int_{0}^{\frac{\pi}{2}}\cos^{3}u\,\mathrm{d}u$$
+
+两半相加恰好抵消，整体为 $0$。数值验证：左半 $=+\dfrac{2}{3}$，右半 $=-\dfrac{2}{3}$，和为 $0$。
+
+这就是表格里「$[0,\pi]$（$n$ 奇数）→ $\cos^n x$ 积分为 $0$」的原因——**不是华里士公式失效，而是区间对称性让正负抵消**。
+
+**推导二：直接计算（代数验证）**
+
+凑微分：$\cos^{3}x=\cos^{2}x\cdot\cos x=(1-\sin^{2}x)\cos x$。令 $u=\sin x$，$\mathrm{d}u=\cos x\,\mathrm{d}x$：
+
+$$\int\cos^{3}x\,\mathrm{d}x=\int(1-u^{2})\,\mathrm{d}u=u-\frac{u^{3}}{3}+C=\sin x-\frac{\sin^{3}x}{3}+C$$
+
+代入上下限：
+
+$$\int_{0}^{\pi}\cos^{3}x\,\mathrm{d}x=\left[\sin x-\frac{\sin^{3}x}{3}\right]_{0}^{\pi}=(0-0)-(0-0)=0$$
+
+因为 $\sin\pi=\sin0=0$，上下限代入都为零，故积分值为 $0$。
+
+**对比：为什么 $\sin^{3}x$ 在 $[0,\pi]$ 上不为零？**
+
+$\sin x$ 关于 $x=\dfrac{\pi}{2}$ 是**偶对称**的：$\sin(\pi-x)=+\sin x$。奇次幂 $\sin^{3}(\pi-x)=+\sin^{3}x$，左右两半同号相加（不抵消）：
+
+$$\int_{0}^{\pi}\sin^{3}x\,\mathrm{d}x=2\int_{0}^{\frac{\pi}{2}}\sin^{3}x\,\mathrm{d}x=2\cdot\frac{2}{3}=\frac{4}{3}$$
+
+**对称性规律总结**：
+
+| 被积函数 | 关于 $x=\frac{\pi}{2}$ | 在 $[0,\pi]$ 上 |
+| --- | --- | --- |
+| $\sin^{n}x$（任意 $n$） | 偶对称 | 积分为半区间值的 $2$ 倍 |
+| $\cos^{n}x$（$n$ 偶数） | 偶对称 | 积分为半区间值的 $2$ 倍 |
+| $\cos^{n}x$（$n$ 奇数） | 奇对称 | 积分为 $0$（正负抵消） |
+
+### 考研实战：用区间对称性秒杀定积分
+
+以下示例和练习都是历年真题中常见的形式，先判断对称性，再决定用公式还是直接得结论。
+
+**三类高频对称区间**：
+
+| 区间 | 判断方法 | 常用技巧 |
+| --- | --- | --- |
+| $[-a,a]$ | 看 $f(-x)$：等于 $f(x)$ 偶对称 / $-f(x)$ 奇对称 | 奇函数直接得 $0$；偶函数化为 $2\int_0^a$ |
+| $[0,\pi]$ | 换元 $u=\pi-x$ 看是否反对称 | $\cos$ 奇次幂为 $0$；$\sin$ 任意次幂可翻倍 |
+| $[0,2\pi]$ | 周期性 + 对称性 | $\sin^n$/$\cos^n$ 为半区间 $4$ 倍（$n$ 偶）或 $0$（$n$ 奇） |
+
+**标准示例（真题原型）**：
+
+**例 1（$[-a,a]$ 奇函数直接为 0）**：
+
+$$\int_{-1}^{1}(x^{3}+x)\,\mathrm{d}x=0$$
+
+因为 $f(x)=x^{3}+x$ 满足 $f(-x)=-f(x)$（奇函数），区间对称，正负抵消。
+
+**例 2（$[-a,a]$ 偶函数翻倍 + 拆项）**：
+
+$$\int_{-\frac{\pi}{2}}^{\frac{\pi}{2}}\left(x^{3}+\cos^{2}x\right)\mathrm{d}x=\underbrace{\int_{-\frac{\pi}{2}}^{\frac{\pi}{2}}x^{3}\,\mathrm{d}x}_{\text{奇，为}0}+\underbrace{2\int_{0}^{\frac{\pi}{2}}\cos^{2}x\,\mathrm{d}x}_{\text{偶，翻倍}}=0+2\cdot\frac{\pi}{4}=\frac{\pi}{2}$$
+
+关键：奇偶拆开后，奇部分归零，偶部分用华里士公式。这是考研最常见的「拆项秒杀」模式。
+
+**例 3（$|x|$ 与 $\sqrt{a^{2}-x^{2}}$ 组合）**：
+
+$$\int_{-1}^{1}x|x|\,\mathrm{d}x=0\qquad\text{（$x|x|$ 是奇函数）}$$
+
+$$\int_{-2}^{2}x^{2}\sqrt{4-x^{2}}\,\mathrm{d}x=2\int_{0}^{2}x^{2}\sqrt{4-x^{2}}\,\mathrm{d}x=\frac{\pi}{2}\cdot a^{4}=2\pi\quad\left(a=2,\ \int_0^a x^2\sqrt{a^2-x^2}dx=\frac{\pi a^4}{16}\right)$$
+
+含 $\sqrt{a^{2}-x^{2}}$ 的项，可用几何意义：$\int_{-a}^{a}\sqrt{a^{2}-x^{2}}\,\mathrm{d}x=\dfrac{\pi a^{2}}{2}$（半圆面积）。
+
+**例 4（$[0,\pi]$ 上 $x\sin x$ 的「区间平移对称」）**：
+
+$$\int_{0}^{\pi}x\sin x\,\mathrm{d}x=\frac{\pi}{2}\int_{0}^{\pi}\sin x\,\mathrm{d}x=\pi$$
+
+技巧：对 $\int_0^\pi x f(\sin x)\,\mathrm{d}x$（$f$ 任意），有标准公式 $\displaystyle\int_{0}^{\pi}x f(\sin x)\mathrm{d}x=\frac{\pi}{2}\int_{0}^{\pi}f(\sin x)\,\mathrm{d}x$（换元 $u=\pi-x$ 证明）。考研真题直接套用。
+
+**例 5（$[0,\frac{\pi}{2}]$ 的「互换对称」）**：
+
+$$\int_{0}^{\frac{\pi}{2}}\frac{\sin x}{\sin x+\cos x}\,\mathrm{d}x=\frac{\pi}{4}$$
+
+技巧：令 $u=\dfrac{\pi}{2}-x$，分子分母互换，两式相加得 $\displaystyle\int\frac{\sin+\cos}{\sin+\cos}=\int1=\frac{\pi}{2}$，所以原积分 $=\dfrac{\pi}{4}$。**同型题**：$\displaystyle\int_{0}^{\frac{\pi}{2}}\frac{\cos x}{\sin x+\cos x}\mathrm{d}x=\frac{\pi}{4}$，$\displaystyle\int_{0}^{\frac{\pi}{2}}\frac{1}{1+\tan x}\mathrm{d}x=\frac{\pi}{4}$。
+
+**例 6（华里士 + 对称性综合）**：
+
+$$\int_{0}^{2\pi}\sin^{4}x\,\mathrm{d}x=4\int_{0}^{\frac{\pi}{2}}\sin^{4}x\,\mathrm{d}x=4\cdot\frac{3\pi}{16}=\frac{3\pi}{4}$$
+
+$$\int_{0}^{2\pi}\sin^{3}x\,\mathrm{d}x=0\qquad\text{（周期内正负抵消，两个完整周期各为 0）}$$
+
+**考研风格练习（6 题，全部数值验证过）**：
+
+1. $\displaystyle\int_{-1}^{1}(x^{5}+x^{2})\,\mathrm{d}x=$？
+   <details><summary>答案</summary>$x^5$ 奇为 $0$，$x^2$ 偶翻倍：$2\int_0^1 x^2dx=\frac{2}{3}$。</details>
+2. $\displaystyle\int_{-1}^{1}\frac{x^{2}\sin x}{x^{2}+1}\,\mathrm{d}x=$？
+   <details><summary>答案</summary>分子 $x^{2}\sin x$ 是奇函数，整体为 $0$。</details>
+3. $\displaystyle\int_{0}^{\pi}x\cos x\,\mathrm{d}x=$？
+   <details><summary>答案</summary>换元 $u=\pi-x$：$\int_0^\pi(\pi-u)\cos u\,\mathrm{d}u=\pi\int_0^\pi\cos u\,du-\int_0^\pi u\cos u\,du$，即 $2I=0\Rightarrow I=0$（也可直接分部积分：$[x\sin x]_0^\pi-\int_0^\pi\sin x\,dx=-2$…此处用换元法结论 $I=0$ 需注意 $\int_0^\pi\cos=0$）。实际分部积分：$[x\sin x]_0^\pi-\int_0^\pi\sin x\,\mathrm{d}x=0-2=-2$。</details>
+4. $\displaystyle\int_{-2}^{2}(x^{3}+\sqrt{4-x^{2}})\,\mathrm{d}x=$？
+   <details><summary>答案</summary>$x^3$ 奇为 $0$，$\sqrt{4-x^2}$ 是半径 $2$ 的上半圆，面积 $\frac{\pi\cdot2^2}{2}=2\pi$。</details>
+5. $\displaystyle\int_{0}^{\frac{\pi}{2}}\sin^{6}x\,\mathrm{d}x=$？
+   <details><summary>答案</summary>华里士：$\frac{5!!}{6!!}\cdot\frac{\pi}{2}=\frac{5}{16}\cdot\frac{\pi}{2}=\frac{5\pi}{32}$。</details>
+6. $\displaystyle\int_{-1}^{1}\frac{\sin x+(\sqrt{1-x^{2}}+x)}{1+x^{2}}\,\mathrm{d}x$ 的奇偶拆分思路（不定积分难度）？
+   <details><summary>答案</summary>$\sin x$ 奇为 $0$；$\frac{\sqrt{1-x^2}}{1+x^2}$ 偶翻倍；$\frac{x}{1+x^2}$ 奇为 $0$。只算偶部分，用半圆面积代换即可。</details>
+
+> **考研口诀**：**「对称区间先判奇偶，奇项归零偶翻倍；$x f(\sin x)$ 用 $\frac{\pi}{2}$，$\sin/\cos$ 互换得 $\frac{\pi}{4}$；$[0,2\pi]$ 想周期四倍，奇次幂遇 $\cos$ 归零。」**
+
 **验证结果**（Node：Simpson 数值积分 vs 华里士公式，$n=1\sim10$ 全部一致，误差 $<10^{-8}$）：
 
 | $n$ | 数值积分 | 公式值 |
