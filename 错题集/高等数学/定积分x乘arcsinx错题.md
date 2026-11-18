@@ -74,6 +74,12 @@ $$\frac{\mathrm{d}}{\mathrm{d}x}\arcsin x=\frac{1}{\sqrt{1-x^{2}}},\qquad \frac{
 
 $$\int_{0}^{\frac{\pi}{2}}\sin^{2}\theta\,\mathrm{d}\theta=\int_{0}^{\frac{\pi}{2}}\cos^{2}\theta\,\mathrm{d}\theta=\frac{\pi}{4}$$
 
+**降幂公式推导**（知识点补充）：由二倍角公式 $\cos2\theta=1-2\sin^{2}\theta$ 移项得 $\sin^{2}\theta=\dfrac{1-\cos2\theta}{2}$，于是
+
+$$\int_{0}^{\frac{\pi}{2}}\sin^{2}\theta\,\mathrm{d}\theta=\int_{0}^{\frac{\pi}{2}}\frac{1-\cos2\theta}{2}\,\mathrm{d}\theta=\left[\frac{\theta}{2}-\frac{\sin2\theta}{4}\right]_{0}^{\frac{\pi}{2}}=\frac{\pi}{4}-0=\frac{\pi}{4}$$
+
+同理 $\cos^{2}\theta=\dfrac{1+\cos2\theta}{2}$，$\displaystyle\int_{0}^{\frac{\pi}{2}}\cos^{2}\theta\,\mathrm{d}\theta=\dfrac{\pi}{4}$。推广到完整周期区间：$\displaystyle\int_{0}^{\pi}\sin^{2}x\,\mathrm{d}x=\dfrac{\pi}{2}$、$\displaystyle\int_{0}^{\pi}\cos^{2}x\,\mathrm{d}x=\dfrac{\pi}{2}$。
+
 **思路图例**（Mermaid，两条解法路径）：
 
 ```mermaid
