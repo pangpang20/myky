@@ -1,6 +1,134 @@
 [
   {
     "subject": "高等数学",
+    "itemId": "高等数学-定积分x乘arcsinx",
+    "id": "hm-arc1",
+    "topic": "分部积分·选 u",
+    "type": "single",
+    "question": "计算 $\\int x\\arcsin x\\,\\mathrm{d}x$ 时，分部积分应取哪个为 $u$？",
+    "options": {
+      "A": "$\\arcsin x$",
+      "B": "$x$",
+      "C": "$\\mathrm{d}x$",
+      "D": "$\\sqrt{1-x^2}$"
+    },
+    "answer": "A",
+    "analysis": "LIATE：反三角优先于代数，取 $\\arcsin x$ 为 $u$。"
+  },
+  {
+    "subject": "高等数学",
+    "itemId": "高等数学-定积分x乘arcsinx",
+    "id": "hm-arc2",
+    "topic": "导数公式",
+    "type": "single",
+    "question": "$\\frac{\\mathrm{d}}{\\mathrm{d}x}\\arcsin x = $（ ）。",
+    "options": {
+      "A": "$\\frac{1}{\\sqrt{1-x^2}}$",
+      "B": "$-\\frac{1}{\\sqrt{1-x^2}}$",
+      "C": "$\\frac{1}{1+x^2}$",
+      "D": "$\\frac{1}{\\sqrt{x^2-1}}$"
+    },
+    "answer": "A",
+    "analysis": "$\\arcsin$ 导数为正；$\\arccos$ 导数为负，易混淆。"
+  },
+  {
+    "subject": "高等数学",
+    "itemId": "高等数学-定积分x乘arcsinx",
+    "id": "hm-arc3",
+    "topic": "三角换元",
+    "type": "single",
+    "question": "$\\int_0^1\\frac{x^2}{\\sqrt{1-x^2}}\\mathrm{d}x$ 用 $x=\\sin\\theta$ 换元后，$\\theta$ 的积分上下限是（ ）。",
+    "options": {
+      "A": "$[0,\\frac{\\pi}{2}]$",
+      "B": "$[0,\\pi]$",
+      "C": "$[-\\frac{\\pi}{2},\\frac{\\pi}{2}]$",
+      "D": "$[0,1]$"
+    },
+    "answer": "A",
+    "analysis": "$x=1 \\to \\theta=\\frac{\\pi}{2}$（主值区间）。"
+  },
+  {
+    "subject": "高等数学",
+    "itemId": "高等数学-定积分x乘arcsinx",
+    "id": "hm-arc4",
+    "topic": "sin²积分",
+    "type": "single",
+    "question": "$\\int_0^{\\frac{\\pi}{2}}\\sin^2\\theta\\,\\mathrm{d}\\theta = $（ ）。",
+    "options": {
+      "A": "$\\frac{\\pi}{4}$",
+      "B": "$\\frac{\\pi}{2}$",
+      "C": "$1$",
+      "D": "$\\frac{\\pi}{8}$"
+    },
+    "answer": "A",
+    "analysis": "降幂公式积分得 $\\frac{\\pi}{4}$。"
+  },
+  {
+    "subject": "高等数学",
+    "itemId": "高等数学-定积分x乘arcsinx",
+    "id": "hm-arc5",
+    "topic": "本题结果",
+    "type": "single",
+    "question": "$\\int_0^1 x\\arcsin x\\,\\mathrm{d}x = $（ ）。",
+    "options": {
+      "A": "$\\frac{\\pi}{8}$",
+      "B": "$\\frac{\\pi}{4}$",
+      "C": "$\\frac{\\pi}{2}$",
+      "D": "$1$"
+    },
+    "answer": "A",
+    "analysis": "分部积分：$\\frac{\\pi}{4} - \\frac{1}{2}\\cdot\\frac{\\pi}{4} = \\frac{\\pi}{8}$。"
+  },
+  {
+    "subject": "高等数学",
+    "itemId": "高等数学-定积分x乘arcsinx",
+    "id": "hm-exam-6da1ead7",
+    "topic": "arccos 分部积分",
+    "type": "single",
+    "question": "【真题风格】$\\int_0^1 x\\arccos x\\,\\mathrm{d}x = $（ ）。",
+    "options": {
+      "A": "$\\frac{\\pi}{8}$",
+      "B": "$\\frac{\\pi}{4}$",
+      "C": "$\\frac{\\pi}{2}$",
+      "D": "$\\frac{3\\pi}{8}$"
+    },
+    "answer": "A",
+    "analysis": "对称性：$\\arccos x = \\frac{\\pi}{2} - \\arcsin x$，$\\int_0^1 x\\arccos x\\,\\mathrm{d}x = \\frac{\\pi}{2}\\cdot\\frac{1}{2} - \\frac{\\pi}{8} = \\frac{\\pi}{4} - \\frac{\\pi}{8} = \\frac{\\pi}{8}$。"
+  },
+  {
+    "subject": "高等数学",
+    "itemId": "高等数学-定积分x乘arcsinx",
+    "id": "hm-exam-0a1d3bd1",
+    "topic": "θ·sinθ 分部",
+    "type": "single",
+    "question": "【真题改编】$\\int_0^{\\frac{\\pi}{2}}\\theta\\sin\\theta\\,\\mathrm{d}\\theta = $（ ）。",
+    "options": {
+      "A": "$1$",
+      "B": "$\\frac{\\pi}{2}$",
+      "C": "$\\frac{\\pi}{4}$",
+      "D": "$2$"
+    },
+    "answer": "A",
+    "analysis": "分部：$u=\\theta$，$\\mathrm{d}v=\\sin\\theta\\,\\mathrm{d}\\theta$，得 $[-\\theta\\cos\\theta]_0^{\\pi/2} + \\int_0^{\\pi/2}\\cos\\theta\\,\\mathrm{d}\\theta = 0 + 1 = 1$。"
+  },
+  {
+    "subject": "高等数学",
+    "itemId": "高等数学-定积分x乘arcsinx",
+    "id": "hm-exam-6dada0a3",
+    "topic": "对称性关系",
+    "type": "single",
+    "question": "【真题改编】已知 $\\int_0^1 x\\arcsin x\\,\\mathrm{d}x = \\frac{\\pi}{8}$，则 $\\int_0^1 x\\arccos x\\,\\mathrm{d}x = $（ ）。",
+    "options": {
+      "A": "$\\frac{\\pi}{8}$",
+      "B": "$\\frac{\\pi}{4}$",
+      "C": "$\\frac{\\pi}{2}$",
+      "D": "$\\frac{3\\pi}{8}$"
+    },
+    "answer": "A",
+    "analysis": "$\\arccos x = \\frac{\\pi}{2} - \\arcsin x$，所以 $\\int_0^1 x\\arccos x\\,\\mathrm{d}x = \\frac{\\pi}{4} - \\frac{\\pi}{8} = \\frac{\\pi}{8}$。"
+  },
+  {
+    "subject": "高等数学",
     "itemId": "高等数学-摆线参数方程求导",
     "id": "hm-cyc1",
     "topic": "摆线·一阶导数",

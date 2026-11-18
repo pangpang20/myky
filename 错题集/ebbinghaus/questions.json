@@ -1159,6 +1159,134 @@
       },
       "answer": "A",
       "analysis": "$\\sin^{4}\\frac{t}{2}>0$，二阶导数恒负，曲线上凸。"
+    },
+    {
+      "id": "r1-132ad9cc-8cc9-4df7-ba60-8c66e6a7e89c",
+      "itemId": "高等数学-定积分x乘arcsinx",
+      "round": 1,
+      "subject": "高等数学",
+      "topic": "分部积分·选 u",
+      "question": "计算 $\\int x\\arcsin x\\,\\mathrm{d}x$ 时，分部积分应取哪个为 $u$？",
+      "options": {
+        "A": "$\\arcsin x$",
+        "B": "$x$",
+        "C": "$\\mathrm{d}x$",
+        "D": "$\\sqrt{1-x^2}$"
+      },
+      "answer": "A",
+      "analysis": "LIATE 规则：反三角（I）优先于代数（A），取 $\\arcsin x$ 为 $u$，$x\\,\\mathrm{d}x$ 为 $\\mathrm{d}v$。"
+    },
+    {
+      "id": "r1-7b99994c-70ca-4275-816f-71be440826b9",
+      "itemId": "高等数学-定积分x乘arcsinx",
+      "round": 1,
+      "subject": "高等数学",
+      "topic": "导数公式",
+      "question": "$\\frac{\\mathrm{d}}{\\mathrm{d}x}\\arcsin x = $（ ）。",
+      "options": {
+        "A": "$\\frac{1}{\\sqrt{1-x^2}}$",
+        "B": "$-\\frac{1}{\\sqrt{1-x^2}}$",
+        "C": "$\\frac{1}{1+x^2}$",
+        "D": "$\\frac{1}{\\sqrt{x^2-1}}$"
+      },
+      "answer": "A",
+      "analysis": "$\\arcsin$ 导数为正 $\\frac{1}{\\sqrt{1-x^2}}$；注意 $\\arccos$ 导数为负。"
+    },
+    {
+      "id": "r1-ceb9ad1b-5ddb-41e6-9768-1505a37bace9",
+      "itemId": "高等数学-定积分x乘arcsinx",
+      "round": 1,
+      "subject": "高等数学",
+      "topic": "三角换元",
+      "question": "$\\int_0^1\\frac{x^2}{\\sqrt{1-x^2}}\\mathrm{d}x$ 用 $x=\\sin\\theta$ 换元后，$\\theta$ 的积分上下限是（ ）。",
+      "options": {
+        "A": "$[0,\\frac{\\pi}{2}]$",
+        "B": "$[0,\\pi]$",
+        "C": "$[-\\frac{\\pi}{2},\\frac{\\pi}{2}]$",
+        "D": "$[0,1]$"
+      },
+      "answer": "A",
+      "analysis": "$x=0 \\to \\theta=0$；$x=1 \\to \\theta=\\frac{\\pi}{2}$（取主值区间）。"
+    },
+    {
+      "id": "r1-872e4d6c-6285-4aae-b381-39b197b9d2d5",
+      "itemId": "高等数学-定积分x乘arcsinx",
+      "round": 1,
+      "subject": "高等数学",
+      "topic": "sin²积分",
+      "question": "$\\int_0^{\\frac{\\pi}{2}}\\sin^2\\theta\\,\\mathrm{d}\\theta = $（ ）。",
+      "options": {
+        "A": "$\\frac{\\pi}{4}$",
+        "B": "$\\frac{\\pi}{2}$",
+        "C": "$1$",
+        "D": "$\\frac{\\pi}{8}$"
+      },
+      "answer": "A",
+      "analysis": "降幂公式 $\\sin^2\\theta=\\frac{1-\\cos2\\theta}{2}$，积分为 $\\frac{\\pi}{4}$。"
+    },
+    {
+      "id": "r1-68eccc20-42ee-4cf5-a0bc-20743f727342",
+      "itemId": "高等数学-定积分x乘arcsinx",
+      "round": 1,
+      "subject": "高等数学",
+      "topic": "本题结果",
+      "question": "$\\int_0^1 x\\arcsin x\\,\\mathrm{d}x = $（ ）。",
+      "options": {
+        "A": "$\\frac{\\pi}{8}$",
+        "B": "$\\frac{\\pi}{4}$",
+        "C": "$\\frac{\\pi}{2}$",
+        "D": "$1$"
+      },
+      "answer": "A",
+      "analysis": "分部积分后化为 $\\frac{\\pi}{4} - \\frac{1}{2}\\cdot\\frac{\\pi}{4} = \\frac{\\pi}{8}$。"
+    },
+    {
+      "id": "r1-f1616122-b15d-461a-a54c-68bf60d82ba0",
+      "itemId": "高等数学-定积分x乘arcsinx",
+      "round": 1,
+      "subject": "高等数学",
+      "topic": "arccos 分部积分",
+      "question": "【真题风格】$\\int_0^1 x\\arccos x\\,\\mathrm{d}x = $（ ）。",
+      "options": {
+        "A": "$\\frac{\\pi}{8}$",
+        "B": "$\\frac{\\pi}{4}$",
+        "C": "$\\frac{\\pi}{2}$",
+        "D": "$\\frac{3\\pi}{8}$"
+      },
+      "answer": "A",
+      "analysis": "对称性：$\\arccos x = \\frac{\\pi}{2} - \\arcsin x$，$\\int_0^1 x\\arccos x\\,\\mathrm{d}x = \\frac{\\pi}{2}\\cdot\\frac{1}{2} - \\frac{\\pi}{8} = \\frac{\\pi}{4} - \\frac{\\pi}{8} = \\frac{\\pi}{8}$。"
+    },
+    {
+      "id": "r1-00a33877-c2ea-41f0-a127-3e49e1e0baf4",
+      "itemId": "高等数学-定积分x乘arcsinx",
+      "round": 1,
+      "subject": "高等数学",
+      "topic": "θ·sinθ 分部",
+      "question": "【真题改编】$\\int_0^{\\frac{\\pi}{2}}\\theta\\sin\\theta\\,\\mathrm{d}\\theta = $（ ）。",
+      "options": {
+        "A": "$1$",
+        "B": "$\\frac{\\pi}{2}$",
+        "C": "$\\frac{\\pi}{4}$",
+        "D": "$2$"
+      },
+      "answer": "A",
+      "analysis": "分部：$u=\\theta$，$\\mathrm{d}v=\\sin\\theta\\,\\mathrm{d}\\theta$，得 $[-\\theta\\cos\\theta]_0^{\\pi/2} + \\int_0^{\\pi/2}\\cos\\theta\\,\\mathrm{d}\\theta = 0 + 1 = 1$。"
+    },
+    {
+      "id": "r1-eb0f4264-911d-430c-88bb-9dd2a36d3f99",
+      "itemId": "高等数学-定积分x乘arcsinx",
+      "round": 1,
+      "subject": "高等数学",
+      "topic": "对称性关系",
+      "question": "【真题改编】已知 $\\int_0^1 x\\arcsin x\\,\\mathrm{d}x = \\frac{\\pi}{8}$，则 $\\int_0^1 x\\arccos x\\,\\mathrm{d}x = $（ ）。",
+      "options": {
+        "A": "$\\frac{\\pi}{8}$",
+        "B": "$\\frac{\\pi}{4}$",
+        "C": "$\\frac{\\pi}{2}$",
+        "D": "$\\frac{3\\pi}{8}$"
+      },
+      "answer": "A",
+      "analysis": "$\\arccos x = \\frac{\\pi}{2} - \\arcsin x$，所以 $\\int_0^1 x\\arccos x\\,\\mathrm{d}x = \\frac{\\pi}{4} - \\frac{\\pi}{8} = \\frac{\\pi}{8}$。"
     }
   ]
 }

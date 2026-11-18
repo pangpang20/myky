@@ -550,5 +550,20 @@
       "摆线·半角约分": "未作答。半角公式 $1-\\cos t=2\\sin^{2}\\frac{t}{2}$ 与 $\\sin t=2\\sin\\frac{t}{2}\\cos\\frac{t}{2}$ 不熟，导致约分卡住。",
       "摆线·二阶导数公式": "参数方程二阶导数不是 $y''(t)/x''(t)$，正确做法是对 $dy/dx$ 先关于 $t$ 求导再除以 $x'(t)$。"
     }
+  },
+  "高等数学-定积分x乘arcsinx": {
+    "knowledge": "「反三角 × 幂函数」分部积分：取 $u=\\arcsin x$（LIATE：反三角优先于代数），$\\mathrm{d}v=x\\,\\mathrm{d}x$。$\\int_0^1 x\\arcsin x\\,\\mathrm{d}x = [\\frac{x^2}{2}\\arcsin x]_0^1 - \\frac{1}{2}\\int_0^1 \\frac{x^2}{\\sqrt{1-x^2}}\\mathrm{d}x = \\frac{\\pi}{4} - \\frac{1}{2}\\cdot\\frac{\\pi}{4} = \\frac{\\pi}{8}$。其中 $J=\\int_0^1 \\frac{x^2}{\\sqrt{1-x^2}}\\mathrm{d}x$ 用 $x=\\sin\\theta$ 换元得 $\\int_0^{\\pi/2}\\sin^2\\theta\\,\\mathrm{d}\\theta = \\frac{\\pi}{4}$。关键导数：$(\\arcsin x)' = \\frac{1}{\\sqrt{1-x^2}}$，$(\\arccos x)' = -\\frac{1}{\\sqrt{1-x^2}}$。",
+    "mnemonic": "反三角优先当 u，幂函数塞进 dv；换元记得换上下限，sin² 积分是 π/4",
+    "keyPoints": [
+      "LIATE 选 $u$：反三角（In）> 代数（A），所以 $\\arcsin x$ 做 $u$",
+      "$(\\arcsin x)' = \\frac{1}{\\sqrt{1-x^2}}$，$(\\arccos x)' = -\\frac{1}{\\sqrt{1-x^2}}$",
+      "$\\int_0^{\\pi/2}\\sin^2\\theta\\,\\mathrm{d}\\theta = \\frac{\\pi}{4}$（降幂公式）",
+      "三角换元 $x=\\sin\\theta$ 后必须同步换上下限：$x\\in[0,1] \\to \\theta\\in[0,\\frac{\\pi}{2}]$",
+      "$\\int_0^1 x\\arcsin x\\,\\mathrm{d}x = \\frac{\\pi}{8}$"
+    ],
+    "rootCauses": {
+      "分部积分·选 u 顺序": "未作答。LIATE 规则不熟：反三角（I）优先于代数式（A），应取 $\\arcsin x$ 为 $u$。",
+      "三角换元·上下限": "换元 $x=\\sin\\theta$ 后忘记同步换积分上下限，或在 $\\theta\\in[0,\\frac{\\pi}{2}]$ 上处理 $\\sqrt{1-x^2}=\\cos\\theta$ 时出错。"
+    }
   }
 }
