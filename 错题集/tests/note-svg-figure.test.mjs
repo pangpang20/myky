@@ -22,7 +22,8 @@ check(svgCount >= 5, 'rotvol note must embed 5 ```svg 3d figures (4 formulas + 1
 check(fences % 2 === 0, 'all code fences must be balanced')
 check((md.match(/^\*\*推导\*\*/gm) || []).length === 4, 'each of 4 formulas must have detailed derivation')
 check((md.match(/^#### [①②③④]/gm) || []).length === 4, 'all 4 volume formulas must have their own section')
-const svgBlocks = md.split(/```svg\n/).slice(1).map(s => s.split(/```\n/)[0])
+const mdN = md.replace(/\r\n/g, '\n')
+const svgBlocks = mdN.split(/```svg\n/).slice(1).map(s => s.split(/```\n/)[0])
 check(svgBlocks.length === svgCount && svgBlocks.every(b => /<svg[^>]*viewBox/.test(b) && b.trim().endsWith('</svg>')), 'each svg block must carry viewBox and close properly')
 
 process.exit(failed ? 1 : 0)
