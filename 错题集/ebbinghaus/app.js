@@ -76,6 +76,7 @@ function mdToHtml(md){
     if(/^\s*```/.test(line)){
       const isMermaid=/^```mermaid/i.test(line.trim());
       const isSvg=/^```svg/i.test(line.trim());
+      const isFig3d=/^```fig3d/i.test(line.trim());
       const buf=[];i++;
       while(i<lines.length&&!/^\s*```/.test(lines[i])){buf.push(lines[i]);i++}
       i++;
@@ -86,6 +87,10 @@ function mdToHtml(md){
       }
       if(isSvg){
         out.push('<div class="svg-figure">'+buf.join('\n')+'</div>');
+        continue;
+      }
+      if(isFig3d){
+        out.push('<div class="fig3d" data-cfg="'+esc(buf.join('\n'))+'"></div>');
         continue;
       }
       out.push('<pre><code>'+esc(buf.join('\n'))+'</code></pre>');
@@ -160,8 +165,152 @@ async function openNote(itemId){
         mermaid.run({nodes:body.querySelectorAll('.mermaid')});
       }catch(e){console.warn('mermaid render failed',e)}
     }
+    mountFig3d(body);
   }catch(e){
     body.innerHTML='<div class="empty">无法加载：'+esc(e.message)+'<br>'+esc(item.file)+'</div>';
+  }
+}
+function mountFig3d(container){
+  container.querySelectorAll('.fig3d:not([data-ready])').forEach(el=>{
+    el.dataset.ready='1';
+    let cfg={};
+    try{cfg=JSON.parse(el.dataset.cfg||'{}')}catch(e){console.warn('fig3d cfg parse failed',e)}
+    const cv=document.createElement('canvas');
+    cv.style.cssText='width:100%;height:auto;display:block;border-radius:8px;cursor:grab;touch-action:none;max-width:100%';
+    const tip=document.createElement('div');
+    tip.style.cssText='text-align:center;color:var(--muted);font-size:11.5px;margin-top:-4px;user-select:none';
+    tip.textContent='🖱️ 拖动旋转 · 滚轮缩放 · 双击复位';
+    el.appendChild(cv);el.appendChild(tip);
+    new Rot3d(cv,cfg);
+  });
+}
+class Rot3d{
+  constructor(cv,cfg){
+    this.cv=cv;this.ctx=cv.getContext('2d');this.cfg=cfg;
+    this.yaw=cfg.yaw||-0.62;this.pitch=cfg.pitch||0.42;this.zoom=1;
+    this.dark=!document.documentElement.dataset.theme||document.documentElement.dataset.theme==='dark';
+    this.scene=Rot3d.build(cfg);
+    this._resize=()=>this.resize();this._loop=()=>this.draw();
+    new ResizeObserver(this._resize).observe(cv.parentElement);
+    this.bind();
+    this.resize();requestAnimationFrame(this._loop);
+  }
+  static build(cfg){
+    const type=cfg.type||'discX';
+    const fn=s=>typeof s==='string'?new Function('return '+s)():s;
+    const a=cfg.a??0,b=cfg.b??Math.PI,f=cfg.f?fn(cfg.f):(x=>1+Math.sin(x));
+    const g=cfg.g?fn(cfg.g):(y=>0.5+0.4*Math.cos(y));
+    const y1=cfg.y1?fn(cfg.y1):(x=>1+0.6*Math.sin(x)),y2=cfg.y2?fn(cfg.y2):(x=>0.3+0.2*Math.sin(x));
+    const seg=cfg.seg||36,lat=cfg.lat||10,shellXeff=type==='shell'?(cfg.shellX??(a+(b-a)*0.6)):null;
+    const solid=[],wire=[],shells=[],discs=[];
+    const P3=(x,r,ang)=>[x,r*Math.cos(ang),r*Math.sin(ang)];
+    const addLathe=(fn,rows)=>{
+      for(let i=0;i<seg;i++){
+        const t0=i/seg*2*Math.PI,t1=(i+1)/seg*2*Math.PI;
+        rows.forEach((x,k)=>{
+          const r=fn(x);
+          solid.push({p:[P3(x,r,t0),P3(x,r,t1),P3(rows[k+1]||rows[0],r,t1),P3(rows[k+1]||rows[0],r,t0)]});
+        });
+      }
+    };
+    const xs=Array.from({length:lat+1},(_,i)=>a+(b-a)*i/lat);
+    const ys=Array.from({length:lat+1},(_,i)=>a+(b-a)*i/lat);
+    if(type==='discX'||type==='washer'){addLathe(type==='discX'?f:y1,xs);}
+    if(type==='washer'){addLathe(y2,xs);}
+    if(type==='discY'){addLathe(g,ys);}
+    if(type==='shell'){
+      const X=shellXeff,h=f(X),r=X;
+      for(let i=0;i<seg;i++){
+        const t0=i/seg*2*Math.PI,t1=(i+1)/seg*2*Math.PI;
+        solid.push({p:[P3(X-r,0,t0),P3(X-r,0,t1),P3(X+r,0,t1),P3(X+r,0,t0)]});
+        solid.push({p:[P3(X-r,h,t0),P3(X-r,h,t1),P3(X+r,h,t1),P3(X+r,h,t0)]});
+        solid.push({p:[P3(X-r,0,t0),P3(X-r,0,t1),P3(X-r,h,t1),P3(X-r,h,t0)]});
+        solid.push({p:[P3(X+r,0,t0),P3(X+r,0,t1),P3(X+r,h,t1),P3(X+r,h,t0)]});
+      }
+      addLathe(f,xs.filter(x=>Math.abs(x-X)>1e-6));
+    }
+    xs.forEach(x=>discs.push({x,r:(type==='discY'?g: type==='washer'? y1:f)(x)}));
+    if(type==='washer')xs.forEach(x=>discs.push({x,r:y2(x),inner:true}));
+    if(shellXeff!=null)xs.forEach(x=>{if(Math.abs(x-shellXeff)<(b-a)/lat*1.5)discs.push({x,r:f(x)})});
+    xs.forEach(x=>wire.push([P3(x,(type==='discY'?g:type==='washer'?y1:f)(x),0)]));
+    return{solid,discs,wire,shellX:shellXeff,shellH:shellXeff!=null?f(shellXeff):null};
+  }
+  bind(){
+    const cv=this.cv;let drag=false,lx=0,ly=0;
+    cv.addEventListener('pointerdown',e=>{drag=true;lx=e.clientX;ly=e.clientY;cv.style.cursor='grabbing';cv.setPointerCapture(e.pointerId)});
+    cv.addEventListener('pointermove',e=>{if(!drag)return;this.yaw+=(e.clientX-lx)*0.01;this.pitch+=(e.clientY-ly)*0.01;this.pitch=Math.max(-1.4,Math.min(1.4,this.pitch));lx=e.clientX;ly=e.clientY;this.draw()});
+    const up=e=>{drag=false;cv.style.cursor='grab'};
+    cv.addEventListener('pointerup',up);cv.addEventListener('pointercancel',up);
+    cv.addEventListener('wheel',e=>{e.preventDefault();this.zoom*=e.deltaY<0?1.12:0.89;this.zoom=Math.max(0.4,Math.min(3,this.zoom));this.draw()},{passive:false});
+    cv.addEventListener('dblclick',()=>{this.yaw=this.cfg.yaw||-0.62;this.pitch=this.cfg.pitch||0.42;this.zoom=1;this.draw()});
+  }
+  resize(){
+    const w=this.cv.parentElement.clientWidth||700,h=Math.round(Math.max(300,Math.min(430,w*0.52)));
+    const dpr=window.devicePixelRatio||1;
+    this.cv.width=w*dpr;this.cv.height=h*dpr;
+    this.cv.style.height=h+'px';
+    this.ctx.setTransform(dpr,0,0,dpr,0,0);
+    this.w=w;this.h=h;this.draw();
+  }
+  proj(p){
+    const[yaw,pt]=[-this.yaw,this.pitch];
+    let[x,y,z]=p;
+    let x1=x*Math.cos(yaw)+z*Math.sin(yaw);
+    let z1=-x*Math.sin(yaw)+z*Math.cos(yaw);
+    let y2=y*Math.cos(pt)-z1*Math.sin(pt);
+    let z2=y*Math.sin(pt)+z1*Math.cos(pt);
+    const cxp=(this.cfg.cx??0),cx=(this.cfg.center&&this.cfg.center.x)||((x1+z1*0)/2+cxp);
+    const s=(this.w/2.9)*this.zoom*(this.cfg.scale||1);
+    const ox=this.w/2+(this.cfg.ox||0),oy=this.h/2+(this.cfg.oy||14);
+    return[ox+x1*s,oy-y2*s,z2];
+  }
+  draw(){
+    const ctx=this.ctx;if(!this.w)return;
+    ctx.clearRect(0,0,this.w,this.h);
+    ctx.strokeStyle=this.dark?'rgba(148,163,184,.5)':'rgba(71,85,105,.55)';
+    ctx.lineWidth=1.2;
+    // 坐标轴
+    const axes=[[[-0.6,0,0],[1.35,0,0],'x'],[[0,-0.62,0],[0,1.0,0],'y'],[[0,0,-0.7],[0,0,0.7],'z']];
+    axes.forEach(([p0,p1,lab])=>{
+      const[a,b]=[this.proj(p0),this.proj(p1)];
+      ctx.beginPath();ctx.moveTo(a[0],a[1]);ctx.lineTo(b[0],b[1]);ctx.stroke();
+      ctx.fillStyle=this.dark?'#94a3b8':'#475569';
+      ctx.font='600 12px system-ui';
+      ctx.fillText(lab,b[0]+6,b[1]);
+    });
+    const{solid,discs,shellX,shellH}=this.scene;
+    // 旋转体实体面
+    const faces=solid.map(f=>({...f,pts:f.p.map(p=>this.proj(p)),depth:f.p.reduce((s,p)=>s+this.proj(p)[2],0)/f.p.length}));
+    faces.sort((m,n)=>m.depth-n.depth);
+    const blue=this.dark?'96,165,250':'37,99,235', green=this.dark?'74,222,128':'22,163,74';
+    faces.forEach(f=>{
+      ctx.beginPath();f.pts.forEach((p,k)=>k?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]));ctx.closePath();
+      const isShell=shellX!=null&&(Math.abs(f.pts[0][0]-f.pts[1][0])<1e-7);
+      const isTopBot=Math.abs(f.pts[0][1]-f.pts[1][1])<1e-7&&Math.abs(f.pts[1][1]-f.pts[2][1])<1e-7&&Math.abs(f.pts[0][1]-f.pts[3][1])<1e-7;
+      const col=isShell?green:blue;
+      ctx.fillStyle='rgba('+col+',0.14)';ctx.fill();
+      ctx.strokeStyle='rgba('+col+',0.55)';ctx.lineWidth=isShell?1.3:0.85;ctx.stroke();
+    });
+    // 圆盘圈
+    discs.forEach(d=>{
+      const col=d.inner?green:blue;
+      ctx.strokeStyle='rgba('+col+',0.65)';ctx.lineWidth=1.1;
+      ctx.beginPath();
+      for(let k=0;k<=48;k++){const t=k/48*2*Math.PI;const[x,y,z]=this.proj([d.x,d.r*Math.cos(t),d.r*Math.sin(t)]);k?ctx.lineTo(x,y):ctx.moveTo(x,y)}
+      ctx.stroke();
+    });
+    // 母线（正面）
+    ctx.strokeStyle=this.dark?'rgba(59,130,246,.95)':'rgba(37,99,235,.95)';ctx.lineWidth=2.4;
+    ctx.beginPath();
+    let first=true;
+    this.scene.wire.forEach(([p])=>{const[x,y]=this.proj(p);first?ctx.moveTo(x,y):ctx.lineTo(x,y);first=false});
+    ctx.stroke();
+    // 柱壳标注
+    if(shellX!=null&&shellH!=null){
+      ctx.fillStyle=this.dark?'#fbbf24':'#b45309';ctx.font='700 12.5px system-ui';
+      const[px,py]=this.proj([shellX,shellH,0]);
+      ctx.fillText('柱壳 r=x · h=f(x) · 厚 dx',px-58,py-10);
+    }
   }
 }
 function closeNote(){
