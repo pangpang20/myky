@@ -15,9 +15,14 @@ check(app.includes("svg-figure"), 'mdToHtml must emit svg-figure div')
 const html = read('ebbinghaus/index.html')
 check(html.includes('.note-body .svg-figure'), 'note modal must style svg-figure blocks')
 
-const md = read('高等数学/旋转体体积正弦曲线错题.md'.replace('高等数学', '高等数学'))
-check(md.includes('```svg'), 'rotvol note must embed ```svg 3d figure')
-check(/<svg[^>]*viewBox/.test(md), 'embedded svg must carry viewBox')
-check((md.match(/```svg/g) || []).length === (md.match(/^```$/gm) || []).length / 2, 'svg fence must be balanced')
+const md = read('高等数学/旋转体体积正弦曲线错题.md')
+const svgCount = (md.match(/```svg/g) || []).length
+const fences = (md.match(/^```/gm) || []).length
+check(svgCount >= 5, 'rotvol note must embed 5 ```svg 3d figures (4 formulas + 1 overview)')
+check(fences % 2 === 0, 'all code fences must be balanced')
+check((md.match(/^\*\*推导\*\*/gm) || []).length === 4, 'each of 4 formulas must have detailed derivation')
+check((md.match(/^#### [①②③④]/gm) || []).length === 4, 'all 4 volume formulas must have their own section')
+const svgBlocks = md.split(/```svg\n/).slice(1).map(s => s.split(/```\n/)[0])
+check(svgBlocks.length === svgCount && svgBlocks.every(b => /<svg[^>]*viewBox/.test(b) && b.trim().endsWith('</svg>')), 'each svg block must carry viewBox and close properly')
 
 process.exit(failed ? 1 : 0)
