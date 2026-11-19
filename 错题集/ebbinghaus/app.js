@@ -75,12 +75,17 @@ function mdToHtml(md){
     if(/^\s*$/.test(line)){i++;continue}
     if(/^\s*```/.test(line)){
       const isMermaid=/^```mermaid/i.test(line.trim());
+      const isSvg=/^```svg/i.test(line.trim());
       const buf=[];i++;
       while(i<lines.length&&!/^\s*```/.test(lines[i])){buf.push(lines[i]);i++}
       i++;
       if(isMermaid){
         const id='mermaid-'+(++mermaidSeq)+'-'+Math.random().toString(36).slice(2,8);
         out.push('<div class="mermaid" id="'+id+'">'+esc(buf.join('\n'))+'</div>');
+        continue;
+      }
+      if(isSvg){
+        out.push('<div class="svg-figure">'+buf.join('\n')+'</div>');
         continue;
       }
       out.push('<pre><code>'+esc(buf.join('\n'))+'</code></pre>');
