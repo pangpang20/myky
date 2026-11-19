@@ -9,8 +9,9 @@ let failed = 0
 const check = (ok, msg) => { if (!ok) { console.error('FAIL: ' + msg); failed++ } else { console.log('PASS: ' + msg) } }
 
 const app = read('ebbinghaus/app.js')
-check(app.includes("isSvg=/^```svg/i"), 'mdToHtml must parse ```svg blocks')
-check(app.includes("svg-figure"), 'mdToHtml must emit svg-figure div')
+check(app.includes('isSvg=/^```svg/i'), 'mdToHtml must parse ```svg blocks')
+check(app.includes('svg-figure'), 'mdToHtml must emit svg-figure div')
+check(app.includes('katex.render(tex,span'), 'openNote must fallback-render multiline $$ blocks via KaTeX')
 
 const html = read('ebbinghaus/index.html')
 check(html.includes('.note-body .svg-figure'), 'note modal must style svg-figure blocks')
@@ -25,5 +26,18 @@ check((md.match(/^#### [①②③④]/gm) || []).length === 4, 'all 4 volume for
 const mdN = md.replace(/\r\n/g, '\n')
 const svgBlocks = mdN.split(/```svg\n/).slice(1).map(s => s.split(/```\n/)[0])
 check(svgBlocks.length === svgCount && svgBlocks.every(b => /<svg[^>]*viewBox/.test(b) && b.trim().endsWith('</svg>')), 'each svg block must carry viewBox and close properly')
+check(md.includes('## 考研速记规律'), 'rotvol note must include exam-speed pattern section')
+check((md.match(/^### 规律 \d/gm) || []).length >= 6, 'exam patterns must cover at least 6 rules')
+
+const caption = md.split(/\r?\n/).find(l => l.includes('图中蓝色区域')) || ''
+const goodDv = String.raw`$\mathrm{d}V=\pi r^{2}\,\mathrm{d}x$`
+check(caption.includes(goodDv), 'figure caption must keep single-backslash LaTeX commands')
+const broken = [
+  String.raw`$r=sin x+1$`,
+  String.raw`$x=pi/2$`,
+  String.raw`$mathrm{d}V=pi r^{2},mathrm{d}x$`,
+  '[0,pi]',
+]
+check(broken.every(b => !caption.includes(b)), 'caption must not contain broken slash-less LaTeX')
 
 process.exit(failed ? 1 : 0)

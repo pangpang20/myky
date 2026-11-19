@@ -154,6 +154,17 @@ async function openNote(itemId){
     if(window.renderMathInElement){
       try{renderMathInElement(body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})}catch(e){}
     }
+    // KaTeX auto-render 不处理跨行 $$...$$（如 cases 环境），改用显式 renderToString 兜底
+    body.querySelectorAll('p.math-block, p').forEach(p=>{
+      const t=p.textContent.trim();
+      if(!/^\$\$[\s\S]+\$\$$/.test(t)||p.querySelector('.katex'))return;
+      const tex=t.slice(2,-2).trim();
+      try{
+        const span=document.createElement('span');
+        katex.render(tex,span,{displayMode:true,throwOnError:false});
+        p.replaceWith(span);
+      }catch(e){console.warn('katex block render failed',e)}
+    });
     if(window.mermaid&&body.querySelector('.mermaid')){
       try{
         mermaid.initialize({startOnLoad:false,theme:document.documentElement.dataset.theme==='dark'?'dark':'neutral'});
