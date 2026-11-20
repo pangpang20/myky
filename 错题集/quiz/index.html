@@ -33,6 +33,17 @@
   .learn-card h3{margin:14px 0 6px;font-size:15px;color:#1e40af}
   .learn-card p{line-height:1.75;margin:0}
   .learn-card ul{margin:8px 0 0;padding-left:20px;line-height:1.7}
+  .learn-card ol{margin:8px 0 0;padding-left:20px;line-height:1.7}
+  .learn-card h4{margin:14px 0 6px;font-size:14px;color:#2563eb}
+  .learn-card h5{margin:12px 0 4px;font-size:13.5px;color:#3b82f6}
+  .learn-card .md-body>*:first-child{margin-top:0}
+  .learn-card .md-body blockquote{margin:10px 0;padding:8px 12px;border-left:4px solid #93c5fd;background:#eff6ff;border-radius:0 8px 8px 0;color:#1e3a8a}
+  .learn-card .md-body table{border-collapse:collapse;width:100%;margin:12px 0;font-size:13px;line-height:1.5}
+  .learn-card .md-body th,.learn-card .md-body td{border:1px solid #dbeafe;padding:7px 9px;text-align:left;vertical-align:top}
+  .learn-card .md-body th{background:#eef4ff;color:#1e40af;font-weight:700}
+  .learn-card .md-body tr:nth-child(even) td{background:#f8fbff}
+  .learn-card .md-body pre{background:#1e293b;color:#e2e8f0;border-radius:8px;padding:12px 14px;margin:10px 0;overflow-x:auto;font-size:13px;line-height:1.6}
+  .learn-card .md-body hr{border:0;border-top:1px solid #dbeafe;margin:14px 0}
   .learn-mnemonic{margin-top:12px;padding:12px 14px;border-left:5px solid #7c3aed;background:#f5f3ff;border-radius:10px;font-weight:600;color:#5b21b6}
 </style>
 </head>
@@ -139,6 +150,65 @@ function renderQuestion(text) {
   return out;
 }
 
+function renderMarkdown(text) {
+  const normalized = String(text || '').replace(/\r\n/g, '\n').replace(/\n/g, '\n');
+  const lines = normalized.split('\n');
+  const inline = (s) => renderQuestion(s);
+  const isTableSep = (l) => /^\s*\|?[\s:|-]+\|[\s:|-]*$/.test(l) && l.includes('|') && l.includes('-');
+  const cells = (l) => l.trim().replace(/^\|/, '').replace(/\|$/, '').split('|').map(c => c.trim());
+  const out = [];
+  let i = 0;
+  while (i < lines.length) {
+    const line = lines[i];
+    if (/^\s*$/.test(line)) { i++; continue; }
+    if (/^\s*```/.test(line)) {
+      const buf = []; i++;
+      while (i < lines.length && !/^\s*```/.test(lines[i])) { buf.push(lines[i]); i++; }
+      i++;
+      out.push('<pre><code>' + esc(buf.join('\n')) + '</code></pre>');
+      continue;
+    }
+    const h = /^(#{1,6})\s+(.*)$/.exec(line);
+    if (h) { const n = Math.min(h[1].length + 2, 6); out.push('<h' + n + '>' + inline(h[2]) + '</h' + n + '>'); i++; continue; }
+    if (/^\s*>\s?/.test(line)) {
+      const buf = [];
+      while (i < lines.length && /^\s*>\s?/.test(lines[i])) { buf.push(lines[i].replace(/^\s*>\s?/, '')); i++; }
+      out.push('<blockquote>' + inline(buf.join(' ')) + '</blockquote>');
+      continue;
+    }
+    if (/^\s*---+\s*$/.test(line)) { out.push('<hr>'); i++; continue; }
+    if (line.includes('|') && i + 1 < lines.length && isTableSep(lines[i + 1])) {
+      const head = cells(line); i += 2;
+      const rows = [];
+      while (i < lines.length && lines[i].includes('|') && !/^\s*$/.test(lines[i])) { rows.push(cells(lines[i])); i++; }
+      out.push('<table><thead><tr>' + head.map(c => '<th>' + inline(c) + '</th>').join('') + '</tr></thead><tbody>' +
+        rows.map(r => '<tr>' + head.map((_, k) => '<td>' + inline(r[k] || '') + '</td>').join('') + '</tr>').join('') + '</tbody></table>');
+      continue;
+    }
+    const list = /^\s*([-*+]|\d+\.)\s+/.exec(line);
+    if (list) {
+      const ordered = /^\s*\d+\./.test(line);
+      const items = [];
+      while (i < lines.length && /^\s*([-*+]|\d+\.)\s+/.test(lines[i])) {
+        let item = lines[i].replace(/^\s*([-*+]|\d+\.)\s+/, ''); i++;
+        while (i < lines.length && lines[i] !== '' && !/^\s*([-*+]|\d+\.)\s+/.test(lines[i]) && !/^#{1,6}\s/.test(lines[i]) && !/^\s*```/.test(lines[i]) && !/^\s*>/.test(lines[i]) && !/^\s*---+\s*$/.test(lines[i])) {
+          item += ' ' + lines[i].trim(); i++;
+        }
+        items.push(inline(item));
+      }
+      const tag = ordered ? 'ol' : 'ul';
+      out.push('<' + tag + '>' + items.map(t => '<li>' + t + '</li>').join('') + '</' + tag + '>');
+      continue;
+    }
+    const buf = [line]; i++;
+    while (i < lines.length && !/^\s*$/.test(lines[i]) && !/^#{1,6}\s/.test(lines[i]) && !/^\s*([-*+]|\d+\.)\s+/.test(lines[i]) && !/^\s*```/.test(lines[i]) && !/^\s*>/.test(lines[i]) && !/^\s*---+\s*$/.test(lines[i]) && !(lines[i].includes('|') && i + 1 < lines.length && isTableSep(lines[i + 1]))) {
+      buf.push(lines[i]); i++;
+    }
+    out.push('<p>' + buf.map(inline).join('<br>') + '</p>');
+  }
+  return out.join('\n');
+}
+
 function findKnowledgeEntry(q) {
   if (q.itemId && knowledgeBase[q.itemId]) return knowledgeBase[q.itemId];
   const topic = q.topic || "";
@@ -179,7 +249,7 @@ function renderStudy(entry) {
     "<h3>根因分析</h3>",
     causeList.map(([name, value]) => "<p><b>" + name + "：</b>" + renderQuestion(value) + "</p>").join(""),
     "<h3>完整知识点梳理</h3>",
-    "<p>" + renderQuestion(entry.knowledge || "") + "</p>",
+    "<div class=\"md-body\">" + renderMarkdown(entry.knowledge || "") + "</div>",
     "<h3>关键点</h3>",
     "<ul>" + (entry.keyPoints || []).map(item => "<li>" + renderQuestion(item) + "</li>").join("") + "</ul>",
     entry.mnemonic ? "<div class=\"learn-mnemonic\">🧠 记忆口诀：" + renderQuestion(entry.mnemonic) + "</div>" : "",
