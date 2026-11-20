@@ -12,6 +12,7 @@ const app = read('ebbinghaus/app.js')
 check(app.includes('isSvg=/^```svg/i'), 'mdToHtml must parse ```svg blocks')
 check(app.includes('svg-figure'), 'mdToHtml must emit svg-figure div')
 check(app.includes('katex.render(tex,span'), 'openNote must fallback-render multiline $$ blocks via KaTeX')
+check(app.includes("x=x.replace(/`([^`]+)`/g,'<code>$1</code>')"), 'mdInline must match paired inline-code backticks')
 
 const html = read('ebbinghaus/index.html')
 check(html.includes('.note-body .svg-figure'), 'note modal must style svg-figure blocks')

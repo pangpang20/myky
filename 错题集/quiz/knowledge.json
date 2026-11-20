@@ -580,5 +580,23 @@
       "旋转体·公式与展开": "未作答。圆盘法 $V=\\pi\\int y^2\\mathrm{d}x$ 容易漏 $\\pi$；$(\\sin x+1)^2$ 忘记展开成三项是常见错误。",
       "三角积分·降幂与符号": "$\\sin^2x$ 在 $[0,\\pi]$ 上积分为 $\\frac{\\pi}{2}$ 不是 $\\pi$；$\\int_0^\\pi\\sin x\\,\\mathrm{d}x=2$ 不是 0。"
     }
+  },
+  "高等数学-含参数三角有理式积分": {
+    "knowledge": "分母是 sin²x 与 cos²x 的一次组合时，分子分母同除 cos²x：1/(a²sin²x+b²cos²x)=sec²x/(a²tan²x+b²)，令 t=tan x 得 ∫dt/(a²t²+b²)=(1/ab)arctan((a/b)tan x)+C（ab≠0）。退化：b=0 时 −(1/a²)cot x+C；a=0 时 (1/b²)tan x+C；a=b 时 x/a²+C。定积分 ∫₀^{π/2}=π/(2ab)，∫₀^π=π/(ab)。通式只在不含 x=π/2+kπ 的区间成立。",
+    "mnemonic": "平方组合除余弦，sec 平方凑正切；系数一除 a 乘 b，上下限出二分之π",
+    "keyPoints": [
+      "入口：分子分母同除 $\\cos^{2}x$，分子变 $\\sec^{2}x\\,\\mathrm{d}x=\\mathrm{d}(\\tan x)$",
+      "换元 $t=\\tan x$ 后化为 $\\int\\frac{\\mathrm{d}t}{a^{2}t^{2}+b^{2}}$",
+      "结果系数是 $\\frac{1}{ab}$ 而不是 $\\frac{1}{a^{2}+b^{2}}$，$\\arctan$ 内是 $\\frac{a}{b}\\tan x$ 而不是 $\\frac{b}{a}\\tan x$",
+      "退化情形：$b=0$ 得 $-\\frac{1}{a^{2}}\\cot x$，$a=0$ 得 $\\frac{1}{b^{2}}\\tan x$，$a=b$ 得 $\\frac{x}{a^{2}}$",
+      "定积分 $\\int_{0}^{\\pi/2}\\frac{\\mathrm{d}x}{a^{2}\\sin^{2}x+b^{2}\\cos^{2}x}=\\frac{\\pi}{2ab}$，到 $\\pi$ 翻倍为 $\\frac{\\pi}{ab}$",
+      "平方差 $a^{2}\\sin^{2}x-b^{2}\\cos^{2}x$ 对应对数型结果，不是 $\\arctan$",
+      "$-\\frac{1}{ab}\\arctan(\\frac{b}{a}\\cot x)+C$ 与通式只差常数，同为正确原函数"
+    ],
+    "rootCauses": {
+      "三角有理式·换元入口": "未作答。看到 sin²x 与 cos²x 并存容易误走降幂/万能代换；正确入口是同除 cos²x 凑 d(tan x)。",
+      "三角有理式·系数与退化": "∫dt/(a²t²+b²) 的系数是 1/(ab)，常被误写成 1/(a²+b²)；题干只说不全为 0，b=0 或 a=0 必须单独讨论。",
+      "三角有理式·原函数区间": "arctan((a/b)tan x) 在 x=π/2+kπ 无定义，通式只在每个不含这些点的开区间上成立。"
+    }
   }
 }

@@ -59,7 +59,7 @@ function renderStats(){
 // ---- 错题 Markdown 查看 ----
 function mdInline(t){
   let x=esc(t);
-  x=x.replace(/`([^`]+)/g,'<code>$1</code>');
+  x=x.replace(/`([^`]+)`/g,'<code>$1</code>');
   x=x.replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>');
   x=x.replace(/\[([^\]]+)\]\(([^)]+)\)/g,'<a href="$2" target="_blank" rel="noopener">$1</a>');
   return x;

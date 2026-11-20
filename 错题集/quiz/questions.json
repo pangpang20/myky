@@ -1,6 +1,166 @@
 [
   {
     "subject": "高等数学",
+    "itemId": "高等数学-含参数三角有理式积分",
+    "id": "hm-pint-1",
+    "type": "single",
+    "topic": "含参数三角积分·通式",
+    "question": "设 $a,b>0$，$\\displaystyle\\int\\frac{\\mathrm{d}x}{a^{2}\\sin^{2}x+b^{2}\\cos^{2}x}=$（ ）。",
+    "options": {
+      "A": "$\\frac{1}{ab}\\arctan\\left(\\frac{a}{b}\\tan x\\right)+C$",
+      "B": "$\\frac{1}{a^{2}+b^{2}}\\arctan(\\tan x)+C$",
+      "C": "$\\frac{1}{ab}\\arctan\\left(\\frac{b}{a}\\tan x\\right)+C$",
+      "D": "$\\frac{1}{a^{2}+b^{2}}\\ln|\\tan x|+C$"
+    },
+    "answer": "A",
+    "analysis": "同除 $\\cos^{2}x$ 后令 $t=\\tan x$，$\\int\\frac{\\mathrm{d}t}{a^{2}t^{2}+b^{2}}=\\frac{1}{a^{2}}\\cdot\\frac{a}{b}\\arctan\\frac{at}{b}+C=\\frac{1}{ab}\\arctan(\\frac{a}{b}\\tan x)+C$。"
+  },
+  {
+    "subject": "高等数学",
+    "itemId": "高等数学-含参数三角有理式积分",
+    "id": "hm-pint-2",
+    "type": "single",
+    "topic": "含参数三角积分·换元入口",
+    "question": "计算 $\\displaystyle\\int\\frac{\\mathrm{d}x}{a^{2}\\sin^{2}x+b^{2}\\cos^{2}x}$ 时，分子分母同除 $\\cos^{2}x$ 后得到（ ）。",
+    "options": {
+      "A": "$\\frac{\\sec^{2}x}{a^{2}\\tan^{2}x+b^{2}}$",
+      "B": "$\\frac{\\csc^{2}x}{a^{2}+b^{2}\\cot^{2}x}$",
+      "C": "$\\frac{1}{a^{2}\\tan^{2}x+b^{2}}$",
+      "D": "$\\frac{\\sec^{2}x}{a^{2}\\tan^{2}x-b^{2}}$"
+    },
+    "answer": "A",
+    "analysis": "$\\frac{1}{\\cos^{2}x}=\\sec^{2}x$，$\\frac{\\sin^{2}x}{\\cos^{2}x}=\\tan^{2}x$，故分子变为 $\\sec^{2}x$（即 $\\mathrm{d}\\tan x$），分母为 $a^{2}\\tan^{2}x+b^{2}$。"
+  },
+  {
+    "subject": "高等数学",
+    "itemId": "高等数学-含参数三角有理式积分",
+    "id": "hm-pint-3",
+    "type": "single",
+    "topic": "含参数三角积分·换元结果",
+    "question": "令 $t=\\tan x$ 后，$\\displaystyle\\int\\frac{\\mathrm{d}x}{a^{2}\\sin^{2}x+b^{2}\\cos^{2}x}$ 化为（ ）。",
+    "options": {
+      "A": "$\\int\\frac{\\mathrm{d}t}{a^{2}t^{2}+b^{2}}$",
+      "B": "$\\int\\frac{\\mathrm{d}t}{a^{2}t^{2}-b^{2}}$",
+      "C": "$\\int\\frac{t\\,\\mathrm{d}t}{a^{2}t^{2}+b^{2}}$",
+      "D": "$\\int\\frac{\\mathrm{d}t}{(a^{2}t^{2}+b^{2})^{2}}$"
+    },
+    "answer": "A",
+    "analysis": "$\\mathrm{d}t=\\sec^{2}x\\,\\mathrm{d}x$，与分子完全抵消，分母是 $a^{2}t^{2}+b^{2}$。"
+  },
+  {
+    "subject": "高等数学",
+    "itemId": "高等数学-含参数三角有理式积分",
+    "id": "hm-pint-4",
+    "type": "single",
+    "topic": "含参数三角积分·具体系数",
+    "question": "$\\displaystyle\\int\\frac{\\mathrm{d}x}{\\sin^{2}x+4\\cos^{2}x}=$（ ）。",
+    "options": {
+      "A": "$\\frac{1}{2}\\arctan\\left(\\frac{\\tan x}{2}\\right)+C$",
+      "B": "$\\frac{1}{5}\\arctan(2\\tan x)+C$",
+      "C": "$\\frac{1}{2}\\arctan(2\\tan x)+C$",
+      "D": "$\\arctan\\left(\\frac{\\tan x}{2}\\right)+C$"
+    },
+    "answer": "A",
+    "analysis": "$a=1,b=2$，$\\frac{1}{ab}=\\frac{1}{2}$，$\\frac{a}{b}=\\frac{1}{2}$，故为 $\\frac{1}{2}\\arctan(\\frac{\\tan x}{2})+C$。"
+  },
+  {
+    "subject": "高等数学",
+    "itemId": "高等数学-含参数三角有理式积分",
+    "id": "hm-pint-5",
+    "type": "single",
+    "topic": "含参数三角积分·退化",
+    "question": "$\\displaystyle\\int\\frac{\\mathrm{d}x}{a^{2}\\sin^{2}x}$（$a\\neq0$）=（ ）。",
+    "options": {
+      "A": "$-\\frac{1}{a^{2}}\\cot x+C$",
+      "B": "$\\frac{1}{a^{2}}\\tan x+C$",
+      "C": "$-\\frac{1}{a^{2}}\\tan x+C$",
+      "D": "$\\frac{x}{a^{2}}+C$"
+    },
+    "answer": "A",
+    "analysis": "$b=0$ 时只剩 $\\frac{1}{a^{2}}\\int\\csc^{2}x\\,\\mathrm{d}x=-\\frac{1}{a^{2}}\\cot x+C$；数值微分已验证。"
+  },
+  {
+    "subject": "高等数学",
+    "itemId": "高等数学-含参数三角有理式积分",
+    "id": "hm-exam-c25d7e89",
+    "topic": "含参数三角积分·定积分",
+    "type": "single",
+    "question": "【统考真题风格】设 $a,b>0$，$\\displaystyle\\int_{0}^{\\frac{\\pi}{2}}\\frac{\\mathrm{d}x}{a^{2}\\sin^{2}x+b^{2}\\cos^{2}x}=$（ ）。",
+    "options": {
+      "A": "$\\frac{\\pi}{2ab}$",
+      "B": "$\\frac{\\pi}{ab}$",
+      "C": "$\\frac{\\pi}{a^{2}+b^{2}}$",
+      "D": "$\\frac{\\pi}{4ab}$"
+    },
+    "answer": "A",
+    "analysis": "$F(0)=0$，$x\\to\\frac{\\pi}{2}^{-}$ 时 $\\arctan(\\frac{a}{b}\\tan x)\\to\\frac{\\pi}{2}$，故为 $\\frac{1}{ab}\\cdot\\frac{\\pi}{2}=\\frac{\\pi}{2ab}$；Simpson 数值验证一致。"
+  },
+  {
+    "subject": "高等数学",
+    "itemId": "高等数学-含参数三角有理式积分",
+    "id": "hm-exam-b34b0abd",
+    "topic": "含参数三角积分·具体原函数",
+    "type": "single",
+    "question": "【真题风格】$\\displaystyle\\int\\frac{\\mathrm{d}x}{3\\sin^{2}x+\\cos^{2}x}=$（ ）。",
+    "options": {
+      "A": "$\\frac{1}{\\sqrt{3}}\\arctan\\left(\\sqrt{3}\\tan x\\right)+C$",
+      "B": "$\\frac{1}{3}\\arctan\\left(\\frac{\\tan x}{\\sqrt{3}}\\right)+C$",
+      "C": "$\\sqrt{3}\\arctan\\left(\\sqrt{3}\\tan x\\right)+C$",
+      "D": "$\\frac{1}{4}\\arctan(\\tan x)+C$"
+    },
+    "answer": "A",
+    "analysis": "$a=\\sqrt{3},b=1$，$\\frac{1}{ab}=\\frac{1}{\\sqrt{3}}$，$\\frac{a}{b}=\\sqrt{3}$；数值微分误差 $8.3\\times10^{-11}$。"
+  },
+  {
+    "subject": "高等数学",
+    "itemId": "高等数学-含参数三角有理式积分",
+    "id": "hm-exam-ac65bc2e",
+    "topic": "含参数三角积分·定积分数值",
+    "type": "single",
+    "question": "【真题风格】$\\displaystyle\\int_{0}^{\\frac{\\pi}{2}}\\frac{\\mathrm{d}x}{\\sin^{2}x+4\\cos^{2}x}=$（ ）。",
+    "options": {
+      "A": "$\\frac{\\pi}{4}$",
+      "B": "$\\frac{\\pi}{2}$",
+      "C": "$\\frac{\\pi}{5}$",
+      "D": "$\\pi$"
+    },
+    "answer": "A",
+    "analysis": "$\\frac{\\pi}{2ab}=\\frac{\\pi}{2\\cdot1\\cdot2}=\\frac{\\pi}{4}$；Simpson 数值 $0.7853981624$ 与 $\\pi/4$ 一致。"
+  },
+  {
+    "subject": "高等数学",
+    "itemId": "高等数学-含参数三角有理式积分",
+    "id": "hm-exam-6e49bda8",
+    "topic": "含参数三角积分·a=b",
+    "type": "single",
+    "question": "【真题改编】当 $a=b\\neq0$ 时，$\\displaystyle\\int\\frac{\\mathrm{d}x}{a^{2}\\sin^{2}x+b^{2}\\cos^{2}x}=$（ ）。",
+    "options": {
+      "A": "$\\frac{x}{a^{2}}+C$",
+      "B": "$\\frac{1}{a^{2}}\\arctan(\\tan x)+C$ 且不能化简",
+      "C": "$\\frac{1}{a^{2}}\\tan x+C$",
+      "D": "$-\\frac{1}{a^{2}}\\cot x+C$"
+    },
+    "answer": "A",
+    "analysis": "分母恒为 $a^{2}(\\sin^{2}x+\\cos^{2}x)=a^{2}$，积出 $\\frac{x}{a^{2}}+C$；通式在 $(-\\pi/2,\\pi/2)$ 上也化为它。"
+  },
+  {
+    "subject": "高等数学",
+    "itemId": "高等数学-含参数三角有理式积分",
+    "id": "hm-exam-c9e948b1",
+    "topic": "含参数三角积分·原函数区间",
+    "type": "single",
+    "question": "【真题风格·概念】关于 $F(x)=\\dfrac{1}{ab}\\arctan\\left(\\dfrac{a}{b}\\tan x\\right)$（$a,b>0$），正确的是（ ）。",
+    "options": {
+      "A": "它在每个不含 $x=\\frac{\\pi}{2}+k\\pi$ 的开区间上是 $\\frac{1}{a^{2}\\sin^{2}x+b^{2}\\cos^{2}x}$ 的原函数",
+      "B": "它在整个实轴上处处可导且导数等于被积函数",
+      "C": "它不是原函数，因为 $\tan x$ 有周期",
+      "D": "它只在 $(0,\\frac{\\pi}{2})$ 上成立"
+    },
+    "answer": "A",
+    "analysis": "被积函数处处连续，但 $\\tan x$ 在 $x=\\frac{\\pi}{2}+k\\pi$ 发散，通式需分区间写常数；B 错在忽略无定义点，D 错在把范围缩得过小。"
+  },
+  {
+    "subject": "高等数学",
     "itemId": "高等数学-旋转体体积正弦曲线",
     "id": "hm-rot1",
     "topic": "旋转体·圆盘法",
