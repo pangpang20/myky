@@ -23,6 +23,18 @@ check(note.includes('#### A. 仍是线性') && note.includes('#### B. 非线性'
 check(note.includes('Bernoulli') && note.includes('z=y^{1-n}') && note.includes(String.raw`\dfrac{e^{bx}}{a+b}`) && note.includes(String.raw`(\mu M)_y=(\mu N)_x`), '变形表含 Bernoulli、常系数特解、恰当方程判据');
 check((note.match(/### 规律 \d/g) || []).length >= 6 && note.includes('规律 6：常见变形'), '速记规律新增规律 6 且总数 >= 6');
 check(note.includes('deepseek-v4-pro') && note.includes('8/8 一致'), '档案记录第二模型复核结论');
+check(note.includes('为什么乘 $x$') && note.includes('乘积求导法则') && note.includes('正好就是 $(xy)'), '第三步解释积分因子来源与乘积求导');
+const nl = String.fromCharCode(10);
+const crossLineQuad = note.split(nl).some(function(line, i, arr){
+  if (line.indexOf('$$') !== 0 || line.lastIndexOf('$$') > 0) return false;
+  let j = i + 1;
+  while (j < arr.length && arr[j].indexOf('$$') < 0) {
+    if (arr[j].indexOf('quad') >= 0) return true;
+    j++;
+  }
+  return false;
+});
+check(!crossLineQuad, '公式无跨行 quad 泄漏');
 check(note.includes('$' + B + 'int') && !note.includes('$' + B + B + 'int'), '档案 LaTeX 命令为单层反斜杠');
 check(!note.includes(B + B), '档案不含任何连续双反斜杠');
 check(note.includes('### 举一反三 5 题') && note.includes('### 历年真题风格练习'), '档案包含 5 道举一反三与真题风格练习');
