@@ -1575,6 +1575,134 @@
       },
       "answer": "A",
       "analysis": "被积函数处处连续，但 $\\tan x$ 在 $x=\\frac{\\pi}{2}+k\\pi$ 发散，通式需分区间写常数；B 错在忽略无定义点，D 错在把范围缩得过小。"
+    },
+    {
+      "id": "r1-5bfd1be3-8041-442e-8b2b-6e6dbcb53689",
+      "itemId": "高等数学-一阶线性微分方程特解",
+      "round": 1,
+      "subject": "高等数学",
+      "topic": "化标准形",
+      "question": "方程 $x\\frac{\\mathrm{d}y}{\\mathrm{d}x}=x-y$ 化为一阶线性标准形 $y'+P(x)y=Q(x)$ 后，$P(x)$、$Q(x)$ 分别为（ ）。",
+      "options": {
+        "A": "$P=x,\\ Q=1$",
+        "B": "$P=\\frac{1}{x},\\ Q=1$",
+        "C": "$P=-\\frac{1}{x},\\ Q=1$",
+        "D": "$P=\\frac{1}{x},\\ Q=x$"
+      },
+      "answer": "B",
+      "analysis": "两边除以 $x$ 得 $y'+\\frac{1}{x}y=1$，故 $P=\\frac{1}{x}$、$Q=1$。"
+    },
+    {
+      "id": "r1-6245e54f-3896-40c3-87a5-f68ac3d277f8",
+      "itemId": "高等数学-一阶线性微分方程特解",
+      "round": 1,
+      "subject": "高等数学",
+      "topic": "积分因子",
+      "question": "方程 $y'+\\frac{1}{x}y=1$（$x>0$）的积分因子是（ ）。",
+      "options": {
+        "A": "$\\frac{1}{x}$",
+        "B": "$\\ln x$",
+        "C": "$x$",
+        "D": "$x^{2}$"
+      },
+      "answer": "C",
+      "analysis": "$\\mu=e^{\\int\\frac{1}{x}\\mathrm{d}x}=e^{\\ln x}=x$（$x>0$）。"
+    },
+    {
+      "id": "r1-a6cc62d8-3a0d-477a-a091-113ccc0687eb",
+      "itemId": "高等数学-一阶线性微分方程特解",
+      "round": 1,
+      "subject": "高等数学",
+      "topic": "求通解",
+      "question": "方程 $y'+\\frac{1}{x}y=1$（$x>0$）的通解是（ ）。",
+      "options": {
+        "A": "$y=x+\\frac{C}{x}$",
+        "B": "$y=\\frac{x}{2}+Cx$",
+        "C": "$y=\\frac{x^{2}}{2}+\\frac{C}{x}$",
+        "D": "$y=\\frac{x}{2}+\\frac{C}{x}$"
+      },
+      "answer": "D",
+      "analysis": "乘积分因子 $x$ 得 $(xy)'=x$，积分得 $xy=\\frac{x^{2}}{2}+C$，故 $y=\\frac{x}{2}+\\frac{C}{x}$。"
+    },
+    {
+      "id": "r1-3bd07055-1238-471c-b1e4-525b7c12fdf8",
+      "itemId": "高等数学-一阶线性微分方程特解",
+      "round": 1,
+      "subject": "高等数学",
+      "topic": "初值定常数",
+      "question": "若通解为 $y=\\frac{x}{2}+\\frac{C}{x}$，由 $y(\\sqrt{2})=0$ 可得 $C$ 为（ ）。",
+      "options": {
+        "A": "$1$",
+        "B": "$-\\sqrt{2}$",
+        "C": "$\\frac{\\sqrt{2}}{2}$",
+        "D": "$-1$"
+      },
+      "answer": "D",
+      "analysis": "$\\frac{\\sqrt{2}}{2}+\\frac{C}{\\sqrt{2}}=0$，两边乘 $\\sqrt{2}$ 得 $C=-1$。"
+    },
+    {
+      "id": "r1-f7fd66aa-dc29-4ea3-967c-0b67309f6420",
+      "itemId": "高等数学-一阶线性微分方程特解",
+      "round": 1,
+      "subject": "高等数学",
+      "topic": "写特解",
+      "question": "初值问题 $xy'=x-y$，$y(\\sqrt{2})=0$ 的特解是（ ）。",
+      "options": {
+        "A": "$y=\\frac{2-x^{2}}{2x}$",
+        "B": "$y=\\frac{x^{2}+2}{2x}$",
+        "C": "$y=\\frac{x^{2}-2}{2x}$",
+        "D": "$y=\\frac{x^{2}-2}{x}$"
+      },
+      "answer": "C",
+      "analysis": "代入 $C=-1$ 得 $y=\\frac{x}{2}-\\frac{1}{x}=\\frac{x^{2}-2}{2x}$，定义区间 $(0,+\\infty)$。"
+    },
+    {
+      "id": "r1-12eb855c-3bbd-43a0-baa6-8a29d2156e25",
+      "itemId": "高等数学-一阶线性微分方程特解",
+      "round": 1,
+      "subject": "高等数学",
+      "topic": "真题风格·变系数",
+      "question": "【真题风格】求微分方程 $y'-\\frac{y}{x}=x$（$x>0$）满足 $y(1)=0$ 的特解，结果为（ ）。",
+      "options": {
+        "A": "$y=x-x^{2}$",
+        "B": "$y=x^{2}+x$",
+        "C": "$y=x^{2}-1$",
+        "D": "$y=x^{2}-x$"
+      },
+      "answer": "D",
+      "analysis": "积分因子 $\\mu=e^{-\\int\\frac{1}{x}\\mathrm{d}x}=\\frac{1}{x}$，$(\\frac{y}{x})'=1$，得 $y=x^{2}+Cx$；由 $y(1)=0$ 得 $C=-1$，故 $y=x^{2}-x$。"
+    },
+    {
+      "id": "r1-740db8af-bd3c-4280-ad94-a977b5510332",
+      "itemId": "高等数学-一阶线性微分方程特解",
+      "round": 1,
+      "subject": "高等数学",
+      "topic": "真题风格·切线斜率",
+      "question": "【真题风格】曲线 $y=y(x)$ 过点 $(1,2)$，且任一点 $(x,y)$ 处切线斜率为 $\\frac{y}{x}+1$（$x>0$），则曲线方程为（ ）。",
+      "options": {
+        "A": "$y=x(\\ln x+2)+1$",
+        "B": "$y=x(\\ln x+2)$",
+        "C": "$y=x\\ln x+1$",
+        "D": "$y=x(\\ln x+1)$"
+      },
+      "answer": "B",
+      "analysis": "由题意 $y'-\\frac{y}{x}=1$，$\\mu=\\frac{1}{x}$，$(\\frac{y}{x})'=\\frac{1}{x}$，得 $\\frac{y}{x}=\\ln x+C$；由 $y(1)=2$ 得 $C=2$，故 $y=x(\\ln x+2)$。"
+    },
+    {
+      "id": "r1-5c6b435f-f5cf-42d4-8fc9-2d17900e169c",
+      "itemId": "高等数学-一阶线性微分方程特解",
+      "round": 1,
+      "subject": "高等数学",
+      "topic": "真题风格·求函数值",
+      "question": "【真题风格】设 $y=y(x)$ 满足 $xy'+2y=x^{2}$（$x>0$），$y(1)=0$，则 $y(2)$ 为（ ）。",
+      "options": {
+        "A": "$1$",
+        "B": "$\\frac{3}{4}$",
+        "C": "$\\frac{17}{16}$",
+        "D": "$\\frac{15}{16}$"
+      },
+      "answer": "D",
+      "analysis": "标准形 $y'+\\frac{2}{x}y=x$，$\\mu=x^{2}$，$(x^{2}y)'=x^{3}$，$x^{2}y=\\frac{x^{4}}{4}+C$；由 $y(1)=0$ 得 $C=-\\frac{1}{4}$，故 $y(2)=1-\\frac{1}{16}=\\frac{15}{16}$。"
     }
   ]
 }
