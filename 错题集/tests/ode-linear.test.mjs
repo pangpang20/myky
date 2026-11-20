@@ -19,12 +19,16 @@ const check = (ok, msg) => { console.log((ok ? 'PASS' : 'FAIL') + ': ' + msg); i
 
 check(note.includes('## 错题信息') && note.includes('我的答案：未作答'), '错题档案存在且标记未作答');
 check(note.includes('## 考研速记规律（一看就会）') && (note.match(/### 规律 \d/g) || []).length >= 3, '档案包含至少 3 条考研速记规律');
+check(note.includes('#### A. 仍是线性') && note.includes('#### B. 非线性') && note.includes('#### C. 对 $y$ 不线性') && note.includes('#### D. 常数系数') && note.includes('#### E. 一阶线性') && note.includes('#### F. 不是线性'), '常见变形对照补全 A~F 六类');
+check(note.includes('Bernoulli') && note.includes('z=y^{1-n}') && note.includes(String.raw`\dfrac{e^{bx}}{a+b}`) && note.includes(String.raw`(\mu M)_y=(\mu N)_x`), '变形表含 Bernoulli、常系数特解、恰当方程判据');
+check((note.match(/### 规律 \d/g) || []).length >= 6 && note.includes('规律 6：常见变形'), '速记规律新增规律 6 且总数 >= 6');
 check(note.includes('deepseek-v4-pro') && note.includes('8/8 一致'), '档案记录第二模型复核结论');
 check(note.includes('$' + B + 'int') && !note.includes('$' + B + B + 'int'), '档案 LaTeX 命令为单层反斜杠');
 check(!note.includes(B + B), '档案不含任何连续双反斜杠');
 check(note.includes('### 举一反三 5 题') && note.includes('### 历年真题风格练习'), '档案包含 5 道举一反三与真题风格练习');
 check(payload.itemId === itemId && payload.subject === '高等数学', 'payload 指向本知识点');
 check(payload.knowledge.includes('## 考研速记规律（一看就会）'), '知识点卡包含速记规律章节');
+check(payload.knowledge.includes('规律 6：常见变形') && quizKnowledge[itemId].knowledge.includes('规律 6：常见变形') && ebKnowledge[itemId].knowledge.includes('Bernoulli'), '双端知识点卡同步常见变形与规律 6');
 
 const quiz = quizQuestions.filter((q) => q.itemId === itemId);
 const eb = ebQuestions.questions.filter((q) => q.itemId === itemId && q.round === 1);
