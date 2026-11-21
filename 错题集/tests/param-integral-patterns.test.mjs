@@ -15,5 +15,9 @@ check((md.match(/^### 规律 \d/gm) || []).length >= 6, 'param-integral speed pa
 check(md.includes(String.raw`\ln\left|\frac{at-b}{at+b}\right|`), 'speed rule must state the log result for squared-difference case')
 check(md.includes(String.raw`\arctan\frac{at}{b}`), 'speed rule must state arctan result for squared-sum case')
 check(md.includes('## 复刷清单'), 'note must keep its exercise list')
+check(md.includes('#### 例题：一次项分母'), 'auxiliary-angle example section exists')
+check(md.includes('为什么成立'), 'auxiliary-angle example verifies the expansion')
+check(md.includes(String.raw`\sin x+\sqrt{3}\cos x=2\sin\left(x+\frac{\pi}{3}\right)`), 'auxiliary-angle example shows the合成 step')
+check(md.includes(String.raw`\frac{1}{2}\ln\left|\tan\left(\frac{x}{2}+\frac{\pi}{6}\right)\right|+C`), 'auxiliary-angle example shows the csc integral result')
 
 process.exit(failed ? 1 : 0)
