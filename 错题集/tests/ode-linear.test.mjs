@@ -24,6 +24,10 @@ check(note.includes('Bernoulli') && note.includes('z=y^{1-n}') && note.includes(
 check((note.match(/### 规律 \d/g) || []).length >= 6 && note.includes('规律 6：常见变形'), '速记规律新增规律 6 且总数 >= 6');
 check(note.includes('deepseek-v4-pro') && note.includes('8/8 一致'), '档案记录第二模型复核结论');
 check(note.includes('为什么乘 $x$') && note.includes('乘积求导法则') && note.includes('正好就是 $(xy)'), '第三步解释积分因子来源与乘积求导');
+check(note.includes('为什么左边会变成乘积') && note.includes('积分因子的设计目标'), '通用乘积导数原理已解释')
+check(note.includes('强行凑成乘积') && note.includes('好让两边能直接积分'), '通用说明给出积分因子作用的一句话总结')
+check(note.includes('和第三步的') && note.includes('是同一个乘积法则'), 'Bernoulli 换元后商导数已解释')
+check(note.includes('这回未知函数是') && note.includes('套路完全一致'), '互换角色后乘积导数已解释')
 const nl = String.fromCharCode(10);
 const crossLineQuad = note.split(nl).some(function(line, i, arr){
   if (line.indexOf('$$') !== 0 || line.lastIndexOf('$$') > 0) return false;
