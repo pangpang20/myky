@@ -22,6 +22,7 @@ const BS = String.fromCharCode(92);
 check(note.includes('(C_1+C_2x)e^{-x}') && note.includes('(x-1)e^{x}') && note.includes(BS + 'frac{1}{4}'), '档案给出正确通解');
 check(note.includes('## 考研速记规律（一看就会）') && (note.match(/### 规律 \d/g) || []).length >= 3, '档案含至少 3 条考研速记规律');
 check(note.includes('共振例题：右端') && note.includes('为什么乘 $x^{2}$ 而不是 $x$'), '共振（λ等于特征根）完整例题已补充');
+check(note.includes('每求一次导，括号里就多一个') && note.includes('不是新公式，就是乘积求导法则算了两次') && note.includes('平移公式的一般形式'), '平移算子推导已逐步展开');
 check(note.includes('为什么要代入 $x=0') && note.includes('二次保险') && note.includes('恒成立'), '回代验证选点理由已解释');
 check(note.includes('共振') && note.includes('$k$'), '速记规律覆盖共振判定');
 check(note.includes('deepseek-v4-pro') && note.includes('8 道题'), '档案记录第二模型复核结论');
