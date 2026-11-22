@@ -1,0 +1,218 @@
+{
+  "itemId": "英语-阅读隐含原因与作者态度",
+  "subject": "英语",
+  "file": "英语/2000年考研英语阅读Text1美国经济兴衰错题.md",
+  "knowledge": "## 英语阅读·隐含原因与作者态度\n\n本知识点聚焦：通过 Few、blind、obvious 等评价词识别作者的真实归因与对引语的保留态度。\n\n### 题型定位方法\n\n1. 先读题干关键词（人名、时间、行业名、形容词态度词），回原文定位到具体句群。\n2. 细节题坚持“原文同义改写才算对”：选项多一个 not、only、all、never，或与原文主体不一致，直接排除。\n3. 推理题答案必须是原文可推出的“小一步”结论；不能把原文某句主观心态扩大成 human nature、history law 等宏大命题。\n4. 作者态度题抓评价词（Few、blind、obvious、sensational、sweeping）和引用位置；引用专家的话未必等于作者认同。\n\n### 本文对应证据\n\n- 第 11 题（已答对）：战后优势与“他国经济被战争摧毁”相关，答案 C。\n- 第 12 题（错题）：美国汽车和纺织品行业失去部分国内市场，由“Foreign-made cars and textiles were sweeping into the domestic market”直接体现，答案 D；用户误选 A，把“电视制造商只剩一家/被收购”错读成“撤回到国内市场”。\n- 第 13 题（错题）：竞争弱时优势难以长期维持，竞争加剧反而促使反思与复苏，可推出“激烈竞争可能促进经济进步”，答案 B；用户误选 A，把“self-doubt → blind pride”这一美国人的心理变化夸大为 human nature。\n- 第 14 题（错题）：第 4 段③句“Few Americans attribute this solely to such obvious causes as a devalued dollar or the turning of the business cycle”配合④句“Self-doubt has yielded to blind pride”，说明作者认为明显原因被忽视，答案 A；用户误选 B，把 Cavanagh 等被引者的观点当成作者结论。\n\n## 考研速记规律（一看就会）\n\n1. **Few 是隐形否定词**：Few Americans attribute this solely to… = 美国人几乎没有这样归因 → 作者暗示这些明显原因被忽视。\n2. **引语前后定态度**：blind pride 紧接专家乐观引语 → 引语多半是“盲目自豪”的例证，不等于作者认证。\n3. **明显原因优先选**：题干问 author seems to believe 且选项含 business cycle / devalued dollar 这类原文明说的 obvious causes，往往是正确答案，不要被 restructuring/management 等引语高频词带走。\n4. **态度词三分法**：正向（solid growth, improving productivity）、负向（sensational, blind pride, casualty）、保留（Few, solely）；用正负链判定作者立场。",
+  "mnemonic": "态度题：Few/solely 找保留，blind 定贬义；专家话多不等于作者话。",
+  "keyPoints": [
+    "Few 表否定，solely 表“仅仅”",
+    "引用专家前后看作者评价词",
+    "明显原因题优先回原文归因句",
+    "作者态度与被引者态度要分离"
+  ],
+  "rootCauses": {
+    "隐含归因-第14题": "把专家 Cavanagh/Moore/Sahlman 的乐观解释当作作者结论，忽略 Few 与 blind pride 构成的否定/保留框架。",
+    "态度判断-引语误读": "未区分“专家说产业结构重组、管理改善”与“作者暗示美元贬值和经济周期被低估”。"
+  },
+  "ebbinghausQuestions": [
+    {
+      "id": "en-t1-a1",
+      "topic": "作者态度-隐含归因",
+      "type": "single",
+      "question": "The author seems to believe the revival of the U.S. economy in the 1990s can be attributed to the _____.",
+      "options": {
+        "A": "turning of the business cycle",
+        "B": "restructuring of industry",
+        "C": "improved business management",
+        "D": "success in education"
+      },
+      "answer": "A",
+      "analysis": "第四段③句说几乎没有美国人把复苏仅归因于美元贬值或经济周期转折这类显而易见的原因；结合④句“自我怀疑让位于盲目自豪”可知作者认为这些明显原因被忽视，故 A。B/C 是被引用的乐观解释，D 未提及。原题用户误选 B。",
+      "translation": "作者似乎认为 1990 年代美国经济复苏归因于_____。"
+    },
+    {
+      "id": "en-t1-a2",
+      "topic": "作者态度-措辞判断",
+      "type": "single",
+      "question": "In paragraph 4, “Few Americans attribute this solely to …” implies that the author regards the devalued dollar and the business cycle as _____.",
+      "options": {
+        "A": "impossible causes",
+        "B": "obvious causes likely underestimated",
+        "C": "causes disproved by experts",
+        "D": "irrelevant to the U.S. economy"
+      },
+      "answer": "B",
+      "analysis": "such obvious causes 是明说，Few Americans attribute this solely to 说明这些原因很可能被低估；作者并未否定它们，更未说专家反驳它们。",
+      "translation": "第四段的措辞暗示作者认为美元贬值与经济周期是_____。"
+    },
+    {
+      "id": "en-t1-a3",
+      "topic": "作者态度-引用目的",
+      "type": "single",
+      "question": "What is the author’s attitude toward the three experts’ remarks in paragraph 4?",
+      "options": {
+        "A": "Fully approving",
+        "B": "Somewhat skeptical or ironic",
+        "C": "Completely indifferent",
+        "D": "Deeply puzzled"
+      },
+      "answer": "B",
+      "analysis": "专家乐观话语出现在 Self-doubt has yielded to blind pride 之后；作者用 Few、blind pride 等措辞对“管理黄金时代”式结论保持保留，带有轻微怀疑/反讽，而非完全赞同或冷漠。",
+      "translation": "作者对第四段三位专家言论的态度是_____。"
+    },
+    {
+      "id": "en-t1-a4",
+      "topic": "作者态度-情感线索",
+      "type": "single",
+      "question": "Why does the author say “Self-doubt has yielded to blind pride”?",
+      "options": {
+        "A": "To praise American modesty after the recession",
+        "B": "To suggest Americans overlooked simple causes while celebrating revival",
+        "C": "To prove productivity did not improve at all",
+        "D": "To compare education systems in Japan and the U.S."
+      },
+      "answer": "B",
+      "analysis": "这句话连接前句“几乎没有美国人归因于明显原因”和后文专家的乐观评价，说明美国人在复苏中由自我怀疑转向盲目自豪，忽视了简单原因；A/C/D 均不合逻辑。",
+      "translation": "作者为什么说“自我怀疑让位于盲目自豪”？"
+    },
+    {
+      "id": "en-t1-a5",
+      "topic": "作者态度-论证削弱",
+      "type": "single",
+      "question": "Which detail would most weaken the view that industrial restructuring alone caused the revival?",
+      "options": {
+        "A": "The author points to the devalued dollar and the business cycle as obvious causes.",
+        "B": "Productivity improved in the 1990s.",
+        "C": "Industry changed its structure.",
+        "D": "Experts praised business management."
+      },
+      "answer": "A",
+      "analysis": "若作者指出美元贬值和经济周期这类明显原因，就说明“仅靠产业重组”过于单一；B/C/D 反而支持乐观解释。",
+      "translation": "哪一细节最能削弱“仅产业重组导致复苏”的观点？"
+    }
+  ],
+  "quizQuestions": [
+    {
+      "id": "en-t1-a1",
+      "topic": "作者态度-隐含归因",
+      "type": "single",
+      "question": "The author seems to believe the revival of the U.S. economy in the 1990s can be attributed to the _____.",
+      "options": {
+        "A": "turning of the business cycle",
+        "B": "restructuring of industry",
+        "C": "improved business management",
+        "D": "success in education"
+      },
+      "answer": "A",
+      "analysis": "第四段③句说几乎没有美国人把复苏仅归因于美元贬值或经济周期转折这类显而易见的原因；结合④句“自我怀疑让位于盲目自豪”可知作者认为这些明显原因被忽视，故 A。B/C 是被引用的乐观解释，D 未提及。原题用户误选 B。",
+      "translation": "作者似乎认为 1990 年代美国经济复苏归因于_____。"
+    },
+    {
+      "id": "en-t1-a2",
+      "topic": "作者态度-措辞判断",
+      "type": "single",
+      "question": "In paragraph 4, “Few Americans attribute this solely to …” implies that the author regards the devalued dollar and the business cycle as _____.",
+      "options": {
+        "A": "impossible causes",
+        "B": "obvious causes likely underestimated",
+        "C": "causes disproved by experts",
+        "D": "irrelevant to the U.S. economy"
+      },
+      "answer": "B",
+      "analysis": "such obvious causes 是明说，Few Americans attribute this solely to 说明这些原因很可能被低估；作者并未否定它们，更未说专家反驳它们。",
+      "translation": "第四段的措辞暗示作者认为美元贬值与经济周期是_____。"
+    },
+    {
+      "id": "en-t1-a3",
+      "topic": "作者态度-引用目的",
+      "type": "single",
+      "question": "What is the author’s attitude toward the three experts’ remarks in paragraph 4?",
+      "options": {
+        "A": "Fully approving",
+        "B": "Somewhat skeptical or ironic",
+        "C": "Completely indifferent",
+        "D": "Deeply puzzled"
+      },
+      "answer": "B",
+      "analysis": "专家乐观话语出现在 Self-doubt has yielded to blind pride 之后；作者用 Few、blind pride 等措辞对“管理黄金时代”式结论保持保留，带有轻微怀疑/反讽，而非完全赞同或冷漠。",
+      "translation": "作者对第四段三位专家言论的态度是_____。"
+    },
+    {
+      "id": "en-t1-a4",
+      "topic": "作者态度-情感线索",
+      "type": "single",
+      "question": "Why does the author say “Self-doubt has yielded to blind pride”?",
+      "options": {
+        "A": "To praise American modesty after the recession",
+        "B": "To suggest Americans overlooked simple causes while celebrating revival",
+        "C": "To prove productivity did not improve at all",
+        "D": "To compare education systems in Japan and the U.S."
+      },
+      "answer": "B",
+      "analysis": "这句话连接前句“几乎没有美国人归因于明显原因”和后文专家的乐观评价，说明美国人在复苏中由自我怀疑转向盲目自豪，忽视了简单原因；A/C/D 均不合逻辑。",
+      "translation": "作者为什么说“自我怀疑让位于盲目自豪”？"
+    },
+    {
+      "id": "en-t1-a5",
+      "topic": "作者态度-论证削弱",
+      "type": "single",
+      "question": "Which detail would most weaken the view that industrial restructuring alone caused the revival?",
+      "options": {
+        "A": "The author points to the devalued dollar and the business cycle as obvious causes.",
+        "B": "Productivity improved in the 1990s.",
+        "C": "Industry changed its structure.",
+        "D": "Experts praised business management."
+      },
+      "answer": "A",
+      "analysis": "若作者指出美元贬值和经济周期这类明显原因，就说明“仅靠产业重组”过于单一；B/C/D 反而支持乐观解释。",
+      "translation": "哪一细节最能削弱“仅产业重组导致复苏”的观点？"
+    }
+  ],
+  "examQuestions": [
+    {
+      "id": "en-t1-ae1",
+      "topic": "作者态度-判断",
+      "type": "single",
+      "question": "The author seems to regard the claim of a “golden age of business management” as _____.",
+      "options": {
+        "A": "a measured conclusion fully backed by evidence",
+        "B": "an example of blind pride",
+        "C": "the main cause of the 1980s decline",
+        "D": "a Japanese view of the U.S. economy"
+      },
+      "answer": "B",
+      "analysis": "该引语位于 blind pride 语境中，并有 Few Americans attribute this solely to… 的保留铺垫；作者把它视为盲目自豪的例证，而非严谨结论。",
+      "translation": "作者似乎把“企业管理黄金时代”的说法看作_____。"
+    },
+    {
+      "id": "en-t1-ae2",
+      "topic": "词义猜测-习语",
+      "type": "single",
+      "question": "In paragraph 4, “has gone on a diet” means the American industry _____.",
+      "options": {
+        "A": "cut costs and streamlined its operations",
+        "B": "stopped production completely",
+        "C": "greatly increased its workforce",
+        "D": "changed its products into food"
+      },
+      "answer": "A",
+      "analysis": "go on a diet 本义“节食”，文中引申为产业“精简、削减冗余”，与 changed its structure、quick-witted 并列。",
+      "translation": "第四段“go on a diet”指美国产业_____。"
+    },
+    {
+      "id": "en-t1-ae3",
+      "topic": "作者态度-隐含原因",
+      "type": "single",
+      "question": "According to the author, which factor is most likely underappreciated in explaining the U.S. revival?",
+      "options": {
+        "A": "Management education",
+        "B": "The business cycle and the devalued dollar",
+        "C": "Productivity improvement",
+        "D": "Industrial restructuring"
+      },
+      "answer": "B",
+      "analysis": "作者说几乎没有美国人把复苏仅仅归因于美元贬值和经济周期这两个明显原因，说明这两项最可能被低估；C/D 是专家强调的内容。",
+      "translation": "按作者看法，解释美国复苏时哪一因素最可能被低估？"
+    }
+  ]
+}

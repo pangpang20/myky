@@ -1831,6 +1831,438 @@
       },
       "answer": "A",
       "analysis": "$(D+1)^2(e^{-x}v)=e^{-x}v''$，$v''=xRightarrow v=\frac{x^{3}}{6}$。"
+    },
+    {
+      "id": "en-t1-d1",
+      "itemId": "英语-阅读细节理解",
+      "round": 1,
+      "subject": "英语",
+      "topic": "细节理解-产业衰退表现",
+      "type": "single",
+      "question": "According to paragraph 2, which development most directly signaled declining U.S. industrial competitiveness?",
+      "options": {
+        "A": "Foreign-made cars and textiles were sweeping into the domestic market.",
+        "B": "American scientists became less skilled than before.",
+        "C": "Japan bought the only remaining U.S. television maker.",
+        "D": "The United States invented semiconductors."
+      },
+      "answer": "A",
+      "analysis": "第二段⑥句直接说外国汽车和纺织品涌入国内市场，是美国失去部分国内市场的具体表现。B 与第一段“世界最好”矛盾；C 中买方是韩国 LG 且顺序错；D 是美国的优势事实，不是衰退信号。",
+      "translation": "根据第二段，哪一发展最直接表明美国产业竞争力下降？"
+    },
+    {
+      "id": "en-t1-d2",
+      "itemId": "英语-阅读细节理解",
+      "round": 1,
+      "subject": "英语",
+      "topic": "词义猜测-熟词僻义",
+      "type": "single",
+      "question": "In “America’s machine-tool industry was on the ropes,” the phrase “on the ropes” most nearly means _____.",
+      "options": {
+        "A": "expanding rapidly",
+        "B": "in serious trouble",
+        "C": "under foreign ownership",
+        "D": "protected by tariffs"
+      },
+      "answer": "B",
+      "analysis": "前文列举消费电子萎缩、电视制造商只剩一家，语境表明机床业同样处境危险；on the ropes 是拳击用语，引申为“岌岌可危”。",
+      "translation": "“美国机床业 on the ropes”中该短语最接近什么意思？"
+    },
+    {
+      "id": "en-t1-d3",
+      "itemId": "英语-阅读细节理解",
+      "round": 1,
+      "subject": "英语",
+      "topic": "细节理解-比对选项",
+      "type": "single",
+      "question": "Which statement about the U.S. TV industry is supported by the passage?",
+      "options": {
+        "A": "It had withdrawn to its domestic market by 1987.",
+        "B": "Only one U.S. maker remained by 1987, and it was later bought by a Korean company.",
+        "C": "It was taken over by Japanese enterprises in July.",
+        "D": "It lost part of its domestic market to textiles."
+      },
+      "answer": "B",
+      "analysis": "第二段⑤句说 1987 年只剩 Zenith 一家，括号内补充它后来被韩国 LG 收购；A 原文未说“撤回到国内市场”，C 国别错误，D 张冠李戴。",
+      "translation": "关于美国电视业，哪一项得到文章支持？"
+    },
+    {
+      "id": "en-t1-d4",
+      "itemId": "英语-阅读细节理解",
+      "round": 1,
+      "subject": "英语",
+      "topic": "细节理解-例证目的",
+      "type": "single",
+      "question": "Why does the author mention semiconductors in paragraph 2?",
+      "options": {
+        "A": "To show that U.S. decline had already affected every industry.",
+        "B": "To give an example that even a U.S.-invented core industry seemed likely to become the next casualty.",
+        "C": "To prove that the United States had lost all technological advantages.",
+        "D": "To introduce the history of the computer market."
+      },
+      "answer": "B",
+      "analysis": "半导体是美国发明且处于新计算机时代核心，但连它都“似乎要成为下一个牺牲品”，用来强化衰退之痛；A、C 过度绝对，D 非写作目的。",
+      "translation": "第二段为什么提到半导体？"
+    },
+    {
+      "id": "en-t1-d5",
+      "itemId": "英语-阅读细节理解",
+      "round": 1,
+      "subject": "英语",
+      "topic": "细节理解-定位",
+      "type": "single",
+      "question": "Which detail best illustrates “the retreat from predominance proved painful”?",
+      "options": {
+        "A": "The U.S. market was eight times larger than any competitor’s.",
+        "B": "European and Asian economies had been destroyed by the war.",
+        "C": "Consumer-electronics industries shrank or vanished under foreign competition.",
+        "D": "Experts praised the golden age of business management."
+      },
+      "answer": "C",
+      "analysis": "“主导地位后退的痛苦”紧接着由消费电子萎缩/消失、外国商品涌入、机床业岌岌可危等细节说明；A、B 属战后优势背景，D 属 1990 年代复苏。",
+      "translation": "哪一细节最能说明“优势后退是痛苦的”？"
+    },
+    {
+      "id": "en-t1-de1",
+      "itemId": "英语-阅读细节理解",
+      "round": 1,
+      "subject": "英语",
+      "topic": "细节理解-例证识别",
+      "type": "single",
+      "question": "The author uses Zenith as an example to show _____.",
+      "options": {
+        "A": "the strength of American television technology",
+        "B": "the shrinking or vanishing of huge American industries under foreign competition",
+        "C": "the success of South Korean companies in the U.S. market",
+        "D": "the turning of the business cycle"
+      },
+      "answer": "B",
+      "analysis": "Zenith 的例子紧跟“Some huge American industries … had shrunk or vanished”，是外国竞争下美国产业萎缩/消失的例证；C 只是括号中的附带信息，不是例证目的。",
+      "translation": "作者以 Zenith 为例是为了说明_____。"
+    },
+    {
+      "id": "en-t1-de2",
+      "itemId": "英语-阅读细节理解",
+      "round": 1,
+      "subject": "英语",
+      "topic": "细节理解-句意转换",
+      "type": "single",
+      "question": "By “Foreign-made cars and textiles were sweeping into the domestic market,” the author means _____.",
+      "options": {
+        "A": "American cars and textiles were exported in large quantities",
+        "B": "foreign products rapidly gained share in the U.S. market",
+        "C": "the domestic market was closed to foreign goods",
+        "D": "the U.S. auto industry improved its productivity"
+      },
+      "answer": "B",
+      "analysis": "sweep into 表示“大举涌入”，domestic market 指国内市场，因此句意是外国产品迅速进入并占据美国市场份额。",
+      "translation": "“外国汽车和纺织品涌入国内市场”意为_____。"
+    },
+    {
+      "id": "en-t1-de3",
+      "itemId": "英语-阅读细节理解",
+      "round": 1,
+      "subject": "英语",
+      "topic": "细节理解-排除题",
+      "type": "single",
+      "question": "Which of the following is NOT mentioned as a sign of U.S. industrial decline?",
+      "options": {
+        "A": "Consumer electronics shrank or vanished.",
+        "B": "The machine-tool industry was on the ropes.",
+        "C": "Semiconductor making seemed to be the next casualty.",
+        "D": "The education system collapsed."
+      },
+      "answer": "D",
+      "analysis": "A、B、C 均在第二段出现；教育系统崩溃文中未提及，属于无中生有。",
+      "translation": "以下哪项未被提及为美国产业衰退的迹象？"
+    },
+    {
+      "id": "en-t1-i1",
+      "itemId": "英语-阅读推理判断",
+      "round": 1,
+      "subject": "英语",
+      "topic": "推理判断-全文主旨",
+      "type": "single",
+      "question": "What can be inferred from the passage?",
+      "options": {
+        "A": "It is human nature to shift between self-doubt and blind pride.",
+        "B": "Intense competition may contribute to economic progress.",
+        "C": "The revival of the economy depends on international cooperation.",
+        "D": "A long history of success may pave the way for further development."
+      },
+      "answer": "B",
+      "analysis": "文章把“竞争弱→优势丧失”与“竞争压力→反思复苏”联系起来，可推出激烈竞争可能促进经济进步。A 把个人心态泛化为 human nature，C 无中生有，D 与首段“长久成功可能是障碍”相反。",
+      "translation": "从文章可以推断出什么？"
+    },
+    {
+      "id": "en-t1-i2",
+      "itemId": "英语-阅读推理判断",
+      "round": 1,
+      "subject": "英语",
+      "topic": "推理判断-首段隐含",
+      "type": "single",
+      "question": "The first paragraph suggests that long effortless success may be a handicap because _____.",
+      "options": {
+        "A": "it makes a country’s scientists less talented",
+        "B": "it reduces the size of the domestic market",
+        "C": "it may leave a country unprepared when competition returns",
+        "D": "it directly destroys other economies"
+      },
+      "answer": "C",
+      "analysis": "首段说轻松成功可能是障碍，第二段立即写他国富裕后优势缩小、竞争回归时美国人不知所措，故可推知轻松成功使国家应对竞争的能力不足；A/B/D 均与原文无因果对应。",
+      "translation": "首段暗示长期轻松成功可能成为障碍，是因为_____。"
+    },
+    {
+      "id": "en-t1-i3",
+      "itemId": "英语-阅读推理判断",
+      "round": 1,
+      "subject": "英语",
+      "topic": "推理判断-调查态度",
+      "type": "single",
+      "question": "It can be inferred from paragraphs 2–3 that the inquiries into industrial decline were probably _____.",
+      "options": {
+        "A": "satisfied with American business methods",
+        "B": "concerned about growing competition from overseas",
+        "C": "focused only on education reform",
+        "D": "unaware of foreign competition"
+      },
+      "answer": "B",
+      "analysis": "第三段末句说调查结果充满对海外竞争加剧的警告，说明调查者关注海外竞争；A 与“认为经营方式失败”相反，C 无中生有，D 与原文直接矛盾。",
+      "translation": "从第二、三段可推知，关于产业衰退的调查很可能_____。"
+    },
+    {
+      "id": "en-t1-i4",
+      "itemId": "英语-阅读推理判断",
+      "round": 1,
+      "subject": "英语",
+      "topic": "推理判断-因果链",
+      "type": "single",
+      "question": "The crisis of confidence in paragraph 3 most likely resulted from _____.",
+      "options": {
+        "A": "five years of solid growth",
+        "B": "losing prosperity and industrial competitiveness",
+        "C": "Japan’s long struggle",
+        "D": "the golden age of management"
+      },
+      "answer": "B",
+      "analysis": "第三段 All of this 指代第二段的产业萎缩、外国竞争涌入、优势后退；美国人开始认为繁荣不再理所当然且经营方式失败，因此信心危机源于繁荣与竞争力的丧失。A/D 属 1990 年代，C 非原因。",
+      "translation": "第三段的信心危机最可能源于_____。"
+    },
+    {
+      "id": "en-t1-i5",
+      "itemId": "英语-阅读推理判断",
+      "round": 1,
+      "subject": "英语",
+      "topic": "推理判断-对比逻辑",
+      "type": "single",
+      "question": "The comparison of the U.S. in the 1980s and 1990s implies that _____.",
+      "options": {
+        "A": "economic conditions never really change",
+        "B": "self-doubt and pride are equally reliable",
+        "C": "competition and reassessment can accompany economic revival",
+        "D": "international cooperation caused the decline"
+      },
+      "answer": "C",
+      "analysis": "1980 年代在竞争压力下反思产业衰退，1990 年代出现稳定增长；文章整体暗示竞争与反思可能伴随经济复苏。A 与 How things have changed 矛盾，B/D 无依据。",
+      "translation": "对比美国 1980 年代与 1990 年代可推知_____。"
+    },
+    {
+      "id": "en-t1-ie1",
+      "itemId": "英语-阅读推理判断",
+      "round": 1,
+      "subject": "英语",
+      "topic": "推理判断-全文结论",
+      "type": "single",
+      "question": "Which conclusion is best supported by the whole passage?",
+      "options": {
+        "A": "The United States never had real economic advantages.",
+        "B": "Competitive pressure can push a country to rethink and revive its economy.",
+        "C": "A large domestic market guarantees permanent success.",
+        "D": "Expert opinions always reveal the true cause of economic growth."
+      },
+      "answer": "B",
+      "analysis": "全文主线是优势—衰退—信心危机—反思—复苏，且首段说轻松成功可能是障碍，故竞争压力促使反思并可能带来复苏最受支持；A 与首段事实矛盾，C 与“必然缩小”矛盾，D 与作者引用专家时的保留态度矛盾。",
+      "translation": "全文最支持的结论是_____。"
+    },
+    {
+      "id": "en-t1-ie2",
+      "itemId": "英语-阅读推理判断",
+      "round": 1,
+      "subject": "英语",
+      "topic": "推理判断-句间逻辑",
+      "type": "single",
+      "question": "From “Few Americans attribute this solely to …” we can infer that the author thinks _____.",
+      "options": {
+        "A": "the obvious causes should be completely ignored",
+        "B": "many Americans overlooked obvious causes while feeling proud",
+        "C": "the economy revived without any cause",
+        "D": "the business cycle is irrelevant"
+      },
+      "answer": "B",
+      "analysis": "Few 表否定，self-doubt has yielded to blind pride 紧随其后；作者暗示美国人在自豪中忽视了美元贬值、经济周期这些明显原因。A/D 曲解 Few，C 荒谬。",
+      "translation": "由“几乎没有美国人仅仅把它归因于明显原因”可推知作者认为_____。"
+    },
+    {
+      "id": "en-t1-ie3",
+      "itemId": "英语-阅读推理判断",
+      "round": 1,
+      "subject": "英语",
+      "topic": "推理判断-情绪变化",
+      "type": "single",
+      "question": "The passage implies that the U.S. recovery in the 1990s was accompanied by _____.",
+      "options": {
+        "A": "a return to effortless success",
+        "B": "blind pride among Americans",
+        "C": "a collapse in productivity",
+        "D": "rapid Japanese growth"
+      },
+      "answer": "B",
+      "analysis": "第四段明确 Self-doubt has yielded to blind pride，并引用三位专家的乐观评价，说明复苏伴随盲目自豪；A 与作者强调结构性反思不符，C/D 与原文相反。",
+      "translation": "文章暗示 1990 年代美国经济复苏伴随着_____。"
+    },
+    {
+      "id": "en-t1-a1",
+      "itemId": "英语-阅读隐含原因与作者态度",
+      "round": 1,
+      "subject": "英语",
+      "topic": "作者态度-隐含归因",
+      "type": "single",
+      "question": "The author seems to believe the revival of the U.S. economy in the 1990s can be attributed to the _____.",
+      "options": {
+        "A": "turning of the business cycle",
+        "B": "restructuring of industry",
+        "C": "improved business management",
+        "D": "success in education"
+      },
+      "answer": "A",
+      "analysis": "第四段③句说几乎没有美国人把复苏仅归因于美元贬值或经济周期转折这类显而易见的原因；结合④句“自我怀疑让位于盲目自豪”可知作者认为这些明显原因被忽视，故 A。B/C 是被引用的乐观解释，D 未提及。原题用户误选 B。",
+      "translation": "作者似乎认为 1990 年代美国经济复苏归因于_____。"
+    },
+    {
+      "id": "en-t1-a2",
+      "itemId": "英语-阅读隐含原因与作者态度",
+      "round": 1,
+      "subject": "英语",
+      "topic": "作者态度-措辞判断",
+      "type": "single",
+      "question": "In paragraph 4, “Few Americans attribute this solely to …” implies that the author regards the devalued dollar and the business cycle as _____.",
+      "options": {
+        "A": "impossible causes",
+        "B": "obvious causes likely underestimated",
+        "C": "causes disproved by experts",
+        "D": "irrelevant to the U.S. economy"
+      },
+      "answer": "B",
+      "analysis": "such obvious causes 是明说，Few Americans attribute this solely to 说明这些原因很可能被低估；作者并未否定它们，更未说专家反驳它们。",
+      "translation": "第四段的措辞暗示作者认为美元贬值与经济周期是_____。"
+    },
+    {
+      "id": "en-t1-a3",
+      "itemId": "英语-阅读隐含原因与作者态度",
+      "round": 1,
+      "subject": "英语",
+      "topic": "作者态度-引用目的",
+      "type": "single",
+      "question": "What is the author’s attitude toward the three experts’ remarks in paragraph 4?",
+      "options": {
+        "A": "Fully approving",
+        "B": "Somewhat skeptical or ironic",
+        "C": "Completely indifferent",
+        "D": "Deeply puzzled"
+      },
+      "answer": "B",
+      "analysis": "专家乐观话语出现在 Self-doubt has yielded to blind pride 之后；作者用 Few、blind pride 等措辞对“管理黄金时代”式结论保持保留，带有轻微怀疑/反讽，而非完全赞同或冷漠。",
+      "translation": "作者对第四段三位专家言论的态度是_____。"
+    },
+    {
+      "id": "en-t1-a4",
+      "itemId": "英语-阅读隐含原因与作者态度",
+      "round": 1,
+      "subject": "英语",
+      "topic": "作者态度-情感线索",
+      "type": "single",
+      "question": "Why does the author say “Self-doubt has yielded to blind pride”?",
+      "options": {
+        "A": "To praise American modesty after the recession",
+        "B": "To suggest Americans overlooked simple causes while celebrating revival",
+        "C": "To prove productivity did not improve at all",
+        "D": "To compare education systems in Japan and the U.S."
+      },
+      "answer": "B",
+      "analysis": "这句话连接前句“几乎没有美国人归因于明显原因”和后文专家的乐观评价，说明美国人在复苏中由自我怀疑转向盲目自豪，忽视了简单原因；A/C/D 均不合逻辑。",
+      "translation": "作者为什么说“自我怀疑让位于盲目自豪”？"
+    },
+    {
+      "id": "en-t1-a5",
+      "itemId": "英语-阅读隐含原因与作者态度",
+      "round": 1,
+      "subject": "英语",
+      "topic": "作者态度-论证削弱",
+      "type": "single",
+      "question": "Which detail would most weaken the view that industrial restructuring alone caused the revival?",
+      "options": {
+        "A": "The author points to the devalued dollar and the business cycle as obvious causes.",
+        "B": "Productivity improved in the 1990s.",
+        "C": "Industry changed its structure.",
+        "D": "Experts praised business management."
+      },
+      "answer": "A",
+      "analysis": "若作者指出美元贬值和经济周期这类明显原因，就说明“仅靠产业重组”过于单一；B/C/D 反而支持乐观解释。",
+      "translation": "哪一细节最能削弱“仅产业重组导致复苏”的观点？"
+    },
+    {
+      "id": "en-t1-ae1",
+      "itemId": "英语-阅读隐含原因与作者态度",
+      "round": 1,
+      "subject": "英语",
+      "topic": "作者态度-判断",
+      "type": "single",
+      "question": "The author seems to regard the claim of a “golden age of business management” as _____.",
+      "options": {
+        "A": "a measured conclusion fully backed by evidence",
+        "B": "an example of blind pride",
+        "C": "the main cause of the 1980s decline",
+        "D": "a Japanese view of the U.S. economy"
+      },
+      "answer": "B",
+      "analysis": "该引语位于 blind pride 语境中，并有 Few Americans attribute this solely to… 的保留铺垫；作者把它视为盲目自豪的例证，而非严谨结论。",
+      "translation": "作者似乎把“企业管理黄金时代”的说法看作_____。"
+    },
+    {
+      "id": "en-t1-ae2",
+      "itemId": "英语-阅读隐含原因与作者态度",
+      "round": 1,
+      "subject": "英语",
+      "topic": "词义猜测-习语",
+      "type": "single",
+      "question": "In paragraph 4, “has gone on a diet” means the American industry _____.",
+      "options": {
+        "A": "cut costs and streamlined its operations",
+        "B": "stopped production completely",
+        "C": "greatly increased its workforce",
+        "D": "changed its products into food"
+      },
+      "answer": "A",
+      "analysis": "go on a diet 本义“节食”，文中引申为产业“精简、削减冗余”，与 changed its structure、quick-witted 并列。",
+      "translation": "第四段“go on a diet”指美国产业_____。"
+    },
+    {
+      "id": "en-t1-ae3",
+      "itemId": "英语-阅读隐含原因与作者态度",
+      "round": 1,
+      "subject": "英语",
+      "topic": "作者态度-隐含原因",
+      "type": "single",
+      "question": "According to the author, which factor is most likely underappreciated in explaining the U.S. revival?",
+      "options": {
+        "A": "Management education",
+        "B": "The business cycle and the devalued dollar",
+        "C": "Productivity improvement",
+        "D": "Industrial restructuring"
+      },
+      "answer": "B",
+      "analysis": "作者说几乎没有美国人把复苏仅仅归因于美元贬值和经济周期这两个明显原因，说明这两项最可能被低估；C/D 是专家强调的内容。",
+      "translation": "按作者看法，解释美国复苏时哪一因素最可能被低估？"
     }
   ]
 }

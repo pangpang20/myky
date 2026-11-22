@@ -1,0 +1,218 @@
+{
+  "itemId": "英语-阅读推理判断",
+  "subject": "英语",
+  "file": "英语/2000年考研英语阅读Text1美国经济兴衰错题.md",
+  "knowledge": "## 英语阅读·推理判断\n\n本知识点聚焦：从原文事实走一小步推出结论，避免夸大范围和添加原文没有的因果关系。\n\n### 题型定位方法\n\n1. 先读题干关键词（人名、时间、行业名、形容词态度词），回原文定位到具体句群。\n2. 细节题坚持“原文同义改写才算对”：选项多一个 not、only、all、never，或与原文主体不一致，直接排除。\n3. 推理题答案必须是原文可推出的“小一步”结论；不能把原文某句主观心态扩大成 human nature、history law 等宏大命题。\n4. 作者态度题抓评价词（Few、blind、obvious、sensational、sweeping）和引用位置；引用专家的话未必等于作者认同。\n\n### 本文对应证据\n\n- 第 11 题（已答对）：战后优势与“他国经济被战争摧毁”相关，答案 C。\n- 第 12 题（错题）：美国汽车和纺织品行业失去部分国内市场，由“Foreign-made cars and textiles were sweeping into the domestic market”直接体现，答案 D；用户误选 A，把“电视制造商只剩一家/被收购”错读成“撤回到国内市场”。\n- 第 13 题（错题）：竞争弱时优势难以长期维持，竞争加剧反而促使反思与复苏，可推出“激烈竞争可能促进经济进步”，答案 B；用户误选 A，把“self-doubt → blind pride”这一美国人的心理变化夸大为 human nature。\n- 第 14 题（错题）：第 4 段③句“Few Americans attribute this solely to such obvious causes as a devalued dollar or the turning of the business cycle”配合④句“Self-doubt has yielded to blind pride”，说明作者认为明显原因被忽视，答案 A；用户误选 B，把 Cavanagh 等被引者的观点当成作者结论。\n\n## 考研速记规律（一看就会）\n\n1. **小步推理原则**：正确答案 = 原文信息的一步概括；出现 human nature、always、guarantee、depends on 等大词先警惕。\n2. **情绪词不等于 universal 规律**：self-doubt、blind pride 描写特定时期美国人的心态，不能升级为“人类本性”。\n3. **主线串起来推**：首段“轻松成功可能是障碍”+ 二、三段“竞争来后衰退与信心危机”+ 四段“复苏与自豪” → 竞争压力可能促使反思与进步。\n4. **排除三招**：无中生有（international cooperation）、反向说（long success paves the way）、偷换主体（Japan 的崛起不是美国衰退原因）。",
+  "mnemonic": "推理题：靠近原文一小步，夸大范围全排除；情绪描写别上升为普遍规律。",
+  "keyPoints": [
+    "推理必须基于原文小步概括",
+    "识别 human nature/always/guarantee 等夸大词",
+    "全文主线：优势→衰退→危机→反思→复苏",
+    "排除无中生有与反向选项"
+  ],
+  "rootCauses": {
+    "推理判断-第13题": "把“self-doubt → blind pride”心理变化泛化为 human nature，忽略全文“竞争—反思—复苏”的经济主线。",
+    "推理判断-态度泛化": "没有区分“作者叙述的心态变化”与“作者支持的价值判断”。"
+  },
+  "ebbinghausQuestions": [
+    {
+      "id": "en-t1-i1",
+      "topic": "推理判断-全文主旨",
+      "type": "single",
+      "question": "What can be inferred from the passage?",
+      "options": {
+        "A": "It is human nature to shift between self-doubt and blind pride.",
+        "B": "Intense competition may contribute to economic progress.",
+        "C": "The revival of the economy depends on international cooperation.",
+        "D": "A long history of success may pave the way for further development."
+      },
+      "answer": "B",
+      "analysis": "文章把“竞争弱→优势丧失”与“竞争压力→反思复苏”联系起来，可推出激烈竞争可能促进经济进步。A 把个人心态泛化为 human nature，C 无中生有，D 与首段“长久成功可能是障碍”相反。",
+      "translation": "从文章可以推断出什么？"
+    },
+    {
+      "id": "en-t1-i2",
+      "topic": "推理判断-首段隐含",
+      "type": "single",
+      "question": "The first paragraph suggests that long effortless success may be a handicap because _____.",
+      "options": {
+        "A": "it makes a country’s scientists less talented",
+        "B": "it reduces the size of the domestic market",
+        "C": "it may leave a country unprepared when competition returns",
+        "D": "it directly destroys other economies"
+      },
+      "answer": "C",
+      "analysis": "首段说轻松成功可能是障碍，第二段立即写他国富裕后优势缩小、竞争回归时美国人不知所措，故可推知轻松成功使国家应对竞争的能力不足；A/B/D 均与原文无因果对应。",
+      "translation": "首段暗示长期轻松成功可能成为障碍，是因为_____。"
+    },
+    {
+      "id": "en-t1-i3",
+      "topic": "推理判断-调查态度",
+      "type": "single",
+      "question": "It can be inferred from paragraphs 2–3 that the inquiries into industrial decline were probably _____.",
+      "options": {
+        "A": "satisfied with American business methods",
+        "B": "concerned about growing competition from overseas",
+        "C": "focused only on education reform",
+        "D": "unaware of foreign competition"
+      },
+      "answer": "B",
+      "analysis": "第三段末句说调查结果充满对海外竞争加剧的警告，说明调查者关注海外竞争；A 与“认为经营方式失败”相反，C 无中生有，D 与原文直接矛盾。",
+      "translation": "从第二、三段可推知，关于产业衰退的调查很可能_____。"
+    },
+    {
+      "id": "en-t1-i4",
+      "topic": "推理判断-因果链",
+      "type": "single",
+      "question": "The crisis of confidence in paragraph 3 most likely resulted from _____.",
+      "options": {
+        "A": "five years of solid growth",
+        "B": "losing prosperity and industrial competitiveness",
+        "C": "Japan’s long struggle",
+        "D": "the golden age of management"
+      },
+      "answer": "B",
+      "analysis": "第三段 All of this 指代第二段的产业萎缩、外国竞争涌入、优势后退；美国人开始认为繁荣不再理所当然且经营方式失败，因此信心危机源于繁荣与竞争力的丧失。A/D 属 1990 年代，C 非原因。",
+      "translation": "第三段的信心危机最可能源于_____。"
+    },
+    {
+      "id": "en-t1-i5",
+      "topic": "推理判断-对比逻辑",
+      "type": "single",
+      "question": "The comparison of the U.S. in the 1980s and 1990s implies that _____.",
+      "options": {
+        "A": "economic conditions never really change",
+        "B": "self-doubt and pride are equally reliable",
+        "C": "competition and reassessment can accompany economic revival",
+        "D": "international cooperation caused the decline"
+      },
+      "answer": "C",
+      "analysis": "1980 年代在竞争压力下反思产业衰退，1990 年代出现稳定增长；文章整体暗示竞争与反思可能伴随经济复苏。A 与 How things have changed 矛盾，B/D 无依据。",
+      "translation": "对比美国 1980 年代与 1990 年代可推知_____。"
+    }
+  ],
+  "quizQuestions": [
+    {
+      "id": "en-t1-i1",
+      "topic": "推理判断-全文主旨",
+      "type": "single",
+      "question": "What can be inferred from the passage?",
+      "options": {
+        "A": "It is human nature to shift between self-doubt and blind pride.",
+        "B": "Intense competition may contribute to economic progress.",
+        "C": "The revival of the economy depends on international cooperation.",
+        "D": "A long history of success may pave the way for further development."
+      },
+      "answer": "B",
+      "analysis": "文章把“竞争弱→优势丧失”与“竞争压力→反思复苏”联系起来，可推出激烈竞争可能促进经济进步。A 把个人心态泛化为 human nature，C 无中生有，D 与首段“长久成功可能是障碍”相反。",
+      "translation": "从文章可以推断出什么？"
+    },
+    {
+      "id": "en-t1-i2",
+      "topic": "推理判断-首段隐含",
+      "type": "single",
+      "question": "The first paragraph suggests that long effortless success may be a handicap because _____.",
+      "options": {
+        "A": "it makes a country’s scientists less talented",
+        "B": "it reduces the size of the domestic market",
+        "C": "it may leave a country unprepared when competition returns",
+        "D": "it directly destroys other economies"
+      },
+      "answer": "C",
+      "analysis": "首段说轻松成功可能是障碍，第二段立即写他国富裕后优势缩小、竞争回归时美国人不知所措，故可推知轻松成功使国家应对竞争的能力不足；A/B/D 均与原文无因果对应。",
+      "translation": "首段暗示长期轻松成功可能成为障碍，是因为_____。"
+    },
+    {
+      "id": "en-t1-i3",
+      "topic": "推理判断-调查态度",
+      "type": "single",
+      "question": "It can be inferred from paragraphs 2–3 that the inquiries into industrial decline were probably _____.",
+      "options": {
+        "A": "satisfied with American business methods",
+        "B": "concerned about growing competition from overseas",
+        "C": "focused only on education reform",
+        "D": "unaware of foreign competition"
+      },
+      "answer": "B",
+      "analysis": "第三段末句说调查结果充满对海外竞争加剧的警告，说明调查者关注海外竞争；A 与“认为经营方式失败”相反，C 无中生有，D 与原文直接矛盾。",
+      "translation": "从第二、三段可推知，关于产业衰退的调查很可能_____。"
+    },
+    {
+      "id": "en-t1-i4",
+      "topic": "推理判断-因果链",
+      "type": "single",
+      "question": "The crisis of confidence in paragraph 3 most likely resulted from _____.",
+      "options": {
+        "A": "five years of solid growth",
+        "B": "losing prosperity and industrial competitiveness",
+        "C": "Japan’s long struggle",
+        "D": "the golden age of management"
+      },
+      "answer": "B",
+      "analysis": "第三段 All of this 指代第二段的产业萎缩、外国竞争涌入、优势后退；美国人开始认为繁荣不再理所当然且经营方式失败，因此信心危机源于繁荣与竞争力的丧失。A/D 属 1990 年代，C 非原因。",
+      "translation": "第三段的信心危机最可能源于_____。"
+    },
+    {
+      "id": "en-t1-i5",
+      "topic": "推理判断-对比逻辑",
+      "type": "single",
+      "question": "The comparison of the U.S. in the 1980s and 1990s implies that _____.",
+      "options": {
+        "A": "economic conditions never really change",
+        "B": "self-doubt and pride are equally reliable",
+        "C": "competition and reassessment can accompany economic revival",
+        "D": "international cooperation caused the decline"
+      },
+      "answer": "C",
+      "analysis": "1980 年代在竞争压力下反思产业衰退，1990 年代出现稳定增长；文章整体暗示竞争与反思可能伴随经济复苏。A 与 How things have changed 矛盾，B/D 无依据。",
+      "translation": "对比美国 1980 年代与 1990 年代可推知_____。"
+    }
+  ],
+  "examQuestions": [
+    {
+      "id": "en-t1-ie1",
+      "topic": "推理判断-全文结论",
+      "type": "single",
+      "question": "Which conclusion is best supported by the whole passage?",
+      "options": {
+        "A": "The United States never had real economic advantages.",
+        "B": "Competitive pressure can push a country to rethink and revive its economy.",
+        "C": "A large domestic market guarantees permanent success.",
+        "D": "Expert opinions always reveal the true cause of economic growth."
+      },
+      "answer": "B",
+      "analysis": "全文主线是优势—衰退—信心危机—反思—复苏，且首段说轻松成功可能是障碍，故竞争压力促使反思并可能带来复苏最受支持；A 与首段事实矛盾，C 与“必然缩小”矛盾，D 与作者引用专家时的保留态度矛盾。",
+      "translation": "全文最支持的结论是_____。"
+    },
+    {
+      "id": "en-t1-ie2",
+      "topic": "推理判断-句间逻辑",
+      "type": "single",
+      "question": "From “Few Americans attribute this solely to …” we can infer that the author thinks _____.",
+      "options": {
+        "A": "the obvious causes should be completely ignored",
+        "B": "many Americans overlooked obvious causes while feeling proud",
+        "C": "the economy revived without any cause",
+        "D": "the business cycle is irrelevant"
+      },
+      "answer": "B",
+      "analysis": "Few 表否定，self-doubt has yielded to blind pride 紧随其后；作者暗示美国人在自豪中忽视了美元贬值、经济周期这些明显原因。A/D 曲解 Few，C 荒谬。",
+      "translation": "由“几乎没有美国人仅仅把它归因于明显原因”可推知作者认为_____。"
+    },
+    {
+      "id": "en-t1-ie3",
+      "topic": "推理判断-情绪变化",
+      "type": "single",
+      "question": "The passage implies that the U.S. recovery in the 1990s was accompanied by _____.",
+      "options": {
+        "A": "a return to effortless success",
+        "B": "blind pride among Americans",
+        "C": "a collapse in productivity",
+        "D": "rapid Japanese growth"
+      },
+      "answer": "B",
+      "analysis": "第四段明确 Self-doubt has yielded to blind pride，并引用三位专家的乐观评价，说明复苏伴随盲目自豪；A 与作者强调结构性反思不符，C/D 与原文相反。",
+      "translation": "文章暗示 1990 年代美国经济复苏伴随着_____。"
+    }
+  ]
+}

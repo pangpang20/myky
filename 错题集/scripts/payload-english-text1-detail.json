@@ -1,0 +1,218 @@
+{
+  "itemId": "英语-阅读细节理解",
+  "subject": "英语",
+  "file": "英语/2000年考研英语阅读Text1美国经济兴衰错题.md",
+  "knowledge": "## 英语阅读·细节理解\n\n本知识点聚焦：把选项与原文精确比对，识别时间、主体、范围与例证目的。\n\n### 题型定位方法\n\n1. 先读题干关键词（人名、时间、行业名、形容词态度词），回原文定位到具体句群。\n2. 细节题坚持“原文同义改写才算对”：选项多一个 not、only、all、never，或与原文主体不一致，直接排除。\n3. 推理题答案必须是原文可推出的“小一步”结论；不能把原文某句主观心态扩大成 human nature、history law 等宏大命题。\n4. 作者态度题抓评价词（Few、blind、obvious、sensational、sweeping）和引用位置；引用专家的话未必等于作者认同。\n\n### 本文对应证据\n\n- 第 11 题（已答对）：战后优势与“他国经济被战争摧毁”相关，答案 C。\n- 第 12 题（错题）：美国汽车和纺织品行业失去部分国内市场，由“Foreign-made cars and textiles were sweeping into the domestic market”直接体现，答案 D；用户误选 A，把“电视制造商只剩一家/被收购”错读成“撤回到国内市场”。\n- 第 13 题（错题）：竞争弱时优势难以长期维持，竞争加剧反而促使反思与复苏，可推出“激烈竞争可能促进经济进步”，答案 B；用户误选 A，把“self-doubt → blind pride”这一美国人的心理变化夸大为 human nature。\n- 第 14 题（错题）：第 4 段③句“Few Americans attribute this solely to such obvious causes as a devalued dollar or the turning of the business cycle”配合④句“Self-doubt has yielded to blind pride”，说明作者认为明显原因被忽视，答案 A；用户误选 B，把 Cavanagh 等被引者的观点当成作者结论。\n\n## 考研速记规律（一看就会）\n\n1. **主体-时间-范围三对齐**：选项中主体（TV/semiconductor/machine-tool）、时间（1987/mid-1980s/1995）、范围（only/some/few/all）必须与原文一致；Zenith 题的陷阱就是“韩国收购”被改成“日本收购”。\n2. **例证目的向前找**：例子前若是“Some huge industries … had shrunk or vanished”，例子只服务于“萎缩/消失”，不服务于“技术先进”或“市场扩大”。\n3. **短语熟词僻义秒判**：on the ropes 前有 shrunk、vanished、fading 等负面词链 → 选“岌岌可危”；at the heart of = 核心；solid growth = 稳定增长。",
+  "mnemonic": "细节题：先定位，再比对；主体时间范围错，选项再像也排除。",
+  "keyPoints": [
+    "细节题定位词：时间、行业、人名",
+    "例证目的看前句主题",
+    "on the ropes 在负面语境指岌岌可危",
+    "原文同义改写才可选"
+  ],
+  "rootCauses": {
+    "细节理解-电视业误判": "把“只剩一家电视制造商、后来被韩国 LG 收购”误读成“撤回到国内市场”，没有核对主体与时间。",
+    "细节理解-衰退信号": "未抓住“外国汽车和纺织品涌入国内市场=美国失去部分国内市场”的同义改写。"
+  },
+  "ebbinghausQuestions": [
+    {
+      "id": "en-t1-d1",
+      "topic": "细节理解-产业衰退表现",
+      "type": "single",
+      "question": "According to paragraph 2, which development most directly signaled declining U.S. industrial competitiveness?",
+      "options": {
+        "A": "Foreign-made cars and textiles were sweeping into the domestic market.",
+        "B": "American scientists became less skilled than before.",
+        "C": "Japan bought the only remaining U.S. television maker.",
+        "D": "The United States invented semiconductors."
+      },
+      "answer": "A",
+      "analysis": "第二段⑥句直接说外国汽车和纺织品涌入国内市场，是美国失去部分国内市场的具体表现。B 与第一段“世界最好”矛盾；C 中买方是韩国 LG 且顺序错；D 是美国的优势事实，不是衰退信号。",
+      "translation": "根据第二段，哪一发展最直接表明美国产业竞争力下降？"
+    },
+    {
+      "id": "en-t1-d2",
+      "topic": "词义猜测-熟词僻义",
+      "type": "single",
+      "question": "In “America’s machine-tool industry was on the ropes,” the phrase “on the ropes” most nearly means _____.",
+      "options": {
+        "A": "expanding rapidly",
+        "B": "in serious trouble",
+        "C": "under foreign ownership",
+        "D": "protected by tariffs"
+      },
+      "answer": "B",
+      "analysis": "前文列举消费电子萎缩、电视制造商只剩一家，语境表明机床业同样处境危险；on the ropes 是拳击用语，引申为“岌岌可危”。",
+      "translation": "“美国机床业 on the ropes”中该短语最接近什么意思？"
+    },
+    {
+      "id": "en-t1-d3",
+      "topic": "细节理解-比对选项",
+      "type": "single",
+      "question": "Which statement about the U.S. TV industry is supported by the passage?",
+      "options": {
+        "A": "It had withdrawn to its domestic market by 1987.",
+        "B": "Only one U.S. maker remained by 1987, and it was later bought by a Korean company.",
+        "C": "It was taken over by Japanese enterprises in July.",
+        "D": "It lost part of its domestic market to textiles."
+      },
+      "answer": "B",
+      "analysis": "第二段⑤句说 1987 年只剩 Zenith 一家，括号内补充它后来被韩国 LG 收购；A 原文未说“撤回到国内市场”，C 国别错误，D 张冠李戴。",
+      "translation": "关于美国电视业，哪一项得到文章支持？"
+    },
+    {
+      "id": "en-t1-d4",
+      "topic": "细节理解-例证目的",
+      "type": "single",
+      "question": "Why does the author mention semiconductors in paragraph 2?",
+      "options": {
+        "A": "To show that U.S. decline had already affected every industry.",
+        "B": "To give an example that even a U.S.-invented core industry seemed likely to become the next casualty.",
+        "C": "To prove that the United States had lost all technological advantages.",
+        "D": "To introduce the history of the computer market."
+      },
+      "answer": "B",
+      "analysis": "半导体是美国发明且处于新计算机时代核心，但连它都“似乎要成为下一个牺牲品”，用来强化衰退之痛；A、C 过度绝对，D 非写作目的。",
+      "translation": "第二段为什么提到半导体？"
+    },
+    {
+      "id": "en-t1-d5",
+      "topic": "细节理解-定位",
+      "type": "single",
+      "question": "Which detail best illustrates “the retreat from predominance proved painful”?",
+      "options": {
+        "A": "The U.S. market was eight times larger than any competitor’s.",
+        "B": "European and Asian economies had been destroyed by the war.",
+        "C": "Consumer-electronics industries shrank or vanished under foreign competition.",
+        "D": "Experts praised the golden age of business management."
+      },
+      "answer": "C",
+      "analysis": "“主导地位后退的痛苦”紧接着由消费电子萎缩/消失、外国商品涌入、机床业岌岌可危等细节说明；A、B 属战后优势背景，D 属 1990 年代复苏。",
+      "translation": "哪一细节最能说明“优势后退是痛苦的”？"
+    }
+  ],
+  "quizQuestions": [
+    {
+      "id": "en-t1-d1",
+      "topic": "细节理解-产业衰退表现",
+      "type": "single",
+      "question": "According to paragraph 2, which development most directly signaled declining U.S. industrial competitiveness?",
+      "options": {
+        "A": "Foreign-made cars and textiles were sweeping into the domestic market.",
+        "B": "American scientists became less skilled than before.",
+        "C": "Japan bought the only remaining U.S. television maker.",
+        "D": "The United States invented semiconductors."
+      },
+      "answer": "A",
+      "analysis": "第二段⑥句直接说外国汽车和纺织品涌入国内市场，是美国失去部分国内市场的具体表现。B 与第一段“世界最好”矛盾；C 中买方是韩国 LG 且顺序错；D 是美国的优势事实，不是衰退信号。",
+      "translation": "根据第二段，哪一发展最直接表明美国产业竞争力下降？"
+    },
+    {
+      "id": "en-t1-d2",
+      "topic": "词义猜测-熟词僻义",
+      "type": "single",
+      "question": "In “America’s machine-tool industry was on the ropes,” the phrase “on the ropes” most nearly means _____.",
+      "options": {
+        "A": "expanding rapidly",
+        "B": "in serious trouble",
+        "C": "under foreign ownership",
+        "D": "protected by tariffs"
+      },
+      "answer": "B",
+      "analysis": "前文列举消费电子萎缩、电视制造商只剩一家，语境表明机床业同样处境危险；on the ropes 是拳击用语，引申为“岌岌可危”。",
+      "translation": "“美国机床业 on the ropes”中该短语最接近什么意思？"
+    },
+    {
+      "id": "en-t1-d3",
+      "topic": "细节理解-比对选项",
+      "type": "single",
+      "question": "Which statement about the U.S. TV industry is supported by the passage?",
+      "options": {
+        "A": "It had withdrawn to its domestic market by 1987.",
+        "B": "Only one U.S. maker remained by 1987, and it was later bought by a Korean company.",
+        "C": "It was taken over by Japanese enterprises in July.",
+        "D": "It lost part of its domestic market to textiles."
+      },
+      "answer": "B",
+      "analysis": "第二段⑤句说 1987 年只剩 Zenith 一家，括号内补充它后来被韩国 LG 收购；A 原文未说“撤回到国内市场”，C 国别错误，D 张冠李戴。",
+      "translation": "关于美国电视业，哪一项得到文章支持？"
+    },
+    {
+      "id": "en-t1-d4",
+      "topic": "细节理解-例证目的",
+      "type": "single",
+      "question": "Why does the author mention semiconductors in paragraph 2?",
+      "options": {
+        "A": "To show that U.S. decline had already affected every industry.",
+        "B": "To give an example that even a U.S.-invented core industry seemed likely to become the next casualty.",
+        "C": "To prove that the United States had lost all technological advantages.",
+        "D": "To introduce the history of the computer market."
+      },
+      "answer": "B",
+      "analysis": "半导体是美国发明且处于新计算机时代核心，但连它都“似乎要成为下一个牺牲品”，用来强化衰退之痛；A、C 过度绝对，D 非写作目的。",
+      "translation": "第二段为什么提到半导体？"
+    },
+    {
+      "id": "en-t1-d5",
+      "topic": "细节理解-定位",
+      "type": "single",
+      "question": "Which detail best illustrates “the retreat from predominance proved painful”?",
+      "options": {
+        "A": "The U.S. market was eight times larger than any competitor’s.",
+        "B": "European and Asian economies had been destroyed by the war.",
+        "C": "Consumer-electronics industries shrank or vanished under foreign competition.",
+        "D": "Experts praised the golden age of business management."
+      },
+      "answer": "C",
+      "analysis": "“主导地位后退的痛苦”紧接着由消费电子萎缩/消失、外国商品涌入、机床业岌岌可危等细节说明；A、B 属战后优势背景，D 属 1990 年代复苏。",
+      "translation": "哪一细节最能说明“优势后退是痛苦的”？"
+    }
+  ],
+  "examQuestions": [
+    {
+      "id": "en-t1-de1",
+      "topic": "细节理解-例证识别",
+      "type": "single",
+      "question": "The author uses Zenith as an example to show _____.",
+      "options": {
+        "A": "the strength of American television technology",
+        "B": "the shrinking or vanishing of huge American industries under foreign competition",
+        "C": "the success of South Korean companies in the U.S. market",
+        "D": "the turning of the business cycle"
+      },
+      "answer": "B",
+      "analysis": "Zenith 的例子紧跟“Some huge American industries … had shrunk or vanished”，是外国竞争下美国产业萎缩/消失的例证；C 只是括号中的附带信息，不是例证目的。",
+      "translation": "作者以 Zenith 为例是为了说明_____。"
+    },
+    {
+      "id": "en-t1-de2",
+      "topic": "细节理解-句意转换",
+      "type": "single",
+      "question": "By “Foreign-made cars and textiles were sweeping into the domestic market,” the author means _____.",
+      "options": {
+        "A": "American cars and textiles were exported in large quantities",
+        "B": "foreign products rapidly gained share in the U.S. market",
+        "C": "the domestic market was closed to foreign goods",
+        "D": "the U.S. auto industry improved its productivity"
+      },
+      "answer": "B",
+      "analysis": "sweep into 表示“大举涌入”，domestic market 指国内市场，因此句意是外国产品迅速进入并占据美国市场份额。",
+      "translation": "“外国汽车和纺织品涌入国内市场”意为_____。"
+    },
+    {
+      "id": "en-t1-de3",
+      "topic": "细节理解-排除题",
+      "type": "single",
+      "question": "Which of the following is NOT mentioned as a sign of U.S. industrial decline?",
+      "options": {
+        "A": "Consumer electronics shrank or vanished.",
+        "B": "The machine-tool industry was on the ropes.",
+        "C": "Semiconductor making seemed to be the next casualty.",
+        "D": "The education system collapsed."
+      },
+      "answer": "D",
+      "analysis": "A、B、C 均在第二段出现；教育系统崩溃文中未提及，属于无中生有。",
+      "translation": "以下哪项未被提及为美国产业衰退的迹象？"
+    }
+  ]
+}
