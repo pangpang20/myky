@@ -1,6 +1,134 @@
 [
   {
     "subject": "高等数学",
+    "itemId": "高等数学-二阶常系数非齐次线性微分方程",
+    "id": "hm-ode2-1",
+    "topic": "齐次通解",
+    "type": "single",
+    "question": "微分方程 $y''+2y'+y=0$ 的特征方程与齐次通解是（ ）。",
+    "options": {
+      "A": "$r^{2}+2r+1=0$，$y=(C_1+C_2x)e^{-x}$",
+      "B": "$r^{2}+2r+1=0$，$y=C_1e^{-x}+C_2e^{x}$",
+      "C": "$r^{2}-2r+1=0$，$y=(C_1+C_2x)e^{x}$",
+      "D": "$r^{2}+1=0$，$y=C_1cos x+C_2sin x$"
+    },
+    "answer": "A",
+    "analysis": "$r=-1$ 为二重根，齐次通解 $(C_1+C_2x)e^{-x}$。"
+  },
+  {
+    "subject": "高等数学",
+    "itemId": "高等数学-二阶常系数非齐次线性微分方程",
+    "id": "hm-ode2-2",
+    "topic": "特解设法",
+    "type": "single",
+    "question": "求 $y''+2y'+y=xe^{x}$ 的特解时，应设特解形式为（ ）。",
+    "options": {
+      "A": "$axe^{x}$",
+      "B": "$(ax+b)e^{x}$",
+      "C": "$x(ax+b)e^{x}$",
+      "D": "$x^{2}(ax+b)e^{x}$"
+    },
+    "answer": "B",
+    "analysis": "$lambda=1$ 非特征根，不乘 $x$，设 $(ax+b)e^{x}$。"
+  },
+  {
+    "subject": "高等数学",
+    "itemId": "高等数学-二阶常系数非齐次线性微分方程",
+    "id": "hm-ode2-3",
+    "topic": "特解系数",
+    "type": "single",
+    "question": "$y''+2y'+y=xe^{x}$ 的特解 $y_p=\frac14(x-1)e^{x}$ 中，系数 $b$ 为（ ）。",
+    "options": {
+      "A": "$\frac14$",
+      "B": "$0$",
+      "C": "$-\frac14$",
+      "D": "$-1$"
+    },
+    "answer": "C",
+    "analysis": "由 $4a=1, 4a+4b=0$ 得 $a=\frac14, b=-\frac14$。"
+  },
+  {
+    "subject": "高等数学",
+    "itemId": "高等数学-二阶常系数非齐次线性微分方程",
+    "id": "hm-ode2-4",
+    "topic": "完整通解",
+    "type": "single",
+    "question": "$y''+2y'+y=xe^{x}$ 的通解是（ ）。",
+    "options": {
+      "A": "$(C_1+C_2x)e^{-x}+\frac14(x-1)e^{x}$",
+      "B": "$C_1e^{-x}+C_2xe^{x}+\frac14(x-1)e^{x}$",
+      "C": "$(C_1+C_2x)e^{x}+\frac14(x-1)e^{-x}$",
+      "D": "$(C_1+C_2x)e^{-x}+\frac14(x+1)e^{x}$"
+    },
+    "answer": "A",
+    "analysis": "齐次解 $(C_1+C_2x)e^{-x}$ 加特解 $\frac14(x-1)e^{x}$。"
+  },
+  {
+    "subject": "高等数学",
+    "itemId": "高等数学-二阶常系数非齐次线性微分方程",
+    "id": "hm-ode2-5",
+    "topic": "共振判定",
+    "type": "single",
+    "question": "方程 $y''+2y'+y=e^{-x}$ 因 $lambda=-1$ 是二重根（共振），其特解应设为（ ）。",
+    "options": {
+      "A": "$Ae^{-x}$",
+      "B": "$Axe^{-x}$",
+      "C": "$Ax^{2}e^{-x}$",
+      "D": "$Ax^{3}e^{-x}$"
+    },
+    "answer": "C",
+    "analysis": "二重根乘 $x^{2}$，设 $Ax^{2}e^{-x}$（$A=\frac12$）。"
+  },
+  {
+    "subject": "高等数学",
+    "itemId": "高等数学-二阶常系数非齐次线性微分方程",
+    "id": "hm-exam-46f6ed61",
+    "topic": "初值问题",
+    "type": "single",
+    "question": "$y''+2y'+y=xe^{x}$ 满足 $y(0)=0, y'(0)=0$ 的特解为（ ）。（历年真题风格）",
+    "options": {
+      "A": "$\frac14(1+x)e^{-x}+\frac14(x-1)e^{x}$",
+      "B": "$\frac14(1-x)e^{-x}+\frac14(x-1)e^{x}$",
+      "C": "$(1+x)e^{-x}+(x-1)e^{x}$",
+      "D": "$\frac14(1+x)e^{-x}+\frac14(x+1)e^{x}$"
+    },
+    "answer": "A",
+    "analysis": "通解代入初值得 $C_1=C_2=\frac14$。"
+  },
+  {
+    "subject": "高等数学",
+    "itemId": "高等数学-二阶常系数非齐次线性微分方程",
+    "id": "hm-exam-fb5f6e6c",
+    "topic": "共振-右移",
+    "type": "single",
+    "question": "方程 $y''-2y'+y=xe^{x}$（$lambda=1$ 为二重根）的一个特解是（ ）。（历年真题风格）",
+    "options": {
+      "A": "$\frac16x^{2}e^{x}$",
+      "B": "$\frac16x^{3}e^{x}$",
+      "C": "$\frac12x^{2}e^{x}$",
+      "D": "$\frac14(x-1)e^{x}$"
+    },
+    "answer": "B",
+    "analysis": "$(D-1)^2(e^{x}v)=e^{x}v''$，$v''=xRightarrow v=\frac{x^{3}}{6}$。"
+  },
+  {
+    "subject": "高等数学",
+    "itemId": "高等数学-二阶常系数非齐次线性微分方程",
+    "id": "hm-exam-8246cb78",
+    "topic": "共振-左移",
+    "type": "single",
+    "question": "方程 $y''+2y'+y=xe^{-x}$（$lambda=-1$ 为二重根）的一个特解是（ ）。（历年真题风格）",
+    "options": {
+      "A": "$\frac16x^{3}e^{-x}$",
+      "B": "$\frac14(x-1)e^{-x}$",
+      "C": "$\frac12x^{2}e^{-x}$",
+      "D": "$\frac16x^{2}e^{-x}$"
+    },
+    "answer": "A",
+    "analysis": "$(D+1)^2(e^{-x}v)=e^{-x}v''$，$v''=xRightarrow v=\frac{x^{3}}{6}$。"
+  },
+  {
+    "subject": "高等数学",
     "itemId": "高等数学-一阶线性微分方程特解",
     "id": "hm-ode-1",
     "type": "single",

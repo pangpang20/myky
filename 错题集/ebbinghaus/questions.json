@@ -1703,6 +1703,134 @@
       },
       "answer": "D",
       "analysis": "标准形 $y'+\\frac{2}{x}y=x$，$\\mu=x^{2}$，$(x^{2}y)'=x^{3}$，$x^{2}y=\\frac{x^{4}}{4}+C$；由 $y(1)=0$ 得 $C=-\\frac{1}{4}$，故 $y(2)=1-\\frac{1}{16}=\\frac{15}{16}$。"
+    },
+    {
+      "id": "r1-726c46ef-b0d4-48a6-9360-eff2f3551978",
+      "itemId": "高等数学-二阶常系数非齐次线性微分方程",
+      "round": 1,
+      "subject": "高等数学",
+      "topic": "齐次通解",
+      "question": "微分方程 $y''+2y'+y=0$ 的特征方程与齐次通解是（ ）。",
+      "options": {
+        "A": "$r^{2}+2r+1=0$，$y=(C_1+C_2x)e^{-x}$",
+        "B": "$r^{2}+2r+1=0$，$y=C_1e^{-x}+C_2e^{x}$",
+        "C": "$r^{2}-2r+1=0$，$y=(C_1+C_2x)e^{x}$",
+        "D": "$r^{2}+1=0$，$y=C_1cos x+C_2sin x$"
+      },
+      "answer": "A",
+      "analysis": "$r=-1$ 为二重根，齐次通解 $(C_1+C_2x)e^{-x}$。"
+    },
+    {
+      "id": "r1-d9a831e9-8f74-4b1b-b575-5a987a1d2a05",
+      "itemId": "高等数学-二阶常系数非齐次线性微分方程",
+      "round": 1,
+      "subject": "高等数学",
+      "topic": "特解设法",
+      "question": "求 $y''+2y'+y=xe^{x}$ 的特解时，应设特解形式为（ ）。",
+      "options": {
+        "A": "$axe^{x}$",
+        "B": "$(ax+b)e^{x}$",
+        "C": "$x(ax+b)e^{x}$",
+        "D": "$x^{2}(ax+b)e^{x}$"
+      },
+      "answer": "B",
+      "analysis": "$lambda=1$ 非特征根，不乘 $x$，设 $(ax+b)e^{x}$。"
+    },
+    {
+      "id": "r1-ada539f8-d62c-44fa-bc32-f34eb2b8342b",
+      "itemId": "高等数学-二阶常系数非齐次线性微分方程",
+      "round": 1,
+      "subject": "高等数学",
+      "topic": "特解系数",
+      "question": "$y''+2y'+y=xe^{x}$ 的特解 $y_p=\frac14(x-1)e^{x}$ 中，系数 $b$ 为（ ）。",
+      "options": {
+        "A": "$\frac14$",
+        "B": "$0$",
+        "C": "$-\frac14$",
+        "D": "$-1$"
+      },
+      "answer": "C",
+      "analysis": "由 $4a=1, 4a+4b=0$ 得 $a=\frac14, b=-\frac14$。"
+    },
+    {
+      "id": "r1-474ffd6a-56fe-4920-852d-31cdfcf7af37",
+      "itemId": "高等数学-二阶常系数非齐次线性微分方程",
+      "round": 1,
+      "subject": "高等数学",
+      "topic": "完整通解",
+      "question": "$y''+2y'+y=xe^{x}$ 的通解是（ ）。",
+      "options": {
+        "A": "$(C_1+C_2x)e^{-x}+\frac14(x-1)e^{x}$",
+        "B": "$C_1e^{-x}+C_2xe^{x}+\frac14(x-1)e^{x}$",
+        "C": "$(C_1+C_2x)e^{x}+\frac14(x-1)e^{-x}$",
+        "D": "$(C_1+C_2x)e^{-x}+\frac14(x+1)e^{x}$"
+      },
+      "answer": "A",
+      "analysis": "齐次解 $(C_1+C_2x)e^{-x}$ 加特解 $\frac14(x-1)e^{x}$。"
+    },
+    {
+      "id": "r1-dfc2c14a-ecb1-4d6a-80cc-00befa616baa",
+      "itemId": "高等数学-二阶常系数非齐次线性微分方程",
+      "round": 1,
+      "subject": "高等数学",
+      "topic": "共振判定",
+      "question": "方程 $y''+2y'+y=e^{-x}$ 因 $lambda=-1$ 是二重根（共振），其特解应设为（ ）。",
+      "options": {
+        "A": "$Ae^{-x}$",
+        "B": "$Axe^{-x}$",
+        "C": "$Ax^{2}e^{-x}$",
+        "D": "$Ax^{3}e^{-x}$"
+      },
+      "answer": "C",
+      "analysis": "二重根乘 $x^{2}$，设 $Ax^{2}e^{-x}$（$A=\frac12$）。"
+    },
+    {
+      "id": "r1-c5a2b48f-880b-4625-b316-5c96718730ce",
+      "itemId": "高等数学-二阶常系数非齐次线性微分方程",
+      "round": 1,
+      "subject": "高等数学",
+      "topic": "初值问题",
+      "question": "$y''+2y'+y=xe^{x}$ 满足 $y(0)=0, y'(0)=0$ 的特解为（ ）。（历年真题风格）",
+      "options": {
+        "A": "$\frac14(1+x)e^{-x}+\frac14(x-1)e^{x}$",
+        "B": "$\frac14(1-x)e^{-x}+\frac14(x-1)e^{x}$",
+        "C": "$(1+x)e^{-x}+(x-1)e^{x}$",
+        "D": "$\frac14(1+x)e^{-x}+\frac14(x+1)e^{x}$"
+      },
+      "answer": "A",
+      "analysis": "通解代入初值得 $C_1=C_2=\frac14$。"
+    },
+    {
+      "id": "r1-8441d278-944a-4e13-80a6-fcefd4512380",
+      "itemId": "高等数学-二阶常系数非齐次线性微分方程",
+      "round": 1,
+      "subject": "高等数学",
+      "topic": "共振-右移",
+      "question": "方程 $y''-2y'+y=xe^{x}$（$lambda=1$ 为二重根）的一个特解是（ ）。（历年真题风格）",
+      "options": {
+        "A": "$\frac16x^{2}e^{x}$",
+        "B": "$\frac16x^{3}e^{x}$",
+        "C": "$\frac12x^{2}e^{x}$",
+        "D": "$\frac14(x-1)e^{x}$"
+      },
+      "answer": "B",
+      "analysis": "$(D-1)^2(e^{x}v)=e^{x}v''$，$v''=xRightarrow v=\frac{x^{3}}{6}$。"
+    },
+    {
+      "id": "r1-19ca2ebd-ac27-4426-a58a-e57926b86ce3",
+      "itemId": "高等数学-二阶常系数非齐次线性微分方程",
+      "round": 1,
+      "subject": "高等数学",
+      "topic": "共振-左移",
+      "question": "方程 $y''+2y'+y=xe^{-x}$（$lambda=-1$ 为二重根）的一个特解是（ ）。（历年真题风格）",
+      "options": {
+        "A": "$\frac16x^{3}e^{-x}$",
+        "B": "$\frac14(x-1)e^{-x}$",
+        "C": "$\frac12x^{2}e^{-x}$",
+        "D": "$\frac16x^{2}e^{-x}$"
+      },
+      "answer": "A",
+      "analysis": "$(D+1)^2(e^{-x}v)=e^{-x}v''$，$v''=xRightarrow v=\frac{x^{3}}{6}$。"
     }
   ]
 }

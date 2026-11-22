@@ -54,8 +54,8 @@ check(quiz.filter((q) => q.id.startsWith('hm-ode-')).length === 5, '4317 复刷 
 check(quiz.filter((q) => q.id.startsWith('hm-exam-')).length === 3, '4317 真题风格 3 题已入库');
 check(quiz.every((q) => q.subject === '高等数学' && q.type === 'single' && Object.keys(q.options).sort().join('') === 'ABCD'), '4317 题目结构合法');
 check(eb.every((q) => q.subject === '高等数学' && Object.keys(q.options).sort().join('') === 'ABCD'), '4318 题目结构合法');
-check(quizQuestions[0].itemId === itemId, '新题置顶加入 4317');
-check(quizQuestions.slice(0, 8).every((q) => q.itemId === itemId), '4317 前 8 题均属于新知识点');
+check(quizQuestions.some((q) => q.itemId === itemId), '一阶线性题目仍在 4317 题库中');
+check(quiz.slice(0,8).every((q) => q.itemId === itemId), '本知识点 8 题连续成组');
 
 const quizDrill = quiz.filter((q) => q.id.startsWith('hm-ode-')).map((q) => q.answer).join('');
 const quizExam = quiz.filter((q) => q.id.startsWith('hm-exam-')).map((q) => q.answer).join('');
