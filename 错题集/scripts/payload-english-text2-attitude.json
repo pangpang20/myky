@@ -1,0 +1,218 @@
+{
+  "itemId": "英语-阅读作者态度2",
+  "subject": "英语",
+  "file": "英语/2000年考研英语阅读Text2人类进化停滞错题.md",
+  "knowledge": "## 英语阅读·作者态度（Text 2）\n\n本知识点聚焦：识别 dangerous、ugly、mediocrity、Utopia 等评价词的反讽与批判意味。\n\n### 题型定位方法\n\n1. 先看题干中的段落、数字、专有名词和评价词，再回原文定位。\n2. 细节题必须逐项比对主体、时间、比较对象和范围；原文说“过去”，选项换成“现在”就错。\n3. 推理题答案通常是对原文信息的一步概括；标题题要覆盖全文主线，不能用局部细节充当标题。\n4. 态度题抓评价词（dangerous、ugly、mediocrity、Utopia）和比喻；反讽不等于字面赞美。\n\n### 本文对应证据\n\n- 第 15 题：首段数据表明过去男性死亡率高、存活率低，答案 C；用户误选 A，把“未来男孩过剩”与“过去危险”混淆。\n- 第 16 题：印度贫富悬殊但存活率和子女数趋同，自然选择作用下降，答案 B；图片黄色标记若落在 B，则本题实际答对。\n- 第 17 题：第三段 machines and society did it for us，答案 A；图片黄色标记若落在 A，则本题实际答对。\n- 第 18 题：全文讲自然选择减弱、身体未变，最佳标题 Human Evolution Going Nowhere，答案 D；用户选 D 正确。\n\n## 考研速记规律（一看就会）\n\n1. **反讽三件套**：正面大词（Utopia/perfection）+ 负面细节（ugly/little change/mediocrity）= 反讽。\n2. **评价词定态度**：dangerous、ugly 是负面；grand mediocrity 表面中性，语境中指进化差异削弱。\n3. **作者与例证分离**：印度部落不是“基因优越”，而是用来说明差异减少使自然选择变弱。\n4. **末段语气**：后代惊讶的是我们离乌托邦远，而他们长得一样；笑点/讽刺点在“身体没变”。",
+  "mnemonic": "正面词配负面细节，多半是反讽；例证不评价人群优劣。",
+  "keyPoints": [
+    "Utopia 在文中是反讽",
+    "ugly 表明负面评价",
+    "mediocrity 指差异削弱",
+    "印度例子不比较基因优劣"
+  ],
+  "rootCauses": {
+    "作者态度-标题": "D 项 Human Evolution Going Nowhere 正确，需巩固反讽标题识别。",
+    "作者态度-例证": "不要把自然选择力下降误读为阶层或种族优劣判断。"
+  },
+  "ebbinghausQuestions": [
+    {
+      "id": "en-t2-a1",
+      "topic": "作者态度-隐含归因",
+      "type": "single",
+      "question": "The author seems to believe human evolution has stopped mainly because _____.",
+      "options": {
+        "A": "technology and society replaced natural selection",
+        "B": "humans reached the biological Utopia physically",
+        "C": "women no longer give birth to many children",
+        "D": "men and women now have the same survival rate"
+      },
+      "answer": "A",
+      "analysis": "末段明确 We did not evolve, because machines and society did it for us；社会技术替代自然选择是核心原因。B 是反讽表述，C/D 只是局部现象。",
+      "translation": "作者认为人类进化停止主要因为_____。"
+    },
+    {
+      "id": "en-t2-a2",
+      "topic": "作者态度-反讽识别",
+      "type": "single",
+      "question": "The phrase “biological Utopia” is used with _____.",
+      "options": {
+        "A": "pure admiration",
+        "B": "irony",
+        "C": "scientific neutrality",
+        "D": "religious devotion"
+      },
+      "answer": "B",
+      "analysis": "上下文说物理变化很小、20 世纪生活 ugly beyond comprehension，故 Utopia 是反讽，不是赞美。",
+      "translation": "“生物乌托邦”一词带有_____语气。"
+    },
+    {
+      "id": "en-t2-a3",
+      "topic": "作者态度-评价词",
+      "type": "single",
+      "question": "Which word best describes the author’s view of the 20th-century way of life?",
+      "options": {
+        "A": "Ignorant",
+        "B": "Ugly",
+        "C": "Perfect",
+        "D": "Primitive"
+      },
+      "answer": "B",
+      "analysis": "原文 No doubt we will remember a 20th century way of life beyond comprehension for its ugliness；ugliness 是明确负面评价。",
+      "translation": "哪个词最能描述作者对 20 世纪生活方式的看法？"
+    },
+    {
+      "id": "en-t2-a4",
+      "topic": "作者态度-例证态度",
+      "type": "single",
+      "question": "Why does the author say India’s upper-middle class has lost 80% of natural selection power compared to tribes?",
+      "options": {
+        "A": "To praise upper-middle-class lifestyle",
+        "B": "To show that reduced differences weaken natural selection",
+        "C": "To argue that tribes have better genes",
+        "D": "To predict India’s population collapse"
+      },
+      "answer": "B",
+      "analysis": "这一数据是印度例证的结论，服务于“差异减少使自然选择机会减少”的论点，无赞美或基因优劣含义。",
+      "translation": "作者为何说印度中上层阶级自然选择力下降？"
+    },
+    {
+      "id": "en-t2-a5",
+      "topic": "作者态度-结论判断",
+      "type": "single",
+      "question": "What can be concluded about the author’s attitude toward modern biological change?",
+      "options": {
+        "A": "It is faster than ever.",
+        "B": "It is largely halted in the body while life changes technologically.",
+        "C": "It has made humans unrecognizable.",
+        "D": "It is controlled by religious communities."
+      },
+      "answer": "B",
+      "analysis": "末段 lives transformed but bodies have not，机器和社会完成改变，身体几乎不变；这体现作者对现代生物变化的基本判断。",
+      "translation": "关于现代生物变化，作者的态度/判断是_____。"
+    }
+  ],
+  "quizQuestions": [
+    {
+      "id": "en-t2-a1",
+      "topic": "作者态度-隐含归因",
+      "type": "single",
+      "question": "The author seems to believe human evolution has stopped mainly because _____.",
+      "options": {
+        "A": "technology and society replaced natural selection",
+        "B": "humans reached the biological Utopia physically",
+        "C": "women no longer give birth to many children",
+        "D": "men and women now have the same survival rate"
+      },
+      "answer": "A",
+      "analysis": "末段明确 We did not evolve, because machines and society did it for us；社会技术替代自然选择是核心原因。B 是反讽表述，C/D 只是局部现象。",
+      "translation": "作者认为人类进化停止主要因为_____。"
+    },
+    {
+      "id": "en-t2-a2",
+      "topic": "作者态度-反讽识别",
+      "type": "single",
+      "question": "The phrase “biological Utopia” is used with _____.",
+      "options": {
+        "A": "pure admiration",
+        "B": "irony",
+        "C": "scientific neutrality",
+        "D": "religious devotion"
+      },
+      "answer": "B",
+      "analysis": "上下文说物理变化很小、20 世纪生活 ugly beyond comprehension，故 Utopia 是反讽，不是赞美。",
+      "translation": "“生物乌托邦”一词带有_____语气。"
+    },
+    {
+      "id": "en-t2-a3",
+      "topic": "作者态度-评价词",
+      "type": "single",
+      "question": "Which word best describes the author’s view of the 20th-century way of life?",
+      "options": {
+        "A": "Ignorant",
+        "B": "Ugly",
+        "C": "Perfect",
+        "D": "Primitive"
+      },
+      "answer": "B",
+      "analysis": "原文 No doubt we will remember a 20th century way of life beyond comprehension for its ugliness；ugliness 是明确负面评价。",
+      "translation": "哪个词最能描述作者对 20 世纪生活方式的看法？"
+    },
+    {
+      "id": "en-t2-a4",
+      "topic": "作者态度-例证态度",
+      "type": "single",
+      "question": "Why does the author say India’s upper-middle class has lost 80% of natural selection power compared to tribes?",
+      "options": {
+        "A": "To praise upper-middle-class lifestyle",
+        "B": "To show that reduced differences weaken natural selection",
+        "C": "To argue that tribes have better genes",
+        "D": "To predict India’s population collapse"
+      },
+      "answer": "B",
+      "analysis": "这一数据是印度例证的结论，服务于“差异减少使自然选择机会减少”的论点，无赞美或基因优劣含义。",
+      "translation": "作者为何说印度中上层阶级自然选择力下降？"
+    },
+    {
+      "id": "en-t2-a5",
+      "topic": "作者态度-结论判断",
+      "type": "single",
+      "question": "What can be concluded about the author’s attitude toward modern biological change?",
+      "options": {
+        "A": "It is faster than ever.",
+        "B": "It is largely halted in the body while life changes technologically.",
+        "C": "It has made humans unrecognizable.",
+        "D": "It is controlled by religious communities."
+      },
+      "answer": "B",
+      "analysis": "末段 lives transformed but bodies have not，机器和社会完成改变，身体几乎不变；这体现作者对现代生物变化的基本判断。",
+      "translation": "关于现代生物变化，作者的态度/判断是_____。"
+    }
+  ],
+  "examQuestions": [
+    {
+      "id": "en-t2-ae1",
+      "topic": "作者态度-标题选择",
+      "type": "single",
+      "question": "Which title best reflects the author’s ironic view of modern human evolution?",
+      "options": {
+        "A": "Human Evolution Going Nowhere",
+        "B": "The Triumph of Natural Selection",
+        "C": "A New Age of Physical Perfection",
+        "D": "Sex Ratio and Marriage Markets"
+      },
+      "answer": "A",
+      "analysis": "Going Nowhere 概括进化停滞并带反讽；B/C 与原文相反，D 过窄。",
+      "translation": "哪个标题最能体现作者对现代进化的反讽看法？"
+    },
+    {
+      "id": "en-t2-ae2",
+      "topic": "作者态度-词汇评价",
+      "type": "single",
+      "question": "In “the grand mediocrity of today,” the word “mediocrity” suggests the author sees uniformity as _____.",
+      "options": {
+        "A": "a sign of biological progress",
+        "B": "a weakening of evolutionary differences",
+        "C": "a moral virtue",
+        "D": "a temporary phenomenon"
+      },
+      "answer": "B",
+      "analysis": "mediocrity 与 everyone being the same 连用，说明平均化削弱进化差异，非道德赞美。",
+      "translation": "“普遍的平庸”暗示作者把同质化视为_____。"
+    },
+    {
+      "id": "en-t2-ae3",
+      "topic": "作者态度-归纳",
+      "type": "single",
+      "question": "Which statement would the author most likely agree with?",
+      "options": {
+        "A": "Modern machines reduce the need for physical evolution.",
+        "B": "Natural selection is stronger in rich countries than in tribes.",
+        "C": "Human bodies will soon resemble ships.",
+        "D": "A high birth rate alone guarantees evolution."
+      },
+      "answer": "A",
+      "analysis": "机器与社会替我们改变生活，身体未随之进化；B 与印度例子相反，C 曲解比喻，D 无依据。",
+      "translation": "作者最可能同意哪项？"
+    }
+  ]
+}

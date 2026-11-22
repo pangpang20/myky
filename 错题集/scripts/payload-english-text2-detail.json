@@ -1,0 +1,218 @@
+{
+  "itemId": "英语-阅读细节理解2",
+  "subject": "英语",
+  "file": "英语/2000年考研英语阅读Text2人类进化停滞错题.md",
+  "knowledge": "## 英语阅读·细节理解（Text 2）\n\n本知识点聚焦：比对数字、时间和例证对象，避免把“现在变化”误作“过去危险”。\n\n### 题型定位方法\n\n1. 先看题干中的段落、数字、专有名词和评价词，再回原文定位。\n2. 细节题必须逐项比对主体、时间、比较对象和范围；原文说“过去”，选项换成“现在”就错。\n3. 推理题答案通常是对原文信息的一步概括；标题题要覆盖全文主线，不能用局部细节充当标题。\n4. 态度题抓评价词（dangerous、ugly、mediocrity、Utopia）和比喻；反讽不等于字面赞美。\n\n### 本文对应证据\n\n- 第 15 题：首段数据表明过去男性死亡率高、存活率低，答案 C；用户误选 A，把“未来男孩过剩”与“过去危险”混淆。\n- 第 16 题：印度贫富悬殊但存活率和子女数趋同，自然选择作用下降，答案 B；图片黄色标记若落在 B，则本题实际答对。\n- 第 17 题：第三段 machines and society did it for us，答案 A；图片黄色标记若落在 A，则本题实际答对。\n- 第 18 题：全文讲自然选择减弱、身体未变，最佳标题 Human Evolution Going Nowhere，答案 D；用户选 D 正确。\n\n## 考研速记规律（一看就会）\n\n1. **过去/现在二分法**：题干出现 used to、fifty years ago 时，答案必须回到对应过去句；now/today 后的信息常用于对比，不可倒灌。\n2. **数字服务论点**：105:100、成熟期平衡、70 岁 2:1 不是纯数据，统一指向“过去男性存活率较低”；不要抓住 mate 一词就选“缺配偶”。\n3. **例证向前找主题句**：India 例子前是 differences ... diminished；例子结论自然选择 lost 80% power，选“自然选择几乎不起作用”。",
+  "mnemonic": "细节题：时间先分层，数字看指向，例子向前找论点。",
+  "keyPoints": [
+    "used to / fifty years ago 对应过去信息",
+    "性别比数据指向男性死亡率",
+    "India 例证自然选择作用减弱",
+    "machines and society 是末段关键原因"
+  ],
+  "rootCauses": {
+    "细节理解-第15题": "把后文未来男孩过剩导致寻找配偶竞争的推论，错当成首段过去男性危险；没有抓 male mortality。",
+    "细节理解-标记核对": "第16、17题黄色标记与官方答案一致，登记时按用户说明保留核对记录。"
+  },
+  "ebbinghausQuestions": [
+    {
+      "id": "en-t2-d1",
+      "topic": "细节理解-男性危险",
+      "type": "single",
+      "question": "What used to be the danger in being a man according to the first paragraph?",
+      "options": {
+        "A": "A lack of mates.",
+        "B": "A fierce competition.",
+        "C": "A lower survival rate.",
+        "D": "A defective gene."
+      },
+      "answer": "C",
+      "analysis": "首段先说男性出生多但到成熟期接近平衡、70 岁女性是男性两倍，随后点明 male mortality 高这一规律正在改变；过去的危险是男性死亡率更高，即存活率更低。用户误选 A，把后文“未来男孩过剩”错当过去危险。",
+      "translation": "根据第一段，做男人过去有什么危险？"
+    },
+    {
+      "id": "en-t2-d2",
+      "topic": "细节理解-婴儿体重",
+      "type": "single",
+      "question": "Fifty years ago, what determined whether a baby, especially a boy baby, survived?",
+      "options": {
+        "A": "Its weight.",
+        "B": "Its intelligence.",
+        "C": "Its family wealth.",
+        "D": "Its birth order."
+      },
+      "answer": "A",
+      "analysis": "第二段前部明确说五十年前婴儿存活取决于体重，轻一公斤或重一公斤几乎必死；如今几乎没有影响。",
+      "translation": "五十年前，什么决定婴儿能否存活？"
+    },
+    {
+      "id": "en-t2-d3",
+      "topic": "细节理解-印度例证",
+      "type": "single",
+      "question": "What does the example of India illustrate?",
+      "options": {
+        "A": "Wealthy people tend to have fewer children than poor people.",
+        "B": "Natural selection hardly works among the rich and the poor.",
+        "C": "The middle class population is 80% smaller than that of the tribes.",
+        "D": "India is one of the countries with a very high birth rate."
+      },
+      "answer": "B",
+      "analysis": "印度贫富差距大，但存活率与子女数量趋于一致，因此自然选择在印度中上层阶级作用下降 80%，例证自然选择在贫富群体间几乎不起作用。用户误选 B 其实正确；黄色标记可能看错行。",
+      "translation": "印度的例子说明了什么？"
+    },
+    {
+      "id": "en-t2-d4",
+      "topic": "细节理解-现代出生数",
+      "type": "single",
+      "question": "According to paragraph 2, which statement about birth rates is true?",
+      "options": {
+        "A": "Most women have 15 children.",
+        "B": "Religious communities have stopped having children.",
+        "C": "Most people have roughly the same number of offspring.",
+        "D": "Tribal peoples have fewer children than the middle class."
+      },
+      "answer": "C",
+      "analysis": "第二段说 Most of us have roughly the same number of offspring；A 与 very few women have 15 children 相反，B/D 无中生有。",
+      "translation": "根据第二段，关于出生率哪项正确？"
+    },
+    {
+      "id": "en-t2-d5",
+      "topic": "细节理解-身体未进化",
+      "type": "single",
+      "question": "Why have human bodies not changed greatly in the past 100,000 years?",
+      "options": {
+        "A": "Human bodies reached perfection.",
+        "B": "Machines and society transformed life instead.",
+        "C": "Natural selection became stronger.",
+        "D": "Physical variation disappeared completely."
+      },
+      "answer": "B",
+      "analysis": "第三段明确 We did not evolve, because machines and society did it for us；生活改变由技术与社会承担，身体没有相应变化。",
+      "translation": "为什么过去十万年人的身体没有大变？"
+    }
+  ],
+  "quizQuestions": [
+    {
+      "id": "en-t2-d1",
+      "topic": "细节理解-男性危险",
+      "type": "single",
+      "question": "What used to be the danger in being a man according to the first paragraph?",
+      "options": {
+        "A": "A lack of mates.",
+        "B": "A fierce competition.",
+        "C": "A lower survival rate.",
+        "D": "A defective gene."
+      },
+      "answer": "C",
+      "analysis": "首段先说男性出生多但到成熟期接近平衡、70 岁女性是男性两倍，随后点明 male mortality 高这一规律正在改变；过去的危险是男性死亡率更高，即存活率更低。用户误选 A，把后文“未来男孩过剩”错当过去危险。",
+      "translation": "根据第一段，做男人过去有什么危险？"
+    },
+    {
+      "id": "en-t2-d2",
+      "topic": "细节理解-婴儿体重",
+      "type": "single",
+      "question": "Fifty years ago, what determined whether a baby, especially a boy baby, survived?",
+      "options": {
+        "A": "Its weight.",
+        "B": "Its intelligence.",
+        "C": "Its family wealth.",
+        "D": "Its birth order."
+      },
+      "answer": "A",
+      "analysis": "第二段前部明确说五十年前婴儿存活取决于体重，轻一公斤或重一公斤几乎必死；如今几乎没有影响。",
+      "translation": "五十年前，什么决定婴儿能否存活？"
+    },
+    {
+      "id": "en-t2-d3",
+      "topic": "细节理解-印度例证",
+      "type": "single",
+      "question": "What does the example of India illustrate?",
+      "options": {
+        "A": "Wealthy people tend to have fewer children than poor people.",
+        "B": "Natural selection hardly works among the rich and the poor.",
+        "C": "The middle class population is 80% smaller than that of the tribes.",
+        "D": "India is one of the countries with a very high birth rate."
+      },
+      "answer": "B",
+      "analysis": "印度贫富差距大，但存活率与子女数量趋于一致，因此自然选择在印度中上层阶级作用下降 80%，例证自然选择在贫富群体间几乎不起作用。用户误选 B 其实正确；黄色标记可能看错行。",
+      "translation": "印度的例子说明了什么？"
+    },
+    {
+      "id": "en-t2-d4",
+      "topic": "细节理解-现代出生数",
+      "type": "single",
+      "question": "According to paragraph 2, which statement about birth rates is true?",
+      "options": {
+        "A": "Most women have 15 children.",
+        "B": "Religious communities have stopped having children.",
+        "C": "Most people have roughly the same number of offspring.",
+        "D": "Tribal peoples have fewer children than the middle class."
+      },
+      "answer": "C",
+      "analysis": "第二段说 Most of us have roughly the same number of offspring；A 与 very few women have 15 children 相反，B/D 无中生有。",
+      "translation": "根据第二段，关于出生率哪项正确？"
+    },
+    {
+      "id": "en-t2-d5",
+      "topic": "细节理解-身体未进化",
+      "type": "single",
+      "question": "Why have human bodies not changed greatly in the past 100,000 years?",
+      "options": {
+        "A": "Human bodies reached perfection.",
+        "B": "Machines and society transformed life instead.",
+        "C": "Natural selection became stronger.",
+        "D": "Physical variation disappeared completely."
+      },
+      "answer": "B",
+      "analysis": "第三段明确 We did not evolve, because machines and society did it for us；生活改变由技术与社会承担，身体没有相应变化。",
+      "translation": "为什么过去十万年人的身体没有大变？"
+    }
+  ],
+  "examQuestions": [
+    {
+      "id": "en-t2-de1",
+      "topic": "细节理解-性别比",
+      "type": "single",
+      "question": "Which statistic best supports the claim that being a man used to be dangerous?",
+      "options": {
+        "A": "105 males born per 100 females but near balance at maturity.",
+        "B": "Twice as many men as women among 70-year-olds.",
+        "C": "Boy babies survive as well as girls today.",
+        "D": "Most people have roughly the same number of offspring."
+      },
+      "answer": "A",
+      "analysis": "出生男多女少但成熟期接近平衡，说明成长过程中男性损耗更大；B 与原文相反，C 是当前变化，D 属第二段。",
+      "translation": "哪一统计最能支持过去做男人危险？"
+    },
+    {
+      "id": "en-t2-de2",
+      "topic": "细节理解-基因变异",
+      "type": "single",
+      "question": "Why does the disappearance of weight-related infant mortality matter for evolution?",
+      "options": {
+        "A": "It proves that genes no longer vary.",
+        "B": "It removes another agent of natural selection because much variation is genetic.",
+        "C": "It makes boys mature earlier.",
+        "D": "It increases the number of religious communities."
+      },
+      "answer": "B",
+      "analysis": "原文说体重差异与存活相关，而这些差异很多由基因造成；体重不再影响存活就少了自然选择的一个抓手。",
+      "translation": "体重相关婴儿死亡率消失为何影响进化？"
+    },
+    {
+      "id": "en-t2-de3",
+      "topic": "细节理解-例证功能",
+      "type": "single",
+      "question": "Why does the author mention India in paragraph 2?",
+      "options": {
+        "A": "To show that birth control is religiously forbidden.",
+        "B": "To illustrate that reduced differences in survival and reproduction weaken natural selection.",
+        "C": "To prove that tribal peoples are evolving faster physically.",
+        "D": "To compare Indian and Western sex ratios."
+      },
+      "answer": "B",
+      "analysis": "印度例子前一句讲人与人差异和自然选择机会减少；例子说明即使贫富悬殊，存活和子女数趋同使自然选择作用大减。",
+      "translation": "作者为何在第二段提到印度？"
+    }
+  ]
+}

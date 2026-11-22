@@ -1,6 +1,414 @@
 [
   {
     "subject": "英语",
+    "itemId": "英语-阅读作者态度2",
+    "id": "en-t2-a1",
+    "topic": "作者态度-隐含归因",
+    "type": "single",
+    "question": "The author seems to believe human evolution has stopped mainly because _____.",
+    "options": {
+      "A": "technology and society replaced natural selection",
+      "B": "humans reached the biological Utopia physically",
+      "C": "women no longer give birth to many children",
+      "D": "men and women now have the same survival rate"
+    },
+    "answer": "A",
+    "analysis": "末段明确 We did not evolve, because machines and society did it for us；社会技术替代自然选择是核心原因。B 是反讽表述，C/D 只是局部现象。",
+    "translation": "作者认为人类进化停止主要因为_____。"
+  },
+  {
+    "subject": "英语",
+    "itemId": "英语-阅读作者态度2",
+    "id": "en-t2-a2",
+    "topic": "作者态度-反讽识别",
+    "type": "single",
+    "question": "The phrase “biological Utopia” is used with _____.",
+    "options": {
+      "A": "pure admiration",
+      "B": "irony",
+      "C": "scientific neutrality",
+      "D": "religious devotion"
+    },
+    "answer": "B",
+    "analysis": "上下文说物理变化很小、20 世纪生活 ugly beyond comprehension，故 Utopia 是反讽，不是赞美。",
+    "translation": "“生物乌托邦”一词带有_____语气。"
+  },
+  {
+    "subject": "英语",
+    "itemId": "英语-阅读作者态度2",
+    "id": "en-t2-a3",
+    "topic": "作者态度-评价词",
+    "type": "single",
+    "question": "Which word best describes the author’s view of the 20th-century way of life?",
+    "options": {
+      "A": "Ignorant",
+      "B": "Ugly",
+      "C": "Perfect",
+      "D": "Primitive"
+    },
+    "answer": "B",
+    "analysis": "原文 No doubt we will remember a 20th century way of life beyond comprehension for its ugliness；ugliness 是明确负面评价。",
+    "translation": "哪个词最能描述作者对 20 世纪生活方式的看法？"
+  },
+  {
+    "subject": "英语",
+    "itemId": "英语-阅读作者态度2",
+    "id": "en-t2-a4",
+    "topic": "作者态度-例证态度",
+    "type": "single",
+    "question": "Why does the author say India’s upper-middle class has lost 80% of natural selection power compared to tribes?",
+    "options": {
+      "A": "To praise upper-middle-class lifestyle",
+      "B": "To show that reduced differences weaken natural selection",
+      "C": "To argue that tribes have better genes",
+      "D": "To predict India’s population collapse"
+    },
+    "answer": "B",
+    "analysis": "这一数据是印度例证的结论，服务于“差异减少使自然选择机会减少”的论点，无赞美或基因优劣含义。",
+    "translation": "作者为何说印度中上层阶级自然选择力下降？"
+  },
+  {
+    "subject": "英语",
+    "itemId": "英语-阅读作者态度2",
+    "id": "en-t2-a5",
+    "topic": "作者态度-结论判断",
+    "type": "single",
+    "question": "What can be concluded about the author’s attitude toward modern biological change?",
+    "options": {
+      "A": "It is faster than ever.",
+      "B": "It is largely halted in the body while life changes technologically.",
+      "C": "It has made humans unrecognizable.",
+      "D": "It is controlled by religious communities."
+    },
+    "answer": "B",
+    "analysis": "末段 lives transformed but bodies have not，机器和社会完成改变，身体几乎不变；这体现作者对现代生物变化的基本判断。",
+    "translation": "关于现代生物变化，作者的态度/判断是_____。"
+  },
+  {
+    "subject": "英语",
+    "itemId": "英语-阅读作者态度2",
+    "id": "en-t2-ae1",
+    "topic": "作者态度-标题选择",
+    "type": "single",
+    "question": "Which title best reflects the author’s ironic view of modern human evolution?",
+    "options": {
+      "A": "Human Evolution Going Nowhere",
+      "B": "The Triumph of Natural Selection",
+      "C": "A New Age of Physical Perfection",
+      "D": "Sex Ratio and Marriage Markets"
+    },
+    "answer": "A",
+    "analysis": "Going Nowhere 概括进化停滞并带反讽；B/C 与原文相反，D 过窄。",
+    "translation": "哪个标题最能体现作者对现代进化的反讽看法？"
+  },
+  {
+    "subject": "英语",
+    "itemId": "英语-阅读作者态度2",
+    "id": "en-t2-ae2",
+    "topic": "作者态度-词汇评价",
+    "type": "single",
+    "question": "In “the grand mediocrity of today,” the word “mediocrity” suggests the author sees uniformity as _____.",
+    "options": {
+      "A": "a sign of biological progress",
+      "B": "a weakening of evolutionary differences",
+      "C": "a moral virtue",
+      "D": "a temporary phenomenon"
+    },
+    "answer": "B",
+    "analysis": "mediocrity 与 everyone being the same 连用，说明平均化削弱进化差异，非道德赞美。",
+    "translation": "“普遍的平庸”暗示作者把同质化视为_____。"
+  },
+  {
+    "subject": "英语",
+    "itemId": "英语-阅读作者态度2",
+    "id": "en-t2-ae3",
+    "topic": "作者态度-归纳",
+    "type": "single",
+    "question": "Which statement would the author most likely agree with?",
+    "options": {
+      "A": "Modern machines reduce the need for physical evolution.",
+      "B": "Natural selection is stronger in rich countries than in tribes.",
+      "C": "Human bodies will soon resemble ships.",
+      "D": "A high birth rate alone guarantees evolution."
+    },
+    "answer": "A",
+    "analysis": "机器与社会替我们改变生活，身体未随之进化；B 与印度例子相反，C 曲解比喻，D 无依据。",
+    "translation": "作者最可能同意哪项？"
+  },
+  {
+    "subject": "英语",
+    "itemId": "英语-阅读推理判断2",
+    "id": "en-t2-i1",
+    "topic": "推理判断-标题主旨",
+    "type": "single",
+    "question": "Which of the following would be the best title for the passage?",
+    "options": {
+      "A": "Sex Ratio Changes in Human Evolution.",
+      "B": "Ways of Continuing Man’s Evolution.",
+      "C": "The Evolutionary Future of Nature.",
+      "D": "Human Evolution Going Nowhere."
+    },
+    "answer": "D",
+    "analysis": "全文主线是自然选择机会减少、人类身体停止变化、生物乌托邦到来，标题应概括“人类进化停滞”。A 只涵盖首段性别比，B 与文意相反，C 范围过大。用户选 D 正确。",
+    "translation": "哪项是文章最佳标题？"
+  },
+  {
+    "subject": "英语",
+    "itemId": "英语-阅读推理判断2",
+    "id": "en-t2-i2",
+    "topic": "推理判断-进化停止原因",
+    "type": "single",
+    "question": "The author argues that our bodies have stopped evolving because _____.",
+    "options": {
+      "A": "life has been improved by technological advance",
+      "B": "the number of female babies has been declining",
+      "C": "our species has reached the highest stage of evolution",
+      "D": "the difference between wealth and poverty is disappearing"
+    },
+    "answer": "A",
+    "analysis": "第三段说机器和社会替我们完成了改变，生活被技术改造而身体未变，因此选 A。用户误选 A 其实正确；黄色标记应核对。",
+    "translation": "作者认为身体停止进化是因为_____。"
+  },
+  {
+    "subject": "英语",
+    "itemId": "英语-阅读推理判断2",
+    "id": "en-t2-i3",
+    "topic": "推理判断-乌托邦反讽",
+    "type": "single",
+    "question": "By “the biological Utopia has arrived,” the author most likely means that _____.",
+    "options": {
+      "A": "humans have become physically perfect",
+      "B": "natural selection no longer shapes human bodies much",
+      "C": "poverty has disappeared completely",
+      "D": "everyone lives much longer than before"
+    },
+    "answer": "B",
+    "analysis": "“生物乌托邦”紧跟自然选择机会被消除、死亡率与子女数平均化，且作者说 almost no physical change，可知是反讽自然选择对人的塑造作用大大减弱，非身体完美。",
+    "translation": "“生物乌托邦已经到来”最可能意为_____。"
+  },
+  {
+    "subject": "英语",
+    "itemId": "英语-阅读推理判断2",
+    "id": "en-t2-i4",
+    "topic": "推理判断-社会与技术",
+    "type": "single",
+    "question": "It can be inferred from the last paragraph that technology and society have _____.",
+    "options": {
+      "A": "replaced biological adaptation as the main way human life changes",
+      "B": "made natural selection more intense",
+      "C": "caused major physical changes in humans",
+      "D": "stopped all changes in human life"
+    },
+    "answer": "A",
+    "analysis": "原文 lives have been transformed but our bodies have not；machines and society did it for us，说明技术和社会替代生物适应来改变生活。B/C 与原文相反，D 与 lives transformed 矛盾。",
+    "translation": "从末段可推知技术和社会_____。"
+  },
+  {
+    "subject": "英语",
+    "itemId": "英语-阅读推理判断2",
+    "id": "en-t2-i5",
+    "topic": "推理判断-结尾语气",
+    "type": "single",
+    "question": "What is the author’s tone when saying descendants will “look just like us”?",
+    "options": {
+      "A": "Proud and celebratory",
+      "B": "Ironic and mildly critical",
+      "C": "Completely indifferent",
+      "D": "Fearful of extinction"
+    },
+    "answer": "B",
+    "analysis": "作者把 20 世纪生活称为 beyond comprehension for its ugliness，并说后代虽惊讶但长相一样，语气带反讽和轻微批判，而非自豪或恐惧灭绝。",
+    "translation": "作者说后代“看起来和我们一样”的语气是_____。"
+  },
+  {
+    "subject": "英语",
+    "itemId": "英语-阅读推理判断2",
+    "id": "en-t2-ie1",
+    "topic": "推理判断-全文主线",
+    "type": "single",
+    "question": "Which inference best captures the whole passage?",
+    "options": {
+      "A": "Medical progress has made men and women biologically equal.",
+      "B": "Modern society reduces natural selection and leaves human bodies largely unchanged.",
+      "C": "India will soon eliminate all tribal differences.",
+      "D": "Human evolution will resume once birth rates rise."
+    },
+    "answer": "B",
+    "analysis": "全文两大部分：前两段讲自然选择机会减少，末段讲身体未变、机器社会代替进化；B 最完整。A 只涉及性别比且过度，C/D 无依据。",
+    "translation": "哪项最能概括全文？"
+  },
+  {
+    "subject": "英语",
+    "itemId": "英语-阅读推理判断2",
+    "id": "en-t2-ie2",
+    "topic": "推理判断-平均化",
+    "type": "single",
+    "question": "The repeated idea that death age and birth number have become “average” suggests that _____.",
+    "options": {
+      "A": "individual differences relevant to natural selection have shrunk",
+      "B": "everyone now has the same genes",
+      "C": "religious communities no longer exist",
+      "D": "infant mortality depends more on weight"
+    },
+    "answer": "A",
+    "analysis": "死亡年龄和子女数平均化说明个体差异缩小，自然选择可利用的变异减少；B/D 过度或相反，C 无中生有。",
+    "translation": "死亡年龄和子女数“平均化”暗示_____。"
+  },
+  {
+    "subject": "英语",
+    "itemId": "英语-阅读推理判断2",
+    "id": "en-t2-ie3",
+    "topic": "推理判断-讽刺对象",
+    "type": "single",
+    "question": "The Darwin quotation is mainly used to _____.",
+    "options": {
+      "A": "praise Darwin’s knowledge of ships",
+      "B": "compare people ignorant of evolution to savages who cannot understand a ship",
+      "C": "prove that humans are physically changing rapidly",
+      "D": "explain why men used to have a lower survival rate"
+    },
+    "answer": "B",
+    "analysis": "达尔文名言用“野蛮人看船”比喻不懂进化者看有机生命，强调理解障碍；此处服务于作者对现代人误解进化的反讽。",
+    "translation": "引用达尔文的话主要为了_____。"
+  },
+  {
+    "subject": "英语",
+    "itemId": "英语-阅读细节理解2",
+    "id": "en-t2-d1",
+    "topic": "细节理解-男性危险",
+    "type": "single",
+    "question": "What used to be the danger in being a man according to the first paragraph?",
+    "options": {
+      "A": "A lack of mates.",
+      "B": "A fierce competition.",
+      "C": "A lower survival rate.",
+      "D": "A defective gene."
+    },
+    "answer": "C",
+    "analysis": "首段先说男性出生多但到成熟期接近平衡、70 岁女性是男性两倍，随后点明 male mortality 高这一规律正在改变；过去的危险是男性死亡率更高，即存活率更低。用户误选 A，把后文“未来男孩过剩”错当过去危险。",
+    "translation": "根据第一段，做男人过去有什么危险？"
+  },
+  {
+    "subject": "英语",
+    "itemId": "英语-阅读细节理解2",
+    "id": "en-t2-d2",
+    "topic": "细节理解-婴儿体重",
+    "type": "single",
+    "question": "Fifty years ago, what determined whether a baby, especially a boy baby, survived?",
+    "options": {
+      "A": "Its weight.",
+      "B": "Its intelligence.",
+      "C": "Its family wealth.",
+      "D": "Its birth order."
+    },
+    "answer": "A",
+    "analysis": "第二段前部明确说五十年前婴儿存活取决于体重，轻一公斤或重一公斤几乎必死；如今几乎没有影响。",
+    "translation": "五十年前，什么决定婴儿能否存活？"
+  },
+  {
+    "subject": "英语",
+    "itemId": "英语-阅读细节理解2",
+    "id": "en-t2-d3",
+    "topic": "细节理解-印度例证",
+    "type": "single",
+    "question": "What does the example of India illustrate?",
+    "options": {
+      "A": "Wealthy people tend to have fewer children than poor people.",
+      "B": "Natural selection hardly works among the rich and the poor.",
+      "C": "The middle class population is 80% smaller than that of the tribes.",
+      "D": "India is one of the countries with a very high birth rate."
+    },
+    "answer": "B",
+    "analysis": "印度贫富差距大，但存活率与子女数量趋于一致，因此自然选择在印度中上层阶级作用下降 80%，例证自然选择在贫富群体间几乎不起作用。用户误选 B 其实正确；黄色标记可能看错行。",
+    "translation": "印度的例子说明了什么？"
+  },
+  {
+    "subject": "英语",
+    "itemId": "英语-阅读细节理解2",
+    "id": "en-t2-d4",
+    "topic": "细节理解-现代出生数",
+    "type": "single",
+    "question": "According to paragraph 2, which statement about birth rates is true?",
+    "options": {
+      "A": "Most women have 15 children.",
+      "B": "Religious communities have stopped having children.",
+      "C": "Most people have roughly the same number of offspring.",
+      "D": "Tribal peoples have fewer children than the middle class."
+    },
+    "answer": "C",
+    "analysis": "第二段说 Most of us have roughly the same number of offspring；A 与 very few women have 15 children 相反，B/D 无中生有。",
+    "translation": "根据第二段，关于出生率哪项正确？"
+  },
+  {
+    "subject": "英语",
+    "itemId": "英语-阅读细节理解2",
+    "id": "en-t2-d5",
+    "topic": "细节理解-身体未进化",
+    "type": "single",
+    "question": "Why have human bodies not changed greatly in the past 100,000 years?",
+    "options": {
+      "A": "Human bodies reached perfection.",
+      "B": "Machines and society transformed life instead.",
+      "C": "Natural selection became stronger.",
+      "D": "Physical variation disappeared completely."
+    },
+    "answer": "B",
+    "analysis": "第三段明确 We did not evolve, because machines and society did it for us；生活改变由技术与社会承担，身体没有相应变化。",
+    "translation": "为什么过去十万年人的身体没有大变？"
+  },
+  {
+    "subject": "英语",
+    "itemId": "英语-阅读细节理解2",
+    "id": "en-t2-de1",
+    "topic": "细节理解-性别比",
+    "type": "single",
+    "question": "Which statistic best supports the claim that being a man used to be dangerous?",
+    "options": {
+      "A": "105 males born per 100 females but near balance at maturity.",
+      "B": "Twice as many men as women among 70-year-olds.",
+      "C": "Boy babies survive as well as girls today.",
+      "D": "Most people have roughly the same number of offspring."
+    },
+    "answer": "A",
+    "analysis": "出生男多女少但成熟期接近平衡，说明成长过程中男性损耗更大；B 与原文相反，C 是当前变化，D 属第二段。",
+    "translation": "哪一统计最能支持过去做男人危险？"
+  },
+  {
+    "subject": "英语",
+    "itemId": "英语-阅读细节理解2",
+    "id": "en-t2-de2",
+    "topic": "细节理解-基因变异",
+    "type": "single",
+    "question": "Why does the disappearance of weight-related infant mortality matter for evolution?",
+    "options": {
+      "A": "It proves that genes no longer vary.",
+      "B": "It removes another agent of natural selection because much variation is genetic.",
+      "C": "It makes boys mature earlier.",
+      "D": "It increases the number of religious communities."
+    },
+    "answer": "B",
+    "analysis": "原文说体重差异与存活相关，而这些差异很多由基因造成；体重不再影响存活就少了自然选择的一个抓手。",
+    "translation": "体重相关婴儿死亡率消失为何影响进化？"
+  },
+  {
+    "subject": "英语",
+    "itemId": "英语-阅读细节理解2",
+    "id": "en-t2-de3",
+    "topic": "细节理解-例证功能",
+    "type": "single",
+    "question": "Why does the author mention India in paragraph 2?",
+    "options": {
+      "A": "To show that birth control is religiously forbidden.",
+      "B": "To illustrate that reduced differences in survival and reproduction weaken natural selection.",
+      "C": "To prove that tribal peoples are evolving faster physically.",
+      "D": "To compare Indian and Western sex ratios."
+    },
+    "answer": "B",
+    "analysis": "印度例子前一句讲人与人差异和自然选择机会减少；例子说明即使贫富悬殊，存活和子女数趋同使自然选择作用大减。",
+    "translation": "作者为何在第二段提到印度？"
+  },
+  {
+    "subject": "英语",
     "itemId": "英语-阅读隐含原因与作者态度",
     "id": "en-t1-a1",
     "topic": "作者态度-隐含归因",

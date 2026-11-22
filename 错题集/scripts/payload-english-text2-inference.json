@@ -1,0 +1,218 @@
+{
+  "itemId": "英语-阅读推理判断2",
+  "subject": "英语",
+  "file": "英语/2000年考研英语阅读Text2人类进化停滞错题.md",
+  "knowledge": "## 英语阅读·推理判断（Text 2）\n\n本知识点聚焦：由自然选择减弱、身体未变和生活技术化推出全文主旨与标题。\n\n### 题型定位方法\n\n1. 先看题干中的段落、数字、专有名词和评价词，再回原文定位。\n2. 细节题必须逐项比对主体、时间、比较对象和范围；原文说“过去”，选项换成“现在”就错。\n3. 推理题答案通常是对原文信息的一步概括；标题题要覆盖全文主线，不能用局部细节充当标题。\n4. 态度题抓评价词（dangerous、ugly、mediocrity、Utopia）和比喻；反讽不等于字面赞美。\n\n### 本文对应证据\n\n- 第 15 题：首段数据表明过去男性死亡率高、存活率低，答案 C；用户误选 A，把“未来男孩过剩”与“过去危险”混淆。\n- 第 16 题：印度贫富悬殊但存活率和子女数趋同，自然选择作用下降，答案 B；图片黄色标记若落在 B，则本题实际答对。\n- 第 17 题：第三段 machines and society did it for us，答案 A；图片黄色标记若落在 A，则本题实际答对。\n- 第 18 题：全文讲自然选择减弱、身体未变，最佳标题 Human Evolution Going Nowhere，答案 D；用户选 D 正确。\n\n## 考研速记规律（一看就会）\n\n1. **标题覆盖全文**：标题题正确项要同时覆盖自然选择机会减少和身体停止变化；只讲 sex ratio 是“局部当主旨”。\n2. **Going Nowhere 秒判**：全文出现 over、Utopia、little physical change、bodies have not 等词链，即“进化停滞”主题。\n3. **反讽识别**：Utopia 若搭配 ugly、little physical change，通常是反讽，不是赞美。\n4. **小步推理**：technology/society replaced biology = 生活改变但身体未改；不能推成 perfect 或 extinct。",
+  "mnemonic": "标题题看主线，Utopia 看语气，技术社会替代生物改变。",
+  "keyPoints": [
+    "标题要覆盖全文而非局部",
+    "进化停滞词链：over/Utopia/little change",
+    "技术社会替代身体进化",
+    "反讽题看情感评价词"
+  ],
+  "rootCauses": {
+    "推理判断-第18题": "用户选 D 与官方答案一致；仍需把标题题方法固化为“全文主线优先”。",
+    "推理判断-局部信息": "不要把首段性别比或单段例证上升为全文标题。"
+  },
+  "ebbinghausQuestions": [
+    {
+      "id": "en-t2-i1",
+      "topic": "推理判断-标题主旨",
+      "type": "single",
+      "question": "Which of the following would be the best title for the passage?",
+      "options": {
+        "A": "Sex Ratio Changes in Human Evolution.",
+        "B": "Ways of Continuing Man’s Evolution.",
+        "C": "The Evolutionary Future of Nature.",
+        "D": "Human Evolution Going Nowhere."
+      },
+      "answer": "D",
+      "analysis": "全文主线是自然选择机会减少、人类身体停止变化、生物乌托邦到来，标题应概括“人类进化停滞”。A 只涵盖首段性别比，B 与文意相反，C 范围过大。用户选 D 正确。",
+      "translation": "哪项是文章最佳标题？"
+    },
+    {
+      "id": "en-t2-i2",
+      "topic": "推理判断-进化停止原因",
+      "type": "single",
+      "question": "The author argues that our bodies have stopped evolving because _____.",
+      "options": {
+        "A": "life has been improved by technological advance",
+        "B": "the number of female babies has been declining",
+        "C": "our species has reached the highest stage of evolution",
+        "D": "the difference between wealth and poverty is disappearing"
+      },
+      "answer": "A",
+      "analysis": "第三段说机器和社会替我们完成了改变，生活被技术改造而身体未变，因此选 A。用户误选 A 其实正确；黄色标记应核对。",
+      "translation": "作者认为身体停止进化是因为_____。"
+    },
+    {
+      "id": "en-t2-i3",
+      "topic": "推理判断-乌托邦反讽",
+      "type": "single",
+      "question": "By “the biological Utopia has arrived,” the author most likely means that _____.",
+      "options": {
+        "A": "humans have become physically perfect",
+        "B": "natural selection no longer shapes human bodies much",
+        "C": "poverty has disappeared completely",
+        "D": "everyone lives much longer than before"
+      },
+      "answer": "B",
+      "analysis": "“生物乌托邦”紧跟自然选择机会被消除、死亡率与子女数平均化，且作者说 almost no physical change，可知是反讽自然选择对人的塑造作用大大减弱，非身体完美。",
+      "translation": "“生物乌托邦已经到来”最可能意为_____。"
+    },
+    {
+      "id": "en-t2-i4",
+      "topic": "推理判断-社会与技术",
+      "type": "single",
+      "question": "It can be inferred from the last paragraph that technology and society have _____.",
+      "options": {
+        "A": "replaced biological adaptation as the main way human life changes",
+        "B": "made natural selection more intense",
+        "C": "caused major physical changes in humans",
+        "D": "stopped all changes in human life"
+      },
+      "answer": "A",
+      "analysis": "原文 lives have been transformed but our bodies have not；machines and society did it for us，说明技术和社会替代生物适应来改变生活。B/C 与原文相反，D 与 lives transformed 矛盾。",
+      "translation": "从末段可推知技术和社会_____。"
+    },
+    {
+      "id": "en-t2-i5",
+      "topic": "推理判断-结尾语气",
+      "type": "single",
+      "question": "What is the author’s tone when saying descendants will “look just like us”?",
+      "options": {
+        "A": "Proud and celebratory",
+        "B": "Ironic and mildly critical",
+        "C": "Completely indifferent",
+        "D": "Fearful of extinction"
+      },
+      "answer": "B",
+      "analysis": "作者把 20 世纪生活称为 beyond comprehension for its ugliness，并说后代虽惊讶但长相一样，语气带反讽和轻微批判，而非自豪或恐惧灭绝。",
+      "translation": "作者说后代“看起来和我们一样”的语气是_____。"
+    }
+  ],
+  "quizQuestions": [
+    {
+      "id": "en-t2-i1",
+      "topic": "推理判断-标题主旨",
+      "type": "single",
+      "question": "Which of the following would be the best title for the passage?",
+      "options": {
+        "A": "Sex Ratio Changes in Human Evolution.",
+        "B": "Ways of Continuing Man’s Evolution.",
+        "C": "The Evolutionary Future of Nature.",
+        "D": "Human Evolution Going Nowhere."
+      },
+      "answer": "D",
+      "analysis": "全文主线是自然选择机会减少、人类身体停止变化、生物乌托邦到来，标题应概括“人类进化停滞”。A 只涵盖首段性别比，B 与文意相反，C 范围过大。用户选 D 正确。",
+      "translation": "哪项是文章最佳标题？"
+    },
+    {
+      "id": "en-t2-i2",
+      "topic": "推理判断-进化停止原因",
+      "type": "single",
+      "question": "The author argues that our bodies have stopped evolving because _____.",
+      "options": {
+        "A": "life has been improved by technological advance",
+        "B": "the number of female babies has been declining",
+        "C": "our species has reached the highest stage of evolution",
+        "D": "the difference between wealth and poverty is disappearing"
+      },
+      "answer": "A",
+      "analysis": "第三段说机器和社会替我们完成了改变，生活被技术改造而身体未变，因此选 A。用户误选 A 其实正确；黄色标记应核对。",
+      "translation": "作者认为身体停止进化是因为_____。"
+    },
+    {
+      "id": "en-t2-i3",
+      "topic": "推理判断-乌托邦反讽",
+      "type": "single",
+      "question": "By “the biological Utopia has arrived,” the author most likely means that _____.",
+      "options": {
+        "A": "humans have become physically perfect",
+        "B": "natural selection no longer shapes human bodies much",
+        "C": "poverty has disappeared completely",
+        "D": "everyone lives much longer than before"
+      },
+      "answer": "B",
+      "analysis": "“生物乌托邦”紧跟自然选择机会被消除、死亡率与子女数平均化，且作者说 almost no physical change，可知是反讽自然选择对人的塑造作用大大减弱，非身体完美。",
+      "translation": "“生物乌托邦已经到来”最可能意为_____。"
+    },
+    {
+      "id": "en-t2-i4",
+      "topic": "推理判断-社会与技术",
+      "type": "single",
+      "question": "It can be inferred from the last paragraph that technology and society have _____.",
+      "options": {
+        "A": "replaced biological adaptation as the main way human life changes",
+        "B": "made natural selection more intense",
+        "C": "caused major physical changes in humans",
+        "D": "stopped all changes in human life"
+      },
+      "answer": "A",
+      "analysis": "原文 lives have been transformed but our bodies have not；machines and society did it for us，说明技术和社会替代生物适应来改变生活。B/C 与原文相反，D 与 lives transformed 矛盾。",
+      "translation": "从末段可推知技术和社会_____。"
+    },
+    {
+      "id": "en-t2-i5",
+      "topic": "推理判断-结尾语气",
+      "type": "single",
+      "question": "What is the author’s tone when saying descendants will “look just like us”?",
+      "options": {
+        "A": "Proud and celebratory",
+        "B": "Ironic and mildly critical",
+        "C": "Completely indifferent",
+        "D": "Fearful of extinction"
+      },
+      "answer": "B",
+      "analysis": "作者把 20 世纪生活称为 beyond comprehension for its ugliness，并说后代虽惊讶但长相一样，语气带反讽和轻微批判，而非自豪或恐惧灭绝。",
+      "translation": "作者说后代“看起来和我们一样”的语气是_____。"
+    }
+  ],
+  "examQuestions": [
+    {
+      "id": "en-t2-ie1",
+      "topic": "推理判断-全文主线",
+      "type": "single",
+      "question": "Which inference best captures the whole passage?",
+      "options": {
+        "A": "Medical progress has made men and women biologically equal.",
+        "B": "Modern society reduces natural selection and leaves human bodies largely unchanged.",
+        "C": "India will soon eliminate all tribal differences.",
+        "D": "Human evolution will resume once birth rates rise."
+      },
+      "answer": "B",
+      "analysis": "全文两大部分：前两段讲自然选择机会减少，末段讲身体未变、机器社会代替进化；B 最完整。A 只涉及性别比且过度，C/D 无依据。",
+      "translation": "哪项最能概括全文？"
+    },
+    {
+      "id": "en-t2-ie2",
+      "topic": "推理判断-平均化",
+      "type": "single",
+      "question": "The repeated idea that death age and birth number have become “average” suggests that _____.",
+      "options": {
+        "A": "individual differences relevant to natural selection have shrunk",
+        "B": "everyone now has the same genes",
+        "C": "religious communities no longer exist",
+        "D": "infant mortality depends more on weight"
+      },
+      "answer": "A",
+      "analysis": "死亡年龄和子女数平均化说明个体差异缩小，自然选择可利用的变异减少；B/D 过度或相反，C 无中生有。",
+      "translation": "死亡年龄和子女数“平均化”暗示_____。"
+    },
+    {
+      "id": "en-t2-ie3",
+      "topic": "推理判断-讽刺对象",
+      "type": "single",
+      "question": "The Darwin quotation is mainly used to _____.",
+      "options": {
+        "A": "praise Darwin’s knowledge of ships",
+        "B": "compare people ignorant of evolution to savages who cannot understand a ship",
+        "C": "prove that humans are physically changing rapidly",
+        "D": "explain why men used to have a lower survival rate"
+      },
+      "answer": "B",
+      "analysis": "达尔文名言用“野蛮人看船”比喻不懂进化者看有机生命，强调理解障碍；此处服务于作者对现代人误解进化的反讽。",
+      "translation": "引用达尔文的话主要为了_____。"
+    }
+  ]
+}
