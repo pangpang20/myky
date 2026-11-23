@@ -1734,7 +1734,7 @@
         "D": "$x^{2}(ax+b)e^{x}$"
       },
       "answer": "B",
-      "analysis": "$lambda=1$ 非特征根，不乘 $x$，设 $(ax+b)e^{x}$。"
+      "analysis": "$\\lambda=1$ 非特征根，不乘 $x$，设 $(ax+b)e^{x}$。"
     },
     {
       "id": "r1-ada539f8-d62c-44fa-bc32-f34eb2b8342b",
@@ -1742,15 +1742,15 @@
       "round": 1,
       "subject": "高等数学",
       "topic": "特解系数",
-      "question": "$y''+2y'+y=xe^{x}$ 的特解 $y_p=\frac14(x-1)e^{x}$ 中，系数 $b$ 为（ ）。",
+      "question": "$y''+2y'+y=xe^{x}$ 的特解 $y_p=\\frac{14}(x-1)e^{x}$ 中，系数 $b$ 为（ ）。",
       "options": {
-        "A": "$\frac14$",
+        "A": "$\\frac{14}$",
         "B": "$0$",
-        "C": "$-\frac14$",
+        "C": "$-\\frac{14}$",
         "D": "$-1$"
       },
       "answer": "C",
-      "analysis": "由 $4a=1, 4a+4b=0$ 得 $a=\frac14, b=-\frac14$。"
+      "analysis": "由 $4a=1, 4a+4b=0$ 得 $a=\\frac{14}, b=-\\frac{14}$。"
     },
     {
       "id": "r1-474ffd6a-56fe-4920-852d-31cdfcf7af37",
@@ -1760,13 +1760,13 @@
       "topic": "完整通解",
       "question": "$y''+2y'+y=xe^{x}$ 的通解是（ ）。",
       "options": {
-        "A": "$(C_1+C_2x)e^{-x}+\frac14(x-1)e^{x}$",
-        "B": "$C_1e^{-x}+C_2xe^{x}+\frac14(x-1)e^{x}$",
-        "C": "$(C_1+C_2x)e^{x}+\frac14(x-1)e^{-x}$",
-        "D": "$(C_1+C_2x)e^{-x}+\frac14(x+1)e^{x}$"
+        "A": "$(C_1+C_2x)e^{-x}+\\frac{14}(x-1)e^{x}$",
+        "B": "$C_1e^{-x}+C_2xe^{x}+\\frac{14}(x-1)e^{x}$",
+        "C": "$(C_1+C_2x)e^{x}+\\frac{14}(x-1)e^{-x}$",
+        "D": "$(C_1+C_2x)e^{-x}+\\frac{14}(x+1)e^{x}$"
       },
       "answer": "A",
-      "analysis": "齐次解 $(C_1+C_2x)e^{-x}$ 加特解 $\frac14(x-1)e^{x}$。"
+      "analysis": "齐次解 $(C_1+C_2x)e^{-x}$ 加特解 $\\frac{14}(x-1)e^{x}$。"
     },
     {
       "id": "r1-dfc2c14a-ecb1-4d6a-80cc-00befa616baa",
@@ -1774,7 +1774,7 @@
       "round": 1,
       "subject": "高等数学",
       "topic": "共振判定",
-      "question": "方程 $y''+2y'+y=e^{-x}$ 因 $lambda=-1$ 是二重根（共振），其特解应设为（ ）。",
+      "question": "方程 $y''+2y'+y=e^{-x}$ 因 $\\lambda=-1$ 是二重根（共振），其特解应设为（ ）。",
       "options": {
         "A": "$Ae^{-x}$",
         "B": "$Axe^{-x}$",
@@ -1782,7 +1782,7 @@
         "D": "$Ax^{3}e^{-x}$"
       },
       "answer": "C",
-      "analysis": "二重根乘 $x^{2}$，设 $Ax^{2}e^{-x}$（$A=\frac12$）。"
+      "analysis": "二重根乘 $x^{2}$，设 $Ax^{2}e^{-x}$（$A=\\frac{12}$）。"
     },
     {
       "id": "r1-c5a2b48f-880b-4625-b316-5c96718730ce",
@@ -1792,13 +1792,13 @@
       "topic": "初值问题",
       "question": "$y''+2y'+y=xe^{x}$ 满足 $y(0)=0, y'(0)=0$ 的特解为（ ）。（历年真题风格）",
       "options": {
-        "A": "$\frac14(1+x)e^{-x}+\frac14(x-1)e^{x}$",
-        "B": "$\frac14(1-x)e^{-x}+\frac14(x-1)e^{x}$",
+        "A": "$\\frac{14}(1+x)e^{-x}+\\frac{14}(x-1)e^{x}$",
+        "B": "$\\frac{14}(1-x)e^{-x}+\\frac{14}(x-1)e^{x}$",
         "C": "$(1+x)e^{-x}+(x-1)e^{x}$",
-        "D": "$\frac14(1+x)e^{-x}+\frac14(x+1)e^{x}$"
+        "D": "$\\frac{14}(1+x)e^{-x}+\\frac{14}(x+1)e^{x}$"
       },
       "answer": "A",
-      "analysis": "通解代入初值得 $C_1=C_2=\frac14$。"
+      "analysis": "通解代入初值得 $C_1=C_2=\\frac{14}$。"
     },
     {
       "id": "r1-8441d278-944a-4e13-80a6-fcefd4512380",
@@ -1806,15 +1806,15 @@
       "round": 1,
       "subject": "高等数学",
       "topic": "共振-右移",
-      "question": "方程 $y''-2y'+y=xe^{x}$（$lambda=1$ 为二重根）的一个特解是（ ）。（历年真题风格）",
+      "question": "方程 $y''-2y'+y=xe^{x}$（$\\lambda=1$ 为二重根）的一个特解是（ ）。（历年真题风格）",
       "options": {
-        "A": "$\frac16x^{2}e^{x}$",
-        "B": "$\frac16x^{3}e^{x}$",
-        "C": "$\frac12x^{2}e^{x}$",
-        "D": "$\frac14(x-1)e^{x}$"
+        "A": "$\\frac{16}x^{2}e^{x}$",
+        "B": "$\\frac{16}x^{3}e^{x}$",
+        "C": "$\\frac{12}x^{2}e^{x}$",
+        "D": "$\\frac{14}(x-1)e^{x}$"
       },
       "answer": "B",
-      "analysis": "$(D-1)^2(e^{x}v)=e^{x}v''$，$v''=xRightarrow v=\frac{x^{3}}{6}$。"
+      "analysis": "$(D-1)^2(e^{x}v)=e^{x}v''$，$v''=x\\Rightarrow v=\\frac{x^{3}}{6}$。"
     },
     {
       "id": "r1-19ca2ebd-ac27-4426-a58a-e57926b86ce3",
@@ -1822,15 +1822,15 @@
       "round": 1,
       "subject": "高等数学",
       "topic": "共振-左移",
-      "question": "方程 $y''+2y'+y=xe^{-x}$（$lambda=-1$ 为二重根）的一个特解是（ ）。（历年真题风格）",
+      "question": "方程 $y''+2y'+y=xe^{-x}$（$\\lambda=-1$ 为二重根）的一个特解是（ ）。（历年真题风格）",
       "options": {
-        "A": "$\frac16x^{3}e^{-x}$",
-        "B": "$\frac14(x-1)e^{-x}$",
-        "C": "$\frac12x^{2}e^{-x}$",
-        "D": "$\frac16x^{2}e^{-x}$"
+        "A": "$\\frac{16}x^{3}e^{-x}$",
+        "B": "$\\frac{14}(x-1)e^{-x}$",
+        "C": "$\\frac{12}x^{2}e^{-x}$",
+        "D": "$\\frac{16}x^{2}e^{-x}$"
       },
       "answer": "A",
-      "analysis": "$(D+1)^2(e^{-x}v)=e^{-x}v''$，$v''=xRightarrow v=\frac{x^{3}}{6}$。"
+      "analysis": "$(D+1)^2(e^{-x}v)=e^{-x}v''$，$v''=x\\Rightarrow v=\\frac{x^{3}}{6}$。"
     },
     {
       "id": "en-t1-d1",
