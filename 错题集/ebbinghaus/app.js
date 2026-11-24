@@ -1,6 +1,7 @@
 'use strict';
 let DB=null,QS=[],KB={},page=1,pageSize=10,queue=[],qi=0,roundId='',forceMode=false,results=[];
 let trendMode='day';
+let trendStart='',trendEnd='';
 
 function nowEast8Iso(){const d=new Date(Date.now()+8*3600*1000);return d.toISOString().replace('Z','+08:00')}
 
@@ -761,7 +762,26 @@ function toggleCurve(){
 function setTrendMode(mode){
   trendMode=mode;
   document.getElementById('trendDayBtn').classList.toggle('active',mode==='day');
+  document.getElementById('trendWeekBtn').classList.toggle('active',mode==='week');
   document.getElementById('trendMonthBtn').classList.toggle('active',mode==='month');
+  renderTrend();
+}
+function weekStart(dateStr){
+  const d=new Date(dateStr+"T00:00:00Z");
+  const day=d.getUTCDay();
+  const diff=(day===0?6:day-1);
+  d.setUTCDate(d.getUTCDate()-diff);
+  return d.toISOString().slice(0,10);
+}
+function onTrendRangeChange(){
+  trendStart=document.getElementById('trendStart').value||'';
+  trendEnd=document.getElementById('trendEnd').value||'';
+  renderTrend();
+}
+function clearTrendRange(){
+  trendStart='';trendEnd='';
+  document.getElementById('trendStart').value='';
+  document.getElementById('trendEnd').value='';
   renderTrend();
 }
 function pad2(n){return String(n).padStart(2,"0")}
@@ -778,15 +798,28 @@ function trendBuckets(){
     qAddDay[d]=(qAddDay[d]||0)+QS.filter(q=>q.itemId===i.id).length;
   });
   const keys=[];
-  if(trendMode==='month'){
+  if(trendStart&&trendEnd){
+    const cur=new Date(trendStart+"T00:00:00Z"),last=new Date(trendEnd+"T00:00:00Z");
+    const seen=new Set();
+    while(cur<=last){
+      const ds=cur.toISOString().slice(0,10);
+      const k=trendMode==='month'?ds.slice(0,7):(trendMode==='week'?weekStart(ds):ds);
+      if(!seen.has(k)){seen.add(k);keys.push(k)}
+      cur.setUTCDate(cur.getUTCDate()+1);
+    }
+  } else if(trendMode==='month'){
     const todayStr=east8TodayStr();
     let [y,m]=todayStr.slice(0,7).split("-").map(Number);
     for(let i=5;i>=0;i--){let mm=m-i,yy=y;while(mm<=0){mm+=12;yy--}keys.push(yy+"-"+pad2(mm))}
+  } else if(trendMode==='week'){
+    const ws=weekStart(east8TodayStr());
+    const end=new Date(ws+"T00:00:00Z");
+    for(let i=2;i>=0;i--){const d=new Date(end);d.setUTCDate(d.getUTCDate()-i*7);keys.push(d.toISOString().slice(0,10))}
   } else {
     const end=new Date(east8TodayStr()+"T00:00:00Z");
     for(let i=6;i>=0;i--){const d=new Date(end);d.setUTCDate(d.getUTCDate()-i);keys.push(d.toISOString().slice(0,10))}
   }
-  const keyOf=d=>trendMode==='month'?d.slice(0,7):d;
+  const keyOf=d=>trendMode==='month'?d.slice(0,7):(trendMode==='week'?weekStart(d):d);
   const sums={};
   const bump=(d,f)=>{const k=keyOf(d);const b=sums[k]||(sums[k]={ans:0,kp:0,q:0});b[f]+=1};
   Object.keys(perDay).forEach(d=>{for(let i=0;i<perDay[d];i++)bump(d,"ans")});
@@ -839,7 +872,7 @@ function renderTrend(){
   ["kp","q","ans"].forEach(s=>{out+='<path d="'+smoothPath(pts[s])+'" fill="none" stroke="'+COLORS[s]+'" stroke-width="2.4" stroke-linecap="round" filter="url(#trendShadow)"/>'});
   data.forEach((d,i)=>{
     const x=xOf(i);
-    const lab=trendMode==="month"?(d.key.slice(0,4)+"年"+Number(d.key.slice(5))+"月"):d.key.slice(5).replace("-","/");
+    const lab=trendMode==="month"?(d.key.slice(0,4)+"年"+Number(d.key.slice(5))+"月"):(trendMode==="week"?(Number(d.key.slice(5,7))+"/"+Number(d.key.slice(8,10))+"周"):d.key.slice(5).replace("-","/"));
     out+='<text x="'+x+'" y="'+(PT+ih+24)+'" fill="'+labelC+'" font-size="11.5" text-anchor="middle">'+lab+'</text>';
     const entries=[{s:"ans",y:pts.ans[i].y,v:d.ans},{s:"kp",y:pts.kp[i].y,v:d.kp},{s:"q",y:pts.q[i].y,v:d.q}];
     entries.forEach(e=>{out+='<circle cx="'+x+'" cy="'+e.y+'" r="4" fill="var(--bg2)" stroke="'+COLORS[e.s]+'" stroke-width="2.2"/>'});
@@ -848,7 +881,8 @@ function renderTrend(){
     order.forEach(o=>{const e=entries[o.i];let ly=e.y-12;while(placed.some(p=>Math.abs(p-ly)<13))ly-=14;placed.push(ly);out+='<text x="'+x+'" y="'+ly+'" fill="'+COLORS[e.s]+'" font-size="11" font-weight="700" text-anchor="middle">'+e.v+'</text>'});
   });
   out+='<line x1="'+PL+'" y1="'+(PT+ih)+'" x2="'+(PL+iw)+'" y2="'+(PT+ih)+'" stroke="'+axisC+'" stroke-width="1"/>';
-  out+='<text x="'+(PL+iw)+'" y="'+(PT+ih+46)+'" fill="'+labelC+'" font-size="11" text-anchor="end">'+(trendMode==="month"?"近 6 个月":"近 7 天")+" · "+(trendMode==="month"?"按月汇总":"按日汇总")+'</text>';
+  const rangeLabel=trendStart&&trendEnd?(trendStart+" ~ "+trendEnd):(trendMode==="month"?"近 6 个月":(trendMode==="week"?"近 3 周":"近 7 天"));
+  out+='<text x="'+(PL+iw)+'" y="'+(PT+ih+46)+'" fill="'+labelC+'" font-size="11" text-anchor="end">'+rangeLabel+" · "+(trendMode==="month"?"按月汇总":(trendMode==="week"?"按周汇总":"按日汇总"))+'</text>';
   ["ans","kp","q"].forEach((s,si)=>{
     const d=smoothPath(pts[s]);
     for(let k=0;k<7;k++){
