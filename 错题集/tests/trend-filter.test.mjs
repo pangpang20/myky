@@ -31,4 +31,8 @@ check(html.includes('repeat(7,minmax(0,1fr))'), 'CSS: 日历列等宽且不被�
 check(html.includes('.cal-day.empty{background:transparent;cursor:default;min-width:0;height:30px}') || html.includes('cal-day.empty{'), 'CSS: 空格子尺寸受约束');
 check(html.includes('cal-day.empty') && html.includes('padding:0'), 'CSS: 覆盖全局 .empty{padding:44px} 防止撑破日历');
 
+check(js.includes('labelEvery') && js.includes('labelAngle'), 'JS: X 轴标签抽稀与倾斜参数存在');
+check(js.includes('font-size="9"') || js.includes('font-size=\"9\"') || js.includes('fontSize'), 'JS: 长范围标签字号缩小');
+check(js.includes('transform="rotate(') || js.includes('rotate('), 'JS: 标签使用旋转避免重叠');
+
 process.exit(failed ? 1 : 0);

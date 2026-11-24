@@ -934,10 +934,20 @@ function renderTrend(){
   const areaOf=p=>smoothPath(p)+' L '+p[p.length-1].x+' '+(PT+ih)+' L '+p[0].x+' '+(PT+ih)+' Z';
   out+='<path d="'+areaOf(pts.ans)+'" fill="url(#ansGrad)" stroke="none"/>';
   ["kp","q","ans"].forEach(s=>{out+='<path d="'+smoothPath(pts[s])+'" fill="none" stroke="'+COLORS[s]+'" stroke-width="2.4" stroke-linecap="round" filter="url(#trendShadow)"/>'});
+  const n=data.length;
+  const labelEvery=n<=12?1:(n<=24?2:(n<=40?3:Math.ceil(n/14)));
+  const crowded=n>12;
+  const fontSize=crowded?9:11.5;
+  const labelAngle=crowded?-35:0;
+  const labelY=PT+ih+(crowded?30:24);
+  const labelAnchor=crowded?"end":"middle";
   data.forEach((d,i)=>{
     const x=xOf(i);
     const lab=useCustom?d.key.slice(5).replace("-","/"):(trendMode==="month"?(d.key.slice(0,4)+"年"+Number(d.key.slice(5))+"月"):(trendMode==="week"?(Number(d.key.slice(5,7))+"/"+Number(d.key.slice(8,10))+"周"):d.key.slice(5).replace("-","/")));
-    out+='<text x="'+x+'" y="'+(PT+ih+24)+'" fill="'+labelC+'" font-size="11.5" text-anchor="middle">'+lab+'</text>';
+    if(i%labelEvery===0||i===n-1){
+      const tf=labelAngle?' transform="rotate('+labelAngle+','+x+','+labelY+')"':'';
+      out+='<text x="'+x+'" y="'+labelY+'" fill="'+labelC+'" font-size="'+fontSize+'" text-anchor="'+labelAnchor+'"'+tf+'>'+lab+'</text>';
+    }
     const entries=[{s:"ans",y:pts.ans[i].y,v:d.ans},{s:"kp",y:pts.kp[i].y,v:d.kp},{s:"q",y:pts.q[i].y,v:d.q}];
     entries.forEach(e=>{out+='<circle cx="'+x+'" cy="'+e.y+'" r="4" fill="var(--bg2)" stroke="'+COLORS[e.s]+'" stroke-width="2.2"/>'});
     const order=[0,1,2].map(i=>({i,y:entries[i].y})).sort((a,b)=>b.y-a.y);
