@@ -27,5 +27,8 @@ check(js.includes('useCustom?"按日汇总"'), 'JS: 自定义范围文案为按�
 check(js.includes('const k=ds;') && js.includes('useCustom&&trendStart&&trendEnd'), 'JS: 自定义范围逐日生成 X 轴键');
 check(js.includes('calEnd>today') || js.includes('ds>today'), 'JS: 日历中超过今天的日期不可选');
 check(js.includes('function shiftTrendMonth('), 'JS: 日历可切换月份');
+check(html.includes('repeat(7,minmax(0,1fr))'), 'CSS: 日历列等宽且不被空格子撑破');
+check(html.includes('.cal-day.empty{background:transparent;cursor:default;min-width:0;height:30px}') || html.includes('cal-day.empty{'), 'CSS: 空格子尺寸受约束');
+check(html.includes('cal-day.empty') && html.includes('padding:0'), 'CSS: 覆盖全局 .empty{padding:44px} 防止撑破日历');
 
 process.exit(failed ? 1 : 0);
