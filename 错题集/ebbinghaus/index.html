@@ -74,6 +74,11 @@ tbody tr:hover td{background:var(--bg3)}
 .trend-range label{display:inline-flex;align-items:center;gap:5px}
 .trend-range input{background:var(--bg3);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:5px 8px;font-size:12px}
 .trend-range button{padding:5px 12px;font-size:12px}
+.trend-range{position:relative}
+.trend-range-text{font-size:11.5px;color:var(--text);font-weight:600;white-space:nowrap}
+.trend-range-panel{position:absolute;top:calc(100% + 8px);right:0;z-index:30;display:none;align-items:center;gap:8px;flex-wrap:wrap;background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:12px 14px;box-shadow:0 12px 30px rgba(15,23,42,.18)}
+.trend-range-panel.open{display:flex}
+.trend-range-panel label{white-space:nowrap}
 .trend-legend{display:flex;align-items:center;justify-content:center;gap:12px;padding:14px 0;font-size:12px;flex-wrap:wrap}
 .trend-legend .chip{display:inline-flex;align-items:center;gap:7px;padding:5px 13px;border-radius:999px;background:var(--bg3);border:1px solid var(--border);font-weight:600;color:var(--muted)}
 .trend-legend .chip i{width:9px;height:9px;border-radius:50%}
@@ -216,7 +221,7 @@ tbody tr:hover td{background:var(--bg3)}
     <div class="trend-head">
       <span class="trend-title"><span class="dot"></span>学习趋势</span>
       <div class="seg"><button id="trendDayBtn" class="active" onclick="setTrendMode('day')">按日</button><button id="trendWeekBtn" onclick="setTrendMode('week')">按周</button><button id="trendMonthBtn" onclick="setTrendMode('month')">按月</button></div>
-      <div class="trend-range"><label>起始 <input type="date" id="trendStart" onchange="onTrendRangeChange()"></label><label>结束 <input type="date" id="trendEnd" onchange="onTrendRangeChange()"></label><button class="btn ghost" onclick="clearTrendRange()">清空</button></div>
+      <div class="trend-range"><button class="btn ghost" id="trendRangeBtn" onclick="toggleTrendRangePanel()">📅 日期范围</button><span id="trendRangeText" class="trend-range-text"></span><button class="btn ghost" onclick="clearTrendRange()">清空</button><div class="trend-range-panel" id="trendRangePanel"><label>起始 <input type="date" id="trendStart" onchange="onTrendRangeChange()"></label><label>结束 <input type="date" id="trendEnd" onchange="onTrendRangeChange()"></label><button class="btn primary" onclick="applyTrendRange()">应用</button></div></div>
     </div>
     <div class="trend-legend"><span class="chip"><i style="background:#2563eb"></i>每日做题数</span><span class="chip"><i style="background:#16a34a"></i>新增知识点</span><span class="chip"><i style="background:#f59e0b"></i>新增题数</span></div>
     <div class="trend-box"><svg id="trendSvg" class="trend-svg" viewBox="0 0 960 320"></svg></div>
