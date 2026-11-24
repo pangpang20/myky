@@ -3111,6 +3111,134 @@
       },
       "answer": "A",
       "analysis": "$x_B=\frac{1+a^2}{2a}$，代入 $a=1/sqrt3$ 得 $\frac{4/3}{2/sqrt3}=\frac{2sqrt3}{3}$。"
+    },
+    {
+      "id": "r1-be215233-084d-4987-b727-9a466afc1d63",
+      "itemId": "高等数学-函数不等式与导数积分性质辨析",
+      "round": 1,
+      "subject": "高等数学",
+      "topic": "原题·性质辨析",
+      "question": "若 $f,g$ 在 $\\mathbb{R}$ 上可导且 $f(x)<g(x)$，则必有（ ）。",
+      "options": {
+        "A": "$f(-x)>g(-x)$",
+        "B": "$f'(x)<g'(x)$",
+        "C": "$\\lim_{x\\to x_0}f(x)<\\lim_{x\\to x_0}g(x)$",
+        "D": "$\\int_0^x f<\\int_0^x g$"
+      },
+      "answer": "C",
+      "analysis": "可导⇒连续⇒极限=函数值，严格不等号传递"
+    },
+    {
+      "id": "r1-3c0550b1-ca41-47af-9b30-a308d7bcf38e",
+      "itemId": "高等数学-函数不等式与导数积分性质辨析",
+      "round": 1,
+      "subject": "高等数学",
+      "topic": "导数反例",
+      "question": "说明「$f(x)<g(x)$ 不能推出 $f'(x)<g'(x)$」的反例是（ ）。",
+      "options": {
+        "A": "$f(x)=0,\\ g(x)=1$（常数）",
+        "B": "$f=e^x,\\ g=2e^x$",
+        "C": "$f=x,\\ g=x+1$",
+        "D": "$f=x^2,\\ g=x^3$"
+      },
+      "answer": "A",
+      "analysis": "常数函数导数都是 0，$f'=g'$，不满足 $f'<g'$"
+    },
+    {
+      "id": "r1-22f5d0a8-9a63-45d2-ad7b-7ace4f76f35c",
+      "itemId": "高等数学-函数不等式与导数积分性质辨析",
+      "round": 1,
+      "subject": "高等数学",
+      "topic": "可导与极限",
+      "question": "若 $f$ 在 $\\mathbb{R}$ 上可导，则 $\\lim_{x\\to x_0}f(x)=$（ ）。",
+      "options": {
+        "A": "$f'(x_0)$",
+        "B": "$f(x_0)$",
+        "C": "不存在",
+        "D": "$0$"
+      },
+      "answer": "B",
+      "analysis": "可导必连续，极限等于函数值"
+    },
+    {
+      "id": "r1-713a27ca-3692-440d-a65f-e64f2bdd499e",
+      "itemId": "高等数学-函数不等式与导数积分性质辨析",
+      "round": 1,
+      "subject": "高等数学",
+      "topic": "变量代换",
+      "question": "若 $f(x)<g(x)$ 恒成立，则 $f(-x)$ 与 $g(-x)$ 的关系是（ ）。",
+      "options": {
+        "A": "$f(-x)>g(-x)$",
+        "B": "$f(-x)<g(-x)$",
+        "C": "相等",
+        "D": "不确定"
+      },
+      "answer": "B",
+      "analysis": "令 $t=-x$ 代入原不等式，方向不变"
+    },
+    {
+      "id": "r1-da1fb68e-8249-49a4-8712-40338bd89f82",
+      "itemId": "高等数学-函数不等式与导数积分性质辨析",
+      "round": 1,
+      "subject": "高等数学",
+      "topic": "积分限方向",
+      "question": "设 $f\\equiv 0,\\ g\\equiv 1$，则 $\\int_0^x f(t)\\,\\mathrm{d}t<\\int_0^x g(t)\\,\\mathrm{d}t$ 何时成立？（ ）",
+      "options": {
+        "A": "所有 $x$",
+        "B": "$x>0$",
+        "C": "$x<0$",
+        "D": "$x=0$"
+      },
+      "answer": "B",
+      "analysis": "只有 $x>0$ 时上限大于下限，$0<x$ 成立"
+    },
+    {
+      "id": "r1-7bd5b369-e3ca-4868-9a5f-6d744e12d62e",
+      "itemId": "高等数学-函数不等式与导数积分性质辨析",
+      "round": 1,
+      "subject": "高等数学",
+      "topic": "非严格不等式",
+      "question": "若 $f,g$ 可导且 $f(x)\\le g(x)$，则 $\\lim f$ 与 $\\lim g$ 的关系是（ ）。",
+      "options": {
+        "A": "严格小于",
+        "B": "小于或等于",
+        "C": "大于",
+        "D": "不确定"
+      },
+      "answer": "B",
+      "analysis": "非严格时只能得 $\\le$"
+    },
+    {
+      "id": "r1-eb708121-e1d3-435d-871b-5027d02486b7",
+      "itemId": "高等数学-函数不等式与导数积分性质辨析",
+      "round": 1,
+      "subject": "高等数学",
+      "topic": "积分保号性",
+      "question": "若 $f(x)<g(x)$ 恒成立且 $x>0$，则 $\\int_0^x f\\,\\mathrm{d}t$ 与 $\\int_0^x g\\,\\mathrm{d}t$ 的关系是（ ）。",
+      "options": {
+        "A": "前者小",
+        "B": "后者小",
+        "C": "相等",
+        "D": "不确定"
+      },
+      "answer": "A",
+      "analysis": "$x>0$ 时积分保号性成立"
+    },
+    {
+      "id": "r1-8de49893-f8e0-45f9-8f54-bfa191d22f25",
+      "itemId": "高等数学-函数不等式与导数积分性质辨析",
+      "round": 1,
+      "subject": "高等数学",
+      "topic": "导数反例变式",
+      "question": "设 $f(x)=x^2,\\ g(x)=x^2+1$，正确的是（ ）。",
+      "options": {
+        "A": "$f<g$ 且 $f'=g'$",
+        "B": "$f<g$ 且 $f'>g'$",
+        "C": "$f>g$",
+        "D": "$f'=0$"
+      },
+      "answer": "A",
+      "analysis": "$f=x^2<g=x^2+1$ 恒成立，但 $f'=g'=2x$"
     }
   ]
 }
