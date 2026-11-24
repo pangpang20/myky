@@ -853,15 +853,15 @@
     "id": "hm-ode2-3",
     "topic": "特解系数",
     "type": "single",
-    "question": "$y''+2y'+y=xe^{x}$ 的特解 $y_p=\\frac{14}(x-1)e^{x}$ 中，系数 $b$ 为（ ）。",
+    "question": "$y''+2y'+y=xe^{x}$ 的特解 $y_p=\\frac{1}{4}(x-1)e^{x}$ 中，系数 $b$ 为（ ）。",
     "options": {
-      "A": "$\\frac{14}$",
+      "A": "$\\frac{1}{4}$",
       "B": "$0$",
-      "C": "$-\\frac{14}$",
+      "C": "$-\\frac{1}{4}$",
       "D": "$-1$"
     },
     "answer": "C",
-    "analysis": "由 $4a=1, 4a+4b=0$ 得 $a=\\frac{14}, b=-\\frac{14}$。"
+    "analysis": "由 $4a=1, 4a+4b=0$ 得 $a=\\frac{1}{4}, b=-\\frac{1}{4}$。"
   },
   {
     "subject": "高等数学",
@@ -871,13 +871,13 @@
     "type": "single",
     "question": "$y''+2y'+y=xe^{x}$ 的通解是（ ）。",
     "options": {
-      "A": "$(C_1+C_2x)e^{-x}+\\frac{14}(x-1)e^{x}$",
-      "B": "$C_1e^{-x}+C_2xe^{x}+\\frac{14}(x-1)e^{x}$",
-      "C": "$(C_1+C_2x)e^{x}+\\frac{14}(x-1)e^{-x}$",
-      "D": "$(C_1+C_2x)e^{-x}+\\frac{14}(x+1)e^{x}$"
+      "A": "$(C_1+C_2x)e^{-x}+\\frac{1}{4}(x-1)e^{x}$",
+      "B": "$C_1e^{-x}+C_2xe^{x}+\\frac{1}{4}(x-1)e^{x}$",
+      "C": "$(C_1+C_2x)e^{x}+\\frac{1}{4}(x-1)e^{-x}$",
+      "D": "$(C_1+C_2x)e^{-x}+\\frac{1}{4}(x+1)e^{x}$"
     },
     "answer": "A",
-    "analysis": "齐次解 $(C_1+C_2x)e^{-x}$ 加特解 $\\frac{14}(x-1)e^{x}$。"
+    "analysis": "齐次解 $(C_1+C_2x)e^{-x}$ 加特解 $\\frac{1}{4}(x-1)e^{x}$。"
   },
   {
     "subject": "高等数学",
@@ -893,7 +893,7 @@
       "D": "$Ax^{3}e^{-x}$"
     },
     "answer": "C",
-    "analysis": "二重根乘 $x^{2}$，设 $Ax^{2}e^{-x}$（$A=\\frac{12}$）。"
+    "analysis": "二重根乘 $x^{2}$，设 $Ax^{2}e^{-x}$（$A=\\frac{1}{2}$）。"
   },
   {
     "subject": "高等数学",
@@ -903,13 +903,13 @@
     "type": "single",
     "question": "$y''+2y'+y=xe^{x}$ 满足 $y(0)=0, y'(0)=0$ 的特解为（ ）。（历年真题风格）",
     "options": {
-      "A": "$\\frac{14}(1+x)e^{-x}+\\frac{14}(x-1)e^{x}$",
-      "B": "$\\frac{14}(1-x)e^{-x}+\\frac{14}(x-1)e^{x}$",
+      "A": "$\\frac{1}{4}(1+x)e^{-x}+\\frac{1}{4}(x-1)e^{x}$",
+      "B": "$\\frac{1}{4}(1-x)e^{-x}+\\frac{1}{4}(x-1)e^{x}$",
       "C": "$(1+x)e^{-x}+(x-1)e^{x}$",
-      "D": "$\\frac{14}(1+x)e^{-x}+\\frac{14}(x+1)e^{x}$"
+      "D": "$\\frac{1}{4}(1+x)e^{-x}+\\frac{1}{4}(x+1)e^{x}$"
     },
     "answer": "A",
-    "analysis": "通解代入初值得 $C_1=C_2=\\frac{14}$。"
+    "analysis": "通解代入初值得 $C_1=C_2=\\frac{1}{4}$。"
   },
   {
     "subject": "高等数学",
@@ -919,10 +919,10 @@
     "type": "single",
     "question": "方程 $y''-2y'+y=xe^{x}$（$\\lambda=1$ 为二重根）的一个特解是（ ）。（历年真题风格）",
     "options": {
-      "A": "$\\frac{16}x^{2}e^{x}$",
-      "B": "$\\frac{16}x^{3}e^{x}$",
-      "C": "$\\frac{12}x^{2}e^{x}$",
-      "D": "$\\frac{14}(x-1)e^{x}$"
+      "A": "$\\frac{1}{6}x^{2}e^{x}$",
+      "B": "$\\frac{1}{6}x^{3}e^{x}$",
+      "C": "$\\frac{1}{2}x^{2}e^{x}$",
+      "D": "$\\frac{1}{4}(x-1)e^{x}$"
     },
     "answer": "B",
     "analysis": "$(D-1)^2(e^{x}v)=e^{x}v''$，$v''=x\\Rightarrow v=\\frac{x^{3}}{6}$。"
@@ -935,10 +935,10 @@
     "type": "single",
     "question": "方程 $y''+2y'+y=xe^{-x}$（$\\lambda=-1$ 为二重根）的一个特解是（ ）。（历年真题风格）",
     "options": {
-      "A": "$\\frac{16}x^{3}e^{-x}$",
-      "B": "$\\frac{14}(x-1)e^{-x}$",
-      "C": "$\\frac{12}x^{2}e^{-x}$",
-      "D": "$\\frac{16}x^{2}e^{-x}$"
+      "A": "$\\frac{1}{6}x^{3}e^{-x}$",
+      "B": "$\\frac{1}{4}(x-1)e^{-x}$",
+      "C": "$\\frac{1}{2}x^{2}e^{-x}$",
+      "D": "$\\frac{1}{6}x^{2}e^{-x}$"
     },
     "answer": "A",
     "analysis": "$(D+1)^2(e^{-x}v)=e^{-x}v''$，$v''=x\\Rightarrow v=\\frac{x^{3}}{6}$。"
