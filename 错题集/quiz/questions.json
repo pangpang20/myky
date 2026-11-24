@@ -1,5 +1,165 @@
 [
   {
+    "subject": "高等数学",
+    "itemId": "高等数学-绝对值函数奇偶性与性质判断",
+    "id": "hm-abs-parity-1",
+    "type": "single",
+    "topic": "拆绝对值判奇偶",
+    "question": "设 $f(x)=|x\\sin x|e^{\\cos x}$，则 $f(x)$ 是（ ）。",
+    "options": {
+      "A": "有界函数",
+      "B": "单调函数",
+      "C": "周期函数",
+      "D": "偶函数"
+    },
+    "answer": "D",
+    "analysis": "$|x\\sin x|=|x|\\cdot|\\sin x|$，三个因子皆偶，偶乘偶乘偶为偶，故选 D。"
+  },
+  {
+    "subject": "高等数学",
+    "itemId": "高等数学-绝对值函数奇偶性与性质判断",
+    "id": "hm-abs-parity-2",
+    "type": "single",
+    "topic": "含指数的奇偶性",
+    "question": "设 $f(x)=|x\\cos x|e^{\\sin x}$，则 $f(x)$ 是（ ）。",
+    "options": {
+      "A": "奇函数",
+      "B": "偶函数",
+      "C": "非奇非偶函数",
+      "D": "有界函数"
+    },
+    "answer": "C",
+    "analysis": "$|x\\cos x|$ 偶，$e^{\\sin x}$ 非奇非偶（$e^{\\sin(-x)}=e^{-\\sin x}\\neq e^{\\sin x}$），故乘积非奇非偶；取 $x_k=\\frac{\\pi}{2}+2k\\pi$ 得 $f(x_k)=x_k\\to+\\infty$，故无界，D 错。"
+  },
+  {
+    "subject": "高等数学",
+    "itemId": "高等数学-绝对值函数奇偶性与性质判断",
+    "id": "hm-abs-parity-3",
+    "type": "single",
+    "topic": "绝对值乘奇函数",
+    "question": "设 $f(x)=|x|\\sin x$，则 $f(x)$ 是（ ）。",
+    "options": {
+      "A": "奇函数",
+      "B": "偶函数",
+      "C": "非奇非偶函数",
+      "D": "有界函数"
+    },
+    "answer": "A",
+    "analysis": "$f(-x)=|-x|\\sin(-x)=-|x|\\sin x=-f(x)$，为奇函数；取 $x=\\frac{\\pi}{2}$ 得 $f=\\frac{\\pi}{2}>0$，故无界，D 错。"
+  },
+  {
+    "subject": "高等数学",
+    "itemId": "高等数学-绝对值函数奇偶性与性质判断",
+    "id": "hm-abs-parity-4",
+    "type": "single",
+    "topic": "分式型奇偶性",
+    "question": "设 $f(x)=\\frac{\\sin x}{x}\\ (x\\neq 0)$，则 $f(x)$ 是（ ）。",
+    "options": {
+      "A": "奇函数",
+      "B": "偶函数",
+      "C": "非奇非偶函数",
+      "D": "不存在"
+    },
+    "answer": "B",
+    "analysis": "定义域 $\\mathbb{R}\\setminus\\{0\\}$ 关于原点对称；$f(-x)=\\frac{\\sin(-x)}{-x}=\\frac{\\sin x}{x}=f(x)$，为偶函数。"
+  },
+  {
+    "subject": "高等数学",
+    "itemId": "高等数学-绝对值函数奇偶性与性质判断",
+    "id": "hm-abs-parity-5",
+    "type": "single",
+    "topic": "性质联动排除",
+    "question": "设 $f(x)=|x\\sin x|e^{\\cos x}$，下列结论正确的是（ ）。",
+    "options": {
+      "A": "$f$ 是周期函数",
+      "B": "$f$ 是单调函数",
+      "C": "$f$ 是偶函数",
+      "D": "$f$ 是有界函数"
+    },
+    "answer": "C",
+    "analysis": "$f(-x)=f(x)$ 故为偶函数；$f(x_k)=x_k\\to+\\infty$ 说明无界，从而排除 A、D；振荡排除 B。"
+  },
+  {
+    "subject": "高等数学",
+    "itemId": "高等数学-绝对值函数奇偶性与性质判断",
+    "id": "hm-exam-869d2d3d",
+    "topic": "真题风格·奇偶性",
+    "type": "single",
+    "question": "【真题风格】设 $f(x)=|x\\sin x|e^{|\\cos x|}\\ (-\\infty<x<+\\infty)$，则 $f(x)$ 是（ ）。",
+    "options": {
+      "A": "有界函数",
+      "B": "单调函数",
+      "C": "周期函数",
+      "D": "偶函数"
+    },
+    "answer": "D",
+    "analysis": "$|\\cos x|$ 偶，$e^{|\\cos x|}$ 偶，$|x\\sin x|$ 偶，三者相乘为偶函数；无界故排除 A、C，振荡故排除 B。"
+  },
+  {
+    "subject": "高等数学",
+    "itemId": "高等数学-绝对值函数奇偶性与性质判断",
+    "id": "hm-exam-63ed2c1a",
+    "topic": "真题风格·复合",
+    "type": "single",
+    "question": "【真题风格】设 $f(x)=\\sin|x|+|\\sin x|$，则 $f(x)$ 是（ ）。",
+    "options": {
+      "A": "奇函数",
+      "B": "偶函数",
+      "C": "非奇非偶函数",
+      "D": "既奇又偶函数"
+    },
+    "answer": "B",
+    "analysis": "$\\sin|x|$ 与 $|\\sin x|$ 均为偶函数，其和仍为偶函数；且 $f$ 不恒为 $0$，故不是零函数。"
+  },
+  {
+    "subject": "高等数学",
+    "itemId": "高等数学-绝对值函数奇偶性与性质判断",
+    "id": "hm-exam-d5dac1bc",
+    "topic": "真题风格·含参",
+    "type": "single",
+    "question": "【真题风格】设 $f(x)=|x-1|+|x+1|$，则 $f(x)$ 是（ ）。",
+    "options": {
+      "A": "奇函数",
+      "B": "偶函数",
+      "C": "非奇非偶函数",
+      "D": "既奇又偶函数"
+    },
+    "answer": "B",
+    "analysis": "$f(-x)=|-x-1|+|-x+1|=|x+1|+|x-1|=f(x)$，为偶函数（等价于 $f(x)=2\\max\\{|x|,1\\}$）。"
+  },
+  {
+    "subject": "高等数学",
+    "itemId": "高等数学-绝对值函数奇偶性与性质判断",
+    "id": "hm-exam-c2d39f5c",
+    "topic": "真题风格·推断",
+    "type": "single",
+    "question": "【真题风格】已知 $f(x)$ 在 $\\mathbb{R}$ 上是偶函数，则下列函数中必为奇函数的是（ ）。",
+    "options": {
+      "A": "$f(x)e^{x}$",
+      "B": "$f(x)sin x$",
+      "C": "$f(x)+x$",
+      "D": "$[f(x)]^{2}$"
+    },
+    "answer": "B",
+    "analysis": "奇乘偶为奇，故 $f(x)\\sin x$ 为奇函数；A 非奇非偶，C 偶加奇为非奇非偶，D 偶的平方仍为偶。"
+  },
+  {
+    "subject": "高等数学",
+    "itemId": "高等数学-绝对值函数奇偶性与性质判断",
+    "id": "hm-exam-0439ff2a",
+    "topic": "真题风格·分式",
+    "type": "single",
+    "question": "【真题风格】设 $f(x)=\\frac{|x|}{x}\\ (x\\neq 0)$，则 $f(x)$ 是（ ）。",
+    "options": {
+      "A": "奇函数",
+      "B": "偶函数",
+      "C": "非奇非偶函数",
+      "D": "无定义"
+    },
+    "answer": "A",
+    "analysis": "定义域关于原点对称，$f(-x)=\\frac{|-x|}{-x}=-\\frac{|x|}{x}=-f(x)$，为奇函数。"
+  },
+  {
     "subject": "英语",
     "itemId": "英语-2000阅读Text2人类进化停滞",
     "id": "en-t2-a1",
