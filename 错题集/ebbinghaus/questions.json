@@ -2855,6 +2855,262 @@
       },
       "answer": "A",
       "analysis": "定义域关于原点对称，$f(-x)=\\frac{|-x|}{-x}=-\\frac{|x|}{x}=-f(x)$，为奇函数。"
+    },
+    {
+      "id": "r1-47d33a1f-98cd-453d-9478-015f3c671910",
+      "itemId": "高等数学-变上限积分复合上限求导",
+      "round": 1,
+      "subject": "高等数学",
+      "topic": "变上限求导·求函数值",
+      "question": "设 $f$ 连续，$\\int_{0}^{x^{3}-1}f(t)\\,\\mathrm{d}t=x$，则 $f(7)=$（ ）。",
+      "options": {
+        "A": "$\frac{1}{12}$",
+        "B": "$\frac{1}{6}$",
+        "C": "$\frac{1}{4}$",
+        "D": "$\frac{1}{3}$"
+      },
+      "answer": "A",
+      "analysis": "求导得 $f(x^3-1)\\cdot3x^2=1$，$x=2$ 时 $f(7)=\frac{1}{12}$。"
+    },
+    {
+      "id": "r1-1d0d590d-407f-4418-9a11-62ac557eb198",
+      "itemId": "高等数学-变上限积分复合上限求导",
+      "round": 1,
+      "subject": "高等数学",
+      "topic": "变上限求导·平方上限",
+      "question": "设 $f$ 连续，$\\int_{0}^{x^{2}-1}f(t)\\,\\mathrm{d}t=x^{3}$，则 $f(3)=$（ ）。",
+      "options": {
+        "A": "$\frac{3}{2}$",
+        "B": "$2$",
+        "C": "$3$",
+        "D": "$6$"
+      },
+      "answer": "C",
+      "analysis": "求导得 $f(x^2-1)\\cdot2x=3x^2$，$x=2$ 时 $f(3)=3$。"
+    },
+    {
+      "id": "r1-576c8bee-3479-4848-82d3-255312ed7824",
+      "itemId": "高等数学-变上限积分复合上限求导",
+      "round": 1,
+      "subject": "高等数学",
+      "topic": "变上限求导·立方上限",
+      "question": "设 $f$ 连续，$\\int_{0}^{x^{3}}f(t)\\,\\mathrm{d}t=x^{2}$，则 $f(8)=$（ ）。",
+      "options": {
+        "A": "$\frac{1}{6}$",
+        "B": "$\frac{1}{3}$",
+        "C": "$\frac{2}{3}$",
+        "D": "$1$"
+      },
+      "answer": "B",
+      "analysis": "求导得 $f(x^3)\\cdot3x^2=2x$，$x=2$ 时 $f(8)=\frac{1}{3}$。"
+    },
+    {
+      "id": "r1-b3e0872b-4650-4d3c-b6a0-9b1a8bb99abe",
+      "itemId": "高等数学-变上限积分复合上限求导",
+      "round": 1,
+      "subject": "高等数学",
+      "topic": "变上限求导·下限为常数1",
+      "question": "设 $f$ 连续，$\\int_{1}^{x^{2}}f(t)\\,\\mathrm{d}t=x$，则 $f(4)=$（ ）。",
+      "options": {
+        "A": "$\frac{1}{8}$",
+        "B": "$\frac{1}{4}$",
+        "C": "$\frac{1}{2}$",
+        "D": "$1$"
+      },
+      "answer": "B",
+      "analysis": "求导得 $f(x^2)\\cdot2x=1$，$x=2$ 时 $f(4)=\frac{1}{4}$。"
+    },
+    {
+      "id": "r1-6bbfc438-336f-4616-be94-31417da2d049",
+      "itemId": "高等数学-变上限积分复合上限求导",
+      "round": 1,
+      "subject": "高等数学",
+      "topic": "变上限求导·公式识别",
+      "question": "对 $\\int_{0}^{g(x)}f(t)\\,\\mathrm{d}t=h(x)$ 两边求导，结果正确的是（ ）。",
+      "options": {
+        "A": "$f(g(x))=h'(x)$",
+        "B": "$f(g(x))g'(x)=h'(x)$",
+        "C": "$f'(g(x))g'(x)=h'(x)$",
+        "D": "$f(g'(x))=h'(x)$"
+      },
+      "answer": "B",
+      "analysis": "变上限积分求导 = 被积函数代上限 × 上限导数。"
+    },
+    {
+      "id": "r1-9e9e4b3f-78cd-47f3-96ce-fe4f8d6dcc8c",
+      "itemId": "高等数学-变上限积分复合上限求导",
+      "round": 1,
+      "subject": "高等数学",
+      "topic": "真题风格·右边平方",
+      "question": "设 $f$ 连续，$\\int_{0}^{x^{3}-1}f(t)\\,\\mathrm{d}t=x^{2}$，则 $f(7)=$（ ）。（历年真题风格）",
+      "options": {
+        "A": "$\frac{1}{6}$",
+        "B": "$\frac{1}{3}$",
+        "C": "$\frac{2}{3}$",
+        "D": "$1$"
+      },
+      "answer": "B",
+      "analysis": "求导得 $f(x^3-1)\\cdot3x^2=2x$，$x=2$ 时 $f(7)=\frac{1}{3}$。"
+    },
+    {
+      "id": "r1-407cd262-10b8-4473-8ed3-594f792670f7",
+      "itemId": "高等数学-变上限积分复合上限求导",
+      "round": 1,
+      "subject": "高等数学",
+      "topic": "真题风格·线性上限",
+      "question": "设 $f$ 连续，$\\int_{0}^{2x}f(t)\\,\\mathrm{d}t=x^{3}$，则 $f(2)=$（ ）。（历年真题风格）",
+      "options": {
+        "A": "$1$",
+        "B": "$\frac{3}{2}$",
+        "C": "$3$",
+        "D": "$6$"
+      },
+      "answer": "B",
+      "analysis": "求导得 $f(2x)\\cdot2=3x^2$，$x=1$ 时 $f(2)=\frac{3}{2}$。"
+    },
+    {
+      "id": "r1-f40b0fed-c942-4728-8ad1-ee3085d355c3",
+      "itemId": "高等数学-变上限积分复合上限求导",
+      "round": 1,
+      "subject": "高等数学",
+      "topic": "真题风格·指数上限",
+      "question": "设 $f$ 连续，$\\int_{0}^{e^{x}-1}f(t)\\,\\mathrm{d}t=x$，则 $f(e-1)=$（ ）。（历年真题风格）",
+      "options": {
+        "A": "$\frac{1}{e}$",
+        "B": "$\frac{1}{2}$",
+        "C": "$e$",
+        "D": "$\frac{e}{2}$"
+      },
+      "answer": "A",
+      "analysis": "求导得 $f(e^x-1)\\cdot e^x=1$，$x=1$ 时 $f(e-1)=\frac{1}{e}$。"
+    },
+    {
+      "id": "r1-2c626521-be73-4cc5-b03b-d6804c610ac0",
+      "itemId": "高等数学-切线与抛物线围成面积最小",
+      "round": 1,
+      "subject": "高等数学",
+      "topic": "切线·方程",
+      "question": "曲线 $y=-x^2+1$ 在第一象限内点 $P(a,1-a^2)$ 处的切线方程是（ ）。",
+      "options": {
+        "A": "$y=-2ax+a^2+1$",
+        "B": "$y=-2ax+a^2-1$",
+        "C": "$y=-2ax+1-a^2$",
+        "D": "$y=2ax+a^2+1$"
+      },
+      "answer": "A",
+      "analysis": "$y'=-2x$，点斜式 $y-(1-a^2)=-2a(x-a)$，化简得 $y=-2ax+1+a^2$。"
+    },
+    {
+      "id": "r1-f77431f2-d52e-4cb2-9023-88a0bb51ff38",
+      "itemId": "高等数学-切线与抛物线围成面积最小",
+      "round": 1,
+      "subject": "高等数学",
+      "topic": "面积·表达式",
+      "question": "上述切线与曲线及两坐标轴所围成图形的面积是（ ）。",
+      "options": {
+        "A": "$dfrac{(1+a^2)^2}{4a}-dfrac23$",
+        "B": "$dfrac{(1+a^2)^2}{4a}+dfrac23$",
+        "C": "$dfrac{(1-a^2)^2}{4a}-dfrac23$",
+        "D": "$dfrac{(1+a^2)^2}{2a}-dfrac23$"
+      },
+      "answer": "A",
+      "analysis": "三角形面积 $\frac{(1+a^2)^2}{4a}$，减去曲线下面积 $int_0^1(1-x^2)dx=\frac23$。"
+    },
+    {
+      "id": "r1-c67c6950-b17c-4b86-b8d0-81e50a7e58f3",
+      "itemId": "高等数学-切线与抛物线围成面积最小",
+      "round": 1,
+      "subject": "高等数学",
+      "topic": "最值·横坐标",
+      "question": "使该图形面积最小的 $a$ 是（ ）。",
+      "options": {
+        "A": "$dfrac1{sqrt3}$",
+        "B": "$dfrac12$",
+        "C": "$dfrac{sqrt3}{2}$",
+        "D": "$dfrac2{sqrt3}$"
+      },
+      "answer": "A",
+      "analysis": "$S'(a)=\frac{(3a^2-1)(a^2+1)}{4a^2}$，唯一正驻点 $a=1/sqrt3$，左负右正。"
+    },
+    {
+      "id": "r1-b89a97b7-755c-4d69-bfe5-3a5f79c54d4a",
+      "itemId": "高等数学-切线与抛物线围成面积最小",
+      "round": 1,
+      "subject": "高等数学",
+      "topic": "最值·最小面积",
+      "question": "该图形的最小面积是（ ）。",
+      "options": {
+        "A": "$dfrac{4sqrt3-6}{9}$",
+        "B": "$dfrac{4sqrt3}{9}$",
+        "C": "$dfrac{4sqrt3-6}{3}$",
+        "D": "$dfrac{2sqrt3-3}{9}$"
+      },
+      "answer": "A",
+      "analysis": "代入 $a=1/sqrt3$：$S_{min}=\frac{4sqrt3}{9}-\frac23=\frac{4sqrt3-6}{9}$。"
+    },
+    {
+      "id": "r1-75216b33-0de7-4e4b-a499-1fbf4ff4c017",
+      "itemId": "高等数学-切线与抛物线围成面积最小",
+      "round": 1,
+      "subject": "高等数学",
+      "topic": "切点·坐标",
+      "question": "取得最小面积时切点 $P$ 的坐标是（ ）。",
+      "options": {
+        "A": "$left(dfrac{sqrt3}{3},dfrac23\right)$",
+        "B": "$left(dfrac{sqrt3}{3},dfrac13\right)$",
+        "C": "$left(dfrac23,dfrac{sqrt3}{3}\right)$",
+        "D": "$left(dfrac13,dfrac23\right)$"
+      },
+      "answer": "A",
+      "analysis": "$a=1/sqrt3=sqrt3/3$，$y=1-a^2=1-1/3=2/3$。"
+    },
+    {
+      "id": "r1-1d053a07-7a11-4352-8325-ae714b66f565",
+      "itemId": "高等数学-切线与抛物线围成面积最小",
+      "round": 1,
+      "subject": "高等数学",
+      "topic": "真题风格·一般式",
+      "question": "【真题风格】曲线 $y=c-x^2 (c>0)$ 的第一象限切线与曲线及坐标轴所围图形的最小面积是（ ）。",
+      "options": {
+        "A": "$dfrac{(4sqrt3-6)c^{3/2}}{9}$",
+        "B": "$dfrac{(4sqrt3-6)c^{3/2}}{3}$",
+        "C": "$dfrac{4sqrt3,c^{3/2}}{9}$",
+        "D": "$dfrac{(4sqrt3-3)c^{3/2}}{9}$"
+      },
+      "answer": "A",
+      "analysis": "最优 $a=sqrt{c/3}$；三角形最小面积 $\frac{4sqrt3 c^{3/2}}{9}$，曲边面积 $\frac23 c^{3/2}$，差为 $\frac{(4sqrt3-6)c^{3/2}}{9}$。"
+    },
+    {
+      "id": "r1-29402c3a-9160-46fb-9ea1-3273b1101d1c",
+      "itemId": "高等数学-切线与抛物线围成面积最小",
+      "round": 1,
+      "subject": "高等数学",
+      "topic": "真题改编·三角形",
+      "question": "【真题改编】在 $y=-x^2+1$ 上求切线，使它与两坐标轴围成的三角形面积最小，最小三角形面积是（ ）。",
+      "options": {
+        "A": "$dfrac{4sqrt3}{9}$",
+        "B": "$dfrac{2sqrt3}{9}$",
+        "C": "$dfrac{4sqrt3}{3}$",
+        "D": "$dfrac{8sqrt3}{9}$"
+      },
+      "answer": "A",
+      "analysis": "$T(a)=\frac{(1+a^2)^2}{4a}$，在 $a=1/sqrt3$ 处取最小值 $\frac{4sqrt3}{9}$。"
+    },
+    {
+      "id": "r1-8c249825-6eca-41af-8c4b-f35946263924",
+      "itemId": "高等数学-切线与抛物线围成面积最小",
+      "round": 1,
+      "subject": "高等数学",
+      "topic": "真题改编·截距",
+      "question": "【真题改编】当原题所围图形面积最小时，该切线与 $x$ 轴交点横坐标是（ ）。",
+      "options": {
+        "A": "$dfrac{2sqrt3}{3}$",
+        "B": "$dfrac{sqrt3}{3}$",
+        "C": "$dfrac43$",
+        "D": "$dfrac23$"
+      },
+      "answer": "A",
+      "analysis": "$x_B=\frac{1+a^2}{2a}$，代入 $a=1/sqrt3$ 得 $\frac{4/3}{2/sqrt3}=\frac{2sqrt3}{3}$。"
     }
   ]
 }

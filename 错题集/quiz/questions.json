@@ -1,6 +1,262 @@
 [
   {
     "subject": "高等数学",
+    "itemId": "高等数学-切线与抛物线围成面积最小",
+    "id": "hm-tangent1",
+    "topic": "切线·方程",
+    "type": "single",
+    "question": "曲线 $y=-x^2+1$ 在第一象限内点 $P(a,1-a^2)$ 处的切线方程是（ ）。",
+    "options": {
+      "A": "$y=-2ax+a^2+1$",
+      "B": "$y=-2ax+a^2-1$",
+      "C": "$y=-2ax+1-a^2$",
+      "D": "$y=2ax+a^2+1$"
+    },
+    "answer": "A",
+    "analysis": "$y-(1-a^2)=-2a(x-a)$，化简得 $y=-2ax+1+a^2$。"
+  },
+  {
+    "subject": "高等数学",
+    "itemId": "高等数学-切线与抛物线围成面积最小",
+    "id": "hm-tangent2",
+    "topic": "面积·表达式",
+    "type": "single",
+    "question": "该切线与曲线及两坐标轴所围成图形的面积表达式是（ ）。",
+    "options": {
+      "A": "$dfrac{(1+a^2)^2}{4a}-dfrac23$",
+      "B": "$dfrac{(1+a^2)^2}{4a}+dfrac23$",
+      "C": "$dfrac{(1-a^2)^2}{4a}-dfrac23$",
+      "D": "$dfrac{(1+a^2)^2}{2a}-dfrac23$"
+    },
+    "answer": "A",
+    "analysis": "三角形面积减固定曲边面积 $\frac23$。"
+  },
+  {
+    "subject": "高等数学",
+    "itemId": "高等数学-切线与抛物线围成面积最小",
+    "id": "hm-tangent3",
+    "topic": "最值·横坐标",
+    "type": "single",
+    "question": "使该面积最小的切点横坐标 $a$ 是（ ）。",
+    "options": {
+      "A": "$dfrac1{sqrt3}$",
+      "B": "$dfrac12$",
+      "C": "$dfrac{sqrt3}{2}$",
+      "D": "$dfrac2{sqrt3}$"
+    },
+    "answer": "A",
+    "analysis": "$S'(a)propto(3a^2-1)(a^2+1)$，正根为 $a=1/sqrt3$。"
+  },
+  {
+    "subject": "高等数学",
+    "itemId": "高等数学-切线与抛物线围成面积最小",
+    "id": "hm-tangent4",
+    "topic": "最值·最小面积",
+    "type": "single",
+    "question": "该图形的最小面积是（ ）。",
+    "options": {
+      "A": "$dfrac{4sqrt3-6}{9}$",
+      "B": "$dfrac{4sqrt3}{9}$",
+      "C": "$dfrac{4sqrt3-6}{3}$",
+      "D": "$dfrac{2sqrt3-3}{9}$"
+    },
+    "answer": "A",
+    "analysis": "$S_{min}=\frac{4sqrt3}{9}-\frac23=\frac{4sqrt3-6}{9}$。"
+  },
+  {
+    "subject": "高等数学",
+    "itemId": "高等数学-切线与抛物线围成面积最小",
+    "id": "hm-tangent5",
+    "topic": "切点·坐标",
+    "type": "single",
+    "question": "取得最小面积时切点 $P$ 的坐标是（ ）。",
+    "options": {
+      "A": "$left(dfrac{sqrt3}{3},dfrac23\right)$",
+      "B": "$left(dfrac{sqrt3}{3},dfrac13\right)$",
+      "C": "$left(dfrac23,dfrac{sqrt3}{3}\right)$",
+      "D": "$left(dfrac13,dfrac23\right)$"
+    },
+    "answer": "A",
+    "analysis": "$a=sqrt3/3$，$y=1-a^2=2/3$。"
+  },
+  {
+    "subject": "高等数学",
+    "itemId": "高等数学-切线与抛物线围成面积最小",
+    "id": "hm-exam-45895962",
+    "topic": "真题风格·一般式",
+    "type": "single",
+    "question": "【真题风格】曲线 $y=c-x^2 (c>0)$ 的第一象限切线与曲线及坐标轴所围图形的最小面积是（ ）。",
+    "options": {
+      "A": "$dfrac{(4sqrt3-6)c^{3/2}}{9}$",
+      "B": "$dfrac{(4sqrt3-6)c^{3/2}}{3}$",
+      "C": "$dfrac{4sqrt3,c^{3/2}}{9}$",
+      "D": "$dfrac{(4sqrt3-3)c^{3/2}}{9}$"
+    },
+    "answer": "A",
+    "analysis": "最优 $a=sqrt{c/3}$；三角形最小面积 $\frac{4sqrt3 c^{3/2}}{9}$，曲边面积 $\frac23 c^{3/2}$，差为 $\frac{(4sqrt3-6)c^{3/2}}{9}$。"
+  },
+  {
+    "subject": "高等数学",
+    "itemId": "高等数学-切线与抛物线围成面积最小",
+    "id": "hm-exam-f196221f",
+    "topic": "真题改编·三角形",
+    "type": "single",
+    "question": "【真题改编】在 $y=-x^2+1$ 上求切线，使它与两坐标轴围成的三角形面积最小，最小三角形面积是（ ）。",
+    "options": {
+      "A": "$dfrac{4sqrt3}{9}$",
+      "B": "$dfrac{2sqrt3}{9}$",
+      "C": "$dfrac{4sqrt3}{3}$",
+      "D": "$dfrac{8sqrt3}{9}$"
+    },
+    "answer": "A",
+    "analysis": "$T(a)=\frac{(1+a^2)^2}{4a}$，在 $a=1/sqrt3$ 处取最小值 $\frac{4sqrt3}{9}$。"
+  },
+  {
+    "subject": "高等数学",
+    "itemId": "高等数学-切线与抛物线围成面积最小",
+    "id": "hm-exam-f32daa08",
+    "topic": "真题改编·截距",
+    "type": "single",
+    "question": "【真题改编】当原题所围图形面积最小时，该切线与 $x$ 轴交点横坐标是（ ）。",
+    "options": {
+      "A": "$dfrac{2sqrt3}{3}$",
+      "B": "$dfrac{sqrt3}{3}$",
+      "C": "$dfrac43$",
+      "D": "$dfrac23$"
+    },
+    "answer": "A",
+    "analysis": "$x_B=\frac{1+a^2}{2a}$，代入 $a=1/sqrt3$ 得 $\frac{4/3}{2/sqrt3}=\frac{2sqrt3}{3}$。"
+  },
+  {
+    "subject": "高等数学",
+    "itemId": "高等数学-变上限积分复合上限求导",
+    "id": "hm-varup-1",
+    "topic": "变上限求导·求函数值",
+    "type": "single",
+    "question": "设 $f$ 连续，$\\int_{0}^{x^{3}-1}f(t)\\,\\mathrm{d}t=x$，则 $f(7)=$（ ）。",
+    "options": {
+      "A": "$\frac{1}{12}$",
+      "B": "$\frac{1}{6}$",
+      "C": "$\frac{1}{4}$",
+      "D": "$\frac{1}{3}$"
+    },
+    "answer": "A",
+    "analysis": "求导得 $f(x^3-1)\\cdot3x^2=1$，$x=2$ 时 $f(7)=\frac{1}{12}$。"
+  },
+  {
+    "subject": "高等数学",
+    "itemId": "高等数学-变上限积分复合上限求导",
+    "id": "hm-varup-2",
+    "topic": "变上限求导·平方上限",
+    "type": "single",
+    "question": "设 $f$ 连续，$\\int_{0}^{x^{2}-1}f(t)\\,\\mathrm{d}t=x^{3}$，则 $f(3)=$（ ）。",
+    "options": {
+      "A": "$\frac{3}{2}$",
+      "B": "$2$",
+      "C": "$3$",
+      "D": "$6$"
+    },
+    "answer": "C",
+    "analysis": "求导得 $f(x^2-1)\\cdot2x=3x^2$，$x=2$ 时 $f(3)=3$。"
+  },
+  {
+    "subject": "高等数学",
+    "itemId": "高等数学-变上限积分复合上限求导",
+    "id": "hm-varup-3",
+    "topic": "变上限求导·立方上限",
+    "type": "single",
+    "question": "设 $f$ 连续，$\\int_{0}^{x^{3}}f(t)\\,\\mathrm{d}t=x^{2}$，则 $f(8)=$（ ）。",
+    "options": {
+      "A": "$\frac{1}{6}$",
+      "B": "$\frac{1}{3}$",
+      "C": "$\frac{2}{3}$",
+      "D": "$1$"
+    },
+    "answer": "B",
+    "analysis": "求导得 $f(x^3)\\cdot3x^2=2x$，$x=2$ 时 $f(8)=\frac{1}{3}$。"
+  },
+  {
+    "subject": "高等数学",
+    "itemId": "高等数学-变上限积分复合上限求导",
+    "id": "hm-varup-4",
+    "topic": "变上限求导·下限为常数1",
+    "type": "single",
+    "question": "设 $f$ 连续，$\\int_{1}^{x^{2}}f(t)\\,\\mathrm{d}t=x$，则 $f(4)=$（ ）。",
+    "options": {
+      "A": "$\frac{1}{8}$",
+      "B": "$\frac{1}{4}$",
+      "C": "$\frac{1}{2}$",
+      "D": "$1$"
+    },
+    "answer": "B",
+    "analysis": "求导得 $f(x^2)\\cdot2x=1$，$x=2$ 时 $f(4)=\frac{1}{4}$。"
+  },
+  {
+    "subject": "高等数学",
+    "itemId": "高等数学-变上限积分复合上限求导",
+    "id": "hm-varup-5",
+    "topic": "变上限求导·公式识别",
+    "type": "single",
+    "question": "对 $\\int_{0}^{g(x)}f(t)\\,\\mathrm{d}t=h(x)$ 两边求导，结果正确的是（ ）。",
+    "options": {
+      "A": "$f(g(x))=h'(x)$",
+      "B": "$f(g(x))g'(x)=h'(x)$",
+      "C": "$f'(g(x))g'(x)=h'(x)$",
+      "D": "$f(g'(x))=h'(x)$"
+    },
+    "answer": "B",
+    "analysis": "变上限积分求导 = 被积函数代上限 × 上限导数。"
+  },
+  {
+    "subject": "高等数学",
+    "itemId": "高等数学-变上限积分复合上限求导",
+    "id": "hm-exam-8c6edfac",
+    "topic": "真题风格·右边平方",
+    "type": "single",
+    "question": "设 $f$ 连续，$\\int_{0}^{x^{3}-1}f(t)\\,\\mathrm{d}t=x^{2}$，则 $f(7)=$（ ）。（历年真题风格）",
+    "options": {
+      "A": "$\frac{1}{6}$",
+      "B": "$\frac{1}{3}$",
+      "C": "$\frac{2}{3}$",
+      "D": "$1$"
+    },
+    "answer": "B",
+    "analysis": "求导得 $f(x^3-1)\\cdot3x^2=2x$，$x=2$ 时 $f(7)=\frac{1}{3}$。"
+  },
+  {
+    "subject": "高等数学",
+    "itemId": "高等数学-变上限积分复合上限求导",
+    "id": "hm-exam-d521dfa7",
+    "topic": "真题风格·线性上限",
+    "type": "single",
+    "question": "设 $f$ 连续，$\\int_{0}^{2x}f(t)\\,\\mathrm{d}t=x^{3}$，则 $f(2)=$（ ）。（历年真题风格）",
+    "options": {
+      "A": "$1$",
+      "B": "$\frac{3}{2}$",
+      "C": "$3$",
+      "D": "$6$"
+    },
+    "answer": "B",
+    "analysis": "求导得 $f(2x)\\cdot2=3x^2$，$x=1$ 时 $f(2)=\frac{3}{2}$。"
+  },
+  {
+    "subject": "高等数学",
+    "itemId": "高等数学-变上限积分复合上限求导",
+    "id": "hm-exam-f394df64",
+    "topic": "真题风格·指数上限",
+    "type": "single",
+    "question": "设 $f$ 连续，$\\int_{0}^{e^{x}-1}f(t)\\,\\mathrm{d}t=x$，则 $f(e-1)=$（ ）。（历年真题风格）",
+    "options": {
+      "A": "$\frac{1}{e}$",
+      "B": "$\frac{1}{2}$",
+      "C": "$e$",
+      "D": "$\frac{e}{2}$"
+    },
+    "answer": "A",
+    "analysis": "求导得 $f(e^x-1)\\cdot e^x=1$，$x=1$ 时 $f(e-1)=\frac{1}{e}$。"
+  },
+  {
+    "subject": "高等数学",
     "itemId": "高等数学-绝对值函数奇偶性与性质判断",
     "id": "hm-abs-parity-1",
     "type": "single",

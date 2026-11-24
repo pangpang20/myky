@@ -1,0 +1,193 @@
+{
+  "itemId": "高等数学-切线与抛物线围成面积最小",
+  "subject": "高等数学",
+  "file": "高等数学/切线与抛物线围成面积最小错题.md",
+  "knowledge": "设第一象限切点 $P(a,1-a^2)$，$0<a<1$。曲线 $y=1-x^2$ 的导数为 $y'=-2x$，切线为 $L(x)=-2ax+1+a^2$。\n\n切线与两坐标轴交于 $C(0,1+a^2)$、$B((1+a^2)/(2a),0)$，截得三角形面积 $T(a)=(1+a^2)^2/(4a)$。\n\n所求图形面积 = 三角形面积 − 曲边三角形面积，故 $S(a)=T(a)-int_0^1(1-x^2)dx=(1+a^2)^2/(4a)-2/3$。\n\n求导 $S'(a)=(3a^2-1)(a^2+1)/(4a^2)$，唯一正驻点 $a=1/sqrt3$，且左负右正，为全局最小点。\n\n最优切点 $P=(sqrt3/3,2/3)$，最小面积 $S_{min}=(4sqrt3-6)/9approx0.1031336923$。\n\n一般化 $y=c-x^2$ 时，$a=sqrt{c/3}$，$S_{min}=(4sqrt3-6)c^{3/2}/9$。",
+  "mnemonic": "切线在上、三角包曲边、减掉定值再极值；切点 a=1/√3，最小面积 (4√3-6)/9",
+  "keyPoints": [
+    "切线方程：$y=-2ax+1+a^2$，常数项不是 $1-a^2$",
+    "截距：$y_C=1+a^2$，$x_B=(1+a^2)/(2a)$；三角形面积 $T=(1+a^2)^2/(4a)$",
+    "固定曲边面积：$int_0^1(1-x^2)dx=2/3$；所求 $S=T-2/3$",
+    "$S'(a)=\frac{(3a^2-1)(a^2+1)}{4a^2}$，最优 $a=\frac1{sqrt3}$",
+    "切点 $P=(\frac{sqrt3}{3},\frac23)$，最小面积 $\frac{4sqrt3-6}{9}$",
+    "一般式 $y=c-x^2$：$a=sqrt{c/3}$，$S_{min}=\frac{(4sqrt3-6)c^{3/2}}{9}$",
+    "速记：凹抛物线切线在上方；先写大三角形，再减固定曲边面积"
+  ],
+  "rootCauses": {
+    "切线方程·常数项": "点斜式化简时 $1-a^2+2a^2=1+a^2$，漏掉合并会连锁算错两个截距。",
+    "图形边界·面积差": "所围图形是切线截出的三角形减去曲线与坐标轴围成的固定曲边三角形，不是切线与曲线之间的一小块。",
+    "导数最值·因式分解": "$3a^4+2a^2-1=(3a^2-1)(a^2+1)$，唯一正根 $a=1/sqrt3$；仅最小化三角形面积时别忘了最后减 $2/3$。"
+  },
+  "ebbinghausQuestions": [
+    {
+      "topic": "切线·方程",
+      "question": "曲线 $y=-x^2+1$ 在第一象限内点 $P(a,1-a^2)$ 处的切线方程是（ ）。",
+      "options": {
+        "A": "$y=-2ax+a^2+1$",
+        "B": "$y=-2ax+a^2-1$",
+        "C": "$y=-2ax+1-a^2$",
+        "D": "$y=2ax+a^2+1$"
+      },
+      "answer": "A",
+      "analysis": "$y'=-2x$，点斜式 $y-(1-a^2)=-2a(x-a)$，化简得 $y=-2ax+1+a^2$。"
+    },
+    {
+      "topic": "面积·表达式",
+      "question": "上述切线与曲线及两坐标轴所围成图形的面积是（ ）。",
+      "options": {
+        "A": "$dfrac{(1+a^2)^2}{4a}-dfrac23$",
+        "B": "$dfrac{(1+a^2)^2}{4a}+dfrac23$",
+        "C": "$dfrac{(1-a^2)^2}{4a}-dfrac23$",
+        "D": "$dfrac{(1+a^2)^2}{2a}-dfrac23$"
+      },
+      "answer": "A",
+      "analysis": "三角形面积 $\frac{(1+a^2)^2}{4a}$，减去曲线下面积 $int_0^1(1-x^2)dx=\frac23$。"
+    },
+    {
+      "topic": "最值·横坐标",
+      "question": "使该图形面积最小的 $a$ 是（ ）。",
+      "options": {
+        "A": "$dfrac1{sqrt3}$",
+        "B": "$dfrac12$",
+        "C": "$dfrac{sqrt3}{2}$",
+        "D": "$dfrac2{sqrt3}$"
+      },
+      "answer": "A",
+      "analysis": "$S'(a)=\frac{(3a^2-1)(a^2+1)}{4a^2}$，唯一正驻点 $a=1/sqrt3$，左负右正。"
+    },
+    {
+      "topic": "最值·最小面积",
+      "question": "该图形的最小面积是（ ）。",
+      "options": {
+        "A": "$dfrac{4sqrt3-6}{9}$",
+        "B": "$dfrac{4sqrt3}{9}$",
+        "C": "$dfrac{4sqrt3-6}{3}$",
+        "D": "$dfrac{2sqrt3-3}{9}$"
+      },
+      "answer": "A",
+      "analysis": "代入 $a=1/sqrt3$：$S_{min}=\frac{4sqrt3}{9}-\frac23=\frac{4sqrt3-6}{9}$。"
+    },
+    {
+      "topic": "切点·坐标",
+      "question": "取得最小面积时切点 $P$ 的坐标是（ ）。",
+      "options": {
+        "A": "$left(dfrac{sqrt3}{3},dfrac23\right)$",
+        "B": "$left(dfrac{sqrt3}{3},dfrac13\right)$",
+        "C": "$left(dfrac23,dfrac{sqrt3}{3}\right)$",
+        "D": "$left(dfrac13,dfrac23\right)$"
+      },
+      "answer": "A",
+      "analysis": "$a=1/sqrt3=sqrt3/3$，$y=1-a^2=1-1/3=2/3$。"
+    }
+  ],
+  "quizQuestions": [
+    {
+      "id": "hm-tangent1",
+      "topic": "切线·方程",
+      "type": "single",
+      "question": "曲线 $y=-x^2+1$ 在第一象限内点 $P(a,1-a^2)$ 处的切线方程是（ ）。",
+      "options": {
+        "A": "$y=-2ax+a^2+1$",
+        "B": "$y=-2ax+a^2-1$",
+        "C": "$y=-2ax+1-a^2$",
+        "D": "$y=2ax+a^2+1$"
+      },
+      "answer": "A",
+      "analysis": "$y-(1-a^2)=-2a(x-a)$，化简得 $y=-2ax+1+a^2$。"
+    },
+    {
+      "id": "hm-tangent2",
+      "topic": "面积·表达式",
+      "type": "single",
+      "question": "该切线与曲线及两坐标轴所围成图形的面积表达式是（ ）。",
+      "options": {
+        "A": "$dfrac{(1+a^2)^2}{4a}-dfrac23$",
+        "B": "$dfrac{(1+a^2)^2}{4a}+dfrac23$",
+        "C": "$dfrac{(1-a^2)^2}{4a}-dfrac23$",
+        "D": "$dfrac{(1+a^2)^2}{2a}-dfrac23$"
+      },
+      "answer": "A",
+      "analysis": "三角形面积减固定曲边面积 $\frac23$。"
+    },
+    {
+      "id": "hm-tangent3",
+      "topic": "最值·横坐标",
+      "type": "single",
+      "question": "使该面积最小的切点横坐标 $a$ 是（ ）。",
+      "options": {
+        "A": "$dfrac1{sqrt3}$",
+        "B": "$dfrac12$",
+        "C": "$dfrac{sqrt3}{2}$",
+        "D": "$dfrac2{sqrt3}$"
+      },
+      "answer": "A",
+      "analysis": "$S'(a)propto(3a^2-1)(a^2+1)$，正根为 $a=1/sqrt3$。"
+    },
+    {
+      "id": "hm-tangent4",
+      "topic": "最值·最小面积",
+      "type": "single",
+      "question": "该图形的最小面积是（ ）。",
+      "options": {
+        "A": "$dfrac{4sqrt3-6}{9}$",
+        "B": "$dfrac{4sqrt3}{9}$",
+        "C": "$dfrac{4sqrt3-6}{3}$",
+        "D": "$dfrac{2sqrt3-3}{9}$"
+      },
+      "answer": "A",
+      "analysis": "$S_{min}=\frac{4sqrt3}{9}-\frac23=\frac{4sqrt3-6}{9}$。"
+    },
+    {
+      "id": "hm-tangent5",
+      "topic": "切点·坐标",
+      "type": "single",
+      "question": "取得最小面积时切点 $P$ 的坐标是（ ）。",
+      "options": {
+        "A": "$left(dfrac{sqrt3}{3},dfrac23\right)$",
+        "B": "$left(dfrac{sqrt3}{3},dfrac13\right)$",
+        "C": "$left(dfrac23,dfrac{sqrt3}{3}\right)$",
+        "D": "$left(dfrac13,dfrac23\right)$"
+      },
+      "answer": "A",
+      "analysis": "$a=sqrt3/3$，$y=1-a^2=2/3$。"
+    }
+  ],
+  "examQuestions": [
+    {
+      "topic": "真题风格·一般式",
+      "question": "【真题风格】曲线 $y=c-x^2 (c>0)$ 的第一象限切线与曲线及坐标轴所围图形的最小面积是（ ）。",
+      "options": {
+        "A": "$dfrac{(4sqrt3-6)c^{3/2}}{9}$",
+        "B": "$dfrac{(4sqrt3-6)c^{3/2}}{3}$",
+        "C": "$dfrac{4sqrt3,c^{3/2}}{9}$",
+        "D": "$dfrac{(4sqrt3-3)c^{3/2}}{9}$"
+      },
+      "answer": "A",
+      "analysis": "最优 $a=sqrt{c/3}$；三角形最小面积 $\frac{4sqrt3 c^{3/2}}{9}$，曲边面积 $\frac23 c^{3/2}$，差为 $\frac{(4sqrt3-6)c^{3/2}}{9}$。"
+    },
+    {
+      "topic": "真题改编·三角形",
+      "question": "【真题改编】在 $y=-x^2+1$ 上求切线，使它与两坐标轴围成的三角形面积最小，最小三角形面积是（ ）。",
+      "options": {
+        "A": "$dfrac{4sqrt3}{9}$",
+        "B": "$dfrac{2sqrt3}{9}$",
+        "C": "$dfrac{4sqrt3}{3}$",
+        "D": "$dfrac{8sqrt3}{9}$"
+      },
+      "answer": "A",
+      "analysis": "$T(a)=\frac{(1+a^2)^2}{4a}$，在 $a=1/sqrt3$ 处取最小值 $\frac{4sqrt3}{9}$。"
+    },
+    {
+      "topic": "真题改编·截距",
+      "question": "【真题改编】当原题所围图形面积最小时，该切线与 $x$ 轴交点横坐标是（ ）。",
+      "options": {
+        "A": "$dfrac{2sqrt3}{3}$",
+        "B": "$dfrac{sqrt3}{3}$",
+        "C": "$dfrac43$",
+        "D": "$dfrac23$"
+      },
+      "answer": "A",
+      "analysis": "$x_B=\frac{1+a^2}{2a}$，代入 $a=1/sqrt3$ 得 $\frac{4/3}{2/sqrt3}=\frac{2sqrt3}{3}$。"
+    }
+  ]
+}
