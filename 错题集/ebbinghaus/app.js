@@ -2,6 +2,7 @@
 let DB=null,QS=[],KB={},page=1,pageSize=10,queue=[],qi=0,roundId='',forceMode=false,results=[];
 let trendMode='day';
 let trendStart='',trendEnd='',useCustom=false;
+let calStart='',calEnd='',calYear=0,calMonth=0;
 
 function nowEast8Iso(){const d=new Date(Date.now()+8*3600*1000);return d.toISOString().replace('Z','+08:00')}
 
@@ -778,30 +779,71 @@ function todayStr(){return today()}
 function clampTrendEnd(v){return v&&v>todayStr()?todayStr():v}
 function toggleTrendRangePanel(){
   const panel=document.getElementById('trendRangePanel');
-  document.getElementById('trendEnd').max=todayStr();
-  document.getElementById('trendStart').max=todayStr();
-  panel.classList.toggle('open');
+  const willOpen=!panel.classList.contains('open');
+  panel.classList.toggle('open',willOpen);
+  if(willOpen){
+    calStart=trendStart||'';calEnd=trendEnd||'';
+    const d=new Date((trendEnd||todayStr())+"T00:00:00Z");
+    calYear=d.getUTCFullYear();calMonth=d.getUTCMonth();
+    renderTrendCalendar();
+  }
+}
+function shiftTrendMonth(delta){
+  const cur=new Date(Date.UTC(calYear,calMonth,1));
+  cur.setUTCMonth(cur.getUTCMonth()+delta);
+  calYear=cur.getUTCFullYear();calMonth=cur.getUTCMonth();
+  renderTrendCalendar();
+}
+function renderTrendCalendar(){
+  const grid=document.getElementById('trendCalendar');
+  const title=document.getElementById('trendCalMonth');
+  const sel=document.getElementById('trendCalSel');
+  const max=todayStr();
+  title.textContent=calYear+"年"+(calMonth+1)+"月";
+  sel.textContent=calStart?(calStart+(calEnd?" ~ "+calEnd:" ~ 请选择结束")):"请选择起始日期";
+  const first=new Date(Date.UTC(calYear,calMonth,1));
+  const lead=(first.getUTCDay()===0?6:first.getUTCDay()-1);
+  const days=new Date(Date.UTC(calYear,calMonth+1,0)).getUTCDate();
+  let html="";
+  for(let i=0;i<lead;i++)html+='<div class="cal-day empty"></div>';
+  for(let d=1;d<=days;d++){
+    const ds=calYear+"-"+pad2(calMonth+1)+"-"+pad2(d);
+    const disabled=ds>max;
+    const cls=["cal-day"];
+    if(disabled)cls.push("disabled");
+    if(ds===calStart)cls.push("start");
+    if(ds===calEnd)cls.push("end");
+    if(calStart&&calEnd&&ds>calStart&&ds<calEnd)cls.push("in-range");
+    html+='<div class="'+cls.join(" ")+'" data-date="'+ds+'">'+d+'</div>';
+  }
+  grid.innerHTML=html;
+  grid.onclick=function(ev){
+    const cell=ev.target.closest('.cal-day[data-date]');
+    if(!cell||cell.classList.contains("disabled")||cell.classList.contains("empty"))return;
+    pickTrendDate(cell.getAttribute("data-date"));
+  };
+}
+function pickTrendDate(ds){
+  if(ds>todayStr())return;
+  if(!calStart||calEnd){calStart=ds;calEnd=''}
+  else if(ds<calStart){calEnd=calStart;calStart=ds}
+  else{calEnd=ds}
+  renderTrendCalendar();
 }
 function applyTrendRange(){
-  const startEl=document.getElementById('trendStart'),endEl=document.getElementById('trendEnd');
-  const start=startEl.value||'',todayStrV=todayStr();
-  let end=endEl.value||'';
-  if(end>todayStrV){end=todayStrV;endEl.value=end}
-  if(!start||!end||start>end){alert('请选择有效的起始和结束日期（结束不超过今天）');return}
-  trendStart=start;trendEnd=end;useCustom=true;
-  document.getElementById('trendRangeText').textContent=start+' ~ '+end;
+  const max=todayStr();
+  if(!calStart||!calEnd){alert('请在日历中依次点选起始和结束日期');return}
+  let a=calStart,b=calEnd;
+  if(a>b){const t=a;a=b;b=t}
+  if(b>max)b=max;
+  trendStart=a;trendEnd=b;useCustom=true;
+  document.getElementById('trendRangeText').textContent=a+' ~ '+b;
   document.getElementById('trendRangePanel').classList.remove('open');
   renderTrend();
 }
-function onTrendRangeChange(){
-  const endEl=document.getElementById('trendEnd');
-  if(endEl.value>todayStr()){endEl.value=todayStr()}
-  if(trendStart&&trendEnd){useCustom=true;renderTrend()}
-}
+function onTrendRangeChange(){}
 function clearTrendRange(){
-  trendStart='';trendEnd='';useCustom=false;
-  document.getElementById('trendStart').value='';
-  document.getElementById('trendEnd').value='';
+  trendStart='';trendEnd='';useCustom=false;calStart='';calEnd='';
   document.getElementById('trendRangeText').textContent='';
   document.getElementById('trendRangePanel').classList.remove('open');
   renderTrend();
